@@ -1,23 +1,25 @@
-# claude-skills-mb
+# websearch-exa
 
-Curated Claude Code skills by [Mirko Bozzetto](https://github.com/mirkobozzetto).
+Power web search skill for Claude Code, powered by [Exa MCP](https://docs.exa.ai/reference/mcp).
+
+Single `/websearch` command with 8 intent-routed modes (quick, deep, code, docs, debug, news, compare, research).
 
 ## Install
 
 ```
-/plugin marketplace add mirkobozzetto/claude-skills-mb
-/plugin install websearch@claude-skills-mb
+/plugin marketplace add mirkobozzetto/websearch-exa
+/plugin install websearch@websearch-exa
 ```
 
 ## Plugins
 
 | Plugin | Version | Description |
 |--------|---------|-------------|
-| [websearch](./plugins/websearch) | 1.0.0 | Intent-routed web search via Exa MCP (8 modes: quick, deep, code, docs, debug, news, compare, research) |
+| [websearch](./plugins/websearch) | 1.0.0 | Intent-routed web search via Exa MCP (8 modes) |
 
 ## Prerequisites
 
-All plugins in this marketplace use [Exa MCP](https://docs.exa.ai/reference/mcp) as the sole web access layer.
+Uses [Exa MCP](https://docs.exa.ai/reference/mcp) as the sole web access layer.
 
 Setup before installing:
 
@@ -25,7 +27,7 @@ Setup before installing:
 2. Add the Exa MCP server to your Claude Code config.
 3. Verify `mcp__exa__*` tools are available in a Claude Code session.
 
-## Why a personal marketplace
+## Why a marketplace, not a bare skill
 
 - Versioned releases via semver tags.
 - `/plugin update` works out of the box.
@@ -37,4 +39,4 @@ MIT - see [LICENSE](./LICENSE).
 
 ## Contributing
 
-Open an issue or PR. One concern per PR. Keep skill files focused (single responsibility).
+Open an issue or PR at [github.com/mirkobozzetto/websearch-exa](https://github.com/mirkobozzetto/websearch-exa).

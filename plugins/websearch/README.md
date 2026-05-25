@@ -21,8 +21,8 @@ All results are cited inline with `[source](url)`.
 ## Install
 
 ```
-/plugin marketplace add mirkobozzetto/claude-skills-mb
-/plugin install websearch@claude-skills-mb
+/plugin marketplace add mirkobozzetto/websearch-exa
+/plugin install websearch@websearch-exa
 ```
 
 ## Prerequisites
@@ -118,7 +118,7 @@ Deep mode runs an evaluator loop: after each pass, the model identifies knowledg
 
 ## Contributing
 
-Issues and PRs welcome at [github.com/mirkobozzetto/claude-skills-mb](https://github.com/mirkobozzetto/claude-skills-mb).
+Issues and PRs welcome at [github.com/mirkobozzetto/websearch-exa](https://github.com/mirkobozzetto/websearch-exa).
 
 Keep changes focused: one mode, one flag, or one ref file per PR.
 
