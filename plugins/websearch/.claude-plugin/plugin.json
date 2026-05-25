@@ -1,0 +1,11 @@
+{
+  "name": "websearch",
+  "version": "1.0.0",
+  "description": "Intent-routed web search via Exa MCP. 8 modes (quick/deep/code/docs/debug/news/compare/research).",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/claude-skills-mb"
+}

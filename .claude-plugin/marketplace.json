@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "claude-skills-mb",
+  "description": "Mirko Bozzetto's curated Claude Code skills",
+  "owner": {
+    "name": "Mirko Bozzetto",
+    "email": "mirko.prodev@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "websearch",
+      "source": "./plugins/websearch",
+      "description": "Power search via Exa MCP. 8 modes: quick, deep, code, docs, debug, news, compare, research.",
+      "version": "1.0.0",
+      "category": "research",
+      "tags": ["exa", "search", "research", "docs", "debug"],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/claude-skills-mb"
+    }
+  ]
+}
