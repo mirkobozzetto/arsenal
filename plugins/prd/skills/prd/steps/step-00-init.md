@@ -85,14 +85,14 @@ Use AskUserQuestion:
 ```yaml
 questions:
   - header: "Start"
-    question: "PRD pour '<feature_name>'. Prêt à démarrer l'interview ?"
+    question: "PRD for '<feature_name>'. Ready to start the interview?"
     options:
-      - label: "Démarrer (Recommended)"
-        description: "Lancer les questions de cadrage"
+      - label: "Start (Recommended)"
+        description: "Launch the scoping questions"
       - label: "Skip interview"
-        description: "Drafter direct depuis l'idée (qualité moindre)"
-      - label: "Annuler"
-        description: "Ne pas lancer ce PRD"
+        description: "Draft directly from the idea (lower quality)"
+      - label: "Cancel"
+        description: "Do not launch this PRD"
     multiSelect: false
 ```
 Route: Skip interview → set skip_interview = true.

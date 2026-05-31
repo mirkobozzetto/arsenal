@@ -37,25 +37,25 @@ Use AskUserQuestion in batches of 1-4 max. Example sequence:
 
 ```yaml
 questions:
-  - header: "Symptôme"
-    question: "Quel problème concret tu observes aujourd'hui ?"
+  - header: "Symptom"
+    question: "What concrete problem are you observing today?"
     options:
-      - label: "Bug / dysfonctionnement"
-        description: "Comportement incorrect actuel"
-      - label: "Friction / lenteur"
-        description: "Process pénible, lent, coûteux"
-      - label: "Limite / blocage"
-        description: "Impossible de faire X aujourd'hui"
-      - label: "Risque / dette"
-        description: "Pas encore cassé mais danger"
+      - label: "Bug / malfunction"
+        description: "Current incorrect behavior"
+      - label: "Friction / slowness"
+        description: "Painful, slow, costly process"
+      - label: "Limit / blocker"
+        description: "Impossible to do X today"
+      - label: "Risk / debt"
+        description: "Not broken yet but dangerous"
     multiSelect: false
 ```
 
-Suivi par questions ouvertes (free text via user response) :
-- "Depuis quand ?"
-- "Qui est impacté (utilisateurs, équipes, systèmes) ?"
-- "Pourquoi maintenant ? (deadline, incident, opportunité)"
-- "Quels signaux quantitatifs ? (metrics, errors, latency)"
+Follow up with open questions (free text via user response):
+- "Since when?"
+- "Who is impacted (users, teams, systems)?"
+- "Why now? (deadline, incident, opportunity)"
+- "What quantitative signals? (metrics, errors, latency)"
 
 If `auto_mode` → infer from title + context_collected. Mark assumptions explicitly.
 
@@ -65,7 +65,7 @@ AskUserQuestion or infer:
 - 3-5 goals max, measurable if possible
 - 3-5 non-goals, explicit "we are NOT solving X"
 
-Non-goals = critical. Sans non-goals → scope creep dans steps suivants.
+Non-goals = critical. Without non-goals → scope creep in later steps.
 
 ### 4. Write sections 3 + 4
 
@@ -131,15 +131,15 @@ Else AskUserQuestion:
 
 ```yaml
 questions:
-  - header: "Étape suivante"
-    question: "Problème défini. Explorer alternatives ?"
+  - header: "Next step"
+    question: "Problem defined. Explore alternatives?"
     options:
-      - label: "Continuer (Recommended)"
+      - label: "Continue (Recommended)"
         description: "Step 03: Alternatives Considered"
-      - label: "Affiner le problème"
-        description: "Reboucler : la définition n'est pas assez nette"
-      - label: "Retour contexte"
-        description: "Step 01 : manque de contexte technique"
+      - label: "Refine the problem"
+        description: "Loop back: the definition is not sharp enough"
+      - label: "Back to context"
+        description: "Step 01: missing technical context"
     multiSelect: false
 ```
 

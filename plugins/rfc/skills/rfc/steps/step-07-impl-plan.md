@@ -143,15 +143,15 @@ Else AskUserQuestion:
 
 ```yaml
 questions:
-  - header: "Étape suivante"
-    question: "Plan d'impl écrit. Lancer revue adversariale (subagent) ?"
+  - header: "Next step"
+    question: "Impl plan written. Run the adversarial review (subagent)?"
     options:
-      - label: "Continuer revue (Recommended)"
-        description: "Step 08 : Adversarial review via subagent"
-      - label: "Skip revue → finaliser"
-        description: "Step 09 : RFC self-sufficient, pas de second avis"
-      - label: "Affiner plan"
-        description: "Reboucler : tasks trop gros / deps unclear"
+      - label: "Continue to review (Recommended)"
+        description: "Step 08: Adversarial review via subagent"
+      - label: "Skip review -> finalize"
+        description: "Step 09: RFC self-sufficient, no second opinion"
+      - label: "Refine plan"
+        description: "Loop back: tasks too big / deps unclear"
     multiSelect: false
 ```
 

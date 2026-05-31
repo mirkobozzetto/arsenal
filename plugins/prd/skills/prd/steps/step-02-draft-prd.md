@@ -62,7 +62,7 @@ status: draft
 stepsCompleted: [0, 1, 2]
 ---
 ```
-Body = the sections above. Prose in French; identifiers in English. If `prd_path` exists, edit in place (do not create a duplicate).
+Body = the sections above. Prose in English; identifiers in English. If `prd_path` exists, edit in place (do not create a duplicate).
 
 ### 3. Confirm
 
@@ -74,15 +74,15 @@ Use AskUserQuestion:
 ```yaml
 questions:
   - header: "PRD"
-    question: "PRD écrit dans <prd_path>. On dérive les tasks ?"
+    question: "PRD written to <prd_path>. Derive the tasks?"
     options:
-      - label: "Dériver les tasks (Recommended)"
-        description: "Passer à la todo dérivée du PRD"
-      - label: "Réviser le PRD"
-        description: "Ajuster des sections avant"
+      - label: "Derive the tasks (Recommended)"
+        description: "Move to the todo derived from the PRD"
+      - label: "Revise the PRD"
+        description: "Adjust some sections first"
     multiSelect: false
 ```
-Route: Réviser → revise the named sections in place, re-confirm.
+Route: Revise → revise the named sections in place, re-confirm.
 
 ---
 

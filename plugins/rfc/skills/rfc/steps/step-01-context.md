@@ -33,12 +33,12 @@ If `{auto_mode}` = false, use AskUserQuestion:
 ```yaml
 questions:
   - header: "Scope"
-    question: "Quels mots-clés / symboles / chemins définissent la zone impactée ?"
+    question: "Which keywords / symbols / paths define the impacted area?"
     options:
-      - label: "Auto-détect depuis le titre"
-        description: "Extract keywords du titre RFC"
-      - label: "Spécifier manuellement"
-        description: "Je liste les modules/fonctions ciblés"
+      - label: "Auto-detect from the title"
+        description: "Extract keywords from the RFC title"
+      - label: "Specify manually"
+        description: "I list the targeted modules/functions"
     multiSelect: false
 ```
 
@@ -120,13 +120,13 @@ Else AskUserQuestion:
 
 ```yaml
 questions:
-  - header: "Étape suivante"
-    question: "Contexte collecté. Passer à la définition du problème ?"
+  - header: "Next step"
+    question: "Context collected. Move on to defining the problem?"
     options:
-      - label: "Continuer (Recommended)"
+      - label: "Continue (Recommended)"
         description: "Step 02: Problem & Motivation"
-      - label: "Enrichir le contexte"
-        description: "Boucler sur step-01 avec keywords supplémentaires"
+      - label: "Enrich the context"
+        description: "Loop on step-01 with additional keywords"
     multiSelect: false
 ```
 

@@ -1,6 +1,6 @@
 # Issue body template
 
-Render this as the GitHub issue body on `create`. Every section is required; the **Pickup Directive** is what lets a future session resume cold. Prose in French; identifiers in English.
+Render this as the GitHub issue body on `create`. Every section is required; the **Pickup Directive** is what lets a future session resume cold. Prose in English; identifiers in English.
 
 ```markdown
 ## Problem
@@ -8,19 +8,19 @@ Render this as the GitHub issue body on `create`. Every section is required; the
 
 ## Pickup Directive
 > Self-contained. A future session reads ONLY this section + comments to resume, with no prior chat.
-- Contexte : <repo, branche, fichiers/zones concernés>
-- État actuel : <ce qui est fait / pas fait>
-- Prochaine étape : <l'action concrète à reprendre>
-- Comment vérifier : <commande / test / signal de succès>
+- Context: <repo, branch, files/areas involved>
+- Current state: <what is done / not done>
+- Next step: <the concrete action to resume>
+- How to verify: <command / test / success signal>
 
 ## Hypothesis
-<cause suspectée, et pourquoi>
+<suspected cause, and why>
 
 ## Attempts
-- [ ] <tentative + résultat>   (mis à jour via `gh issue comment`)
+- [ ] <attempt + result>   (updated via `gh issue comment`)
 
 ## Resolution
-<rempli à la fermeture : ce qui a corrigé, et pourquoi ça marche>
+<filled in at close: what fixed it, and why it works>
 ```
 
 ## Conventions

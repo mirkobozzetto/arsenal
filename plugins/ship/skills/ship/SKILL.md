@@ -117,5 +117,5 @@ Auto-detected by artifact shape (set in step-00-triage, parsed in step-01-ingest
 - NEVER hardcode a toolchain (pnpm/Node). Detect the stack; ask when unknown.
 - NEVER use `rm -rf`. Use `trash`. NEVER modify a database without explicit approval.
 - Cleanup (step-06) is MANDATORY on every path (shipped / halted / rejected).
-- Prose in French; identifiers in English. Web via Exa MCP only. Honor the git write-guard.
+- Prose in English; identifiers in English. Web via Exa MCP only. Honor the git write-guard.
 </critical>

@@ -55,22 +55,22 @@ Always ask, even in `auto_mode` (this is the product/technical boundary, the use
 
 ```yaml
 questions:
-  - header: "Suite"
-    question: "PRD + tasks prêts. On enchaîne sur quoi ?"
+  - header: "Next"
+    question: "PRD + tasks ready. What do we move on to?"
     options:
-      - label: "RFC (concevoir le how)"
-        description: "Explore les alternatives techniques, pèse les tradeoffs et liste les risques AVANT de coder. À choisir si la solution technique n'est pas évidente ou si la décision franchit une boundary (archi, migration, nouveau pattern). Évite de coder dans la mauvaise direction."
-      - label: "ship (implémenter le spec)"
-        description: "Exécuteur spec-driven : lit tasks.md (gate status: ready), verrouille un contrat, implémente, rend un verification-bundle + une trace. Respecte ta règle 'pas de tests/builds auto'. À choisir pour construire direct sans débat d'archi. Terminal de la chaîne prd -> ship."
-      - label: "Stop ici"
-        description: "Le PRD + la todo suffisent pour l'instant. Reprise plus tard via ship sur le fichier tasks."
+      - label: "RFC (design the how)"
+        description: "Explores the technical alternatives, weighs the tradeoffs and lists the risks BEFORE coding. Choose this if the technical solution is not obvious or if the decision crosses a boundary (architecture, migration, new pattern). Avoids coding in the wrong direction."
+      - label: "ship (implement the spec)"
+        description: "Spec-driven executor: reads tasks.md (gate status: ready), locks a contract, implements, returns a verification-bundle + a trace. Respects your 'no auto tests/builds' rule. Choose this to build directly without an architecture debate. Terminal of the prd -> ship chain."
+      - label: "Stop here"
+        description: "The PRD + the todo are enough for now. Resume later via ship on the tasks file."
     multiSelect: false
 ```
 
 **Route based on response:**
 - **RFC** → tell the user to run `rfc` using `<prd_path>` as the product input (the RFC consumes the PRD requirements). Do NOT run it automatically.
 - **ship** → tell the user to run `ship <feature_dir>` (the prd folder); ship reads tasks.md + prd.md, gated on `status: ready`. Do NOT run it automatically.
-- **Stop ici** → end; print the resume hint (`ship <feature_dir>` later).
+- **Stop here** → end; print the resume hint (`ship <feature_dir>` later).
 
 ### 5. Commit?
 
@@ -82,15 +82,15 @@ Use AskUserQuestion:
 ```yaml
 questions:
   - header: "Commit"
-    question: "Commiter le PRD + tasks ?"
+    question: "Commit the PRD + tasks?"
     options:
-      - label: "Non, je gère (Recommended)"
-        description: "Ne rien commiter (git write-guard)"
-      - label: "Commiter"
-        description: "git add docs/prd && commit (passera par le guard)"
+      - label: "No, I'll handle it (Recommended)"
+        description: "Don't commit anything (git write-guard)"
+      - label: "Commit"
+        description: "git add docs/prd && commit (will go through the guard)"
     multiSelect: false
 ```
-Route: Commiter → stage only `docs/prd/`, conventional message, no Claude signature; the git write-guard prompt will fire.
+Route: Commit → stage only `docs/prd/`, conventional message, no Claude signature; the git write-guard prompt will fire.
 
 ---
 

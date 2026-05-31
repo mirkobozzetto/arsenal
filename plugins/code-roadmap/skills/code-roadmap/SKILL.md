@@ -1,6 +1,6 @@
 ---
 name: code-roadmap
-description: Orientation map for the start of a coding task. Reads your intent, matches it against the skills currently available in this session, and prints a recommended chain of skills plus a suggested execution mode and reflection level, as options with a WHY, never a forced path. Advisory only: it never launches a skill and never forces a choice. Triggers on "par où commencer", "quel skill pour X", "which skill", "how should I approach this", "route this", "roadmap", "what's the path for". NOT find-skills (that installs external skills), NOT setup-audit (that checks config health), NOT brainstorm (that does the research itself).
+description: Orientation map for the start of a coding task. Reads your intent, matches it against the skills currently available in this session, and prints a recommended chain of skills plus a suggested execution mode and reflection level, as options with a WHY, never a forced path. Advisory only: it never launches a skill and never forces a choice. Triggers on "where do I start", "which skill for X", "which skill", "how should I approach this", "route this", "roadmap", "what's the path for". NOT find-skills (that installs external skills), NOT setup-audit (that checks config health), NOT brainstorm (that does the research itself).
 argument-hint: "<task description>"
 allowed-tools: Bash
 ---
@@ -85,7 +85,7 @@ The axes are independent: a hairy single-file algorithm = deep + solo; a mechani
 
 ## 6. Harness modes are not skills
 
-ultracode (= effort xhigh + auto dynamic-workflow) and Agent Teams sit ABOVE the skill layer. Claude Code CANNOT change the effort level itself, exactly like high→max: only the user toggles it via the effort menu. So when a fan-out is warranted, do NOT emit a stray "set it yourself" note: ASK the user explicitly, e.g. "ce task justifie ultracode : active-le dans le menu effort (toi seul peux le faire), ou demande-moi de créer un workflow". Never present these as a skill to run, and never imply the skill/CC can flip the effort setting.
+ultracode (= effort xhigh + auto dynamic-workflow) and Agent Teams sit ABOVE the skill layer. Claude Code CANNOT change the effort level itself, exactly like high→max: only the user toggles it via the effort menu. So when a fan-out is warranted, do NOT emit a stray "set it yourself" note: ASK the user explicitly, e.g. "this task justifies ultracode: enable it in the effort menu (only you can do it), or ask me to create a workflow". Never present these as a skill to run, and never imply the skill/CC can flip the effort setting.
 
 ## 7. Gap protocol: when nothing installed fits the core task
 
@@ -98,23 +98,23 @@ ultracode (= effort xhigh + auto dynamic-workflow) and Agent Teams sit ABOVE the
 Print, then STOP:
 
 ```
-CHAÎNE CANONIQUE
+CANONICAL CHAIN
 1. <skill>   : WHY (facet/signal)
 2. <skill>   : WHY
 ...
 
-RÉFLEXION (suggérée) : <level> : WHY. (Si fan-out justifié : DEMANDE à l'utilisateur d'activer ultracode via le menu effort (CC ne peut pas le faire lui-même) ; ou propose de créer un workflow.)
+REFLECTION (suggested) : <level> : WHY. (If fan-out is warranted: ASK the user to enable ultracode via the effort menu (CC cannot do it itself); or propose creating a workflow.)
 
-EXÉCUTION (à toi de choisir) :
+EXECUTION (your call) :
   <option> → WHY
   <option> → WHY
 
 ALTERNATIVES
 - <other chain/mode> : tradeoff
 
-GAP (si rien ne colle) : <find-skills | creator> : WHY
+GAP (if nothing fits) : <find-skills | creator> : WHY
 
-À toi de choisir.
+Your call.
 ```
 
 Never proceed to run any named skill. The user (or the main session) drives from here.
@@ -127,4 +127,4 @@ Never proceed to run any named skill. The user (or the main session) drives from
 
 ## Constraints
 
-No comments in generated code. Prose in French, technical terms in English. Web via Exa MCP only. Honor the git write-guard. Never modify a database.
+No comments in generated code. Prose in English, technical terms in English. Web via Exa MCP only. Honor the git write-guard. Never modify a database.

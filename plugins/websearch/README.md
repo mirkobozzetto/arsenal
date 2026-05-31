@@ -293,7 +293,7 @@ Filters combine with any mode.
 **Daily factual question**
 
 ```
-/websearch quel est le port par défaut de PostgreSQL
+/websearch what is the default port of PostgreSQL
 ```
 
 **Find a code snippet**
@@ -329,7 +329,7 @@ Filters combine with any mode.
 **Deep research with report saved**
 
 ```
-/websearch --deep --save rapport.md impact IA sur le développement logiciel
+/websearch --deep --save report.md AI impact on software development
 ```
 
 **Recent papers**

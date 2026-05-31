@@ -8,7 +8,7 @@ A task crosses a risk boundary if it does ANY of the following. ship checkpoints
 
 | Hazard | Always-ask (even with -a) | Why |
 |--------|---------------------------|-----|
-| Database schema / data migration | YES | "Jamais modif DB sans approval explicit" |
+| Database schema / data migration | YES | "Never modify a DB without explicit approval" |
 | Deleting a file or directory | YES | Irreversible loss |
 | Removing or downgrading a dependency | YES | Breaks consumers silently |
 | Breaking a public API / exported contract | YES | Outward-facing blast radius |

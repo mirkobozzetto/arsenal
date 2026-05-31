@@ -68,12 +68,12 @@ The contract is the immutable target the verification bundle validates against. 
 ```yaml
 questions:
   - header: "Plan"
-    question: "DAG: {N} tâches, {G} groupes indépendants, chemin critique {C}. Contrat verrouillé dans contract.md. Continuer ?"
+    question: "DAG: {N} tasks, {G} independent groups, critical path {C}. Contract locked in contract.md. Continue?"
     options:
-      - label: "Continuer (Recommended)"
-        description: "Choisir le moteur d'exécution"
-      - label: "Revoir l'ordre"
-        description: "Ajuster l'ordonnancement (sans re-scoper le produit)"
+      - label: "Continue (Recommended)"
+        description: "Choose the execution engine"
+      - label: "Review the order"
+        description: "Adjust the scheduling (without re-scoping the product)"
     multiSelect: false
 ```
 

@@ -73,7 +73,7 @@ Store {team_name}. Same-file sets still serialize. Workers never do irreversible
 Before any op on the `references/guardrails.md` hazard list:
 ```
 ALWAYS-ASK hazards (DB/migration, deletion, dependency removal, public-API break, security change):
-  -> AskUserQuestion EVEN IF auto_mode (safety override; "Jamais modif DB sans approval explicit").
+  -> AskUserQuestion EVEN IF auto_mode (safety override; "Never modify a DB without explicit approval").
      Options: Proceed / Skip this op / Halt. Record the decision in trace.md Checkpoints.
 Other irreversible ops (e.g. new dependency, scope-edge):
   -> auto_mode may proceed but MUST log to trace.md; otherwise ask.
@@ -84,7 +84,7 @@ Never let a worker perform these: only the lead, after approval.
 
 ```
 For prd, mutating docs/prd/<slug>/tasks.md checkboxes is a write into the upstream spec.
-IF auto_mode = false: confirm once "Cocher les tâches faites dans tasks.md ?" (yes -> tick - [ ] -> - [x]; no -> progress stays in trace.md only).
+IF auto_mode = false: confirm once "Check off the completed tasks in tasks.md?" (yes -> tick - [ ] -> - [x]; no -> progress stays in trace.md only).
 For rfc: NEVER mutate RFC.md. Progress lives only in trace.md.
 ```
 

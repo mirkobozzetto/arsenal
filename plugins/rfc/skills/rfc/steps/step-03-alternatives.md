@@ -116,15 +116,15 @@ Else AskUserQuestion:
 
 ```yaml
 questions:
-  - header: "Étape suivante"
-    question: "Alternatives surfacées. Détailler le design proposé ?"
+  - header: "Next step"
+    question: "Alternatives surfaced. Detail the proposed design?"
     options:
-      - label: "Continuer (Recommended)"
-        description: "Step 04 : Proposed Design (l'approche détaillée)"
-      - label: "Ajouter une alternative"
-        description: "Reboucler : je vois un autre angle"
-      - label: "Stop ici"
-        description: "RFC suffit comme exploration : pas besoin de design détaillé"
+      - label: "Continue (Recommended)"
+        description: "Step 04: Proposed Design (the detailed approach)"
+      - label: "Add an alternative"
+        description: "Loop back: I see another angle"
+      - label: "Stop here"
+        description: "RFC is enough as exploration: no need for a detailed design"
     multiSelect: false
 ```
 

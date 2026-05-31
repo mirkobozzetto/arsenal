@@ -1,187 +1,187 @@
-# /websearch - Guide complet
+# /websearch - Full guide
 
-## Utilisation rapide
+## Quick usage
 
 ```
-/websearch <query>                    Recherche rapide
-/websearch --deep <query>             Recherche approfondie multi-passes
-/websearch --code <query>             Exemples de code, API, libs
-/websearch --docs <lib>               Documentation officielle d'une lib
-/websearch --debug <erreur>           Colle une erreur, trouve le fix
-/websearch --news <sujet>             Actualités récentes
-/websearch --compare <A> vs <B>       Comparaison côte à côte
-/websearch --research <sujet>         Articles académiques
-/websearch --similar <url>            Pages similaires à une URL
-/websearch --info                     Ce guide
+/websearch <query>                    Quick search
+/websearch --deep <query>             Deep multi-pass research
+/websearch --code <query>             Code examples, API, libs
+/websearch --docs <lib>               Official documentation for a lib
+/websearch --debug <error>            Paste an error, find the fix
+/websearch --news <topic>             Recent news
+/websearch --compare <A> vs <B>       Side-by-side comparison
+/websearch --research <topic>         Academic papers
+/websearch --similar <url>            Pages similar to a URL
+/websearch --info                     This guide
 ```
 
-## Modes en détail
+## Modes in detail
 
-### Recherche rapide (défaut)
+### Quick search (default)
 ```
-/websearch comment fonctionne gRPC
+/websearch how does gRPC work
 ```
-Une seule passe, 5 résultats, réponse en bullet points avec sources.
-Idéal pour les questions factuelles rapides.
+Single pass, 5 results, answer in bullet points with sources.
+Best for fast factual questions.
 
 ### Deep research (`--deep`)
 ```
 /websearch --deep state management React 2026
 ```
-Décompose la query en 3-5 sous-queries par angle :
-- Définitionnel, pratique, comparatif, récent, expert.
-- Évalue les résultats, identifie les gaps.
-- Itère jusqu'à 3 passes max.
-- Produit un rapport structuré avec sections thématiques.
-Usage : décisions techniques, veille approfondie, exploration de sujet.
+Breaks the query into 3-5 sub-queries by angle:
+- Definitional, practical, comparative, recent, expert.
+- Evaluates results, identifies gaps.
+- Iterates up to 3 passes max.
+- Produces a structured report with thematic sections.
+Usage: technical decisions, deep monitoring, topic exploration.
 
 ### Code (`--code`)
 ```
 /websearch --code FastAPI middleware authentication
 /websearch --code Python asyncio gather timeout
 ```
-Utilise `get_code_context_exa` optimisé pour :
-- Extraire des snippets de code réels (GitHub, SO, docs officielles).
-- Résultats orientés code d'abord, explication ensuite.
-Usage : trouver un exemple d'API, un pattern d'implémentation.
+Uses `get_code_context_exa`, optimized to:
+- Extract real code snippets (GitHub, SO, official docs).
+- Code-first results, explanation second.
+Usage: find an API example, an implementation pattern.
 
 ### Documentation (`--docs`)
 ```
 /websearch --docs prisma
 /websearch --docs next.js app router
 ```
-Workflow en 2 temps :
-1. Trouve le site de docs officiel.
-2. Crawl la page pertinente + sous-pages liées.
-Usage : comprendre une API spécifique, lire la doc sans quitter le terminal.
+Two-step workflow:
+1. Find the official docs site.
+2. Crawl the relevant page + linked sub-pages.
+Usage: understand a specific API, read the docs without leaving the terminal.
 
 ### Debug (`--debug`)
 ```
 /websearch --debug "TypeError: Cannot read properties of undefined (reading 'map')"
 /websearch --debug CORS error preflight blocked
 ```
-Workflow intelligent :
-1. Nettoie l'erreur (retire paths, timestamps, données user).
-2. Cherche l'erreur exacte d'abord.
-3. Élargit en sémantique si pas assez de résultats.
-4. Cible Stack Overflow, GitHub Issues.
-Format : solution d'abord, explication ensuite.
+Smart workflow:
+1. Clean the error (strip paths, timestamps, user data).
+2. Search the exact error first.
+3. Broaden to semantic if not enough results.
+4. Target Stack Overflow, GitHub Issues.
+Format: solution first, explanation second.
 
 ### News (`--news`)
 ```
 /websearch --news AI agents
 /websearch --news --after 2026-05-01 Claude Code
 ```
-Filtre par catégorie "news" Exa.
-Par défaut : 7 derniers jours.
-Format : timeline, plus récent en premier.
+Filters by Exa "news" category.
+Default: last 7 days.
+Format: timeline, most recent first.
 
 ### Compare (`--compare`)
 ```
 /websearch --compare React vs Vue vs Svelte
 /websearch --compare Prisma vs Drizzle
 ```
-Lance une query parallèle par option.
-Produit un tableau comparatif + verdict.
+Runs one parallel query per option.
+Produces a comparison table + verdict.
 
 ### Research (`--research`)
 ```
 /websearch --research transformer architecture scaling laws
 ```
-Filtre catégorie "research paper" Exa.
-Résultats d'arxiv, ACM, IEEE, Nature.
-Format : résumé + findings clés + méthodologie.
+Filters by Exa "research paper" category.
+Results from arxiv, ACM, IEEE, Nature.
+Format: summary + key findings + methodology.
 
 ### Similar (`--similar`)
 ```
 /websearch --similar https://blog.example.com/great-article
 ```
-Trouve des pages sémantiquement similaires à une URL donnée.
+Finds pages semantically similar to a given URL.
 
-## Filtres
+## Filters
 
-Combinables avec tous les modes :
+Combinable with all modes:
 
 ```
---after <date>        Résultats après cette date
-                      Formats : 2026-05-01, "last week", "3 days ago"
+--after <date>        Results after this date
+                      Formats: 2026-05-01, "last week", "3 days ago"
 
---before <date>       Résultats avant cette date
+--before <date>       Results before this date
 
---domain <d>          Restreindre aux domaines (virgules)
+--domain <d>          Restrict to domains (comma-separated)
                       Ex: --domain github.com,stackoverflow.com
 
---exclude <d>         Exclure des domaines
+--exclude <d>         Exclude domains
                       Ex: --exclude reddit.com,medium.com
 
---fresh               Force le live crawl (contenu temps réel)
-                      Exa recrawl les pages au lieu du cache
+--fresh               Force live crawl (real-time content)
+                      Exa recrawls pages instead of using the cache
 
---locale <CC>         Résultats localisés (code pays ISO)
+--locale <CC>         Localized results (ISO country code)
                       Ex: --locale FR, --locale US
 
--n <num>              Nombre de résultats (défaut: 5, max: 20)
+-n <num>              Number of results (default: 5, max: 20)
 ```
 
-## Sortie
+## Output
 
 ```
---save <fichier>      Sauvegarde le rapport en markdown
-                      Ex: --save ./rapport-react.md
+--save <file>         Save the report as markdown
+                      Ex: --save ./report-react.md
 
---json                Sortie JSON structurée (pour piping)
+--json                Structured JSON output (for piping)
 
---full                Texte complet au lieu des highlights
-                      Plus de tokens mais plus de contexte
+--full                Full text instead of highlights
+                      More tokens but more context
 ```
 
-## Exemples d'usage quotidien
+## Daily usage examples
 
 ```bash
-# Question rapide
-/websearch quel est le port par défaut de PostgreSQL
+# Quick question
+/websearch what is the default port of PostgreSQL
 
-# Trouver un snippet
+# Find a snippet
 /websearch --code React useOptimistic example
 
-# Débugger une erreur
+# Debug an error
 /websearch --debug "ECONNREFUSED 127.0.0.1:5432"
 
-# Lire les docs d'une lib
+# Read a lib's docs
 /websearch --docs zod validation
 
-# Veille techno
+# Tech monitoring
 /websearch --news --after "last week" Anthropic Claude
 
-# Choix technique
+# Technical choice
 /websearch --compare Bun vs Deno vs Node.js 2026
 
-# Recherche approfondie pour un article
-/websearch --deep --save rapport.md impact IA sur le développement logiciel
+# Deep research for an article
+/websearch --deep --save report.md AI impact on software development
 
-# Papers récents
+# Recent papers
 /websearch --research --after 2026-01-01 LLM code generation evaluation
 
-# Trouver du contenu similaire
+# Find similar content
 /websearch --similar https://exa.ai/blog/search-for-ai
 ```
 
-## Comment ça marche
+## How it works
 
-La skill utilise 4 outils Exa MCP :
+The skill uses 4 Exa MCP tools:
 
-| Outil | Usage |
+| Tool | Usage |
 |-------|-------|
-| `web_search_exa` | Recherche sémantique générale |
-| `get_code_context_exa` | Code, API, docs techniques |
-| `web_search_advanced_exa` | Filtres catégorie (news, research, company) |
-| `crawling_exa` | Lecture complète d'une URL + sous-pages |
+| `web_search_exa` | General semantic search |
+| `get_code_context_exa` | Code, API, technical docs |
+| `web_search_advanced_exa` | Category filters (news, research, company) |
+| `crawling_exa` | Full read of a URL + sub-pages |
 
-Le workflow adapte automatiquement :
-- L'outil Exa utilisé selon le mode.
-- Les domaines ciblés selon l'écosystème détecté.
-- La formulation de query (sémantique, pas mots-clés).
-- Le format de sortie selon le type de recherche.
+The workflow adapts automatically:
+- The Exa tool used per mode.
+- The targeted domains per detected ecosystem.
+- The query phrasing (semantic, not keywords).
+- The output format per search type.
 
-Mode `--deep` : itère jusqu'à 3 passes avec analyse de gaps entre chaque passe.
-Tous les résultats sont cités inline avec `[source](url)`.
+`--deep` mode: iterates up to 3 passes with gap analysis between each pass.
+All results are cited inline with `[source](url)`.

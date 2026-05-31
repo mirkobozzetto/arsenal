@@ -53,7 +53,7 @@ Use AskUserQuestion for each dimension. Provide 2-4 concrete option guesses + th
 ```yaml
 questions:
   - header: "JTBD"
-    question: "Quel job l'utilisateur 'engage' cette feature pour accomplir ?"
+    question: "What job does the user 'hire' this feature to accomplish?"
     options:
       - label: "<guess A>"
         description: "<why>"
@@ -75,16 +75,16 @@ Summarize the gathered `answers` in a short bullet recap. Mark any dimension sti
 Use AskUserQuestion:
 ```yaml
 questions:
-  - header: "Cadrage"
-    question: "Assez de signal pour drafter le PRD ?"
+  - header: "Scoping"
+    question: "Enough signal to draft the PRD?"
     options:
-      - label: "Drafter (Recommended)"
-        description: "Le cadrage est suffisant, passer au PRD"
-      - label: "Re-questionner"
-        description: "Creuser les dimensions encore floues"
+      - label: "Draft (Recommended)"
+        description: "Scoping is sufficient, move to the PRD"
+      - label: "Re-question"
+        description: "Dig into the dimensions that are still fuzzy"
     multiSelect: false
 ```
-Route: Re-questionner → loop back to sequence 1 for the thin dimensions.
+Route: Re-question → loop back to sequence 1 for the thin dimensions.
 
 ### 4. Update State
 
@@ -115,7 +115,7 @@ answers: { jtbd, target_user, problem, constraints, data_source, business_rule, 
 
 - One dimension per question; never bundle unrelated dimensions
 - Offer concrete guesses as options so the user can confirm fast
-- Keep questions in French; identifiers in English
+- Keep questions in English; identifiers in English
 
 ---
 

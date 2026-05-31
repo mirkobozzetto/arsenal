@@ -35,14 +35,14 @@ Else AskUserQuestion:
 ```yaml
 questions:
   - header: "Base design"
-    question: "Quelle alternative sert de base au design détaillé ?"
+    question: "Which alternative serves as the base for the detailed design?"
     options:
-      - label: "Alt 1 : {name}"
+      - label: "Alt 1: {name}"
         description: "{1-line summary}"
-      - label: "Alt 2 : {name}"
+      - label: "Alt 2: {name}"
         description: "{1-line summary}"
-      - label: "Hybride"
-        description: "Combine plusieurs alternatives : préciser laquelle prend quoi"
+      - label: "Hybrid"
+        description: "Combine multiple alternatives: specify which takes what"
     multiSelect: false
 ```
 
@@ -131,15 +131,15 @@ Else AskUserQuestion:
 
 ```yaml
 questions:
-  - header: "Étape suivante"
-    question: "Design écrit. Passer aux risques + open questions ?"
+  - header: "Next step"
+    question: "Design written. Move on to risks + open questions?"
     options:
-      - label: "Continuer (Recommended)"
-        description: "Step 05 : Drawbacks, risks, unknowns"
-      - label: "Affiner design"
-        description: "Reboucler : sections manquantes / unclear"
-      - label: "Retour alternatives"
-        description: "Step 03 : je doute du choix de base"
+      - label: "Continue (Recommended)"
+        description: "Step 05: Drawbacks, risks, unknowns"
+      - label: "Refine design"
+        description: "Loop back: missing / unclear sections"
+      - label: "Back to alternatives"
+        description: "Step 03: I doubt the base choice"
     multiSelect: false
 ```
 

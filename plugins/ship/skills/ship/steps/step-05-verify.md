@@ -10,7 +10,7 @@ next_step: steps/step-06-finish.md
 ## MANDATORY EXECUTION RULES:
 
 - YOU ARE A VERIFIER, not a test runner
-- NEVER run build/test/typecheck toolchain by default (your rule: "user fait ça")
+- NEVER run build/test/typecheck toolchain by default (your rule: "the user does that")
 - NEVER run destructive/DB/deploy commands, ever, even with --yolo
 - ALWAYS write verification-bundle.md (stack-detected) + finalize trace.md
 - ALWAYS map each contract item to a concrete edit (PASS/FAIL)
@@ -63,8 +63,8 @@ Set {bundle_path}.
 
 ```
 DEFAULT (no --yolo):
-  -> List the SAFE commands. AskUserQuestion: "Lancer ces checks moi-même, ou tu les lances ?"
-     Options: "Je les lance moi (Recommended)" / "ship lance les checks safe maintenant".
+  -> List the SAFE commands. AskUserQuestion: "Run these checks myself, or do you run them?"
+     Options: "I run them myself (Recommended)" / "ship runs the safe checks now".
      Only on explicit opt-in does ship run the SAFE set; otherwise it runs nothing.
 
 --yolo:

@@ -44,22 +44,22 @@ Agent({
   description: "Adversarial RFC review: gaps",
   subagent_type: "general-purpose",
   prompt: `
-    Lis ce RFC complet et trouve les GAPS : requirements manquants,
-    edge cases ignorés, hypothèses cachées, contradictions internes.
+    Read this full RFC and find the GAPS: missing requirements,
+    ignored edge cases, hidden assumptions, internal contradictions.
 
     RFC content:
     ---
     {full RFC.md content}
     ---
 
-    Pour chaque finding, output:
+    For each finding, output:
     - Severity: BLOCKER | MAJOR | MINOR | NIT
     - Section: which section of RFC
     - Issue: ≤2 sentences
     - Suggestion: ≤2 sentences
 
     Format: markdown table. No praise, no recap.
-    Sois sceptique. Ton job = trouver ce qui manque, pas valider.
+    Be skeptical. Your job = find what is missing, not validate.
   `
 })
 ```
@@ -71,15 +71,15 @@ Agent({
   description: "Adversarial RFC review: impl realism",
   subagent_type: "general-purpose",
   prompt: `
-    Lis ce RFC complet et challenge le plan d'impl (section 10).
-    Cherche : tâches sous-estimées, deps cachées, hypothèses d'ops,
-    risques de rollback ignorés, ce qui casse en prod.
+    Read this full RFC and challenge the impl plan (section 10).
+    Look for: underestimated tasks, hidden deps, ops assumptions,
+    ignored rollback risks, what breaks in prod.
 
     RFC content: ---
     {full RFC.md content}
     ---
 
-    Output format identique à Subagent A.
+    Output format identical to Subagent A.
   `
 })
 ```
@@ -120,13 +120,13 @@ If any BLOCKER found:
 ```yaml
 questions:
   - header: "Blockers"
-    question: "{N} BLOCKER(s) trouvés. Action ?"
+    question: "{N} BLOCKER(s) found. Action?"
     options:
-      - label: "Revoir RFC (Recommended)"
-        description: "Reboucler aux steps concernés pour fixer blockers"
-      - label: "Accepter blockers"
-        description: "Documenter dans § correspondante + continuer step-09"
-      - label: "Abandonner RFC"
+      - label: "Revisit RFC (Recommended)"
+        description: "Loop back to the relevant steps to fix blockers"
+      - label: "Accept blockers"
+        description: "Document in the corresponding § + continue step-09"
+      - label: "Abandon RFC"
         description: "Status: Rejected"
     multiSelect: false
 ```
@@ -159,8 +159,8 @@ review_nit: L
 ## NEXT STEP:
 
 If blockers accepted/none → load `./step-09-finalize.md`.
-If user chose "Revoir RFC" → AskUserQuestion which step to reload (typically step-04 or step-05).
-If "Abandonner" → load step-09 with `status: Rejected`.
+If user chose "Revisit RFC" → AskUserQuestion which step to reload (typically step-04 or step-05).
+If "Abandon" → load step-09 with `status: Rejected`.
 
 <critical>
 Subagent has FRESH context: that's the point. Independent review > self-review every time. Resist urge to argue back.

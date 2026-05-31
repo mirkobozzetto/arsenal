@@ -61,7 +61,7 @@ Set {ultracode_signal}:
   - "unknown" if unreadable / empty
 ship STILL cannot SET the effort (read-only; hooks cannot set it either, CC issue #30806). Only the user toggles /effort.
 IF complex AND {ultracode_signal} = "off":
-  -> prepare a SUGGESTION line for the confirm gate ("ce spec gagnerait à /effort xhigh|ultracode"), never auto-enable.
+  -> prepare a SUGGESTION line for the confirm gate ("this spec would benefit from /effort xhigh|ultracode"), never auto-enable.
 IF {ultracode_signal} = "on":
   -> note that the harness may auto-launch dynamic workflows in parallel, orthogonal to the tier ship picks.
 ```
@@ -73,15 +73,15 @@ IF {ultracode_signal} = "on":
 **If `{auto_mode}` = false:**
 ```yaml
 questions:
-  - header: "Moteur"
-    question: "Tier sélectionné: {engine_tier} ({groups} groupes indépendants). [Si complexe: ce spec gagnerait à ultracode, active /effort ultracode|xhigh toi-même (ship ne peut pas).] Continuer ?"
+  - header: "Engine"
+    question: "Selected tier: {engine_tier} ({groups} independent groups). [If complex: this spec would benefit from ultracode, enable /effort ultracode|xhigh yourself (ship cannot).] Continue?"
     options:
-      - label: "Continuer (Recommended)"
-        description: "Exécuter sur le tier {engine_tier}"
-      - label: "Forcer solo"
-        description: "Un seul worker, séquentiel, plus sûr"
-      - label: "Forcer teams"
-        description: "Équipe d'agents (nécessite le flag teams + groupes disjoints)"
+      - label: "Continue (Recommended)"
+        description: "Execute on the {engine_tier} tier"
+      - label: "Force solo"
+        description: "A single worker, sequential, safer"
+      - label: "Force teams"
+        description: "Agent team (requires the teams flag + disjoint groups)"
     multiSelect: false
 ```
 

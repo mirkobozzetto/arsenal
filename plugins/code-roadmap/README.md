@@ -9,16 +9,16 @@ Orientation for the **start** of a coding task. Given an intent, `code-roadmap` 
 `code-roadmap` reads the **live** skill inventory (the list your agent already has in context), reasons about the *shape* of your task across a few signals (scope, independent surfaces, risk, ambiguity, repo familiarity), and prints:
 
 ```
-CHAÎNE CANONIQUE
+CANONICAL CHAIN
 1. <skill>   : why
 2. <skill>   : why
 
-RÉFLEXION (suggérée) : <trivial | standard | deep | ultracode> : why
-EXÉCUTION (à toi de choisir) :
-  <option> → why
-  <option> → why
+REFLECTION (suggested) : <trivial | standard | deep | ultracode> : why
+EXECUTION (your call) :
+  <option> -> why
+  <option> -> why
 
-ALTERNATIVES / GAP / À toi de choisir.
+ALTERNATIVES / GAP / Your call.
 ```
 
 Because the inventory is read live, adding or removing a skill changes its routing next session with **zero edits** to the plugin: there is no hardcoded catalog to drift. It has **no Skill tool on purpose**: it structurally cannot execute anything, only orient.
@@ -36,7 +36,7 @@ Because the inventory is read live, adding or removing a skill changes its routi
 
 ```bash
 /code-roadmap migrate the auth module to the new token format
-/code-roadmap par où commencer pour ajouter un cache Redis
+/code-roadmap where do I start to add a Redis cache
 ```
 
 ## What it will and won't do

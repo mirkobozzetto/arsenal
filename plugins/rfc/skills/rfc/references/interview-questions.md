@@ -5,37 +5,37 @@ Used by steps that need user input. AskUserQuestion preferred; free-text for fol
 ## Step 02: Problem & Motivation
 
 ### Symptom (single-select)
-**Q:** Quel problème concret tu observes aujourd'hui ?
-- Bug / dysfonctionnement (comportement incorrect)
-- Friction / lenteur (process pénible, lent, coûteux)
-- Limite / blocage (impossible de faire X)
-- Risque / dette (pas cassé mais danger)
+**Q:** What concrete problem are you observing today?
+- Bug / malfunction (incorrect behavior)
+- Friction / slowness (painful, slow, costly process)
+- Limit / blocker (impossible to do X)
+- Risk / debt (not broken but dangerous)
 
 ### Trigger (single-select)
-**Q:** Pourquoi maintenant ?
-- Incident récent (post-mortem, fire)
-- Deadline (release, conformité, deadline business)
-- Dépendance (lib EOL, vendor change, upstream migration)
-- Opportunité (nouvelle techno mature, refacto opportuniste)
+**Q:** Why now?
+- Recent incident (post-mortem, fire)
+- Deadline (release, compliance, business deadline)
+- Dependency (lib EOL, vendor change, upstream migration)
+- Opportunity (newly mature tech, opportunistic refactor)
 
 ### Stakeholders (multi-select)
-**Q:** Qui est impacté ?
-- Utilisateurs finaux
-- Équipe dev interne
+**Q:** Who is impacted?
+- End users
+- Internal dev team
 - Ops / SRE
-- Sécurité / compliance
-- Business / produit
+- Security / compliance
+- Business / product
 
 ### Signals (free-text)
-- Métriques quantitatives observées ?
-- Logs / errors ?
-- Volume / fréquence ?
+- Quantitative metrics observed?
+- Logs / errors?
+- Volume / frequency?
 
 ### Goals (free-text, structured)
-- 3-5 objectifs mesurables. Format: "X passe de A à B" ou "Permettre X sans Y".
+- 3-5 measurable goals. Format: "X goes from A to B" or "Enable X without Y".
 
 ### Non-Goals (free-text, structured)
-- 3-5 explicit. Format: "Nous ne résolvons PAS X dans ce RFC".
+- 3-5 explicit. Format: "We are NOT solving X in this RFC".
 
 ---
 
@@ -64,12 +64,12 @@ Used by steps that need user input. AskUserQuestion preferred; free-text for fol
 ## Step 04: Design
 
 ### Base alternative pick (single-select)
-**Q:** Quelle alternative sert de base ?
-- Liste générée depuis step-03
-- Option "Hybride" → préciser ce qui vient de chaque
+**Q:** Which alternative serves as the base?
+- List generated from step-03
+- "Hybrid" option → specify what comes from each
 
 ### Diagram type (multi-select)
-**Q:** Quels diagrammes nécessaires ?
+**Q:** Which diagrams are needed?
 - Architecture (flowchart)
 - Sequence (API/flows)
 - ER (schema)
@@ -77,8 +77,8 @@ Used by steps that need user input. AskUserQuestion preferred; free-text for fol
 - C4 (system boundary)
 
 ### Breaking changes (single-select)
-- Aucun
-- API public breaking
+- None
+- Public API breaking
 - Schema breaking (migration)
 - Behavior breaking (silent semantics change)
 
@@ -94,27 +94,27 @@ Used by steps that need user input. AskUserQuestion preferred; free-text for fol
 - Dark launch (shadow traffic)
 
 ### Rollback feasibility (single-select)
-- PR revert suffit
-- Migration reversible (down script)
-- Backup + restore requis
-- Irreversible: flag prominent
+- PR revert is enough
+- Reversible migration (down script)
+- Backup + restore required
+- Irreversible: prominent flag
 
 ### Open questions ownership (free-text)
-Par question :
-- Owner (nom / rôle)
-- Deadline (date ou "before T0X")
+Per question:
+- Owner (name / role)
+- Deadline (date or "before T0X")
 
 ---
 
 ## Step 06: Recommendation
 
 ### Confidence (single-select)
-- High (≥80% sûr design tient sur 12 mois)
-- Medium (50-80%, dépend de variables identifiées)
-- Low (<50%, hypothèse à valider via prototype)
+- High (≥80% sure the design holds for 12 months)
+- Medium (50-80%, depends on identified variables)
+- Low (<50%, hypothesis to validate via prototype)
 
 ### Revisit triggers (free-text)
-- Conditions concrètes qui invalideraient le choix
+- Concrete conditions that would invalidate the choice
 - Ex: "load > 10x", "vendor change", "team size double"
 
 ---
@@ -122,44 +122,44 @@ Par question :
 ## Step 07: Impl Plan
 
 ### Task split heuristic
-Si effort > 1 jour → split. Critère :
-- Compilable / testable indépendamment
-- Reviewer peut suivre la diff sans trop de contexte
-- Acceptance criteria distincts
+If effort > 1 day → split. Criteria:
+- Compilable / testable independently
+- Reviewer can follow the diff without too much context
+- Distinct acceptance criteria
 
 ### Verification depth (single-select per task)
 - Unit only
 - Unit + integration
 - Unit + integration + perf
-- Manuel (rare, justifier)
+- Manual (rare, justify)
 
 ---
 
 ## Step 08: Review
 
 ### Subagent flavors (multi-select)
-- Gap hunter (requirements manquants, edge cases)
+- Gap hunter (missing requirements, edge cases)
 - Impl realism (tasks underestimated, ops surprises)
 - Security review (OWASP, authz, secrets)
 - Perf review (latency, throughput, memory)
 
 ### Action on BLOCKER (single-select)
-- Revoir RFC (reboucler aux steps concernées)
-- Accepter blockers (documenter, continuer)
-- Abandonner RFC (status: Rejected)
+- Revise RFC (loop back to the relevant steps)
+- Accept blockers (document, continue)
+- Abandon RFC (status: Rejected)
 
 ---
 
 ## Step 09: Finalize
 
 ### Status (single-select)
-- Draft (prêt à circuler)
-- Review (en cours)
-- Accepted (validé, permission d'impl)
-- Rejected (décision = ne pas faire)
+- Draft (ready to circulate)
+- Review (in progress)
+- Accepted (validated, permission to implement)
+- Rejected (decision = do not do it)
 
 ### Handoff (single-select)
-- Stop ici (artefact only)
-- Lancer /ship sur impl plan
-- Lancer /sdd (spec-driven)
-- Push vers /brain (Obsidian)
+- Stop here (artifact only)
+- Run /ship on the impl plan
+- Run /sdd (spec-driven)
+- Push to /brain (Obsidian)

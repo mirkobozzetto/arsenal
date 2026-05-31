@@ -122,15 +122,15 @@ Else AskUserQuestion:
 
 ```yaml
 questions:
-  - header: "Étape suivante"
-    question: "Recommandation actée. Détailler plan d'implémentation ?"
+  - header: "Next step"
+    question: "Recommendation settled. Detail the implementation plan?"
     options:
-      - label: "Continuer (Recommended)"
-        description: "Step 07 : Implementation plan (tâches ordonnées)"
-      - label: "Confidence trop basse"
-        description: "→ Recherche additionnelle (Exa) ou prototype avant impl plan"
-      - label: "Stop RFC ici"
-        description: "RFC = décision uniquement, impl ailleurs (ship/sdd)"
+      - label: "Continue (Recommended)"
+        description: "Step 07: Implementation plan (ordered tasks)"
+      - label: "Confidence too low"
+        description: "-> Additional research (Exa) or prototype before impl plan"
+      - label: "Stop RFC here"
+        description: "RFC = decision only, impl elsewhere (ship/sdd)"
     multiSelect: false
 ```
 

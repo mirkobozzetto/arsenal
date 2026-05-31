@@ -69,7 +69,7 @@ Load `steps/step-00-init.md`
 - Never write feature code in this skill; stop at the task list.
 - The task file carries an explicit "Do NOT implement" header until the user runs the implementer.
 - No comments inside any generated code or scripts.
-- Prose in French; technical terms and identifiers in English.
+- Prose in English; technical terms and identifiers in English.
 - Any web lookup uses Exa MCP only (web_search_exa, crawling_exa); never native WebSearch/WebFetch.
 - Honor the git write-guard: do not commit/push the PRD unless the user asks.
 - Edit existing PRD files in place rather than creating duplicates.

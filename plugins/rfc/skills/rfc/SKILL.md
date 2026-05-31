@@ -1,6 +1,6 @@
 ---
 name: rfc
-description: Multi-step RFC (Request For Comments) workflow for Claude Code. Forces reasoning before action: problem → alternatives → tradeoffs → design → risks → recommendation → impl plan. Use when user says "RFC", "écris un RFC", "design doc", "propose a", "before implementing", or when decision crosses a boundary (system/team/version). Integrates GitNexus codebase context, Exa research, adversarial review subagent.
+description: Multi-step RFC (Request For Comments) workflow for Claude Code. Forces reasoning before action: problem → alternatives → tradeoffs → design → risks → recommendation → impl plan. Use when user says "RFC", "write an RFC", "design doc", "propose a", "before implementing", or when decision crosses a boundary (system/team/version). Integrates GitNexus codebase context, Exa research, adversarial review subagent.
 argument-hint: "<short title> [--auto] [--scope <path>] [--no-review] [--out <dir>]"
 ---
 

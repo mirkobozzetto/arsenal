@@ -36,7 +36,7 @@ Read the spec, enforce the run-gate, parse its tasks into `{tasks}`, and detect 
 Read {artifact_path}/prd.md frontmatter.
 GATE: status MUST be "ready" (set by prd step-04).
   IF status != ready (missing / draft):
-    -> Refuse: "PRD pas finalisé (status != ready). Lance prd step-04, ou confirme un override."
+    -> Refuse: "PRD not finalized (status != ready). Run prd step-04, or confirm an override."
     -> HALT (route to step-06-finish with final_status = halted) unless the user explicitly overrides.
 Note: the "Do NOT implement" line in tasks.md is a PROHIBITION on prd, NOT an authorization. Do not treat it as the gate.
 ```
@@ -46,7 +46,7 @@ Note: the "Do NOT implement" line in tasks.md is a PROHIBITION on prd, NOT an au
 Read {artifact_path} (RFC.md) frontmatter.
 GATE: status MUST be "Accepted".
   IF status in (Draft, Review, Rejected):
-    -> Refuse: "RFC pas Accepted (status: <x>). Un RFC s'exécute seulement une fois Accepted."
+    -> Refuse: "RFC not Accepted (status: <x>). An RFC runs only once it is Accepted."
     -> HALT (route to step-06-finish with final_status = halted) unless explicit override.
 ```
 

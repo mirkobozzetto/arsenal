@@ -132,15 +132,15 @@ Else AskUserQuestion:
 
 ```yaml
 questions:
-  - header: "Étape suivante"
-    question: "Risques + questions listés. Formaliser recommandation ?"
+  - header: "Next step"
+    question: "Risks + questions listed. Formalize recommendation?"
     options:
-      - label: "Continuer (Recommended)"
-        description: "Step 06 : Recommendation + rationale"
-      - label: "Risques bloquants"
-        description: "1+ risque non mitigable → revoir design (step-04)"
-      - label: "Questions trop nombreuses"
-        description: "Open questions > 5 → recherche additionnelle requise"
+      - label: "Continue (Recommended)"
+        description: "Step 06: Recommendation + rationale"
+      - label: "Blocking risks"
+        description: "1+ unmitigatable risk -> revisit design (step-04)"
+      - label: "Too many questions"
+        description: "Open questions > 5 -> additional research required"
     multiSelect: false
 ```
 

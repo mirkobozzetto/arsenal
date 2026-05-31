@@ -78,7 +78,7 @@ The structure lives in `references/issue-template.md`. Read it before `create` s
 - Confirm with the user before `gh issue create` and before `gh issue close` (outward-facing / state change).
 - Use `gh` for all issue operations, not raw git; this skill never commits or pushes.
 - Never modify a database; this skill only touches GitHub issues.
-- Prose in French; technical terms and identifiers in English.
+- Prose in English; technical terms and identifiers in English.
 - Any web lookup uses Exa MCP only (web_search_exa, crawling_exa); never native WebSearch/WebFetch.
 - No comments inside any generated code or scripts.
 

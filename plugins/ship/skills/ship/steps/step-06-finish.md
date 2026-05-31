@@ -69,14 +69,14 @@ NEVER auto-commit. ship does not commit/push/PR.
 IF auto_mode = false AND final_status = shipped:
   AskUserQuestion:
     header: "Commit"
-    question: "Commiter le travail ?"
+    question: "Commit the work?"
     options:
-      - label: "Non, je gère (Recommended)"
-        description: "Rien commiter (git write-guard)"
-      - label: "Commiter"
-        description: "Stage + commit, message propre, sans signature (le guard fera son prompt)"
+      - label: "No, I'll handle it (Recommended)"
+        description: "Commit nothing (git write-guard)"
+      - label: "Commit"
+        description: "Stage + commit, clean message, no signature (the guard will fire its prompt)"
     multiSelect: false
-  Route "Commiter" -> conventional message, no Claude signature, git write-guard prompt fires.
+  Route "Commit" -> conventional message, no Claude signature, git write-guard prompt fires.
 ```
 
 ### 4. Final state update

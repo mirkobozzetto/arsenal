@@ -85,12 +85,12 @@ ELSE:
 ```yaml
 questions:
   - header: "Start"
-    question: "ship va exécuter {artifact_path} ({artifact_kind}). Démarrer ?"
+    question: "ship will execute {artifact_path} ({artifact_kind}). Start?"
     options:
-      - label: "Démarrer (Recommended)"
-        description: "Lire le spec, valider le gate, planifier"
-      - label: "Annuler"
-        description: "Ne rien faire"
+      - label: "Start (Recommended)"
+        description: "Read the spec, validate the gate, plan"
+      - label: "Cancel"
+        description: "Do nothing"
     multiSelect: false
 ```
 

@@ -50,16 +50,16 @@ Else AskUserQuestion:
 ```yaml
 questions:
   - header: "Status"
-    question: "Status final du RFC ?"
+    question: "Final RFC status?"
     options:
       - label: "Draft (Recommended)"
-        description: "Prêt à circuler pour review humain"
+        description: "Ready to circulate for human review"
       - label: "Review"
-        description: "En cours de relecture par d'autres"
+        description: "Under review by others"
       - label: "Accepted"
-        description: "Validé : permission d'implémenter"
+        description: "Validated: permission to implement"
       - label: "Rejected"
-        description: "Décision = ne pas faire (archive)"
+        description: "Decision = do not do it (archive)"
     multiSelect: false
 ```
 
@@ -99,38 +99,38 @@ Use AskUserQuestion (unless `auto_mode`):
 
 ```yaml
 questions:
-  - header: "Suite"
-    question: "RFC finalisé. Action suivante ?"
+  - header: "Next"
+    question: "RFC finalized. Next action?"
     options:
-      - label: "Lancer ship sur le plan"
-        description: "Exécuteur spec-driven : ship lit ce RFC (gate status: Accepted), construit le DAG depuis section 10, implémente, rend un verification-bundle + trace. Respecte 'pas de tests/builds auto'. Terminal de la chaîne rfc -> ship."
-      - label: "Stop ici"
-        description: "RFC = artefact. Impl plus tard via ship sur le RFC Accepted."
-      - label: "Sauver dans brain"
-        description: "Push vers Obsidian vault via /brain"
+      - label: "Run ship on the plan"
+        description: "Spec-driven executor: ship reads this RFC (gate status: Accepted), builds the DAG from section 10, implements, returns a verification-bundle + trace. Honors 'no auto tests/builds'. Terminal of the rfc -> ship chain."
+      - label: "Stop here"
+        description: "RFC = artifact. Impl later via ship on the Accepted RFC."
+      - label: "Save to brain"
+        description: "Push to the Obsidian vault via /brain"
     multiSelect: false
 ```
 
-Si choix ship → invoque-le avec `{rfc_path}` (il refuse si status != Accepted). Si brain → invoque /brain avec `{rfc_path}`. (sdd reste dispo manuellement : /speckit.specify.) RFC Accepted != implémenté : ne lance que sur choix explicite.
+If ship is chosen -> invoke it with `{rfc_path}` (it refuses if status != Accepted). If brain -> invoke /brain with `{rfc_path}`. (sdd stays available manually: /speckit.specify.) RFC Accepted != implemented: only launch on explicit choice.
 
 ## SUCCESS METRICS:
 
-✅ Section 1 (Summary) ≤ 6 sentences, factuelle
-✅ Status défini explicitement
-✅ Frontmatter `stepsCompleted` complet 0→9
-✅ Index `{out_dir}/README.md` à jour (si applicable)
+✅ Section 1 (Summary) ≤ 6 sentences, factual
+✅ Status explicitly defined
+✅ Frontmatter `stepsCompleted` complete 0→9
+✅ Index `{out_dir}/README.md` up to date (if applicable)
 ✅ User sees recap + handoff options
 
 ## FAILURE MODES:
 
-❌ Summary trop long → c'est pas un summary
-❌ Status laissé `Draft` quand user a validé blockers (devrait être Accepted)
-❌ Pas d'update index → RFC orphelin
-❌ Auto-exec ship sans demander : RFC = décision, pas exécution
+❌ Summary too long → it is not a summary
+❌ Status left `Draft` when user validated blockers (should be Accepted)
+❌ No index update → orphaned RFC
+❌ Auto-exec ship without asking: RFC = decision, not execution
 
 ## NEXT STEP:
 
-Terminal. Si user choisit handoff → Skill tool sur ship/brain.
+Terminal. If user chooses handoff → Skill tool on ship/brain.
 
 <critical>
 RFC is artifact + decision. Implementation is a separate concern. Don't conflate. "Accepted ≠ implemented."

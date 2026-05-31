@@ -69,7 +69,7 @@ stepsCompleted: [0, 1, 2, 3]
 - [ ] 2.0 <parent task>
   - [ ] 2.1 <sub-task>
 ```
-Prose in French; identifiers in English. Edit in place if it exists.
+Prose in English; identifiers in English. Edit in place if it exists.
 If scope is genuinely separate, do NOT bloat this file: create a numbered pair in the same folder (`0001-prd-*` / `tasks-0001-*`) per the SKILL file_layout.
 
 ### 3. Confirm
@@ -82,15 +82,15 @@ Use AskUserQuestion:
 ```yaml
 questions:
   - header: "Tasks"
-    question: "Task list dérivée dans <tasks_path>. Finaliser ?"
+    question: "Task list derived in <tasks_path>. Finalize?"
     options:
-      - label: "Finaliser (Recommended)"
-        description: "Clore le PRD et afficher le handoff"
-      - label: "Réordonner"
-        description: "Ajuster l'ordre / les dépendances"
+      - label: "Finalize (Recommended)"
+        description: "Close the PRD and show the handoff"
+      - label: "Reorder"
+        description: "Adjust the order / the dependencies"
     multiSelect: false
 ```
-Route: Réordonner → adjust ordering/dependencies in place, re-confirm.
+Route: Reorder → adjust ordering/dependencies in place, re-confirm.
 
 ---
 
