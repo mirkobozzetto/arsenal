@@ -16,6 +16,56 @@
       "tags": ["exa", "search", "research", "docs", "debug"],
       "license": "MIT",
       "homepage": "https://github.com/mirkobozzetto/arsenal"
+    },
+    {
+      "name": "code-roadmap",
+      "source": "./plugins/code-roadmap",
+      "description": "Orientation map at task start: matches intent to available skills, prints a recommended chain + execution mode + reflection level. Advisory only.",
+      "version": "1.0.0",
+      "category": "orientation",
+      "tags": ["orientation", "router", "roadmap", "planning"],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/code-roadmap"
+    },
+    {
+      "name": "prd",
+      "source": "./plugins/prd",
+      "description": "Author a product PRD by interview, then emit user stories, scope, metrics, and a derived nested task list (folder per feature).",
+      "version": "1.0.0",
+      "category": "planning",
+      "tags": ["prd", "product-spec", "tasks", "planning"],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/prd"
+    },
+    {
+      "name": "rfc",
+      "source": "./plugins/rfc",
+      "description": "Multi-step RFC workflow: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Reasoning before action.",
+      "version": "1.0.0",
+      "category": "planning",
+      "tags": ["rfc", "design-doc", "architecture", "adr"],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/rfc"
+    },
+    {
+      "name": "ship",
+      "source": "./plugins/ship",
+      "description": "Spec executor. Implements a finalized prd or Accepted rfc (or a bare prompt via inline contract) on agent-teams/subagents/solo, emits a user-run verification bundle + trace ledger.",
+      "version": "1.0.0",
+      "category": "implementation",
+      "tags": ["implement", "spec", "agent-teams", "verification", "executor"],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/ship"
+    },
+    {
+      "name": "issue",
+      "source": "./plugins/issue",
+      "description": "Use GitHub issues as cross-session resolution memory. Create/update/resume self-contained, cold-readable issues via gh CLI.",
+      "version": "1.0.0",
+      "category": "memory",
+      "tags": ["github", "memory", "issues", "gh"],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/issue"
     }
   ]
 }

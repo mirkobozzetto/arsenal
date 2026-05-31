@@ -1,0 +1,34 @@
+triage_mode: ""
+artifact_path: ""
+artifact_kind: ""
+
+auto_mode: false
+economy_mode: false
+resume_mode: false
+yolo_mode: false
+engine_override: null
+
+project_root: ""
+output_dir: ""
+
+detected_stack:
+  language: ""
+  package_manager: ""
+  test_cmd: ""
+  typecheck_cmd: ""
+  lint_cmd: ""
+  build_cmd: ""
+
+tasks: []
+independent_groups: []
+contract_path: ""
+
+engine_tier: ""
+ultracode_signal: "unknown"
+team_name: null
+
+trace_path: ""
+bundle_path: ""
+
+final_status: ""
+stepsCompleted: []

@@ -1,0 +1,11 @@
+{
+  "name": "ship",
+  "version": "1.0.0",
+  "description": "Spec executor. Implements a finalized prd or an Accepted rfc (or a bare prompt via an inline contract) on agent-teams / subagents / solo, then emits a user-run verification bundle + a trace ledger.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/ship"
+}

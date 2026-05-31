@@ -1,0 +1,11 @@
+{
+  "name": "prd",
+  "version": "1.0.0",
+  "description": "Author a product PRD by interview, then emit user stories, scope, success metrics, and a derived nested task list (one folder per feature). Stops at the task list and hands off.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/prd"
+}

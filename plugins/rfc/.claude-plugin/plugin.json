@@ -1,0 +1,11 @@
+{
+  "name": "rfc",
+  "version": "1.0.0",
+  "description": "Multi-step RFC workflow: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Forces reasoning before action. Optional GitNexus + Exa integration.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/rfc"
+}

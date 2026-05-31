@@ -1,119 +1,160 @@
-# arsenal
+<p align="center">
+  <img src="./assets/arsenal-hero.jpeg" alt="arsenal — idea to shipped, through prd and rfc" width="100%">
+</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![Plugin version](https://img.shields.io/badge/websearch-1.0.0-blue.svg)](./plugins/websearch)
+<h1 align="center">arsenal</h1>
 
-Mirko Bozzetto's curated skills for AI coding agents.
+<p align="center">
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/plugins-6-blue.svg" alt="6 plugins">
+  <img src="https://img.shields.io/badge/agent-Claude%20Code-7c3aed.svg" alt="Claude Code">
+</p>
 
-Skills are markdown-based, portable across providers (Claude Code, Codex, Cursor, etc.). Native plugin install is wired for Claude Code; other providers can load the skill files directly.
+<p align="center">
+  Mirko Bozzetto's curated skills for AI coding agents — a spec-driven build pipeline plus the tools around it.
+</p>
 
-First plugin: `/websearch` - a power web search skill that wraps [Exa MCP](https://exa.ai) under a single command with 8 intent-routed modes. Replaces native `WebSearch` and `WebFetch` with semantic search, structured deep research, code lookup, docs crawling, and inline-cited reports.
+Skills here are plain markdown, portable across providers (Claude Code, Codex, Cursor, ...). Native plugin install is wired for Claude Code; other agents can load the skill files directly. Every plugin installs on its own — pick what you need.
+
+---
+
+## What's in the arsenal
+
+| Plugin | Category | What it does |
+|--------|----------|--------------|
+| [`code-roadmap`](./plugins/code-roadmap) | orientation | At task start, matches your intent against the skills you have installed and prints a recommended chain + execution mode + reflection level. Advisory, never forces a path. |
+| [`prd`](./plugins/prd) | planning | Authors a product PRD by interview — the *what* and *why* — then derives a nested task list. Stops before code. |
+| [`rfc`](./plugins/rfc) | planning | The *how*. A 10-step design workflow: problem → alternatives → tradeoffs → design → risks → recommendation → impl plan. Forces reasoning before action. |
+| [`ship`](./plugins/ship) | implementation | The *build*. Executes a finalized `prd` or an Accepted `rfc` (or a bare prompt via an inline contract) on agent-teams / subagents / solo, and hands back a verification bundle you run + a trace ledger. |
+| [`issue`](./plugins/issue) | memory | GitHub issues as cross-session resolution memory. Self-contained, cold-readable, resumable after any context reset. |
+| [`websearch`](./plugins/websearch) | research | Intent-routed web search via [Exa](https://exa.ai) MCP — 8 modes (quick / deep / code / docs / debug / news / compare / research). |
+
+---
+
+## The build pipeline
+
+The four planning-to-build plugins form one chain. The picture at the top is the whole thing: an idea enters, passes the **PRD** gate (what/why) and the **RFC** gate (how), and comes out the other side as shipped code.
+
+```
+            code-roadmap                         issue
+          (orient: which path?)            (memory: resume cold)
+                  │                                 ▲
+                  ▼                                 │  (log when work must
+   idea ──▶ prd ──▶ rfc ──▶ ship ──▶ shipped code  │   survive a reset)
+          what/why   how    build                  │
+            │         │       │                     │
+            └─────────┴───────┴─────────────────────┘
+```
+
+**Suggested order — and what each step applies to:**
+
+1. **`code-roadmap`** — when you're unsure where to start. Applies to *any* task; it only orients, it never runs anything. Skip it once the path is obvious.
+2. **`prd`** — when the *what/why* isn't pinned down yet. Applies to a new feature or product change. Output: `docs/prd/<slug>/{prd.md, tasks.md}`.
+3. **`rfc`** — when the *how* crosses a boundary: architecture, migration, a new pattern, or several valid designs where the wrong one is expensive to undo. Applies to technical decisions worth reasoning about. Output: `RFC.md` with alternatives + tradeoffs + an impl plan.
+4. **`ship`** — to build. Applies to executing a finalized `prd` (`status: ready`) or an Accepted `rfc` (`status: Accepted`). Output: code + a `verification-bundle.md` you run yourself + a `trace.md` ledger.
+5. **`issue`** — transversal. When a problem must survive a context reset, log it as a resumable GitHub issue and pick it up cold later.
+
+Not every task needs all four. A trivial change → `ship` directly (it derives a one-shot inline contract). A boundary-crossing feature → the full `prd → rfc → ship`. `code-roadmap` tells you which.
+
+---
+
+## A bit of history: PRD and RFC
+
+These two artifacts aren't invented here — they're decades-old engineering discipline. The plugins just turn them into repeatable workflows.
+
+### RFC — "Request for Comments" (1969)
+
+The RFC series began in **April 1969**, when **Steve Crocker**, then a UCLA graduate student, wrote **[RFC 1, "Host Software"](https://www.rfc-editor.org/rfc/rfc1.html)** to organize the working notes of the ARPANET's Network Working Group. The name was deliberately humble — in Crocker's words, *"the basic ground rules were that anyone could say anything and that nothing was official... and to emphasize the point, I labeled the notes 'Request for Comments'"* ([The Origins of RFCs](https://datatracker.ietf.org/doc/html/rfc1000)). The goal was to **start the conversation, not freeze a standard**. The series went on to become the Internet's permanent record of design decisions — managed today through the IETF, and edited for 28 years by Jon Postel.
+
+Engineering organizations later borrowed the form for internal design docs: the [Rust RFC process](https://rust-lang.github.io/rfcs/), Oxide's [Requests for Discussion](https://oxide.computer/blog/rfd-1-requests-for-discussion), Google design docs, the Kubernetes and Go proposal processes. The throughline never changed: **write the proposal down, weigh the alternatives and tradeoffs, reach consensus — before you build.** The `rfc` plugin is exactly that discipline, slowed down in the right place.
+
+### PRD — "Product Requirements Document"
+
+The PRD comes from product management. The acronym standardized in the **1990s** waterfall era; the artifact was rewritten for agile in the 2000s. **Marty Cagan's ~2006 [How to Write a Good PRD](https://www.svpg.com/wp-content/uploads/2024/07/How-To-Write-a-Good-PRD.pdf)** was the canonical guide of its generation and led to his 2008 book *Inspired*.
+
+The enduring definition: a PRD states **what** a release will do, **who** it's for, and **why** it matters — and is *deliberately silent on how*. The "how" belongs to the engineering-owned design doc (the RFC). It's distinct from the MRD (Market Requirements Document, which argues *should we build this at all*). Modern practice keeps it short — 1-3 pages, a living document, not a 50-page frozen spec. Cagan himself later [pushed teams toward discovery and prototypes over heavy documents](https://www.svpg.com/discovery-vs-documentation/) — a reminder that the PRD is a means to clarity, not an end. The `prd` plugin runs it as an interview → a tight spec + a derived task list, and stops before code.
+
+> **Why this ordering matters:** the single most common failure is letting the *what* and the *how* bleed together. Keeping `prd` (what/why) upstream of `rfc` (how) upstream of `ship` (build) — each a separate, checkable artifact — is the whole point of the chain.
+
+**Further reading**
+
+- PRD — [How to Write a Good PRD (Marty Cagan / SVPG)](https://www.svpg.com/wp-content/uploads/2024/07/How-To-Write-a-Good-PRD.pdf) · [Discovery vs. Documentation (SVPG)](https://www.svpg.com/discovery-vs-documentation/) · [PRDs: A Modern Guide (Aakash Gupta)](https://www.news.aakashg.com/p/product-requirements-documents-prds)
+- RFC — [RFC Editor history](https://www.rfc-editor.org/history/) · [RFC 1 — Host Software (1969)](https://www.rfc-editor.org/rfc/rfc1.html) · [RFC 2555 — 30 Years of RFCs](https://www.rfc-editor.org/rfc/rfc2555.html) · [The Rust RFC Book](https://rust-lang.github.io/rfcs/) · [Oxide RFD 1](https://oxide.computer/blog/rfd-1-requests-for-discussion)
+
+---
+
+## Why I built this
+
+Splitting a task into three separate, checkable artifacts — *what/why* (`prd`), *how* (`rfc`), *build* (`ship`) — gave me a level of precision I had never reached before. Each stage forces the previous one to be honest: `ship` refuses to run on a PRD that isn't `ready` or an RFC that isn't `Accepted`, so the discipline isn't optional. That gate, more than any single feature, is what changed the quality of what I ship.
+
+— Mirko
 
 ---
 
 ## Quick install (Claude Code)
 
+Add the marketplace once, then install whichever plugins you want:
+
 ```bash
-# 1. (Optional) Sign up at https://dashboard.exa.ai and copy an API key
-#    Free anonymous tier works without a key, rate-limited.
-#    Add a key only when you hit rate limits.
-
-# 2. Add the Exa MCP server (hosted, recommended)
-claude mcp add --transport http exa https://mcp.exa.ai/mcp
-
-# 3. Verify connection
-claude mcp list
-
-# 4. Inside Claude Code:
+# Inside Claude Code:
 /plugin marketplace add mirkobozzetto/arsenal
-/plugin install websearch@arsenal
 
-# 5. Try it
-/websearch what is gRPC
+# Install the whole pipeline:
+/plugin install code-roadmap@arsenal
+/plugin install prd@arsenal
+/plugin install rfc@arsenal
+/plugin install ship@arsenal
+/plugin install issue@arsenal
+
+# ...or just one:
+/plugin install ship@arsenal
 ```
 
-Full setup walkthrough, mode reference, troubleshooting → [plugins/websearch/README.md](./plugins/websearch/README.md).
+Then drive the pipeline:
+
+```bash
+/code-roadmap add OAuth login          # orient
+/prd add OAuth login                   # what/why  -> docs/prd/oauth-login/
+/rfc OAuth login                       # how       -> RFC.md
+/ship docs/prd/oauth-login/            # build     -> code + verification bundle + trace
+```
+
+Per-plugin setup, flags, and dependencies live in each plugin's README (linked in the table above).
 
 ---
 
-## Install on other agents (Codex, Cursor, etc.)
+## Dependencies, per plugin
 
-Skills here are plain markdown. To use them outside Claude Code:
+Plugins are published **as I actually use them** — adapt them to your own setup.
 
-1. Clone the repo or copy `plugins/websearch/skills/websearch/` into your agent's skill/prompt directory.
-2. Wire the agent's MCP config to Exa (hosted or local). Most modern coding agents support MCP.
+- **`ship`**, **`prd`** — use [Exa](https://exa.ai) MCP for any web lookup (no native WebSearch/WebFetch). `ship` is toolchain-agnostic (detects pnpm/bun/yarn/npm, cargo, go, uv, ... from your lockfile) and never runs your tests/builds — it hands you a bundle to run.
+- **`rfc`** — optionally integrates [GitNexus](https://github.com/) for codebase context; degrades to grep/Read when it's absent. Uses Exa for prior-art research.
+- **`code-roadmap`** — reads the skills you have installed this session; mentions index-gated code-intel tools and creator skills that you may or may not have. It only suggests — adapt the chain to your toolbox.
+- **`issue`** — needs the `gh` CLI authenticated, inside a GitHub repo.
+- **`websearch`** — needs the Exa MCP server connected.
+
+---
+
+## Companion: espresso
+
+[**espresso**](https://github.com/mirkobozzetto/espresso) is the token-economy side of this setup — a hooks-based installer that wires up RTK, Caveman, GitNexus and Exa so these skills run lean. arsenal is the *what you build with*; espresso is *how you keep it cheap*.
+
+---
+
+## Install on other agents (Codex, Cursor, ...)
+
+The skills are plain markdown. To use them outside Claude Code:
+
+1. Copy `plugins/<name>/skills/<name>/` into your agent's skill/prompt directory.
+2. Wire the agent's MCP config to whatever the skill needs (Exa for `ship`/`prd`/`websearch`, etc.).
 3. Invoke per your agent's slash/skill mechanism.
-
-The skill body assumes the 4 Exa MCP tools (`web_search_exa`, `get_code_context_exa`, `crawling_exa`, `web_search_advanced_exa`). Any agent that can call those will work.
-
----
-
-## What `/websearch` does
-
-One slash command, 8 modes selected by flag:
-
-| Mode | Flag | Use case |
-|------|------|----------|
-| Quick | *(none)* | Factual lookup, one-shot |
-| Deep research | `--deep` | Multi-pass with gap analysis |
-| Code | `--code` | API snippets, library usage |
-| Docs | `--docs <lib>` | Crawl official docs |
-| Debug | `--debug <err>` | Paste error, find fix |
-| News | `--news` | Recent news, category filtered |
-| Compare | `--compare A vs B` | Side-by-side tech choice |
-| Research | `--research` | Academic papers |
-| Similar | `--similar <url>` | Find similar pages |
-
-Filters (combinable): `--after`, `--before`, `--domain`, `--exclude`, `--fresh`, `--locale`, `-n`.
-Output: `--save <file>`, `--json`, `--full`.
-Help: `--info` (full tutorial inside the skill).
-
----
-
-## Plugins in this marketplace
-
-| Plugin | Version | Description |
-|--------|---------|-------------|
-| [websearch](./plugins/websearch) | 1.0.0 | Intent-routed web search via Exa MCP (8 modes) |
-
-More plugins may land here over time. Marketplace name stays `arsenal`.
-
----
-
-## Prerequisites
-
-- Claude Code v2.1+ for the native plugin install (slash plugin commands).
-- Exa MCP server connected (`mcp__exa__*` tools available).
-- Exa API key **optional** - hosted endpoint `https://mcp.exa.ai/mcp` works anonymously with a free, rate-limited tier. Add a key via header `Authorization: Bearer KEY` or `x-api-key: KEY` to bypass rate limits.
-
-Get a free key at [dashboard.exa.ai/api-keys](https://dashboard.exa.ai/api-keys). See [docs.exa.ai/reference/exa-mcp](https://docs.exa.ai/reference/exa-mcp) for Exa MCP details.
-
----
-
-## Why a marketplace, not a bare skill
-
-- **Versioned** - semver tags, no "did the file change" guesswork.
-- **`/plugin update`** works out of the box.
-- **Same install pattern** as official Anthropic plugins.
-- **Extensible** - more plugins can ship under this marketplace later without breaking installs.
-
----
-
-## Documentation map
-
-- [Full plugin README](./plugins/websearch/README.md) - setup, modes, filters, troubleshooting, architecture.
-- [SKILL.md](./plugins/websearch/skills/websearch/SKILL.md) - skill entry point.
-- [steps/](./plugins/websearch/skills/websearch/steps) - pipeline (triage → search → deep → report).
-- [references/](./plugins/websearch/skills/websearch/references) - domain presets, query patterns, full tutorial.
 
 ---
 
 ## Contributing
 
-Open an issue or PR at [github.com/mirkobozzetto/arsenal](https://github.com/mirkobozzetto/arsenal). One concern per PR. Bump semver on any change shipping to users.
-
----
+Open an issue or PR at [github.com/mirkobozzetto/arsenal](https://github.com/mirkobozzetto/arsenal). One concern per PR. Bump the plugin's semver on any change that ships to users.
 
 ## License
 
-MIT - see [LICENSE](./LICENSE).
+MIT — see [LICENSE](./LICENSE).
