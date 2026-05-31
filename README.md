@@ -85,9 +85,19 @@ The enduring definition: a PRD states **what** a release will do, **who** it's f
 
 ## Why I built this
 
-Splitting a task into three checkable artifacts changed how I work. `prd` pins down the what and the why. `rfc` decides the how. `ship` builds. When I run the full chain, each stage keeps the previous one honest: `ship` will not execute a PRD that is not marked `ready` or an RFC that is not `Accepted`, so the spec has to be real before any code gets written. That gate is what gave me a precision I had never reached before.
+Splitting a task into three checkable artifacts changed how I work.
 
-But the chain is never forced on me. When I just want to move, I hand `ship` a one-line prompt. It asks a couple of quick questions, builds a small contract on the spot, and ships. The discipline is there when the stakes call for it, and out of the way when they do not. That balance is the whole point.
+`prd` pins down the what and the why.
+`rfc` decides the how.
+`ship` executes the plan.
+
+When I run the full chain, each stage keeps the previous one honest: `ship` will not execute a PRD that is not marked `ready` or an RFC that is not `Accepted`. The spec has to be real before any code gets written.
+
+That gate is what gave me a precision I had never reached before.
+
+But the chain is never forced on me. When I just want to move, I hand `ship` a one-line prompt. It asks a couple of quick questions, builds a small contract on the spot, and ships.
+
+The discipline is there when the stakes call for it, and out of the way when they do not. That balance is the whole point.
 
 - Mirko
 
