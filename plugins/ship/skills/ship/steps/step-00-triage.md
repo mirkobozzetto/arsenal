@@ -12,7 +12,7 @@ next_step: steps/step-00-init.md
 - NEVER read task content, write files, or spawn anything in this step
 - NEVER skip the --help check (always the first action)
 - ALWAYS classify the input before routing
-- IF the input is a bare prompt, mark it for a MINIMAL inline spec (CASE C): never a full product PRD
+- IF the input is a bare prompt, OFFER the choice (ship direct, or write prd/rfc first); never silently force a full PRD
 
 ## CONTEXT BOUNDARIES:
 
@@ -59,15 +59,28 @@ ambiguous IF a path that is neither -> probe with Glob (prd.md/tasks.md vs RFC.m
 
 Quick disambiguation when a file is given but kind is unclear: a body with nested `- [ ] N.0/N.1` checkboxes => prd; a body with a flat `| T0n |` task table => rfc.
 
-### 4. Inline note (CASE C)
+### 4. Inline route (CASE C): offer the choice
 
 ```
-IF {triage_mode} = "inline":
-  ship handles it directly, NO escape. step-01-ingest will derive a MINIMAL execution spec
-  (short ordered task list + 2-5 acceptance items) from {raw_prompt} and confirm it with the user.
-  This is NOT a product PRD (no interview, no user stories). For a full durable spec, the user can
-  run /prd first; ship's inline path is the quick route.
-  No status gate applies to inline: the user's confirmation of the derived list IS the gate.
+IF {triage_mode} = "inline" AND NOT auto_mode:
+  No prd/rfc artifact was given. Honor flexibility, ASK how to proceed:
+  AskUserQuestion:
+    header: "No spec"
+    question: "No prd/rfc found. Ship this directly, or spec it first?"
+    options:
+      - label: "Ship direct (Recommended)"
+        description: "ship runs a short interview, builds an inline contract, then executes. Fast, flexible."
+      - label: "Write a PRD first"
+        description: "Stop here, run /prd <idea> to pin down what/why, then /ship the folder."
+      - label: "Write an RFC first"
+        description: "Stop here, run /rfc <title> for a design doc, then /ship the RFC."
+  Route:
+    - "Ship direct"       -> keep {triage_mode} = "inline"; continue. step-01 CASE C runs the interview.
+    - "Write a PRD first" -> tell the user "Run: /prd <your idea>", then STOP.
+    - "Write an RFC first" -> tell the user "Run: /rfc <your title>", then STOP.
+
+IF {triage_mode} = "inline" AND auto_mode:
+  -> skip the question, proceed "Ship direct".
 ```
 
 ### 5. Update state and route
@@ -110,5 +123,5 @@ Load `./step-00-init.md` (prd, rfc, and inline all converge there).
 
 <critical>
 Triage is CLASSIFIER only. No spec reading, no file writes, no spawning.
-A bare prompt -> minimal inline spec (CASE C), then execute. ship handles every case.
+A bare prompt -> offer "ship direct" or "spec first". ship handles every case, flexibility first.
 </critical>

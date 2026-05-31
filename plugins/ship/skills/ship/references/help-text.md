@@ -1,6 +1,6 @@
 # ship: usage
 
-Execute a predetermined spec. ship is the terminal executor of `prd -> rfc -> ship`. It consumes a finalized prd folder or an Accepted RFC, implements it, and hands back a user-run verification bundle + a trace ledger. It never re-authors the spec and never runs build/test toolchain by default.
+Execute a spec. ship is the terminal executor of `prd -> rfc -> ship`: it consumes a finalized prd folder or an Accepted RFC and implements it. It can also ship a bare prompt directly, building a small inline contract first. Either way it hands back a user-run verification bundle + a trace ledger, and never runs your build/test toolchain by default.
 
 ## Invocation
 
@@ -13,7 +13,19 @@ Execute a predetermined spec. ship is the terminal executor of `prd -> rfc -> sh
 /ship -r docs/prd/<slug>/         # resume from existing trace.md
 ```
 
-A bare prompt (no spec artifact) -> ship derives a MINIMAL inline spec (task list + acceptance items), confirms it, then executes. For a full durable product spec, run `/prd` first.
+### Direct ship (no prd/rfc)
+
+Hand ship a bare prompt and it offers a choice:
+
+```
+/ship add a rate limiter to the POST /login route
+```
+
+1. Ship direct (default): ship runs a short interview, structures your prompt into context / task / requirements / success, builds a small inline contract, confirms it, then executes.
+2. Write a PRD first: ship points you to `/prd <idea>` for a durable what/why spec.
+3. Write an RFC first: ship points you to `/rfc <title>` for a design doc.
+
+`-a` skips the questions and ships direct. The interview never becomes a full PRD; for that, use `/prd`. Note: `--yolo` is unrelated, it only lets ship run the SAFE verification commands itself.
 
 ## Flags
 

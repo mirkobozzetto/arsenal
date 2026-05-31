@@ -85,7 +85,9 @@ The enduring definition: a PRD states **what** a release will do, **who** it's f
 
 ## Why I built this
 
-Splitting a task into three separate, checkable artifacts (*what/why* via `prd`, *how* via `rfc`, *build* via `ship`) gave me a level of precision I had never reached before. Each stage forces the previous one to be honest: `ship` refuses to run on a PRD that isn't `ready` or an RFC that isn't `Accepted`, so the discipline isn't optional. That gate, more than any single feature, is what changed the quality of what I ship.
+Splitting a task into three checkable artifacts changed how I work. `prd` pins down the what and the why. `rfc` decides the how. `ship` builds. When I run the full chain, each stage keeps the previous one honest: `ship` will not execute a PRD that is not marked `ready` or an RFC that is not `Accepted`, so the spec has to be real before any code gets written. That gate is what gave me a precision I had never reached before.
+
+But the chain is never forced on me. When I just want to move, I hand `ship` a one-line prompt. It asks a couple of quick questions, builds a small contract on the spot, and ships. The discipline is there when the stakes call for it, and out of the way when they do not. That balance is the whole point.
 
 - Mirko
 

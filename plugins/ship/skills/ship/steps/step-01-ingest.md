@@ -50,15 +50,23 @@ GATE: status MUST be "Accepted".
     -> HALT (route to step-06-finish with final_status = halted) unless explicit override.
 ```
 
-**CASE C (inline):**
+**CASE C (inline, "ship direct"):**
 ```
-No artifact, no status gate. Derive a MINIMAL execution spec from {raw_prompt}:
-  - a short ordered task list (outcomes, not code lines),
-  - 2-5 acceptance items defining "done",
-  - the likely edit scope (files/areas).
-This is NOT a product PRD: no interview, no user stories, no metrics. Keep it tight.
-GATE: confirm the derived list with the user (AskUserQuestion, unless auto_mode).
-  The user's confirmation IS the run-gate. On decline -> adjust or HALT.
+No artifact, no status gate. Build the inline spec via a SHORT structured interview, then derive the contract.
+1. Interview (AskUserQuestion, unless auto_mode): ask only what is missing to ship safely. Structure {raw_prompt}
+   with the prompt-creator frame into four blocks:
+     - CONTEXT: stack / files / branch in play (detect what you can, ask only the gaps).
+     - TASK: one clear imperative restatement of what to build (drop "try to", "maybe").
+     - REQUIREMENTS: explicit constraints + edit scope (which files/areas may change).
+     - SUCCESS: 2-5 acceptance items that define "done".
+   Keep it to 1-2 question rounds; never a full PRD interview.
+2. Derive the MINIMAL execution spec from the four blocks:
+     - a short ordered task list (outcomes, not code lines),
+     - the 2-5 acceptance items as the contract,
+     - the likely edit scope.
+GATE: confirm the derived spec with the user (AskUserQuestion, unless auto_mode). The user's confirmation IS
+  the run-gate. On decline -> adjust or HALT. Stays lightweight: no user stories, no product metrics. For a
+  durable spec, run /prd.
 ```
 
 ### 2. Parse tasks into {tasks}
