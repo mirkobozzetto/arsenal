@@ -1,7 +1,7 @@
 ## MANDATORY EXECUTION RULES (READ FIRST):
 
 - 🛑 NEVER propose solutions or alternatives here
-- 🛑 NEVER skip motivation — "why now" is load-bearing
+- 🛑 NEVER skip motivation: "why now" is load-bearing
 - ✅ ALWAYS interview user via AskUserQuestion if not auto
 - ✅ ALWAYS write problem statement that someone outside the project understands
 - 📋 YOU ARE a problem definer, not a solver
@@ -19,11 +19,11 @@
 
 - Variables: `{rfc_path}`, `{auto_mode}`, `context_collected` (from step-01)
 - Output: sections 3 (Problem & Motivation) + 4 (Goals / Non-Goals) filled
-- Reference: `references/interview-questions.md` — problem block
+- Reference: `references/interview-questions.md` (problem block)
 
 ## YOUR TASK:
 
-Define the problem rigorously — what hurts, why now, who's affected — and lock the goals/non-goals boundary.
+Define the problem rigorously (what hurts, why now, who's affected) and lock the goals/non-goals boundary.
 
 ## EXECUTION SEQUENCE:
 
@@ -62,8 +62,8 @@ If `auto_mode` → infer from title + context_collected. Mark assumptions explic
 ### 3. Goals / Non-goals
 
 AskUserQuestion or infer:
-- 3-5 goals max — measurable if possible
-- 3-5 non-goals — explicit "we are NOT solving X"
+- 3-5 goals max, measurable if possible
+- 3-5 non-goals, explicit "we are NOT solving X"
 
 Non-goals = critical. Sans non-goals → scope creep dans steps suivants.
 
@@ -79,7 +79,7 @@ Non-goals = critical. Sans non-goals → scope creep dans steps suivants.
 {Who suffers, how often, what cost}
 
 ### Why now
-{Trigger — deadline, incident, dependency, opportunity}
+{Trigger: deadline, incident, dependency, opportunity}
 
 ### Signals
 - {quantitative metric or "no metric yet"}
@@ -88,7 +88,7 @@ Non-goals = critical. Sans non-goals → scope creep dans steps suivants.
 ## 4. Goals / Non-Goals
 
 ### Goals
-- {goal 1 — measurable}
+- {goal 1: measurable}
 - {goal 2}
 - ...
 
@@ -119,9 +119,9 @@ nongoals_count: M
 ## FAILURE MODES:
 
 ❌ Vague problem ("better DX", "improve perf") without numbers or refs
-❌ Missing non-goals — guarantees scope creep step-03+
+❌ Missing non-goals: guarantees scope creep step-03+
 ❌ Drafting solutions ("we should use X") in motivation
-❌ More than 5 questions to user — interview overload
+❌ More than 5 questions to user: interview overload
 ❌ Inventing facts in auto_mode without flagging
 
 ## NEXT STEP:
@@ -135,14 +135,14 @@ questions:
     question: "Problème défini. Explorer alternatives ?"
     options:
       - label: "Continuer (Recommended)"
-        description: "Step 03 — Alternatives Considered"
+        description: "Step 03: Alternatives Considered"
       - label: "Affiner le problème"
-        description: "Reboucler — la définition n'est pas assez nette"
+        description: "Reboucler : la définition n'est pas assez nette"
       - label: "Retour contexte"
-        description: "Step 01 — manque de contexte technique"
+        description: "Step 01 : manque de contexte technique"
     multiSelect: false
 ```
 
 <critical>
-"Why before what" — Guy Bary. No solution leak here. If you catch yourself writing "we could…" → stop, that goes in step-03.
+"Why before what" (Guy Bary). No solution leak here. If you catch yourself writing "we could…" → stop, that goes in step-03.
 </critical>

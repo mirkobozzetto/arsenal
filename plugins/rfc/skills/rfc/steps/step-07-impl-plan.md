@@ -1,12 +1,12 @@
 ## MANDATORY EXECUTION RULES (READ FIRST):
 
-- 🛑 NEVER execute tasks here — plan only
-- 🛑 NEVER write tasks > 1 day of work — split them
+- 🛑 NEVER execute tasks here: plan only
+- 🛑 NEVER write tasks > 1 day of work: split them
 - ✅ ALWAYS order tasks by dependency (topological)
 - ✅ ALWAYS mark tasks parallelizable when independent
 - 📋 YOU ARE a planner, not an executor
 - 💬 FOCUS on ordered, sized, dependency-aware task list
-- 🚫 FORBIDDEN to start coding — handoff via ship/sdd skills
+- 🚫 FORBIDDEN to start coding: handoff via ship/sdd skills
 
 ## EXECUTION PROTOCOLS:
 
@@ -35,18 +35,18 @@ Each task:
 - **Files touched** (paths from section 6)
 - **Depends on** (other task IDs, or "none")
 - **Acceptance criteria** (≥1 testable assertion)
-- **Effort** (XS/S/M/L — XL means split)
+- **Effort** (XS/S/M/L, XL means split)
 - **Parallelizable with** (task IDs that can run alongside)
 
 ### 2. Order tasks
 
 Pattern:
-1. **Foundations** — schema migrations, new modules, types
-2. **Implementation** — business logic, API, integrations
-3. **Wiring** — feature flag, routing, observability
-4. **Verification** — tests, perf benchmarks, security review
-5. **Rollout** — gradual flip, monitoring
-6. **Cleanup** — remove dead code, retire old paths
+1. **Foundations**: schema migrations, new modules, types
+2. **Implementation**: business logic, API, integrations
+3. **Wiring**: feature flag, routing, observability
+4. **Verification**: tests, perf benchmarks, security review
+5. **Rollout**: gradual flip, monitoring
+6. **Cleanup**: remove dead code, retire old paths
 
 If any task is L+ → split into smaller before locking plan.
 
@@ -130,7 +130,7 @@ critical_path_days: K
 
 ## FAILURE MODES:
 
-❌ "Implement feature X" as single task — not atomic
+❌ "Implement feature X" as single task: not atomic
 ❌ Missing acceptance criteria → undefinable "done"
 ❌ No dep graph → reviewers can't spot bottlenecks
 ❌ All tasks sequential → missed parallelization
@@ -147,11 +147,11 @@ questions:
     question: "Plan d'impl écrit. Lancer revue adversariale (subagent) ?"
     options:
       - label: "Continuer revue (Recommended)"
-        description: "Step 08 — Adversarial review via subagent"
+        description: "Step 08 : Adversarial review via subagent"
       - label: "Skip revue → finaliser"
-        description: "Step 09 — RFC self-sufficient, pas de second avis"
+        description: "Step 09 : RFC self-sufficient, pas de second avis"
       - label: "Affiner plan"
-        description: "Reboucler — tasks trop gros / deps unclear"
+        description: "Reboucler : tasks trop gros / deps unclear"
     multiSelect: false
 ```
 

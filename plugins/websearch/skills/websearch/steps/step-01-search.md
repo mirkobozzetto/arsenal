@@ -61,7 +61,7 @@ Formulate query as: "{query} code examples API usage". Load domain-presets for e
 **docs**:
 1. Search for official docs: `web_search_exa(query: "{lib_name} official documentation", numResults: 3)`
 2. Identify official docs URL from results
-3. Crawl with: `crawling_exa(url: <docs_url>)` — extract structure
+3. Crawl with `crawling_exa(url: <docs_url>)` to extract structure
 4. If user asked specific question, crawl targeted page with subpages
 
 **debug**:

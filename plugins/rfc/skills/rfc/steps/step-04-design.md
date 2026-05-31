@@ -6,7 +6,7 @@
 - ✅ ALWAYS list files/modules touched + data model + API contracts
 - 📋 YOU ARE a designer, not yet a planner
 - 💬 FOCUS on HOW (architecture, not ordered tasks)
-- 🚫 FORBIDDEN to write impl steps — step-07
+- 🚫 FORBIDDEN to write impl steps: step-07
 
 ## EXECUTION PROTOCOLS:
 
@@ -23,7 +23,7 @@
 
 ## YOUR TASK:
 
-Detail the chosen approach — modules, data, API, flows — concretely enough that an engineer reading cold can build from it without inventing decisions.
+Detail the chosen approach (modules, data, API, flows) concretely enough that an engineer reading cold can build from it without inventing decisions.
 
 ## EXECUTION SEQUENCE:
 
@@ -37,12 +37,12 @@ questions:
   - header: "Base design"
     question: "Quelle alternative sert de base au design détaillé ?"
     options:
-      - label: "Alt 1 — {name}"
+      - label: "Alt 1 : {name}"
         description: "{1-line summary}"
-      - label: "Alt 2 — {name}"
+      - label: "Alt 2 : {name}"
         description: "{1-line summary}"
       - label: "Hybride"
-        description: "Combine plusieurs alternatives — préciser laquelle prend quoi"
+        description: "Combine plusieurs alternatives : préciser laquelle prend quoi"
     multiSelect: false
 ```
 
@@ -92,7 +92,7 @@ flowchart LR
 
 ### 4. Write section 6
 
-Replace `_TBD — step-04_` with the design above. Use Mermaid liberally.
+Replace `_TBD: step-04_` with the design above. Use Mermaid liberally.
 
 ### 5. Update frontmatter
 
@@ -118,7 +118,7 @@ breaking_changes: true | false
 ## FAILURE MODES:
 
 ❌ No diagram for a non-trivial system change
-❌ "We'll figure out the schema later" — design isn't done
+❌ "We'll figure out the schema later": design isn't done
 ❌ Missing impact analysis on changed symbols
 ❌ Listing impl steps here (belongs in step-07)
 ❌ No breaking-change flag for API changes
@@ -135,11 +135,11 @@ questions:
     question: "Design écrit. Passer aux risques + open questions ?"
     options:
       - label: "Continuer (Recommended)"
-        description: "Step 05 — Drawbacks, risks, unknowns"
+        description: "Step 05 : Drawbacks, risks, unknowns"
       - label: "Affiner design"
-        description: "Reboucler — sections manquantes / unclear"
+        description: "Reboucler : sections manquantes / unclear"
       - label: "Retour alternatives"
-        description: "Step 03 — je doute du choix de base"
+        description: "Step 03 : je doute du choix de base"
     multiSelect: false
 ```
 

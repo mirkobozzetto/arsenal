@@ -5,7 +5,7 @@ generated: "{date}"
 ran_by: "user"
 ---
 
-# Verification Bundle — {feature_or_rfc_title}
+# Verification Bundle: {feature_or_rfc_title}
 
 > ship does NOT run these by default (your rule: tests/builds are yours). Run them yourself; each line states what it proves and the expected pass signal. Commands are STACK-DETECTED, not assumed.
 
@@ -18,12 +18,12 @@ ran_by: "user"
 | `{detected test_cmd}` | C1, C3 (acceptance) | all green |
 | `{detected build_cmd}` | bundles | exit 0 |
 
-## Destructive / stateful (USER ONLY — ship never runs, even --yolo)
+## Destructive / stateful (USER ONLY: ship never runs, even --yolo)
 
 | Command | Validates | Warning |
 |---------|-----------|---------|
-| `{migration cmd}` | schema change | mutates DB — run only after review |
-| `{deploy cmd}` | release | outward-facing — your call |
+| `{migration cmd}` | schema change | mutates DB: run only after review |
+| `{deploy cmd}` | release | outward-facing: your call |
 
 ## Contract coverage
 

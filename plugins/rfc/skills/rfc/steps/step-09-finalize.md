@@ -1,6 +1,6 @@
 ## MANDATORY EXECUTION RULES (READ FIRST):
 
-- 🛑 NEVER skip summary — section 1 must be filled last (not first)
+- 🛑 NEVER skip summary: section 1 must be filled last (not first)
 - 🛑 NEVER set status without user confirmation (unless auto_mode)
 - ✅ ALWAYS write section 1 (Summary) now, with full doc as context
 - ✅ ALWAYS update RFC index (`docs/rfcs/README.md`) if present
@@ -12,8 +12,8 @@
 
 - 🎯 Summary written LAST → reflects full doc accurately
 - 💾 Finalize RFC.md + update index + emit next-step suggestion
-- 📖 Terminal step — no further loads
-- 🚫 FORBIDDEN to execute impl plan — handoff via ship
+- 📖 Terminal step: no further loads
+- 🚫 FORBIDDEN to execute impl plan: handoff via ship
 
 ## CONTEXT BOUNDARIES:
 
@@ -35,9 +35,9 @@ Read full RFC.md. Write 3-paragraph summary:
 
 **Problem:** {1-2 sentences from section 3}
 
-**Recommendation:** {1-2 sentences from section 9 — recommendation + confidence}
+**Recommendation:** {1-2 sentences from section 9: recommendation + confidence}
 
-**Impact:** {1-2 sentences — modules touched, breaking changes, effort, key risks}
+**Impact:** {1-2 sentences: modules touched, breaking changes, effort, key risks}
 ```
 
 ≤ 6 sentences total. Someone reading only section 1 knows the verdict.
@@ -57,7 +57,7 @@ questions:
       - label: "Review"
         description: "En cours de relecture par d'autres"
       - label: "Accepted"
-        description: "Validé — permission d'implémenter"
+        description: "Validé : permission d'implémenter"
       - label: "Rejected"
         description: "Décision = ne pas faire (archive)"
     multiSelect: false
@@ -86,7 +86,7 @@ Create `README.md` with header row if none exists.
 ### 5. Display summary to user
 
 ```
-RFC {rfc_id} — {title}
+RFC {rfc_id}: {title}
 Status: {status}
 Path: {rfc_path}
 Tasks: {tasks_count} | Critical path: {critical_path_days}d
@@ -126,7 +126,7 @@ Si choix ship → invoque-le avec `{rfc_path}` (il refuse si status != Accepted)
 ❌ Summary trop long → c'est pas un summary
 ❌ Status laissé `Draft` quand user a validé blockers (devrait être Accepted)
 ❌ Pas d'update index → RFC orphelin
-❌ Auto-exec ship sans demander — RFC = décision, pas exécution
+❌ Auto-exec ship sans demander : RFC = décision, pas exécution
 
 ## NEXT STEP:
 

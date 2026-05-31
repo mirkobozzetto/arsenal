@@ -2,7 +2,7 @@
 
 Used by steps that need user input. AskUserQuestion preferred; free-text for follow-ups.
 
-## Step 02 — Problem & Motivation
+## Step 02: Problem & Motivation
 
 ### Symptom (single-select)
 **Q:** Quel problème concret tu observes aujourd'hui ?
@@ -39,7 +39,7 @@ Used by steps that need user input. AskUserQuestion preferred; free-text for fol
 
 ---
 
-## Step 03 — Alternatives
+## Step 03: Alternatives
 
 ### Alt generation (free-text)
 - Status quo cost ? (mandatory)
@@ -61,7 +61,7 @@ Used by steps that need user input. AskUserQuestion preferred; free-text for fol
 
 ---
 
-## Step 04 — Design
+## Step 04: Design
 
 ### Base alternative pick (single-select)
 **Q:** Quelle alternative sert de base ?
@@ -84,7 +84,7 @@ Used by steps that need user input. AskUserQuestion preferred; free-text for fol
 
 ---
 
-## Step 05 — Risks
+## Step 05: Risks
 
 ### Rollout strategy (single-select)
 - Feature flag (per-user, percentage)
@@ -97,7 +97,7 @@ Used by steps that need user input. AskUserQuestion preferred; free-text for fol
 - PR revert suffit
 - Migration reversible (down script)
 - Backup + restore requis
-- Irreversible — flag prominent
+- Irreversible: flag prominent
 
 ### Open questions ownership (free-text)
 Par question :
@@ -106,7 +106,7 @@ Par question :
 
 ---
 
-## Step 06 — Recommendation
+## Step 06: Recommendation
 
 ### Confidence (single-select)
 - High (≥80% sûr design tient sur 12 mois)
@@ -119,7 +119,7 @@ Par question :
 
 ---
 
-## Step 07 — Impl Plan
+## Step 07: Impl Plan
 
 ### Task split heuristic
 Si effort > 1 jour → split. Critère :
@@ -135,7 +135,7 @@ Si effort > 1 jour → split. Critère :
 
 ---
 
-## Step 08 — Review
+## Step 08: Review
 
 ### Subagent flavors (multi-select)
 - Gap hunter (requirements manquants, edge cases)
@@ -150,7 +150,7 @@ Si effort > 1 jour → split. Critère :
 
 ---
 
-## Step 09 — Finalize
+## Step 09: Finalize
 
 ### Status (single-select)
 - Draft (prêt à circuler)

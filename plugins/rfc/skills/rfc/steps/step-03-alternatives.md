@@ -6,7 +6,7 @@
 - ✅ ALWAYS list pros AND cons for each
 - 📋 YOU ARE an option explorer, not a chooser
 - 💬 FOCUS on surfacing tradeoffs
-- 🚫 FORBIDDEN to recommend — that's step-06
+- 🚫 FORBIDDEN to recommend: that's step-06
 
 ## EXECUTION PROTOCOLS:
 
@@ -30,10 +30,10 @@ Surface ≥3 distinct alternatives with explicit pros/cons. Goal = make tradeoff
 ### 1. Generate candidate alternatives
 
 Mandatory alternatives:
-- **Alt 0 — Status quo / do nothing**: cost of inaction
-- **Alt 1 — Minimal change**: smallest patch solving the immediate pain
-- **Alt 2 — Standard / industry pattern**: most common approach
-- **Alt 3+ — Bold / novel**: bigger refactor or unconventional approach
+- **Alt 0, Status quo / do nothing**: cost of inaction
+- **Alt 1, Minimal change**: smallest patch solving the immediate pain
+- **Alt 2, Standard / industry pattern**: most common approach
+- **Alt 3+, Bold / novel**: bigger refactor or unconventional approach
 
 If only 2 emerge → push harder. There's always a "do nothing" + at least 2 ways forward.
 
@@ -60,13 +60,13 @@ For each alternative, document:
 ```markdown
 ## 5. Alternatives Considered
 
-### Alt 0 — Status Quo
+### Alt 0: Status Quo
 **Summary:** Keep current behavior.
 **Cost of inaction:** {what breaks if we do nothing}
 **Pros:** zero effort, zero risk of regression
 **Cons:** {pain from section 3 persists}
 
-### Alt 1 — {Name}
+### Alt 1: {Name}
 **Summary:** {1-2 sentences}
 **How it solves:** {link to goals}
 **Pros:**
@@ -77,10 +77,10 @@ For each alternative, document:
 **Reversibility:** {easy / hard / one-way door}
 **References:** {url, ADR-NNNN}
 
-### Alt 2 — {Name}
+### Alt 2: {Name}
 ...
 
-### Alt 3 — {Name}
+### Alt 3: {Name}
 ...
 ```
 
@@ -97,17 +97,17 @@ alternatives_count: N
 ✅ ≥3 alternatives (status quo + ≥2 forward)
 ✅ Each has pros, cons, cost, reversibility
 ✅ ≥1 alternative has external reference (Exa-sourced)
-✅ Pros/cons asymmetric — if every alt has same cons, you're not differentiating
+✅ Pros/cons asymmetric: if every alt has same cons, you're not differentiating
 ✅ "One-way door" decisions explicitly flagged
 
 ## FAILURE MODES:
 
-❌ Only 1-2 alternatives — premature convergence
+❌ Only 1-2 alternatives: premature convergence
 ❌ Strawman alternatives (obviously bad) to make Alt 2 look good
-❌ Recommending winner here — that's step-06
+❌ Recommending winner here: that's step-06
 ❌ Skipping Exa research → reinventing wheel
-❌ No reversibility note — biggest gap in junior RFCs
-❌ Identical cost for all alts — means you didn't think hard
+❌ No reversibility note: biggest gap in junior RFCs
+❌ Identical cost for all alts: means you didn't think hard
 
 ## NEXT STEP:
 
@@ -120,11 +120,11 @@ questions:
     question: "Alternatives surfacées. Détailler le design proposé ?"
     options:
       - label: "Continuer (Recommended)"
-        description: "Step 04 — Proposed Design (l'approche détaillée)"
+        description: "Step 04 : Proposed Design (l'approche détaillée)"
       - label: "Ajouter une alternative"
-        description: "Reboucler — je vois un autre angle"
+        description: "Reboucler : je vois un autre angle"
       - label: "Stop ici"
-        description: "RFC suffit comme exploration — pas besoin de design détaillé"
+        description: "RFC suffit comme exploration : pas besoin de design détaillé"
     multiSelect: false
 ```
 

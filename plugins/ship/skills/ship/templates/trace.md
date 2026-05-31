@@ -7,7 +7,7 @@ final_status: ""
 updated: "{date}"
 ---
 
-# Trace Ledger — {feature_or_rfc_title}
+# Trace Ledger: {feature_or_rfc_title}
 
 > Single source of truth for progress. A fresh session reads ONLY this file to resume. One row per task/T-id.
 

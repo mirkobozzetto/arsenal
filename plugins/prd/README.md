@@ -1,6 +1,6 @@
 # prd
 
-The **what / why** stage of the `prd → rfc → ship` pipeline. `prd` interviews you about a feature, then writes a product PRD and a derived task list — and stops before code. It is a product spec, not a technical design (that's `rfc`) and not open research (that's a brainstorm).
+The **what / why** stage of the `prd → rfc → ship` pipeline. `prd` interviews you about a feature, then writes a product PRD and a derived task list, and stops before code. It is a product spec, not a technical design (that's `rfc`) and not open research (that's a brainstorm).
 
 A PRD describes *what* a release does, *who* it's for, and *why*. It is deliberately silent on *how*. See the [history of the PRD](../../README.md#prd--product-requirements-document) in the root README.
 
@@ -16,7 +16,7 @@ docs/prd/<slug>/
   tasks.md    # a single nested checklist: 1.0 parent -> 1.1, 1.2 sub-tasks (phases = parent tasks)
 ```
 
-A big feature adds **more parent tasks**, never more files. The task list traces every task back to a PRD criterion. At the end, `prd.md` is marked `status: ready` and it hands off — to `rfc` (design the how) or straight to `ship` (build it).
+A big feature adds **more parent tasks**, never more files. The task list traces every task back to a PRD criterion. At the end, `prd.md` is marked `status: ready` and it hands off: to `rfc` (design the how) or straight to `ship` (build it).
 
 > Convention follows Ryan Carson's [ai-dev-tasks](https://github.com/snarktank/ai-dev-tasks) pattern: two files per feature, tasks as one nested checklist.
 
@@ -48,8 +48,8 @@ A big feature adds **more parent tasks**, never more files. The task list traces
 
 When the PRD is `ready`, `prd` asks what's next and explains the benefit of each path:
 
-- **`rfc`** — design the *how* first (alternatives, tradeoffs, risks). Choose this when the technical solution isn't obvious or the decision crosses a boundary.
-- **`ship`** — build directly from `tasks.md`. Choose this when the feature is clear and there's no architecture debate.
+- **`rfc`**: design the *how* first (alternatives, tradeoffs, risks). Choose this when the technical solution isn't obvious or the decision crosses a boundary.
+- **`ship`**: build directly from `tasks.md`. Choose this when the feature is clear and there's no architecture debate.
 
 ## Dependencies
 

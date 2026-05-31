@@ -11,7 +11,7 @@ next_step: steps/step-06-finish.md
 
 - YOU ARE A VERIFIER, not a test runner
 - NEVER run build/test/typecheck toolchain by default (your rule: "user fait ça")
-- NEVER run destructive/DB/deploy commands — ever, even with --yolo
+- NEVER run destructive/DB/deploy commands, ever, even with --yolo
 - ALWAYS write verification-bundle.md (stack-detected) + finalize trace.md
 - ALWAYS map each contract item to a concrete edit (PASS/FAIL)
 
@@ -33,7 +33,7 @@ Run read-only self-checks, write the user-run verification bundle, and finalize 
 
 ```
 - Read-back: re-Read every edited file (from trace.md) to confirm the change landed.
-- Contract cross-check: spawn a forked `creator-verifier` Agent (role-templates.md) — for each contract item,
+- Contract cross-check: spawn a forked `creator-verifier` Agent (role-templates.md). For each contract item,
   PASS/FAIL with a file:line cite. Read/Grep only; it never shells out.
 - OPTIONAL adversarial fan-out: spawn `adversarial-reviewer` Agent(s) (code-reviewer style, severity x validity).
 Collect findings. A FAIL or BLOCKER on a task that was supposed to be done -> mark it for HALT/redo (up to the 3x cap from step-04).

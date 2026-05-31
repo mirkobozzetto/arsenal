@@ -1,7 +1,7 @@
 ## MANDATORY EXECUTION RULES (READ FIRST):
 
 - 🛑 NEVER propose design, alternatives, or recommendation here
-- 🛑 NEVER skip GitNexus if available — it's the codebase truth
+- 🛑 NEVER skip GitNexus if available: it's the codebase truth
 - ✅ ALWAYS write findings to section 2 of RFC.md
 - 📋 YOU ARE a context gatherer, not a designer
 - 💬 FOCUS on what exists in the codebase + prior art
@@ -22,7 +22,7 @@
 
 ## YOUR TASK:
 
-Gather objective codebase context — modules, symbols, prior art — relevant to the RFC scope. No interpretation, no design.
+Gather objective codebase context (modules, symbols, prior art) relevant to the RFC scope. No interpretation, no design.
 
 ## EXECUTION SEQUENCE:
 
@@ -49,7 +49,7 @@ If auto → derive 3-5 keywords from title.
 For each keyword:
 - `mcp__gitnexus__query({query: "<keyword>"})` → find execution flows
 - `mcp__gitnexus__context({name: "<symbol>"})` → callers/callees for top symbols
-- Note: index freshness — if stale warning, suggest `npx gitnexus analyze`
+- Note: index freshness. If stale warning, suggest `npx gitnexus analyze`
 
 If GitNexus unavailable / no match:
 - Fallback: `Grep` + `Glob` on `{scope_path}`
@@ -65,18 +65,18 @@ Look for:
 
 ### 4. Write section 2 of RFC.md
 
-Replace `_TBD — step-01_` under `## 2. Context / Codebase` with:
+Replace `_TBD: step-01_` under `## 2. Context / Codebase` with:
 
 ```markdown
 ## 2. Context / Codebase
 
 ### Affected modules
-- `path/to/module.ts` — short purpose
-- `path/to/other.py` — short purpose
+- `path/to/module.ts`: short purpose
+- `path/to/other.py`: short purpose
 
 ### Key symbols
-- `functionName()` — callers: N, callees: M
-- `ClassX` — used in: ...
+- `functionName()`: callers: N, callees: M
+- `ClassX`: used in: ...
 
 ### Prior art
 - ADR-NNNN: title
@@ -103,7 +103,7 @@ context_collected:
 
 ✅ Section 2 of RFC.md filled with concrete refs
 ✅ Frontmatter `stepsCompleted` includes 1
-✅ At least 3 modules OR 3 symbols OR explicit "greenfield — no prior code" note
+✅ At least 3 modules OR 3 symbols OR explicit "greenfield: no prior code" note
 ✅ Prior art section either has refs or explicit "none found"
 
 ## FAILURE MODES:
@@ -124,7 +124,7 @@ questions:
     question: "Contexte collecté. Passer à la définition du problème ?"
     options:
       - label: "Continuer (Recommended)"
-        description: "Step 02 — Problem & Motivation"
+        description: "Step 02: Problem & Motivation"
       - label: "Enrichir le contexte"
         description: "Boucler sur step-01 avec keywords supplémentaires"
     multiSelect: false

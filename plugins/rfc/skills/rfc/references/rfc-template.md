@@ -1,4 +1,4 @@
-# RFC Template — 11 sections
+# RFC Template: 11 sections
 
 Used by step-00 to scaffold `RFC.md`. Each section is filled by a specific step.
 
@@ -17,7 +17,7 @@ auto_mode: false
 skip_review: false
 ---
 
-# NNNN — Title
+# NNNN: Title
 
 ## 1. Summary
 _Filled in step-09 (written LAST with full doc as context)_
@@ -28,7 +28,7 @@ _Filled in step-09 (written LAST with full doc as context)_
 - Impact (1-2 sentences)
 
 ## 2. Context / Codebase
-_Filled in step-01 — inventory only, no design_
+_Filled in step-01: inventory only, no design_
 
 - Affected modules
 - Key symbols (GitNexus refs)
@@ -36,7 +36,7 @@ _Filled in step-01 — inventory only, no design_
 - Execution flows touched
 
 ## 3. Problem & Motivation
-_Filled in step-02 — why before what_
+_Filled in step-02: why before what_
 
 - Current state
 - Pain (who, how often, what cost)
@@ -50,7 +50,7 @@ _Filled in step-02_
 - Non-Goals: 3-5 explicit "we are NOT solving"
 
 ## 5. Alternatives Considered
-_Filled in step-03 — ≥3 alternatives including status quo_
+_Filled in step-03: ≥3 alternatives including status quo_
 
 Per alternative:
 - Summary
@@ -62,7 +62,7 @@ Per alternative:
 - References
 
 ## 6. Proposed Design
-_Filled in step-04 — concrete enough to build from_
+_Filled in step-04: concrete enough to build from_
 
 - Architecture overview + Mermaid diagram
 - Modules/files affected (table)
@@ -121,10 +121,10 @@ Adversarial subagent findings, severity-labeled:
 
 ## Severity definitions
 
-- **BLOCKER** — must fix before status moves past Draft. Wrong architecture, missing security, irreversible mistake.
-- **MAJOR** — must fix before merge. Significant gap or risk without mitigation.
-- **MINOR** — should fix but non-blocking. Clarity, missing edge case, doc gap.
-- **NIT** — cosmetic, optional. Wording, structure.
+- **BLOCKER**: must fix before status moves past Draft. Wrong architecture, missing security, irreversible mistake.
+- **MAJOR**: must fix before merge. Significant gap or risk without mitigation.
+- **MINOR**: should fix but non-blocking. Clarity, missing edge case, doc gap.
+- **NIT**: cosmetic, optional. Wording, structure.
 
 ## Effort sizing
 
@@ -134,4 +134,4 @@ Adversarial subagent findings, severity-labeled:
 | S | 2-4h | localized change, 2-3 files |
 | M | 1d | new module, schema migration |
 | L | 2-3d | cross-cutting change |
-| XL | >3d | SPLIT — never lock as single task |
+| XL | >3d | SPLIT: never lock as single task |

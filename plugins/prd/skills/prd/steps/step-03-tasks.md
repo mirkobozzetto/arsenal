@@ -70,7 +70,7 @@ stepsCompleted: [0, 1, 2, 3]
   - [ ] 2.1 <sub-task>
 ```
 Prose in French; identifiers in English. Edit in place if it exists.
-If scope is genuinely separate, do NOT bloat this file — create a numbered pair in the same folder (`0001-prd-*` / `tasks-0001-*`) per the SKILL file_layout.
+If scope is genuinely separate, do NOT bloat this file: create a numbered pair in the same folder (`0001-prd-*` / `tasks-0001-*`) per the SKILL file_layout.
 
 ### 3. Confirm
 

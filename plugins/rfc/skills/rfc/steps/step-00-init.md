@@ -1,6 +1,6 @@
 ## MANDATORY EXECUTION RULES (READ FIRST):
 
-- 🛑 NEVER skip arg parsing — title is REQUIRED
+- 🛑 NEVER skip arg parsing: title is REQUIRED
 - 🛑 NEVER load step-01 before frontmatter exists on disk
 - ✅ ALWAYS create RFC dir + RFC.md with frontmatter
 - 📋 YOU ARE an initializer, not a designer
@@ -18,7 +18,7 @@
 
 - Input: raw arguments from skill invocation
 - Output: state variables populated + RFC.md skeleton on disk
-- No prior context — this is the entry step
+- No prior context: this is the entry step
 
 ## YOUR TASK:
 
@@ -69,40 +69,40 @@ auto_mode: {auto_mode}
 skip_review: {skip_review}
 ---
 
-# {rfc_id} — {title}
+# {rfc_id}: {title}
 
 ## 1. Summary
-_TBD — completed in step-09_
+_TBD: completed in step-09_
 
 ## 2. Context / Codebase
-_TBD — step-01_
+_TBD: step-01_
 
 ## 3. Problem & Motivation
-_TBD — step-02_
+_TBD: step-02_
 
 ## 4. Goals / Non-Goals
-_TBD — step-02_
+_TBD: step-02_
 
 ## 5. Alternatives Considered
-_TBD — step-03_
+_TBD: step-03_
 
 ## 6. Proposed Design
-_TBD — step-04_
+_TBD: step-04_
 
 ## 7. Drawbacks & Risks
-_TBD — step-05_
+_TBD: step-05_
 
 ## 8. Open Questions
-_TBD — step-05_
+_TBD: step-05_
 
 ## 9. Recommendation & Rationale
-_TBD — step-06_
+_TBD: step-06_
 
 ## 10. Implementation Plan
-_TBD — step-07_
+_TBD: step-07_
 
 ## 11. Review Findings
-_TBD — step-08 (optional)_
+_TBD: step-08 (optional)_
 ```
 
 ### 4. Display parsed config
@@ -122,9 +122,9 @@ RFC {rfc_id} | "{title}" | dir: {rfc_dir} | auto: {auto_mode} | scope: {scope_pa
 
 ## FAILURE MODES:
 
-❌ Missing title — stop and prompt user
-❌ Cannot create dir (perm/path) — surface error, stop
-❌ Skipping frontmatter write — breaks state tracking downstream
+❌ Missing title: stop and prompt user
+❌ Cannot create dir (perm/path): surface error, stop
+❌ Skipping frontmatter write: breaks state tracking downstream
 ❌ Loading step-01 before file exists on disk
 
 ## NEXT STEP:

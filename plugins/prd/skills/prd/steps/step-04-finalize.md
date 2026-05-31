@@ -51,7 +51,7 @@ Tasks:     <tasks_path>  (Do NOT implement)
 
 ### 4. Ask what to do next
 
-Always ask, even in `auto_mode` (this is the product/technical boundary — the user decides where to route). Use AskUserQuestion, and make each option's description state the concrete benefit:
+Always ask, even in `auto_mode` (this is the product/technical boundary, the user decides where to route). Use AskUserQuestion, and make each option's description state the concrete benefit:
 
 ```yaml
 questions:

@@ -1,8 +1,8 @@
 # ship
 
-The **build** stage of the `prd → rfc → ship` pipeline. `ship` executes a predetermined spec — it does not re-write one. Give it a finalized PRD or an Accepted RFC and it implements the spec, then hands you a verification bundle to run and a trace ledger you can resume from.
+The **build** stage of the `prd → rfc → ship` pipeline. `ship` executes a predetermined spec: it does not re-write one. Give it a finalized PRD or an Accepted RFC and it implements the spec, then hands you a verification bundle to run and a trace ledger you can resume from.
 
-**Compatibility:** native install on Claude Code v2.1+. The skill is plain markdown — any agent that can read markdown skills and spawn subagents can use it from `plugins/ship/skills/ship/`.
+**Compatibility:** native install on Claude Code v2.1+. The skill is plain markdown: any agent that can read markdown skills and spawn subagents can use it from `plugins/ship/skills/ship/`.
 
 ---
 
@@ -18,12 +18,12 @@ The **build** stage of the `prd → rfc → ship` pipeline. `ship` executes a pr
 
 It then:
 
-1. **Locks a contract** (`contract.md`) — the definition of done, one row per acceptance criterion.
-2. **Picks an engine** — `teams` (coordinated agents, needs `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` + ≥2 disjoint-file groups) → `subagents` (parallel, no coordination) → `solo`. Fan-out is always bounded by the spec's dependency graph.
-3. **Implements** within the contract's edit scope, checkpointing only at risky boundaries (DB/migration, deletion, dependency removal, public-API break, security change — these always ask, even with `-a`).
+1. **Locks a contract** (`contract.md`): the definition of done, one row per acceptance criterion.
+2. **Picks an engine**: `teams` (coordinated agents, needs `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` + ≥2 disjoint-file groups) → `subagents` (parallel, no coordination) → `solo`. Fan-out is always bounded by the spec's dependency graph.
+3. **Implements** within the contract's edit scope, checkpointing only at risky boundaries (DB/migration, deletion, dependency removal, public-API break, security change; these always ask, even with `-a`).
 4. **Verifies** read-only and writes a `verification-bundle.md` of the exact commands **you** run, plus a `trace.md` ledger.
 
-It **never runs your tests/builds/typechecks by default** — that stays yours. It is toolchain-agnostic: it detects pnpm/bun/yarn/npm, cargo, go, uv, ... from your lockfile and writes the bundle accordingly.
+It **never runs your tests/builds/typechecks by default**: that stays yours. It is toolchain-agnostic: it detects pnpm/bun/yarn/npm, cargo, go, uv, ... from your lockfile and writes the bundle accordingly.
 
 ---
 
@@ -55,12 +55,12 @@ It **never runs your tests/builds/typechecks by default** — that stays yours. 
 
 ### ultracode
 
-`ship` cannot read or set the effort level beyond detecting it via `$CLAUDE_EFFORT`. If a spec looks complex and you haven't enabled it, `ship` *suggests* `/effort xhigh|ultracode` — you toggle it.
+`ship` cannot read or set the effort level beyond detecting it via `$CLAUDE_EFFORT`. If a spec looks complex and you haven't enabled it, `ship` *suggests* `/effort xhigh|ultracode` (you toggle it).
 
 ## Dependencies
 
 - Exa MCP for any web lookup (no native WebSearch/WebFetch).
-- `git` write-guard friendly: `ship` never commits/pushes — it hands off and you ship the commit.
+- `git` write-guard friendly: `ship` never commits/pushes; it hands off and you ship the commit.
 - Removal uses `trash`, never destructive deletes; never modifies a database without an explicit prompt.
 
 ## What it writes

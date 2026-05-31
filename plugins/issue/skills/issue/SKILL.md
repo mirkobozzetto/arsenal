@@ -5,7 +5,7 @@ argument-hint: "[create|update|resume|list] [#N | <problem>]"
 allowed-tools: Bash(gh issue view:*), Bash(gh issue list:*), Read
 ---
 
-# issue — GitHub issues as resolution memory
+# issue: GitHub issues as resolution memory
 
 Persist problem-solving state in GitHub issues so a later session (or a fresh context) can re-read an issue cold and continue. Each issue records the problem, a self-contained Pickup Directive, the working hypothesis, attempts, and the final resolution.
 
@@ -41,7 +41,7 @@ Default when ambiguous and a number is present → **resume #N**; otherwise → 
 ## update
 
 1. **Read before write**: `gh issue view <N> --comments` to load current state.
-2. Append progress as a comment — never overwrite the original body:
+2. Append progress as a comment (never overwrite the original body):
    ```bash
    gh issue comment <N> --body "<progress / revised hypothesis / new attempt>"
    ```
@@ -70,7 +70,7 @@ Show number, title, and updated time.
 
 ## Issue body template
 
-The structure lives in `references/issue-template.md`. Read it before `create` so every issue is self-contained and re-readable cold. The **Pickup Directive** is mandatory — it is what makes the issue resumable without prior context.
+The structure lives in `references/issue-template.md`. Read it before `create` so every issue is self-contained and re-readable cold. The **Pickup Directive** is mandatory: it is what makes the issue resumable without prior context.
 
 ## Guardrails
 
@@ -84,5 +84,5 @@ The structure lives in `references/issue-template.md`. Read it before `create` s
 
 ## Delimitation
 
-- `issue` != `remember` — remember is an ephemeral per-session snapshot. issue is durable and GitHub-native.
-- `issue` != `brain` — brain is manual Obsidian capture. issue is the repo's tracker, auto-re-read on resume.
+- `issue` != `remember`: remember is an ephemeral per-session snapshot. issue is durable and GitHub-native.
+- `issue` != `brain`: brain is manual Obsidian capture. issue is the repo's tracker, auto-re-read on resume.

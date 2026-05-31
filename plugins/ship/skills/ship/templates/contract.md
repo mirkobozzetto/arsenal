@@ -4,7 +4,7 @@ artifact_kind: "{prd|rfc}"
 locked: "{date}"
 ---
 
-# Definition of Done — {feature_or_rfc_title}
+# Definition of Done: {feature_or_rfc_title}
 
 > Immutable target. Every item below is a concrete, checkable condition the final verification bundle validates against. Requirement changes get a NEW entry; never silently rewrite an existing line.
 
@@ -21,4 +21,4 @@ locked: "{date}"
 
 ## Edit scope
 
-- {files/modules the spec authorizes touching — prd Relevant Files / rfc Files column}
+- {files/modules the spec authorizes touching: prd Relevant Files / rfc Files column}

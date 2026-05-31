@@ -117,5 +117,5 @@ workflow_complete: true
 Terminal step. No next step.
 
 <critical>
-Mandatory on every path. trash never rm -rf. The user runs the bundle and commits — ship hands off, it does not push.
+Mandatory on every path. trash never rm -rf. The user runs the bundle and commits: ship hands off, it does not push.
 </critical>

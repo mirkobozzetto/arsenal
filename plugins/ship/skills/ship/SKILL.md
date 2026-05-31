@@ -64,16 +64,16 @@ Execute a locked upstream spec end to end. ship consumes EITHER a finalized prd 
 </state_variables>
 
 <delimitation>
-- `ship` != `prd` — prd produces the durable product spec (what/why) + tasks. ship consumes it; it never interviews or authors a PRD.
-- `ship` != `rfc` — rfc produces the technical design (how). ship consumes an Accepted RFC; it never designs.
+- `ship` != `prd`: prd produces the durable product spec (what/why) + tasks. ship consumes it; it never interviews or authors a PRD.
+- `ship` != `rfc`: rfc produces the technical design (how). ship consumes an Accepted RFC; it never designs.
 - ship is the IMPLEMENTER: terminal of the chain `prd -> rfc -> ship`, and the direct executor of a bare prompt via a minimal inline contract (a task list + acceptance items, never a full PRD).
 </delimitation>
 
 <input_contract>
 Auto-detected by artifact shape (set in step-00-triage, parsed in step-01-ingest):
 
-- CASE A (prd): a `docs/prd/<slug>/` folder. RUN-GATE = `prd.md` frontmatter `status: ready` (set by prd step-04). The `tasks.md` "Do NOT implement" line is a PROHIBITION on prd, NOT an authorization token — never treat its presence as a gate. Parse `tasks.md` (frontmatter `type: tasks`, `## Relevant Files`, the `## Tasks` nested checklist `- [ ] N.0` parents / `- [ ] N.x` sub-tasks); follow `source_prd` to `prd.md` for the WHY (Acceptance criteria, Success metrics, Out-of-scope = never build). The checkbox ledger is mutated only on user confirm.
-- CASE B (rfc): an `RFC.md`. RUN-GATE = frontmatter `status: Accepted` (Draft / Review / Rejected -> refuse + HALT). Build the DAG from section 10 Implementation Plan task table (ID, title, files, deps, effort, accept) cross-checked with the `graph TD` Mermaid; Accept column = done, Files column = edit scope. Read section 6 Proposed Design for HOW, resolve section 11 BLOCKER/MAJOR findings first, sections 7-8 for hazards. NEVER mutate an Accepted RFC.md — rfc progress lives only in ship's trace.md.
+- CASE A (prd): a `docs/prd/<slug>/` folder. RUN-GATE = `prd.md` frontmatter `status: ready` (set by prd step-04). The `tasks.md` "Do NOT implement" line is a PROHIBITION on prd, NOT an authorization token: never treat its presence as a gate. Parse `tasks.md` (frontmatter `type: tasks`, `## Relevant Files`, the `## Tasks` nested checklist `- [ ] N.0` parents / `- [ ] N.x` sub-tasks); follow `source_prd` to `prd.md` for the WHY (Acceptance criteria, Success metrics, Out-of-scope = never build). The checkbox ledger is mutated only on user confirm.
+- CASE B (rfc): an `RFC.md`. RUN-GATE = frontmatter `status: Accepted` (Draft / Review / Rejected -> refuse + HALT). Build the DAG from section 10 Implementation Plan task table (ID, title, files, deps, effort, accept) cross-checked with the `graph TD` Mermaid; Accept column = done, Files column = edit scope. Read section 6 Proposed Design for HOW, resolve section 11 BLOCKER/MAJOR findings first, sections 7-8 for hazards. NEVER mutate an Accepted RFC.md: rfc progress lives only in ship's trace.md.
 - CASE C (inline): a bare prompt with no artifact => ship derives a MINIMAL execution spec (task list + 2-5 acceptance items), confirms it (the user's OK is the run-gate), then executes. Never a full PRD.
 - Disambiguation: nested `- [ ] N.0/N.1` => prd; flat `| T0n |` task table => rfc; no artifact => inline.
 </input_contract>
@@ -105,6 +105,8 @@ Auto-detected by artifact shape (set in step-00-triage, parsed in step-01-ingest
 | `templates/verification-bundle.md` | User-run command list scaffold |
 | `templates/trace.md` | Per-task ledger scaffold (single source of truth) |
 | `templates/state.yaml` | Full state shape for resume |
+| `scripts/detect-stack.sh` | Deterministic toolchain detection: lockfile/manifest -> JSON {language, package_manager} |
+| `scripts/scaffold.sh` | Seed contract.md / verification-bundle.md / trace.md from templates into the output dir |
 </references>
 
 <critical>

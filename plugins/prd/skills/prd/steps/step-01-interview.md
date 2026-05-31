@@ -41,13 +41,13 @@ Elicit the product signal needed to write the PRD through targeted questions, lo
 
 Ask until each is answered (group into 1-2 AskUserQuestion rounds, one question per dimension):
 
-- **JTBD** — what job does the user hire this feature to do?
-- **Target user** — who, and what is their current workaround?
-- **Problem** — what pain/cost exists today? Why now?
-- **Constraints** — hard limits (deadline, platform, compliance, budget).
-- **Data source** — where does the data come from / live?
-- **Business rule** — the core rules that govern correct behavior.
-- **Exception** — edge cases, failure handling, what must NOT happen.
+- **JTBD**: what job does the user hire this feature to do?
+- **Target user**: who, and what is their current workaround?
+- **Problem**: what pain/cost exists today? Why now?
+- **Constraints**: hard limits (deadline, platform, compliance, budget).
+- **Data source**: where does the data come from / live?
+- **Business rule**: the core rules that govern correct behavior.
+- **Exception**: edge cases, failure handling, what must NOT happen.
 
 Use AskUserQuestion for each dimension. Provide 2-4 concrete option guesses + the user can free-text. Example shape:
 ```yaml
@@ -66,7 +66,7 @@ questions:
 
 Summarize the gathered `answers` in a short bullet recap. Mark any dimension still thin.
 
-### 3. Decision gate — enough signal?
+### 3. Decision gate: enough signal?
 
 **If `auto_mode` = true:**
 → If all 7 dimensions have an answer, proceed; else ask the thin ones once more, then proceed.

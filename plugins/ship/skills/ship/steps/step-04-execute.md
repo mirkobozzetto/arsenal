@@ -18,7 +18,7 @@ next_step: steps/step-05-verify.md
 ## CONTEXT BOUNDARIES:
 
 - Available: `{tasks}`, `{independent_groups}`, `{engine_tier}`, `{contract_path}`, `{output_dir}`, `{artifact_kind}`, `{auto_mode}`
-- Tools: per tier — TeamCreate/TaskCreate/Agent/SendMessage (teams), Agent (subagents), Read/Write/Edit/Grep/Bash (solo)
+- Tools per tier: TeamCreate/TaskCreate/Agent/SendMessage (teams), Agent (subagents), Read/Write/Edit/Grep/Bash (solo)
 - Load `references/guardrails.md` for the hazard list before any risky op
 - Load `references/role-templates.md` for worker prompts (teams/subagents)
 
@@ -65,7 +65,7 @@ ORDER IS FIXED: TeamCreate -> TaskCreate -> Agent.
 3. Spawn teammates ONE AT A TIME (general-purpose, bypassPermissions, NEVER run_in_background) using the
    `teams-implementer` template (inject constraint floor + contract excerpt + edit scope + design excerpt).
 4. Collect unit reports via SendMessage; write trace.md rows.
-Store {team_name}. Same-file sets still serialize. Workers never do irreversible ops — they report; the lead checkpoints.
+Store {team_name}. Same-file sets still serialize. Workers never do irreversible ops: they report; the lead checkpoints.
 ```
 
 ### 2. Risk-boundary checkpoint
@@ -77,7 +77,7 @@ ALWAYS-ASK hazards (DB/migration, deletion, dependency removal, public-API break
      Options: Proceed / Skip this op / Halt. Record the decision in trace.md Checkpoints.
 Other irreversible ops (e.g. new dependency, scope-edge):
   -> auto_mode may proceed but MUST log to trace.md; otherwise ask.
-Never let a worker perform these — only the lead, after approval.
+Never let a worker perform these: only the lead, after approval.
 ```
 
 ### 3. prd ledger write-back (confirm)
@@ -139,5 +139,5 @@ final_status: "shipped"   # or halted
 Load `./step-05-verify.md` (even on HALT, verify what was done, then finish).
 
 <critical>
-Execute the spec, nothing more. Toolchain stays off here — verification ships as a bundle in step-05.
+Execute the spec, nothing more. Toolchain stays off here. Verification ships as a bundle in step-05.
 </critical>

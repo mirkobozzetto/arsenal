@@ -2,11 +2,11 @@
 
 - 🛑 NEVER recommend without rationale tying back to goals (section 4)
 - 🛑 NEVER hide which alternative was chosen
-- ✅ ALWAYS justify against each rejected alternative — "why not Alt 2?"
+- ✅ ALWAYS justify against each rejected alternative: "why not Alt 2?"
 - ✅ ALWAYS state confidence level (high/medium/low) honestly
 - 📋 YOU ARE a decision writer, not a salesperson
 - 💬 FOCUS on recommendation + rationale + confidence
-- 🚫 FORBIDDEN to draft impl steps — step-07
+- 🚫 FORBIDDEN to draft impl steps: step-07
 
 ## EXECUTION PROTOCOLS:
 
@@ -29,9 +29,9 @@ State the recommendation and defend it. Make rejection of other alternatives exp
 ### 1. Recommendation statement (1 paragraph)
 
 Pattern:
-> **Recommendation:** Adopt **{Alt N — Name}** as designed in section 6.
+> **Recommendation:** Adopt **{Alt N: Name}** as designed in section 6.
 >
-> Confidence: **{high | medium | low}** — {1 sentence why this confidence level}.
+> Confidence: **{high | medium | low}**: {1 sentence why this confidence level}.
 
 ### 2. Why this one
 
@@ -50,7 +50,7 @@ For each rejected alternative from section 5, ONE sentence why rejected:
 ### Why not other alternatives
 
 - **Alt 0 (status quo):** rejected because {cost of inaction > impl cost}.
-- **Alt 1 ({name}):** rejected because {specific blocker — not "less good"}.
+- **Alt 1 ({name}):** rejected because {specific blocker, not "less good"}.
 - **Alt 3 ({name}):** rejected because {specific blocker}.
 ```
 
@@ -62,8 +62,8 @@ When would this recommendation be wrong?
 
 ```markdown
 ### Revisit if
-- {trigger 1 — e.g., "load > 10x current"}
-- {trigger 2 — e.g., "vendor X discontinues product"}
+- {trigger 1, e.g., "load > 10x current"}
+- {trigger 2, e.g., "vendor X discontinues product"}
 ```
 
 Forces honesty about scope assumptions.
@@ -75,7 +75,7 @@ Forces honesty about scope assumptions.
 
 **Recommendation:** Adopt **{chosen}** as designed in section 6.
 
-**Confidence:** {high | medium | low} — {why}.
+**Confidence:** {high | medium | low}: {why}.
 
 ### How it hits the goals
 | Goal | Mechanism |
@@ -110,7 +110,7 @@ confidence: high | medium | low
 
 ## FAILURE MODES:
 
-❌ Hedging ("we lean toward X but Y is also fine") — pick one
+❌ Hedging ("we lean toward X but Y is also fine"): pick one
 ❌ Rejection reasons that are tautological ("Alt 2 is worse")
 ❌ Missing confidence level → invites overconfidence downstream
 ❌ No "revisit if" → pretends design works under all conditions
@@ -126,7 +126,7 @@ questions:
     question: "Recommandation actée. Détailler plan d'implémentation ?"
     options:
       - label: "Continuer (Recommended)"
-        description: "Step 07 — Implementation plan (tâches ordonnées)"
+        description: "Step 07 : Implementation plan (tâches ordonnées)"
       - label: "Confidence trop basse"
         description: "→ Recherche additionnelle (Exa) ou prototype avant impl plan"
       - label: "Stop RFC ici"
@@ -135,5 +135,5 @@ questions:
 ```
 
 <critical>
-"Accepted = permission to implement, not guarantee of perfection" — pakkasys. Recommendation is a hypothesis; revisit-if conditions are how you stay honest later.
+"Accepted = permission to implement, not guarantee of perfection" (pakkasys). Recommendation is a hypothesis; revisit-if conditions are how you stay honest later.
 </critical>

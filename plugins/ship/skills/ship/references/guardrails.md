@@ -1,4 +1,4 @@
-# Guardrails — irreversible-op hazards + the Bash boundary
+# Guardrails: irreversible-op hazards + the Bash boundary
 
 Loaded on demand by step-04-execute (risk-boundary) and step-05-verify (Bash boundary).
 
@@ -23,7 +23,7 @@ Routine edits inside the spec's edit scope do NOT trigger a checkpoint. The boun
 Default run-authority for ship itself:
 
 - ALLOWED without asking: `Glob`, `Grep`, `Read`, and read-only filesystem inspection (`ls`, `test -f`, `wc -l`, `cat` of a tracked file).
-- FORBIDDEN by default: any command that compiles, executes, type-checks, builds, tests, installs, migrates, or deploys — including `node --check`, dry-runs, `tsc`, `eslint`, `pytest`, `cargo build`, `go build`, `npm`/`pnpm`/`yarn`/`bun` of any kind. These go into the verification bundle for the USER to run.
+- FORBIDDEN by default: any command that compiles, executes, type-checks, builds, tests, installs, migrates, or deploys: including `node --check`, dry-runs, `tsc`, `eslint`, `pytest`, `cargo build`, `go build`, `npm`/`pnpm`/`yarn`/`bun` of any kind. These go into the verification bundle for the USER to run.
 - `--yolo` relaxes ONLY the SAFE verification set (typecheck / lint / test / build the detected stack), and ONLY after ship lists the exact commands and how it will run them. Destructive/DB/deploy commands stay user-only even under --yolo.
 - The creator-verifier self-check (step-05) is READ-ONLY: it reasons over diffs with Read/Grep; it never shells out.
 

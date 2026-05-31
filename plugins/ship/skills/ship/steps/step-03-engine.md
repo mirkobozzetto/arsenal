@@ -10,7 +10,7 @@ next_step: steps/step-04-execute.md
 ## MANDATORY EXECUTION RULES:
 
 - YOU ARE A SELECTOR, not an implementer
-- NEVER set effort/ultracode yourself — only the user can, via /effort
+- NEVER set effort/ultracode yourself: only the user can, via /effort
 - NEVER pick a fan-out tier when independent groups < 2
 - ALWAYS bound fan-out by the DAG (same-file tasks serialize)
 - ALWAYS announce the selected tier (and confirm unless auto_mode)
@@ -54,12 +54,12 @@ Fan-out is ALWAYS bounded by the DAG; even in teams/subagents, same-file seriali
 complex = (groups >= 3) OR (sum of task effort is large) OR (critical_path is long)
 
 Read the LIVE effort via Bash: `echo $CLAUDE_EFFORT` (exposed to hook commands + the Bash tool; values low/medium/high/xhigh/max).
-NOTE: ultracode is NOT a distinct value — it reports as "xhigh" (CC hooks reference). So ship detects "high-effort mode", it cannot distinguish pure xhigh from ultracode.
+NOTE: ultracode is NOT a distinct value: it reports as "xhigh" (CC hooks reference). So ship detects "high-effort mode", it cannot distinguish pure xhigh from ultracode.
 Set {ultracode_signal}:
   - "on"      if $CLAUDE_EFFORT in (xhigh, max)      # strong reasoning / possible ultracode auto-workflows
   - "off"     if $CLAUDE_EFFORT in (low, medium, high)
   - "unknown" if unreadable / empty
-ship STILL cannot SET the effort (read-only; hooks cannot set it either — CC issue #30806). Only the user toggles /effort.
+ship STILL cannot SET the effort (read-only; hooks cannot set it either, CC issue #30806). Only the user toggles /effort.
 IF complex AND {ultracode_signal} = "off":
   -> prepare a SUGGESTION line for the confirm gate ("ce spec gagnerait à /effort xhigh|ultracode"), never auto-enable.
 IF {ultracode_signal} = "on":
@@ -74,7 +74,7 @@ IF {ultracode_signal} = "on":
 ```yaml
 questions:
   - header: "Moteur"
-    question: "Tier sélectionné: {engine_tier} ({groups} groupes indépendants). [Si complexe: ce spec gagnerait à ultracode — active /effort ultracode|xhigh toi-même (ship ne peut pas).] Continuer ?"
+    question: "Tier sélectionné: {engine_tier} ({groups} groupes indépendants). [Si complexe: ce spec gagnerait à ultracode, active /effort ultracode|xhigh toi-même (ship ne peut pas).] Continuer ?"
     options:
       - label: "Continuer (Recommended)"
         description: "Exécuter sur le tier {engine_tier}"

@@ -48,6 +48,8 @@ Store `{independent_groups}`. This count drives the engine probe in step-03 (>=2
 
 ### 3. Lock the contract
 
+Optionally seed the three artifacts in one shot with `bash scripts/scaffold.sh {output_dir}` (copies the templates if absent), then fill them.
+
 Write `{output_dir}/contract.md` from `templates/contract.md`:
 ```
 - One row per acceptance criterion (prd Given/When/Then) OR rfc Accept-criteria cell.
@@ -111,5 +113,5 @@ contract_path: "{output_dir}/contract.md"
 Load `./step-03-engine.md`.
 
 <critical>
-Schedule, don't redesign. The contract is the definition of done — lock it now.
+Schedule, don't redesign. The contract is the definition of done: lock it now.
 </critical>

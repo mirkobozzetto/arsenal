@@ -1,9 +1,9 @@
 ## MANDATORY EXECUTION RULES (READ FIRST):
 
-- 🛑 NEVER claim "no risks" — there are always risks
+- 🛑 NEVER claim "no risks": there are always risks
 - 🛑 NEVER skip open questions even if "obvious"
 - ✅ ALWAYS distinguish drawbacks (inherent) from risks (probabilistic)
-- ✅ ALWAYS list ≥1 unknown — if zero, you're not honest
+- ✅ ALWAYS list ≥1 unknown: if zero, you're not honest
 - 📋 YOU ARE a pessimist, paid to find what breaks
 - 💬 FOCUS on what could go wrong + what we don't know
 - 🚫 FORBIDDEN to write recommendation or impl plan
@@ -36,7 +36,7 @@ Things that ARE the case even if everything goes right:
 - Learning curve for team
 - Documentation debt
 
-Each drawback = unavoidable consequence. Not "might happen" — "will happen".
+Each drawback = unavoidable consequence. Not "might happen" but "will happen".
 
 ### 2. Risks (probabilistic, mitigatable)
 
@@ -56,7 +56,7 @@ What we don't know yet and need to answer before merging:
 - "What happens if X service is down during migration?"
 - "Does Y comply with constraint Z?"
 - "Confirm whether team A is OK with breaking change"
-- "Benchmark missing — measure before locking design"
+- "Benchmark missing: measure before locking design"
 
 Each question must have:
 - **Owner** (who answers it)
@@ -115,15 +115,15 @@ rollout_strategy: "feature_flag | canary | big_bang | ..."
 ✅ ≥3 risks with likelihood + impact + mitigation
 ✅ ≥1 open question with owner + deadline
 ✅ Rollout strategy named
-✅ Rollback procedure described (or "irreversible — flag it")
+✅ Rollback procedure described (or "irreversible: flag it")
 
 ## FAILURE MODES:
 
-❌ "No drawbacks" — lazy, always wrong
-❌ Risks without mitigation — half a risk entry
+❌ "No drawbacks": lazy, always wrong
+❌ Risks without mitigation: half a risk entry
 ❌ Vague open questions without owner → orphaned blockers
-❌ Missing rollout — design isn't shippable
-❌ "Rollback: revert the PR" for data migrations — irreversible work hidden
+❌ Missing rollout: design isn't shippable
+❌ "Rollback: revert the PR" for data migrations: irreversible work hidden
 
 ## NEXT STEP:
 
@@ -136,7 +136,7 @@ questions:
     question: "Risques + questions listés. Formaliser recommandation ?"
     options:
       - label: "Continuer (Recommended)"
-        description: "Step 06 — Recommendation + rationale"
+        description: "Step 06 : Recommendation + rationale"
       - label: "Risques bloquants"
         description: "1+ risque non mitigable → revoir design (step-04)"
       - label: "Questions trop nombreuses"
@@ -145,5 +145,5 @@ questions:
 ```
 
 <critical>
-"Surface risk while change is still cheap" — pakkasys. RFC accepted ≠ guaranteed success. If reviewer can't find new risk, RFC is too optimistic.
+"Surface risk while change is still cheap" (pakkasys). RFC accepted ≠ guaranteed success. If reviewer can't find new risk, RFC is too optimistic.
 </critical>

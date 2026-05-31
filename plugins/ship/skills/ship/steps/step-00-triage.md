@@ -12,7 +12,7 @@ next_step: steps/step-00-init.md
 - NEVER read task content, write files, or spawn anything in this step
 - NEVER skip the --help check (always the first action)
 - ALWAYS classify the input before routing
-- IF the input is a bare prompt, mark it for a MINIMAL inline spec (CASE C) — never a full product PRD
+- IF the input is a bare prompt, mark it for a MINIMAL inline spec (CASE C): never a full product PRD
 
 ## CONTEXT BOUNDARIES:
 
@@ -63,11 +63,11 @@ Quick disambiguation when a file is given but kind is unclear: a body with neste
 
 ```
 IF {triage_mode} = "inline":
-  ship handles it directly — NO escape. step-01-ingest will derive a MINIMAL execution spec
+  ship handles it directly, NO escape. step-01-ingest will derive a MINIMAL execution spec
   (short ordered task list + 2-5 acceptance items) from {raw_prompt} and confirm it with the user.
   This is NOT a product PRD (no interview, no user stories). For a full durable spec, the user can
   run /prd first; ship's inline path is the quick route.
-  No status gate applies to inline — the user's confirmation of the derived list IS the gate.
+  No status gate applies to inline: the user's confirmation of the derived list IS the gate.
 ```
 
 ### 5. Update state and route

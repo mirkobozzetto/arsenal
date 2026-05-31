@@ -41,14 +41,14 @@ Write a complete product PRD from the gathered answers and save it to `prd_path`
 
 Sections (in this order):
 
-- **Problem statement** — the pain, who has it, why now.
-- **Goals** — outcomes this feature must achieve.
-- **Non-goals / Out-of-scope** — explicit exclusions (prevents scope creep).
-- **User stories** — `As a <user>, I want <capability>, so that <value>`.
-- **Acceptance criteria** — per story, testable Given/When/Then.
-- **Success metrics** — measurable signals the feature worked (numbers, not adjectives).
-- **Constraints & assumptions** — from the interview.
-- **Open questions** — anything still thin.
+- **Problem statement**: the pain, who has it, why now.
+- **Goals**: outcomes this feature must achieve.
+- **Non-goals / Out-of-scope**: explicit exclusions (prevents scope creep).
+- **User stories**: `As a <user>, I want <capability>, so that <value>`.
+- **Acceptance criteria**: per story, testable Given/When/Then.
+- **Success metrics**: measurable signals the feature worked (numbers, not adjectives).
+- **Constraints & assumptions**: from the interview.
+- **Open questions**: anything still thin.
 
 ### 2. Write the file
 
@@ -62,7 +62,7 @@ status: draft
 stepsCompleted: [0, 1, 2]
 ---
 ```
-Body = the sections above. Prose in French; identifiers in English. If `prd_path` exists, edit in place — do not create a duplicate.
+Body = the sections above. Prose in French; identifiers in English. If `prd_path` exists, edit in place (do not create a duplicate).
 
 ### 3. Confirm
 

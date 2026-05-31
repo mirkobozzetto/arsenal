@@ -86,6 +86,8 @@ For CASE C (inline), {tasks} comes from the confirmed derived list in step 1 (no
 
 ### 3. Detect the toolchain ({detected_stack})
 
+Prefer the deterministic helper: `bash scripts/detect-stack.sh {project_root}` prints `{"language","package_manager"}`. Use it first; fall back to the manual mapping below only if it errors or returns "unknown".
+
 Read-only detection (no execution):
 ```
 Lockfile -> package_manager:  pnpm-lock.yaml=pnpm | bun.lockb/bun.lock=bun | yarn.lock=yarn | package-lock.json=npm
@@ -134,5 +136,5 @@ detected_stack: {language, package_manager, test_cmd, typecheck_cmd, lint_cmd, b
 Load `./step-02-plan.md`.
 
 <critical>
-Read and gate only. ship executes what the artifact already decomposed — it never re-specs.
+Read and gate only. ship executes what the artifact already decomposed: it never re-specs.
 </critical>

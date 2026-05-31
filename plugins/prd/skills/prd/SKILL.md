@@ -9,9 +9,9 @@ Interview the user about a feature, then produce a complete product PRD and an o
 </objective>
 
 <parameters>
-- `<feature idea>` — free-text feature name or one-line idea (remainder of input).
-- `-a` — auto mode: skip AskUserQuestion confirmations, use recommended options.
-- `-s` — skip-interview: draft directly from the given idea without the question loop (lower quality, use only when the idea is already detailed).
+- `<feature idea>`: free-text feature name or one-line idea (remainder of input).
+- `-a`: auto mode, skip AskUserQuestion confirmations, use recommended options.
+- `-s`: skip-interview, draft directly from the given idea without the question loop (lower quality, use only when the idea is already detailed).
 </parameters>
 
 <state_variables>
@@ -28,9 +28,9 @@ Interview the user about a feature, then produce a complete product PRD and an o
 </state_variables>
 
 <delimitation>
-- `prd` != `rfc` — rfc is a technical design doc (alternatives, tradeoffs, architecture). prd stays at product level (user value, scope, metrics) and never picks the technical how.
-- `prd` != `brainstorm` — brainstorm is open-ended research. prd assumes the idea is chosen and produces a structured spec.
-- `prd` != `ship` — ship implements. prd stops at the task list and hands off.
+- `prd` != `rfc`: rfc is a technical design doc (alternatives, tradeoffs, architecture). prd stays at product level (user value, scope, metrics) and never picks the technical how.
+- `prd` != `brainstorm`: brainstorm is open-ended research. prd assumes the idea is chosen and produces a structured spec.
+- `prd` != `ship`: ship implements. prd stops at the task list and hands off.
 - The PRD generates the todo. The PRD is not itself the todo.
 </delimitation>
 

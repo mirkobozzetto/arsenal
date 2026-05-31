@@ -10,7 +10,7 @@
 
 - Input: raw user arguments from skill invocation
 - Output: populated state variables for step-01
-- No prior context needed — this is the entry step
+- No prior context needed: this is the entry step
 
 ## YOUR TASK:
 

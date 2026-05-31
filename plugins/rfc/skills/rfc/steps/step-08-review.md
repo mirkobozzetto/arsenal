@@ -1,12 +1,12 @@
 ## MANDATORY EXECUTION RULES (READ FIRST):
 
 - 🛑 NEVER skip review unless `{skip_review}` = true
-- 🛑 NEVER edit RFC.md based on review findings here — capture only
+- 🛑 NEVER edit RFC.md based on review findings here: capture only
 - ✅ ALWAYS spawn subagent (different perspective from main thread)
 - ✅ ALWAYS capture findings in section 11, classified by severity
 - 📋 YOU ARE a review orchestrator, not a reviewer yourself
 - 💬 FOCUS on dispatching + capturing findings
-- 🚫 FORBIDDEN to defend the RFC against findings — neutral capture
+- 🚫 FORBIDDEN to defend the RFC against findings: neutral capture
 
 ## EXECUTION PROTOCOLS:
 
@@ -37,14 +37,14 @@ Read `{rfc_path}` completely. Subagent needs full content.
 
 ### 3. Dispatch 1-2 adversarial subagents (in parallel)
 
-**Subagent A — Gap hunter**
+**Subagent A: Gap hunter**
 
 ```
 Agent({
-  description: "Adversarial RFC review — gaps",
+  description: "Adversarial RFC review: gaps",
   subagent_type: "general-purpose",
   prompt: `
-    Lis ce RFC complet et trouve les GAPS — requirements manquants,
+    Lis ce RFC complet et trouve les GAPS : requirements manquants,
     edge cases ignorés, hypothèses cachées, contradictions internes.
 
     RFC content:
@@ -64,11 +64,11 @@ Agent({
 })
 ```
 
-**Subagent B — Impl realism** (optional, if `tasks_count > 5`)
+**Subagent B: Impl realism** (optional, if `tasks_count > 5`)
 
 ```
 Agent({
-  description: "Adversarial RFC review — impl realism",
+  description: "Adversarial RFC review: impl realism",
   subagent_type: "general-purpose",
   prompt: `
     Lis ce RFC complet et challenge le plan d'impl (section 10).
@@ -152,8 +152,8 @@ review_nit: L
 ## FAILURE MODES:
 
 ❌ Reviewing the RFC yourself instead of spawning subagent (same model bias)
-❌ Editing main RFC sections based on findings — that's the user's call
-❌ Defending RFC in section 11 ("but actually we considered…") — capture only
+❌ Editing main RFC sections based on findings: that's the user's call
+❌ Defending RFC in section 11 ("but actually we considered…"): capture only
 ❌ Filtering out findings you disagree with → loses adversarial value
 
 ## NEXT STEP:
@@ -163,5 +163,5 @@ If user chose "Revoir RFC" → AskUserQuestion which step to reload (typically s
 If "Abandonner" → load step-09 with `status: Rejected`.
 
 <critical>
-Subagent has FRESH context — that's the point. Independent review > self-review every time. Resist urge to argue back.
+Subagent has FRESH context: that's the point. Independent review > self-review every time. Resist urge to argue back.
 </critical>
