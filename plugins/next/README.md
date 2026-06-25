@@ -86,14 +86,14 @@ This loop close is the whole point. Without it, an item you already built keeps 
 ```
   SESSION 1                          SESSION 2  (after /clear)
   ─────────                          ─────────────────────────
-  work on agent-studio               [ context wiped ]
+  work on a feature                  [ context wiped ]
       │                                   │
       │ prd / ship stamp status           │ SessionStart hook fires:
       ▼ continuously, onto disk           ▼ runs scan.cjs --banner
   prd.md: status: ready   ───────────▶  injects, before your first prompt:
   (this file survives /clear)            "OPEN WORK:
-                                           - Agent Studio [ready] 0/45
-                                             -> /ship docs/prd/agent-studio"
+                                           - OAuth login [ready] 6/14
+                                             -> /ship docs/prd/oauth-login"
                                           │
                                           ▼  you resume in one read,
                                              not fifteen minutes of re-reading
@@ -129,14 +129,16 @@ It prints **raw text** to stdout on purpose, so it coexists with other raw-text 
 
 ```
 OPEN (ready to act):
-  Agent Studio [ready] (PRD, marketplace-flowflow)  0/45 tasks
-      resume: /ship docs/prd/agent-studio
-  RAG Chat Reliability [ready] (PRD, flowflow)  0/20 tasks
-      resume: /ship docs/prd/rag-chat-reliability
+  OAuth login [in_progress] (PRD)  6/14 tasks
+      resume: /ship -r docs/prd/oauth-login
+  Rate limiter [ready] (PRD)  0/9 tasks
+      resume: /ship docs/prd/rate-limiter
+  Event bus migration [Accepted] (RFC)
+      resume: /ship docs/rfcs/0007-event-bus/RFC.md
 
-(2 in authoring; --all to show)
+(1 in authoring; --all to show)
 
-Next: /ship docs/prd/agent-studio
+Next: /ship -r docs/prd/oauth-login
 ```
 
 Ranking is `in_progress` first, then `ready` / `Accepted`, then alphabetical. The `Next:` line is a deterministic pick, not a judgment of importance: it does not know your priorities, only the lifecycle order.
