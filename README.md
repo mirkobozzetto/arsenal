@@ -27,6 +27,7 @@ Skills here are plain markdown, portable across providers (Claude Code, Codex, C
 | [`rfc`](./plugins/rfc) | planning | The *how*. A 10-step design workflow: problem → alternatives → tradeoffs → design → risks → recommendation → impl plan. Forces reasoning before action. |
 | [`ship`](./plugins/ship) | implementation | The *build*. Executes a finalized `prd` or an Accepted `rfc` (or a bare prompt via an inline contract) on agent-teams / subagents / solo, and hands back a verification bundle you run + a trace ledger. |
 | [`issue`](./plugins/issue) | memory | GitHub issues as cross-session resolution memory. Self-contained, cold-readable, resumable after any context reset. |
+| [`next`](./plugins/next) | orientation | What's left and how to resume it. Derives an open-work board from `prd`/`rfc` frontmatter and recommends the next command; a SessionStart hook auto-surfaces it so context survives `/clear`. |
 | [`websearch`](./plugins/websearch) | research | Intent-routed web search via [Exa](https://exa.ai) MCP: 8 modes (quick / deep / code / docs / debug / news / compare / research). |
 
 ---
@@ -53,6 +54,7 @@ The four planning-to-build plugins form one chain. The picture at the top is the
 3. **`rfc`**: when the *how* crosses a boundary: architecture, migration, a new pattern, or several valid designs where the wrong one is expensive to undo. Applies to technical decisions worth reasoning about. Output: `RFC.md` with alternatives + tradeoffs + an impl plan.
 4. **`ship`**: to build. Applies to executing a finalized `prd` (`status: ready`) or an Accepted `rfc` (`status: Accepted`). Output: code + a `verification-bundle.md` you run yourself + a `trace.md` ledger.
 5. **`issue`**: transversal. When a problem must survive a context reset, log it as a resumable GitHub issue and pick it up cold later.
+6. **`next`**: transversal. Asks "what is left and how do I resume it" - derives the board from each `prd`/`rfc` status and points at the next `/ship`. `ship` closes the loop (flips `ready`/`Accepted` to `shipped` on finish), and a SessionStart hook re-surfaces the board so a `/clear` never loses the thread.
 
 Not every task needs all four. A trivial change → `ship` directly (it derives a one-shot inline contract). A boundary-crossing feature → the full `prd → rfc → ship`. `code-roadmap` tells you which.
 
@@ -117,6 +119,7 @@ Add the marketplace once, then install whichever plugins you want:
 /plugin install rfc@arsenal
 /plugin install ship@arsenal
 /plugin install issue@arsenal
+/plugin install next@arsenal
 
 # ...or just one:
 /plugin install ship@arsenal
@@ -129,6 +132,7 @@ Then drive the pipeline:
 /prd add OAuth login                   # what/why  -> docs/prd/oauth-login/
 /rfc OAuth login                       # how       -> RFC.md
 /ship docs/prd/oauth-login/            # build     -> code + verification bundle + trace
+/next                                  # what's left -> the next /ship, after any /clear
 ```
 
 Per-plugin setup, flags, and dependencies live in each plugin's README (linked in the table above).
