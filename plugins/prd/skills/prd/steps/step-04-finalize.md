@@ -42,6 +42,14 @@ Verify the PRD and task artifacts, mark them ready, then ask the user what to do
 
 Set `status: ready` in `prd_path` frontmatter; confirm `tasks_path` keeps the "Do NOT implement" header.
 
+Also stamp the resume contract in `prd_path` frontmatter so the `next` open-work board and a fresh session can pick this up cold:
+```yaml
+status: ready
+next_action: "<one line: what shipping this delivers>"
+resume_cmd: "/ship docs/prd/<slug>"
+```
+These are the fields `next` reads. `status` flips to `shipped` later, set by ship at finish.
+
 ### 3. Print handoff
 
 ```

@@ -33,11 +33,16 @@ Read the spec, enforce the run-gate, parse its tasks into `{tasks}`, and detect 
 
 **CASE A (prd):**
 ```
-Read {artifact_path}/prd.md frontmatter.
-GATE: status MUST be "ready" (set by prd step-04).
-  IF status != ready (missing / draft):
-    -> Refuse: "PRD not finalized (status != ready). Run prd step-04, or confirm an override."
-    -> HALT (route to step-06-finish with final_status = halted) unless the user explicitly overrides.
+Read {artifact_path}/prd.md frontmatter. Branch on status (the lifecycle is draft -> ready -> in_progress -> shipped):
+  shipped     -> Refuse: "Already shipped (shipped_at: <ts>). Nothing to build. Bump the version for a change,
+                 or pass -r to re-open a halted run." HALT. NEVER silently re-build a shipped spec.
+  in_progress -> A prior run halted. Prefer resume: "This PRD is in_progress; resuming from trace.md."
+                 Continue as a -r resume (read trace.md for done-vs-remaining) rather than restarting from zero.
+  ready       -> proceed.
+  draft/none  -> Refuse: "PRD not finalized (status != ready). Run prd step-04, or confirm an override."
+                 HALT (route to step-06-finish, final_status = halted) unless the user explicitly overrides.
+Pre-flight echo (before parsing): show status + task counts from tasks.md (done/total) so the user sees what will
+  run before it runs. This is the "check before acting" pass; it never silently charges ahead.
 Note: the "Do NOT implement" line in tasks.md is a PROHIBITION on prd, NOT an authorization. Do not treat it as the gate.
 ```
 

@@ -79,7 +79,22 @@ IF auto_mode = false AND final_status = shipped:
   Route "Commit" -> conventional message, no Claude signature, git write-guard prompt fires.
 ```
 
-### 4. Final state update
+### 4. Close the loop (upstream status)
+
+Keep the `next` open-work board honest: an item must leave it once shipped, and a halted run must point back to its resume command. This is the write that prevents a stale "ready"/"Accepted" lingering after the work is done.
+
+```
+IF final_status = shipped AND contract criteria all satisfied:
+  CASE A (prd): set {artifact_path}/prd.md frontmatter status: shipped + shipped_at: <iso>.
+                (prd.md is mutable; tasks.md keeps its "Do NOT implement" header untouched.)
+  CASE B (rfc): NEVER mutate RFC.md. Write a sibling marker {dir}/RFC.shipped with the date.
+  CASE C (inline): no artifact; nothing to flip.
+IF final_status = halted/paused:
+  CASE A: set prd.md status: in_progress + resume_cmd: "/ship -r {artifact_path}".
+  CASE B: leave RFC.md; note the resume command (/ship -r {artifact_path}) in the handoff + trace.md.
+```
+
+### 5. Final state update
 
 ```yaml
 stepsCompleted: [0, 1, 2, 3, 4, 5, 6]

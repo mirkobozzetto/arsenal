@@ -69,7 +69,11 @@ questions:
 status: {chosen}
 stepsCompleted: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 finalized: "{today}"
+next_action: "{one line: what implementing this delivers}"
+resume_cmd: "/ship {rfc_path}"
 ```
+
+`next_action` + `resume_cmd` are the fields the `next` open-work board reads so an Accepted RFC surfaces with its exact resume command. On `status: shipped` (set by ship at finish, or a sibling `RFC.shipped` marker since RFC.md stays immutable) the item leaves the board.
 
 ### 4. Update RFC index (if applicable)
 
