@@ -65,4 +65,4 @@ It **never runs your tests/builds/typechecks by default**: that stays yours. It 
 
 ## What it writes
 
-`contract.md` · `verification-bundle.md` · `trace.md` (single source of truth for resume). For a PRD it ticks `tasks.md` checkboxes on confirm; it never mutates an Accepted `RFC.md`.
+`contract.md` · `verification-bundle.md` · `trace.md` (single source of truth for resume). During the build, `trace.md` is the only live ledger; for a PRD the `tasks.md` checkboxes are reconciled from it **once, at finish** (every `done` row flips `[ ] -> [x]`, byte-preserving, no per-unit confirm), so the count stays honest even under `-a`. It never mutates an Accepted `RFC.md`.

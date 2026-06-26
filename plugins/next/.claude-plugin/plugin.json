@@ -1,6 +1,6 @@
 {
   "name": "next",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Query unfinished prd/rfc/ship work and the exact command to resume it. Derives an open-work board from artifact frontmatter (no separate ledger to drift), and auto-surfaces it at session start so context survives /clear.",
   "author": {
     "name": "Mirko Bozzetto",

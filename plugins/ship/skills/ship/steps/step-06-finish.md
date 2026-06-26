@@ -79,18 +79,25 @@ IF auto_mode = false AND final_status = shipped:
   Route "Commit" -> conventional message, no Claude signature, git write-guard prompt fires.
 ```
 
-### 4. Close the loop (upstream status)
+### 4. Close the loop (upstream status + task ledger)
 
-Keep the `next` open-work board honest: an item must leave it once shipped, and a halted run must point back to its resume command. This is the write that prevents a stale "ready"/"Accepted" lingering after the work is done.
+Keep the `next` open-work board honest: an item must leave it once shipped, a halted run must point back to its resume command, and the upstream task checkboxes must match what trace.md recorded as done. trace.md is the live ledger during execute; this is the SINGLE point where its result is synced back into the prd's tasks.md, so `next` never reads a stale 0/N after a successful run.
 
 ```
 IF final_status = shipped AND contract criteria all satisfied:
-  CASE A (prd): set {artifact_path}/prd.md frontmatter status: shipped + shipped_at: <iso>.
-                (prd.md is mutable; tasks.md keeps its "Do NOT implement" header untouched.)
+  CASE A (prd):
+    1. set {artifact_path}/prd.md frontmatter status: shipped + shipped_at: <iso>.
+    2. Reconcile {artifact_path}/tasks.md from {trace_path}:
+       for every trace row with Status = done, take its Unit id (N.0 / N.x) and flip the
+       matching `- [ ] <id> ...` line to `- [x] <id> ...`. Byte-preserving: only [ ] -> [x],
+       no reorder/reformat; the "Do NOT implement" header and every other line stay intact.
+       UNCONDITIONAL on this path (no confirm gate): shipped + criteria satisfied IS the
+       authorization. A task with no done row stays unchecked.
   CASE B (rfc): NEVER mutate RFC.md. Write a sibling marker {dir}/RFC.shipped with the date.
   CASE C (inline): no artifact; nothing to flip.
 IF final_status = halted/paused:
-  CASE A: set prd.md status: in_progress + resume_cmd: "/ship -r {artifact_path}".
+  CASE A: set prd.md status: in_progress + resume_cmd: "/ship -r {artifact_path}"; ALSO reconcile
+          tasks.md the same way (tick only the done rows) so the board shows honest partial progress.
   CASE B: leave RFC.md; note the resume command (/ship -r {artifact_path}) in the handoff + trace.md.
 ```
 

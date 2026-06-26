@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-  <img src="https://img.shields.io/badge/plugins-6-blue.svg" alt="6 plugins">
+  <img src="https://img.shields.io/badge/plugins-8-blue.svg" alt="8 plugins">
   <img src="https://img.shields.io/badge/agent-Claude%20Code-7c3aed.svg" alt="Claude Code">
 </p>
 
@@ -28,6 +28,7 @@ Skills here are plain markdown, portable across providers (Claude Code, Codex, C
 | [`ship`](./plugins/ship) | implementation | The *build*. Executes a finalized `prd` or an Accepted `rfc` (or a bare prompt via an inline contract) on agent-teams / subagents / solo, and hands back a verification bundle you run + a trace ledger. |
 | [`issue`](./plugins/issue) | memory | GitHub issues as cross-session resolution memory. Self-contained, cold-readable, resumable after any context reset. |
 | [`next`](./plugins/next) | orientation | What's left and how to resume it. Derives an open-work board from `prd`/`rfc` frontmatter and recommends the next command; a SessionStart hook auto-surfaces it so context survives `/clear`. |
+| [`trace`](./plugins/trace) | memory | A progress ledger that writes itself. A Stop hook logs the working-tree delta every turn that touched files (in `ship`, `rfc`, or plain chat), so `next` shows what moved without you remembering to log it. |
 | [`websearch`](./plugins/websearch) | research | Intent-routed web search via [Exa](https://exa.ai) MCP: 8 modes (quick / deep / code / docs / debug / news / compare / research). |
 
 ---
@@ -54,9 +55,18 @@ The four planning-to-build plugins form one chain. The picture at the top is the
 3. **`rfc`**: when the *how* crosses a boundary: architecture, migration, a new pattern, or several valid designs where the wrong one is expensive to undo. Applies to technical decisions worth reasoning about. Output: `RFC.md` with alternatives + tradeoffs + an impl plan.
 4. **`ship`**: to build. Applies to executing a finalized `prd` (`status: ready`) or an Accepted `rfc` (`status: Accepted`). Output: code + a `verification-bundle.md` you run yourself + a `trace.md` ledger.
 5. **`issue`**: transversal. When a problem must survive a context reset, log it as a resumable GitHub issue and pick it up cold later.
-6. **`next`**: transversal. Asks "what is left and how do I resume it" - derives the board from each `prd`/`rfc` status and points at the next `/ship`. `ship` closes the loop (flips `ready`/`Accepted` to `shipped` on finish), and a SessionStart hook re-surfaces the board so a `/clear` never loses the thread.
+6. **`next`**: transversal. Asks "what is left and how do I resume it" - derives the board from each `prd`/`rfc` status and points at the next `/ship`. `ship` closes the loop (flips `ready`/`Accepted` to `shipped` on finish, and reconciles the `tasks.md` checkboxes from its trace so the board's task count is never stale, even under `-a`), and a SessionStart hook re-surfaces the board so a `/clear` never loses the thread.
+7. **`trace`**: transversal. A ledger that writes itself. `next` derives its board from `prd`/`rfc` status, and only `ship` stamps that, so `next` is blind to work done outside `ship`. `trace` fills that gap: a Stop hook logs the working-tree delta on any turn that touches files, in any context, so the work is recorded without you remembering to log it.
 
 Not every task needs all four. A trivial change → `ship` directly (it derives a one-shot inline contract). A boundary-crossing feature → the full `prd → rfc → ship`. `code-roadmap` tells you which.
+
+`trace` and `next` are the continuity pair: `trace` records what happened, `next` tells you what is left. The record is deterministic (a hook, not a habit), so nothing depends on remembering.
+
+```
+   ship ┐
+   rfc  ├──▶  any turn that touches files  ──▶  .claude/trace.md  ──▶  next reads it
+   chat ┘        (Stop hook, automatic)            (one ledger)        "what moved"
+```
 
 ---
 
@@ -120,6 +130,7 @@ Add the marketplace once, then install whichever plugins you want:
 /plugin install ship@arsenal
 /plugin install issue@arsenal
 /plugin install next@arsenal
+/plugin install trace@arsenal
 
 # ...or just one:
 /plugin install ship@arsenal

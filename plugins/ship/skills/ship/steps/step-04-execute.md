@@ -46,7 +46,7 @@ For each task in topological order:
   - Implement ONLY the contract items for this task. No scope creep.
   - Risk-boundary check (see step 2) before any hazardous op.
   - Update trace.md row -> done (files touched + 1-line diff summary).
-  - For prd: tick the tasks.md checkbox for this unit ONLY after user confirm (see step 3).
+  - For prd: record the unit in trace.md only; tasks.md checkboxes are synced once at finish (step-06), not here.
 ```
 
 **SUBAGENTS (`engine_tier` = subagents):**
@@ -80,12 +80,13 @@ Other irreversible ops (e.g. new dependency, scope-edge):
 Never let a worker perform these: only the lead, after approval.
 ```
 
-### 3. prd ledger write-back (confirm)
+### 3. Task ledger = trace.md only (no live checkbox writes)
 
 ```
-For prd, mutating docs/prd/<slug>/tasks.md checkboxes is a write into the upstream spec.
-IF auto_mode = false: confirm once "Check off the completed tasks in tasks.md?" (yes -> tick - [ ] -> - [x]; no -> progress stays in trace.md only).
-For rfc: NEVER mutate RFC.md. Progress lives only in trace.md.
+During execute, trace.md is the ONLY live ledger. Do NOT mutate tasks.md (prd) or RFC.md (rfc) here.
+The prd tasks.md checkboxes are reconciled from trace.md exactly once, at finish (step-06 CASE A):
+shipped + criteria satisfied authorizes the [ ] -> [x] flip, so there is no per-unit confirm and no
+auto_mode hole where progress silently never lands. For rfc: RFC.md stays immutable; progress lives only in trace.md.
 ```
 
 ### 4. Anti-premature-stop + HALT
@@ -114,7 +115,7 @@ final_status: "shipped"   # or halted
 
 - Every task implemented within its contract edit scope, no scope creep
 - Risk-boundary checkpoints fired on hazards; DB/destructive asked even in auto_mode
-- trace.md updated per unit; prd checkboxes only on confirm; RFC.md untouched
+- trace.md updated per unit; tasks.md/RFC.md untouched here (checkbox sync happens once at finish)
 - No build/test toolchain run here
 - Teams order TeamCreate -> TaskCreate -> Agent; never run_in_background
 

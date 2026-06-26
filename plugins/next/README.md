@@ -30,7 +30,7 @@ The state already exists, in the artifacts the pipeline writes:
 
 - `prd` writes `docs/prd/<slug>/prd.md` with a `status` (and `tasks.md` with checkboxes).
 - `rfc` writes `RFC.md` with a `status`.
-- `ship` flips that `status` to `shipped` when it finishes.
+- `ship` flips that `status` to `shipped` when it finishes, and reconciles the `tasks.md` checkboxes from its run trace so the board's count is current, not a stale 0/N.
 
 So "what is left" is not a note you keep up to date. It is **computed** from those statuses, every time you ask. Nothing to maintain, nothing to drift.
 

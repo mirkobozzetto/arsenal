@@ -1,0 +1,11 @@
+{
+  "name": "trace",
+  "version": "1.0.0",
+  "description": "A project-level progress ledger written automatically. A Stop hook logs the working-tree delta at the end of every turn that touched files, so what you did - in ship, rfc, or plain conversation - is recorded without you remembering to log it. `next` reads the ledger to show what moved.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/trace"
+}

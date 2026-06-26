@@ -63,6 +63,26 @@ function countTasks(file) {
   return { done, inprog, total: boxes.length };
 }
 
+// Project activity ledger (written by the `trace` plugin). Parsed best-effort:
+// a malformed line is skipped, a missing file yields []. This is what lets the
+// board show out-of-ship work - edits, other skills, plain conversation.
+function readTrace(root) {
+  let text;
+  try {
+    text = fs.readFileSync(path.join(root, ".claude", "trace.md"), "utf8");
+  } catch {
+    return [];
+  }
+  const out = [];
+  for (const line of text.split("\n")) {
+    const m = line.match(
+      /^- \[([^\]]+)\]\s+(\S+)\s+\|\s+done:\s+(.*?)\s+\|\s+files:\s+(.*?)\s+\|\s+status:\s+(\w+)\s*$/,
+    );
+    if (m) out.push({ context: m[1], date: m[2], what: m[3], files: m[4], status: m[5], repo: path.basename(root) });
+  }
+  return out;
+}
+
 // status -> bucket. open = actionable now; wip = still authoring; done = hidden by default.
 function bucket(kind, status) {
   const s = (status || "").toLowerCase();
@@ -123,6 +143,7 @@ function collect(root) {
 
     items.push({
       kind,
+      slug: isPrd ? path.basename(path.dirname(file)) : path.basename(file, ".md"),
       name: fm.feature || fm.title || fm.slug || path.basename(path.dirname(file)),
       status,
       bucket: b,
@@ -138,26 +159,48 @@ function collect(root) {
 }
 
 let all = [];
-for (const root of roots) all = all.concat(collect(path.resolve(root)));
+let trace = [];
+for (const root of roots) {
+  const r = path.resolve(root);
+  all = all.concat(collect(r));
+  trace = trace.concat(readTrace(r));
+}
 all.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
+
+// When trace says a prd shipped but its frontmatter still reads open, the board
+// is stale (work landed outside ship). Flag it instead of trusting the checkbox.
+const shippedCtx = new Set(trace.filter((t) => /shipped/i.test(t.status)).map((t) => t.context));
+for (const i of all) {
+  if (i.kind === "prd" && i.bucket === "open" && shippedCtx.has(`prd:${i.slug}`)) i.traceShipped = true;
+}
 
 const open = all.filter((i) => i.bucket === "open");
 const wip = all.filter((i) => i.bucket === "wip");
 const done = all.filter((i) => i.bucket === "done");
 
 if (flags.has("--json")) {
-  process.stdout.write(JSON.stringify({ open, wip, done, top: open[0] || null }, null, 2) + "\n");
+  process.stdout.write(
+    JSON.stringify({ open, wip, done, top: open[0] || null, trace: trace.slice(-20) }, null, 2) + "\n",
+  );
   process.exit(0);
 }
 
-// --banner: terse, raw text for the SessionStart hook. Silent when nothing is open.
+// --banner: terse, raw text for the SessionStart hook. Silent only when there is
+// neither open artifact work nor recent trace activity to resurface.
 if (flags.has("--banner")) {
-  if (open.length === 0) process.exit(0);
-  const lines = ["OPEN WORK (run /next for detail):"];
-  for (const i of open.slice(0, 3)) {
-    lines.push(`  - ${i.name} [${i.status}]${i.progress ? " " + i.progress : ""} -> ${i.resume}`);
+  if (open.length === 0 && trace.length === 0) process.exit(0);
+  const lines = [];
+  if (open.length) {
+    lines.push("OPEN WORK (run /next for detail):");
+    for (const i of open.slice(0, 3)) {
+      lines.push(`  - ${i.name} [${i.status}]${i.progress ? " " + i.progress : ""} -> ${i.resume}`);
+    }
+    if (open.length > 3) lines.push(`  (+${open.length - 3} more)`);
   }
-  if (open.length > 3) lines.push(`  (+${open.length - 3} more)`);
+  if (trace.length) {
+    lines.push("RECENT (from trace):");
+    for (const t of trace.slice(-2).reverse()) lines.push(`  - [${t.context}] ${t.what}`);
+  }
   process.stdout.write(lines.join("\n") + "\n");
   process.exit(0);
 }
@@ -166,13 +209,18 @@ if (flags.has("--banner")) {
 function row(i) {
   const tag = i.kind.toUpperCase();
   const prog = i.progress ? `  ${i.progress}` : "";
+  const stale = i.traceShipped ? "  (trace: shipped - board may be stale)" : "";
   const nxt = i.next ? `\n      ${i.next}` : "";
-  return `  ${i.name} [${i.status}] (${tag}${i.repo ? ", " + i.repo : ""})${prog}\n      resume: ${i.resume}${nxt}`;
+  return `  ${i.name} [${i.status}] (${tag}${i.repo ? ", " + i.repo : ""})${prog}${stale}\n      resume: ${i.resume}${nxt}`;
 }
 
 const out = [];
 if (open.length === 0 && wip.length === 0) {
-  out.push("No open prd/rfc work found. Nothing to resume.");
+  out.push(
+    trace.length
+      ? "No open prd/rfc work. Recent activity below (from trace)."
+      : "No open prd/rfc work found. Nothing to resume.",
+  );
 } else {
   if (open.length) {
     out.push("OPEN (ready to act):");
@@ -189,5 +237,16 @@ if (open.length === 0 && wip.length === 0) {
 if (done.length && flags.has("--all")) {
   out.push("\nDONE:");
   out.push(done.map((i) => `  ${i.name} [${i.status}]`).join("\n"));
+}
+if (trace.length) {
+  const n = flags.has("--all") ? 20 : 6;
+  out.push("\nRECENT ACTIVITY (from .claude/trace.md):");
+  out.push(
+    trace
+      .slice(-n)
+      .reverse()
+      .map((t) => `  ${t.date}  [${t.context}] ${t.what} (${t.status})`)
+      .join("\n"),
+  );
 }
 process.stdout.write(out.join("\n") + "\n");

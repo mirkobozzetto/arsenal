@@ -51,7 +51,7 @@ ultracode is NOT a tier. ship cannot read or set the effort level. If the spec l
 - `contract.md`: locked definition of done.
 - `verification-bundle.md`: the commands YOU run, stack-detected.
 - `trace.md`: per-task ledger, single source of truth for resume.
-- For prd: the `tasks.md` checkboxes (mutated on confirm). Never mutates an Accepted RFC.md.
+- For prd: the `tasks.md` checkboxes (reconciled from trace.md once, at finish). Never mutates an Accepted RFC.md.
 
 ## Gates (minimal)
 

@@ -51,7 +51,7 @@
       "name": "ship",
       "source": "./plugins/ship",
       "description": "Spec executor. Implements a finalized prd or Accepted rfc (or a bare prompt via inline contract) on agent-teams/subagents/solo, emits a user-run verification bundle + trace ledger.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "implementation",
       "tags": ["implement", "spec", "agent-teams", "verification", "executor"],
       "license": "MIT",
@@ -61,7 +61,7 @@
       "name": "next",
       "source": "./plugins/next",
       "description": "Query unfinished prd/rfc/ship work and the exact command to resume it. Derives an open-work board from artifact frontmatter; a SessionStart hook auto-surfaces it so context survives /clear.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "orientation",
       "tags": ["resume", "status", "next", "continuity", "handoff"],
       "license": "MIT",
@@ -76,6 +76,16 @@
       "tags": ["github", "memory", "issues", "gh"],
       "license": "MIT",
       "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/issue"
+    },
+    {
+      "name": "trace",
+      "source": "./plugins/trace",
+      "description": "Project progress ledger written automatically. A Stop hook logs the working-tree delta each turn that touched files (ship, rfc, or plain conversation), so what moved is recorded without remembering to log; next reads it.",
+      "version": "1.0.0",
+      "category": "memory",
+      "tags": ["trace", "ledger", "continuity", "hook", "progress"],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/trace"
     }
   ]
 }
