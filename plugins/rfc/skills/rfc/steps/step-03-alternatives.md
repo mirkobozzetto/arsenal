@@ -111,22 +111,7 @@ alternatives_count: N
 
 ## NEXT STEP:
 
-If `{auto_mode}` → load `./step-04-design.md`.
-Else AskUserQuestion:
-
-```yaml
-questions:
-  - header: "Next step"
-    question: "Alternatives surfaced. Detail the proposed design?"
-    options:
-      - label: "Continue (Recommended)"
-        description: "Step 04: Proposed Design (the detailed approach)"
-      - label: "Add an alternative"
-        description: "Loop back: I see another angle"
-      - label: "Stop here"
-        description: "RFC is enough as exploration: no need for a detailed design"
-    multiSelect: false
-```
+Proceed to `./step-04-design.md`. Tell the user in one short line, in the conversation language, what was surfaced (e.g. "3 alternatives + tradeoffs") - do NOT paste the section markdown into the chat. No "continue?" confirmation gate. The user may say "stop" or "add an alternative" to loop back.
 
 <critical>
 This is the section reviewers value most. "Alternatives considered" is the most undervalued section per [youngju.dev]. Prevents future devs from relitigating decisions.

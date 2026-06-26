@@ -48,8 +48,9 @@ Ask until each is answered (group into 1-2 AskUserQuestion rounds, one question 
 - **Data source**: where does the data come from / live?
 - **Business rule**: the core rules that govern correct behavior.
 - **Exception**: edge cases, failure handling, what must NOT happen.
+- **Success metric**: the one number that defines success - baseline today -> target -> measurement window (e.g. "drop-off 34% -> 20% within 30 days"). The single most-skipped, most-important input. If the user cannot name one, the goal is not sharp enough yet; press once.
 
-Use AskUserQuestion for each dimension. Provide 2-4 concrete option guesses + the user can free-text. Example shape:
+Group these into 1-2 AskUserQuestion rounds (the tool takes up to 4 questions per call: e.g. 4 then 4) - never one screen per dimension. Provide 2-4 concrete option guesses per question + the user can free-text. Example shape:
 ```yaml
 questions:
   - header: "JTBD"
@@ -69,7 +70,7 @@ Summarize the gathered `answers` in a short bullet recap. Mark any dimension sti
 ### 3. Decision gate: enough signal?
 
 **If `auto_mode` = true:**
-→ If all 7 dimensions have an answer, proceed; else ask the thin ones once more, then proceed.
+→ If the 7 dimensions + the success metric have an answer, proceed; else ask the thin ones once more, then proceed.
 
 **If `auto_mode` = false:**
 Use AskUserQuestion:
@@ -91,7 +92,7 @@ Route: Re-question → loop back to sequence 1 for the thin dimensions.
 ```yaml
 ---
 stepsCompleted: [0, 1]
-answers: { jtbd, target_user, problem, constraints, data_source, business_rule, exception }
+answers: { jtbd, target_user, problem, constraints, data_source, business_rule, exception, success_metric }
 ---
 ```
 
@@ -99,7 +100,7 @@ answers: { jtbd, target_user, problem, constraints, data_source, business_rule, 
 
 ## SUCCESS METRICS:
 
-✅ All 7 dimensions have a recorded answer
+✅ The 7 dimensions + the success metric have a recorded answer
 ✅ Answers reflected back to the user
 ✅ Decision gate passed (drafted only with enough signal)
 ✅ `answers` object persisted
@@ -113,9 +114,9 @@ answers: { jtbd, target_user, problem, constraints, data_source, business_rule, 
 
 ## INTERVIEW PROTOCOLS:
 
-- One dimension per question; never bundle unrelated dimensions
+- Group the dimensions into 1-2 multi-question rounds; never open one screen per dimension
 - Offer concrete guesses as options so the user can confirm fast
-- Keep questions in English; identifiers in English
+- Questions in the language of the conversation; keep the `slug` and identifiers in English
 
 ---
 

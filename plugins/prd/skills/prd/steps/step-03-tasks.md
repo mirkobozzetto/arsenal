@@ -69,28 +69,12 @@ stepsCompleted: [0, 1, 2, 3]
 - [ ] 2.0 <parent task>
   - [ ] 2.1 <sub-task>
 ```
-Prose in English; identifiers in English. Edit in place if it exists.
+Write any prose in the language of the conversation; keep the tasks.md structure in English - frontmatter keys, the `## Relevant Files` and `## Tasks` headers, and the `- [ ] N.x` checklist (ship/next parse these). Edit in place if it exists.
 If scope is genuinely separate, do NOT bloat this file: create a numbered pair in the same folder (`0001-prd-*` / `tasks-0001-*`) per the SKILL file_layout.
 
-### 3. Confirm
+### 3. Proceed to finalize
 
-**If `auto_mode` = true:**
-→ Proceed to step-04
-
-**If `auto_mode` = false:**
-Use AskUserQuestion:
-```yaml
-questions:
-  - header: "Tasks"
-    question: "Task list derived in <tasks_path>. Finalize?"
-    options:
-      - label: "Finalize (Recommended)"
-        description: "Close the PRD and show the handoff"
-      - label: "Reorder"
-        description: "Adjust the order / the dependencies"
-    multiSelect: false
-```
-Route: Reorder → adjust ordering/dependencies in place, re-confirm.
+Proceed to step-04. Tell the user in one short line, in the conversation language, the task shape (e.g. "N parent tasks, M sub-tasks"). No "finalize?" confirmation gate. The real checkpoint is the parent-task confirmation from step 1 (propose parents -> confirm -> expand sub-tasks); the user may also say "stop" or "reorder" to adjust in place.
 
 ---
 
@@ -108,7 +92,7 @@ Route: Reorder → adjust ordering/dependencies in place, re-confirm.
 ❌ Implementing or coding any task
 ❌ Tasks that don't trace back to the PRD
 ❌ Missing "Do NOT implement" header
-❌ **CRITICAL**: Not using AskUserQuestion to confirm
+❌ Expanding sub-tasks before the parent tasks are confirmed
 
 ## TASK PROTOCOLS:
 

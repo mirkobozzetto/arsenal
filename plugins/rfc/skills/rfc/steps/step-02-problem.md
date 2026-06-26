@@ -61,7 +61,7 @@ If `auto_mode` → infer from title + context_collected. Mark assumptions explic
 
 ### 3. Goals / Non-goals
 
-AskUserQuestion or infer:
+AskUserQuestion (infer ONLY if `auto_mode`; otherwise ask, never assume):
 - 3-5 goals max, measurable if possible
 - 3-5 non-goals, explicit "we are NOT solving X"
 
@@ -126,22 +126,7 @@ nongoals_count: M
 
 ## NEXT STEP:
 
-If `{auto_mode}` → load `./step-03-alternatives.md`.
-Else AskUserQuestion:
-
-```yaml
-questions:
-  - header: "Next step"
-    question: "Problem defined. Explore alternatives?"
-    options:
-      - label: "Continue (Recommended)"
-        description: "Step 03: Alternatives Considered"
-      - label: "Refine the problem"
-        description: "Loop back: the definition is not sharp enough"
-      - label: "Back to context"
-        description: "Step 01: missing technical context"
-    multiSelect: false
-```
+Proceed to `./step-03-alternatives.md`. Tell the user in one short line, in the conversation language, the locked problem (e.g. "problem set, 3 goals / 3 non-goals") - do NOT paste the section markdown into the chat. No "continue?" confirmation gate. The user may say "stop" or "refine the problem" to loop back.
 
 <critical>
 "Why before what" (Guy Bary). No solution leak here. If you catch yourself writing "we could…" → stop, that goes in step-03.

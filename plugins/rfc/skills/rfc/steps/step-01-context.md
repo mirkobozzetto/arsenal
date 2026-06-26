@@ -115,20 +115,7 @@ context_collected:
 
 ## NEXT STEP:
 
-If `{auto_mode}` = true → load `./step-02-problem.md` directly.
-Else AskUserQuestion:
-
-```yaml
-questions:
-  - header: "Next step"
-    question: "Context collected. Move on to defining the problem?"
-    options:
-      - label: "Continue (Recommended)"
-        description: "Step 02: Problem & Motivation"
-      - label: "Enrich the context"
-        description: "Loop on step-01 with additional keywords"
-    multiSelect: false
-```
+Proceed to `./step-02-problem.md`. Tell the user in one short line, in the conversation language, what context was gathered (e.g. "context: 4 modules, 2 prior RFCs") - do NOT paste the section markdown into the chat. No "continue?" confirmation gate. The user may say "stop" or "enrich context" to loop back.
 
 <critical>
 This step describes WHAT EXISTS, not what should be. No "we should", no "I propose". Pure inventory.

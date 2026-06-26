@@ -57,6 +57,10 @@ PRD ready: <prd_path>
 Tasks:     <tasks_path>  (Do NOT implement)
 ```
 
+### 3b. Open a readable HTML view
+
+After both artifacts are marked ready, render the PRD to a clean, styled HTML page and open it in the browser for easy reading, by invoking the `show` skill on `prd_path` (Skill tool, skill "show", argument = the prd.md path). This gives the user a visual, readable summary of the whole PRD, with `## En bref` leading. Best-effort: if rendering fails, report it in one line and continue; never block the handoff on it.
+
 ### 4. Ask what to do next
 
 Always ask, even in `auto_mode` (this is the product/technical boundary, the user decides where to route). Use AskUserQuestion, and make each option's description state the concrete benefit:

@@ -126,22 +126,7 @@ breaking_changes: true | false
 
 ## NEXT STEP:
 
-If `{auto_mode}` → load `./step-05-risks.md`.
-Else AskUserQuestion:
-
-```yaml
-questions:
-  - header: "Next step"
-    question: "Design written. Move on to risks + open questions?"
-    options:
-      - label: "Continue (Recommended)"
-        description: "Step 05: Drawbacks, risks, unknowns"
-      - label: "Refine design"
-        description: "Loop back: missing / unclear sections"
-      - label: "Back to alternatives"
-        description: "Step 03: I doubt the base choice"
-    multiSelect: false
-```
+Proceed to `./step-05-risks.md`. Tell the user in one short line, in the conversation language, the chosen design (e.g. "design: <base alternative>") - do NOT paste the section markdown into the chat. No "continue?" confirmation gate. The user may say "stop" or "refine design" to loop back.
 
 <critical>
 Concrete enough to build from. "Use a cache" = not concrete. "Redis hash keyed by user_id, TTL 1h, invalidate on write" = concrete.

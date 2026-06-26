@@ -18,7 +18,7 @@ next_step: steps/step-03-tasks.md
 
 ## EXECUTION PROTOCOLS:
 
-- 🎯 Show the PRD outline before writing the full body
+- 🎯 Show the PRD outline before writing the full body; speak in short prose and do NOT dump the raw section markdown into the chat (write it to the file, report a one-line recap)
 - 💾 Write the full PRD to `prd_path` with frontmatter
 - 📖 Complete the PRD before loading step-03
 - 🚫 FORBIDDEN to load step-03 until the PRD file is written
@@ -41,12 +41,13 @@ Write a complete product PRD from the gathered answers and save it to `prd_path`
 
 Sections (in this order):
 
-- **Problem statement**: the pain, who has it, why now.
-- **Goals**: outcomes this feature must achieve.
-- **Non-goals / Out-of-scope**: explicit exclusions (prevents scope creep).
+- **En bref (TL;DR)**: the FIRST block, 3 short lines - who it is for / the problem / what it delivers. The skim path: a reader gets the verdict in 10 seconds. (Header `## En bref` is not parsed by ship; safe.)
+- **Problem statement**: the pain, who has it, why now. Keep it tight (2-4 sentences), quantified if possible.
+- **Goals**: outcomes this feature must achieve (measurable outcomes, not features).
+- **Non-goals / Out-of-scope**: explicit exclusions (prevents scope creep; never empty).
 - **User stories**: `As a <user>, I want <capability>, so that <value>`.
-- **Acceptance criteria**: per story, testable Given/When/Then.
-- **Success metrics**: measurable signals the feature worked (numbers, not adjectives).
+- **Acceptance criteria**: per story, testable. Default to a scannable `- [ ]` checklist; use Given/When/Then only for multi-step or edge-case behavior. Keep the `## Acceptance criteria` header in English.
+- **Success metrics**: a primary metric with baseline -> target -> measurement window, plus guardrail metrics not to regress. Numbers, not adjectives. If no primary metric can be named, the goal is not sharp enough. Keep the `## Success metrics` header in English.
 - **Constraints & assumptions**: from the interview.
 - **Open questions**: anything still thin.
 
@@ -62,27 +63,11 @@ status: draft
 stepsCompleted: [0, 1, 2]
 ---
 ```
-Body = the sections above. Prose in English; identifiers in English. If `prd_path` exists, edit in place (do not create a duplicate).
+Body = the sections above. Write the prose in the language of the conversation; keep in English the `slug`, identifiers, frontmatter keys/values, and the section headers ship parses (`## Acceptance criteria`, `## Success metrics`, `## Out-of-scope`). If `prd_path` exists, edit in place (do not create a duplicate).
 
-### 3. Confirm
+### 3. Proceed to tasks
 
-**If `auto_mode` = true:**
-→ Proceed to step-03
-
-**If `auto_mode` = false:**
-Use AskUserQuestion:
-```yaml
-questions:
-  - header: "PRD"
-    question: "PRD written to <prd_path>. Derive the tasks?"
-    options:
-      - label: "Derive the tasks (Recommended)"
-        description: "Move to the todo derived from the PRD"
-      - label: "Revise the PRD"
-        description: "Adjust some sections first"
-    multiSelect: false
-```
-Route: Revise → revise the named sections in place, re-confirm.
+Proceed to step-03. Tell the user in one short line, in the conversation language, that the PRD is written (e.g. "PRD written: <feature>, N stories, primary metric <metric>") - do NOT paste the section markdown into the chat. No "derive the tasks?" confirmation gate. The user may say "stop" or "revise <section>" to adjust in place before tasks.
 
 ---
 
@@ -100,7 +85,8 @@ Route: Revise → revise the named sections in place, re-confirm.
 ❌ Writing feature code
 ❌ Vague success metrics ("better UX")
 ❌ Deriving tasks in this step
-❌ **CRITICAL**: Not using AskUserQuestion to confirm
+❌ Dumping the raw PRD markdown into the chat instead of writing it to the file
+❌ Missing the `## En bref` TL;DR at the top of the PRD
 
 ## DRAFT PROTOCOLS:
 

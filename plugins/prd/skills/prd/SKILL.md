@@ -69,8 +69,16 @@ Load `steps/step-00-init.md`
 - Never write feature code in this skill; stop at the task list.
 - The task file carries an explicit "Do NOT implement" header until the user runs the implementer.
 - No comments inside any generated code or scripts.
-- Prose in English; technical terms and identifiers in English.
+- Converse and write the PRD prose and questions in the language of the conversation (French if the user writes French). Keep in English: the `slug`, code identifiers, frontmatter keys/values, file names, and the structural section headers ship/next parse (`Acceptance criteria`, `Success metrics`, `Out-of-scope`, `## Relevant Files`, `## Tasks`).
 - Any web lookup uses Exa MCP only (web_search_exa, crawling_exa); never native WebSearch/WebFetch.
 - Honor the git write-guard: do not commit/push the PRD unless the user asks.
 - Edit existing PRD files in place rather than creating duplicates.
 </constraints>
+
+<interaction>
+- **Default is interactive. Ask, do not infer.** Without `-a`/`-s`, the interview questions (the 7 dimensions + the success metric) MUST be asked via AskUserQuestion; never infer an answer the user can give. Inference is allowed only under `-a` (auto) or `-s` (skip-interview).
+- **Group the interview.** Ask the dimensions in 1-2 AskUserQuestion rounds (the tool takes up to 4 questions per call), not one screen per dimension.
+- **No empty proceed-gates.** Do not stop with "continue to the next step?" confirmations between draft and tasks; flow through and report one line per artifact. The genuine choices stay: the interview input, the parent-task confirmation, and the final next-action choice (step-04). The user says "stop" or "revise X" to loop back.
+- **Speak in prose, write markdown to the file.** Talk to the user in short prose in their language; do NOT dump the raw PRD/tasks markdown into the chat - write it to the file and report a one-line recap per artifact.
+- **Readability of the PRD.** The produced `prd.md` opens with a `## En bref` TL;DR (3 lines), keeps acceptance criteria as a scannable `- [ ]` checklist, and a success metric with baseline -> target -> window. Best practice: the "why" leads, the doc is skimmable in 10 seconds.
+</interaction>

@@ -117,22 +117,7 @@ confidence: high | medium | low
 
 ## NEXT STEP:
 
-If `{auto_mode}` → load `./step-07-impl-plan.md`.
-Else AskUserQuestion:
-
-```yaml
-questions:
-  - header: "Next step"
-    question: "Recommendation settled. Detail the implementation plan?"
-    options:
-      - label: "Continue (Recommended)"
-        description: "Step 07: Implementation plan (ordered tasks)"
-      - label: "Confidence too low"
-        description: "-> Additional research (Exa) or prototype before impl plan"
-      - label: "Stop RFC here"
-        description: "RFC = decision only, impl elsewhere (ship/sdd)"
-    multiSelect: false
-```
+Proceed to `./step-07-impl-plan.md`. Tell the user in one short line, in the conversation language, the recommendation (e.g. "recommend: <alt>, confidence: <level>") - do NOT paste the section markdown into the chat. No "continue?" confirmation gate. The user may say "stop" or flag low confidence to loop back for research.
 
 <critical>
 "Accepted = permission to implement, not guarantee of perfection" (pakkasys). Recommendation is a hypothesis; revisit-if conditions are how you stay honest later.

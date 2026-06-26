@@ -97,6 +97,10 @@ Tasks: {tasks_count} | Critical path: {critical_path_days}d
 Blockers: {review_blockers} | Major: {review_major}
 ```
 
+### 5b. Open a readable HTML view
+
+After RFC.md is written and the status set, render it to a clean, styled HTML page and open it in the browser for easy reading, by invoking the `show` skill on `{rfc_path}` (Skill tool, skill "show", argument = the RFC.md path). This gives the user a visual, readable summary of the whole RFC, with Section 1 leading on the verdict. Best-effort: if rendering fails, report it in one line and continue; never block finalization on it.
+
 ### 6. Suggest handoff
 
 Use AskUserQuestion (unless `auto_mode`):

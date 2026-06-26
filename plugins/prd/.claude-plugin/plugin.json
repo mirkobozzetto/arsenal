@@ -1,6 +1,6 @@
 {
   "name": "prd",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Author a product PRD by interview, then emit user stories, scope, success metrics, and a derived nested task list (one folder per feature). Stops at the task list and hands off.",
   "author": {
     "name": "Mirko Bozzetto",

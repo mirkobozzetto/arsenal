@@ -127,22 +127,7 @@ rollout_strategy: "feature_flag | canary | big_bang | ..."
 
 ## NEXT STEP:
 
-If `{auto_mode}` → load `./step-06-recommendation.md`.
-Else AskUserQuestion:
-
-```yaml
-questions:
-  - header: "Next step"
-    question: "Risks + questions listed. Formalize recommendation?"
-    options:
-      - label: "Continue (Recommended)"
-        description: "Step 06: Recommendation + rationale"
-      - label: "Blocking risks"
-        description: "1+ unmitigatable risk -> revisit design (step-04)"
-      - label: "Too many questions"
-        description: "Open questions > 5 -> additional research required"
-    multiSelect: false
-```
+Proceed to `./step-06-recommendation.md`. Tell the user in one short line, in the conversation language, the risk posture (e.g. "3 risks mitigated, rollout: <strategy>") - do NOT paste the section markdown into the chat. No "continue?" confirmation gate. The user may say "stop", flag a blocking risk (loop back to design), or call out too many open questions.
 
 <critical>
 "Surface risk while change is still cheap" (pakkasys). RFC accepted ≠ guaranteed success. If reviewer can't find new risk, RFC is too optimistic.

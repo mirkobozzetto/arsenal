@@ -78,6 +78,13 @@ Load `steps/step-00-init.md`
 - **brain skill**: optional save to Obsidian vault after acceptance
 </integrations>
 
+<interaction>
+- **Default is interactive. Ask, do not infer.** Without `--auto`, the real input questions (problem, scope, goals/non-goals, alternatives direction, design choices) MUST be asked via AskUserQuestion. NEVER infer or assume an answer the user can give. Inference is allowed ONLY when `auto_mode` is true. "AskUserQuestion or infer" anywhere in the steps means: ask; infer only under `--auto`.
+- **Input questions vs proceed-confirmations.** Keep asking for INPUT (what the user decides). Do NOT gate the user with empty "continue to the next step?" confirmations between steps - real RFC practice (Rust, Oxide, Google, ADR) has the author write the whole doc then others review; it never asks the author for permission to proceed. Default: flow to the next step and state in one line what was written; the user says "stop" or "revise X" to loop back. The genuine decision points stay: the adversarial review findings (step-08) and the final status (step-09).
+- **Speak in prose, write markdown to the file.** Talk to the user in short prose, in the conversation language. Do NOT dump the raw section markdown destined for RFC.md into the chat; write it to the file and report one line per section.
+- **Language.** Converse and write the RFC prose in the conversation language (French if the user writes French). Keep in English: frontmatter keys/values, section numbers and titles, the Implementation Plan table columns, the `graph TD` block, and code identifiers (the structural anchors ship/next parse).
+</interaction>
+
 <critical>
 RFC ≠ Plan. NEVER converge to implementation before alternatives + tradeoffs are written. Plan mode = biased toward action. RFC slows agent down in the right place. If user says "just plan it", redirect to `ship` skill: RFC is for boundary-crossing decisions only.
 </critical>

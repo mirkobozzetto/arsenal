@@ -138,22 +138,7 @@ critical_path_days: K
 
 ## NEXT STEP:
 
-If `{skip_review}` = true OR `{auto_mode}` → load `./step-09-finalize.md`.
-Else AskUserQuestion:
-
-```yaml
-questions:
-  - header: "Next step"
-    question: "Impl plan written. Run the adversarial review (subagent)?"
-    options:
-      - label: "Continue to review (Recommended)"
-        description: "Step 08: Adversarial review via subagent"
-      - label: "Skip review -> finalize"
-        description: "Step 09: RFC self-sufficient, no second opinion"
-      - label: "Refine plan"
-        description: "Loop back: tasks too big / deps unclear"
-    multiSelect: false
-```
+If `{skip_review}` = true -> load `./step-09-finalize.md` (review skipped via `--no-review`). Otherwise proceed to `./step-08-review.md` and run the adversarial review - it is the valuable step, run it by default. Tell the user in one short line, in the conversation language, the plan size (e.g. "impl plan: N tasks, critical path ~K days") - do NOT paste the section markdown into the chat. No "continue?" confirmation gate. The user may say "stop" or "refine plan" to loop back.
 
 <critical>
 This section gets consumed by `ship` or `sdd` for execution. Quality of task split = quality of impl. Vague tasks → vague impl.

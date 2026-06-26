@@ -1,6 +1,6 @@
 {
   "name": "rfc",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Multi-step RFC workflow: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Forces reasoning before action. Optional GitNexus + Exa integration.",
   "author": {
     "name": "Mirko Bozzetto",
