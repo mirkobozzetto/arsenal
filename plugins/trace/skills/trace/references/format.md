@@ -16,8 +16,8 @@ One line per work block, newest at the bottom:
 - [<context>] <iso-date> | done: <what> | files: <paths> | status: <s>
 ```
 
-- `context` - `prd:<slug>` | `rfc:<NNNN>` | `<top-dir>` | `chat`. Inferred from
-  the changed paths (a change under `docs/prd/<slug>/` -> `prd:<slug>`, etc.).
+- `context` - `brief:<slug>` | `propose:<NNNN>` | `<top-dir>` | `chat`. Inferred from
+  the changed paths (a change under `docs/brief/<slug>/` -> `brief:<slug>`, etc.).
 - `what` - mechanical entries say `edited N files`; manual entries carry the
   intent the user gave, optionally prefixed with a stable id (`1.2`, `T03`).
 - `files` - comma-separated paths, truncated with `+N more` past 8.
@@ -42,8 +42,8 @@ observed at all - the hook exits silently.
 
 ## Relation to ship's trace.md
 
-`ship` writes its own `trace.md` inside a run's output dir (for a prd, that is
-the prd folder): a **per-run resume ledger**, the single source of truth to
+`ship` writes its own `trace.md` inside a run's output dir (for a brief, that is
+the brief folder): a **per-run resume ledger**, the single source of truth to
 resume one ship execution. This project-level `.claude/trace.md` is a different
 thing: a **cross-session activity log** spanning every context, not tied to one
 artifact. They share a name and a spirit (markdown, append, honest progress) but

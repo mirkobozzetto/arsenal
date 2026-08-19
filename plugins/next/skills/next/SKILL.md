@@ -1,6 +1,6 @@
 ---
 name: next
-description: Report unfinished prd/rfc/ship work in this repo and the exact command to resume each, ranked by what to do now. Use when the user asks "what's next", "what's left", "where do I resume", "/next", "la suite", or to re-orient after a context reset. Reads artifact frontmatter as the source of truth; never implements.
+description: Report unfinished brief/propose/ship work in this repo and the exact command to resume each, ranked by what to do now. Use when the user asks "what's next", "what's left", "where do I resume", "/next", "la suite", or to re-orient after a context reset. Reads artifact frontmatter as the source of truth; never implements.
 argument-hint: "[--all] [feature]"
 allowed-tools:
   - Bash
@@ -9,17 +9,17 @@ allowed-tools:
 ---
 
 <objective>
-Answer "what is left to do and how do I resume it" by scanning this repo's prd/rfc artifacts, classifying open vs done from their frontmatter, and emitting the single best next command. Read-only. This skill routes; it never builds (that is ship).
+Answer "what is left to do and how do I resume it" by scanning this repo's brief/propose artifacts, classifying open vs done from their frontmatter, and emitting the single best next command. Read-only. This skill routes; it never builds (that is ship).
 </objective>
 
 <how_it_works>
 The state lives in the artifacts themselves, not a separate ledger:
-- prd: `docs/prd/<slug>/prd.md` frontmatter `status` (draft -> ready -> shipped) + `tasks.md` checkboxes for progress.
-- rfc: `docs/rfcs/.../RFC.md` frontmatter `status` (Draft -> Review -> Accepted -> shipped).
-- OPEN = prd `ready`/`in_progress` or rfc `Accepted`. DONE = `shipped`/`superseded`/`Rejected` (hidden). WIP = still authoring (`draft`/`Review`).
-- `resume_cmd` in frontmatter wins; otherwise it is derived from the path (`/ship <folder-or-RFC.md>`).
+- brief: `docs/brief/<slug>/brief.md` frontmatter `status` (draft -> ready -> shipped) + `tasks.md` checkboxes for progress.
+- propose: `docs/proposals/.../PROPOSAL.md` frontmatter `status` (Draft -> Review -> Accepted -> shipped).
+- OPEN = brief `ready`/`in_progress` or propose `Accepted`. DONE = `shipped`/`superseded`/`Rejected` (hidden). WIP = still authoring (`draft`/`Review`).
+- `resume_cmd` in frontmatter wins; otherwise it is derived from the path (`/ship <folder-or-PROPOSAL.md>`).
 
-Because the board is DERIVED on read, it self-prunes the instant `ship` flips a status. No file to keep in sync. See `references/state-contract.md` for the exact frontmatter fields prd/rfc/ship maintain.
+Because the board is DERIVED on read, it self-prunes the instant `ship` flips a status. No file to keep in sync. See `references/state-contract.md` for the exact frontmatter fields brief/propose/ship maintain.
 </how_it_works>
 
 <steps>
@@ -30,7 +30,7 @@ Because the board is DERIVED on read, it self-prunes the instant `ship` flips a 
    - `--json`: structured output (for tooling).
    - pass extra repo paths to scan sibling repos in one shot.
 2. Render the result as-is. Keep it short. Do NOT re-read every artifact body; the frontmatter scan is enough.
-3. If a feature argument is given, open that artifact (prd.md + tasks.md, or RFC.md) and report: status, done-vs-remaining tasks, the next unchecked task, and the why from the spec.
+3. If a feature argument is given, open that artifact (brief.md + tasks.md, or PROPOSAL.md) and report: status, done-vs-remaining tasks, the next unchecked task, and the why from the spec.
 4. Recommend ONE next action: the top-ranked open item's resume command. Hand off; do not run it.
 </steps>
 

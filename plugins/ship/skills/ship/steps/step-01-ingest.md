@@ -31,27 +31,27 @@ Read the spec, enforce the run-gate, parse its tasks into `{tasks}`, and detect 
 
 ### 1. Apply the run-gate
 
-**CASE A (prd):**
+**CASE A (brief):**
 ```
-Read {artifact_path}/prd.md frontmatter. Branch on status (the lifecycle is draft -> ready -> in_progress -> shipped):
+Read {artifact_path}/brief.md frontmatter. Branch on status (the lifecycle is draft -> ready -> in_progress -> shipped):
   shipped     -> Refuse: "Already shipped (shipped_at: <ts>). Nothing to build. Bump the version for a change,
                  or pass -r to re-open a halted run." HALT. NEVER silently re-build a shipped spec.
-  in_progress -> A prior run halted. Prefer resume: "This PRD is in_progress; resuming from trace.md."
+  in_progress -> A prior run halted. Prefer resume: "This brief is in_progress; resuming from trace.md."
                  Continue as a -r resume (read trace.md for done-vs-remaining) rather than restarting from zero.
   ready       -> proceed.
-  draft/none  -> Refuse: "PRD not finalized (status != ready). Run prd step-04, or confirm an override."
+  draft/none  -> Refuse: "brief not finalized (status != ready). Run brief step-04, or confirm an override."
                  HALT (route to step-06-finish, final_status = halted) unless the user explicitly overrides.
 Pre-flight echo (before parsing): show status + task counts from tasks.md (done/total) so the user sees what will
   run before it runs. This is the "check before acting" pass; it never silently charges ahead.
-Note: the "Do NOT implement" line in tasks.md is a PROHIBITION on prd, NOT an authorization. Do not treat it as the gate.
+Note: the "Do NOT implement" line in tasks.md is a PROHIBITION on brief, NOT an authorization. Do not treat it as the gate.
 ```
 
-**CASE B (rfc):**
+**CASE B (propose):**
 ```
-Read {artifact_path} (RFC.md) frontmatter.
+Read {artifact_path} (PROPOSAL.md) frontmatter.
 GATE: status MUST be "Accepted".
   IF status in (Draft, Review, Rejected):
-    -> Refuse: "RFC not Accepted (status: <x>). An RFC runs only once it is Accepted."
+    -> Refuse: "proposal not Accepted (status: <x>). An proposal runs only once it is Accepted."
     -> HALT (route to step-06-finish with final_status = halted) unless explicit override.
 ```
 
@@ -64,30 +64,30 @@ No artifact, no status gate. Build the inline spec via a SHORT structured interv
      - TASK: one clear imperative restatement of what to build (drop "try to", "maybe").
      - REQUIREMENTS: explicit constraints + edit scope (which files/areas may change).
      - SUCCESS: 2-5 acceptance items that define "done".
-   Keep it to 1-2 question rounds; never a full PRD interview.
+   Keep it to 1-2 question rounds; never a full brief interview.
 2. Derive the MINIMAL execution spec from the four blocks:
      - a short ordered task list (outcomes, not code lines),
      - the 2-5 acceptance items as the contract,
      - the likely edit scope.
 GATE: confirm the derived spec with the user (AskUserQuestion, unless auto_mode). The user's confirmation IS
   the run-gate. On decline -> adjust or HALT. Stays lightweight: no user stories, no product metrics. For a
-  durable spec, run /prd.
+  durable spec, run /brief.
 ```
 
 ### 2. Parse tasks into {tasks}
 
 For CASE C (inline), {tasks} comes from the confirmed derived list in step 1 (no file to parse); skip to step 3.
 
-**CASE A (prd):** read `{artifact_path}/tasks.md`
+**CASE A (brief):** read `{artifact_path}/tasks.md`
 ```
-- Confirm frontmatter type: tasks; capture source_prd.
+- Confirm frontmatter type: tasks; capture source_brief.
 - Parse ## Relevant Files -> edit-scope hints.
-- Parse ## Tasks nested checklist: each `- [ ] N.0 <parent> _(PRD: <ref>)_` with sub-tasks `- [ ] N.x`.
-- Follow source_prd -> prd.md: capture Acceptance criteria (Given/When/Then), Success metrics, Out-of-scope.
-- Build {tasks}: one entry per parent (N.0) with its sub-tasks, ordered by listed order + dependency, each tagged with its PRD criterion and edit-scope files.
+- Parse ## Tasks nested checklist: each `- [ ] N.0 <parent> _(brief: <ref>)_` with sub-tasks `- [ ] N.x`.
+- Follow source_brief -> brief.md: capture Acceptance criteria (Given/When/Then), Success metrics, Out-of-scope.
+- Build {tasks}: one entry per parent (N.0) with its sub-tasks, ordered by listed order + dependency, each tagged with its brief criterion and edit-scope files.
 ```
 
-**CASE B (rfc):** read section 10 Implementation Plan in `{artifact_path}`
+**CASE B (propose):** read section 10 Implementation Plan in `{artifact_path}`
 ```
 - Parse the Tasks table rows (ID, title, files, deps, effort, accept).
 - Cross-check the `graph TD` dependency Mermaid against the Depends-on column.
@@ -124,15 +124,15 @@ detected_stack: {language, package_manager, test_cmd, typecheck_cmd, lint_cmd, b
 
 ## SUCCESS METRICS:
 
-- Run-gate enforced (prd status: ready / rfc status: Accepted); refusal HALTs cleanly
+- Run-gate enforced (brief status: ready / propose status: Accepted); refusal HALTs cleanly
 - {tasks} parsed straight from the artifact, traceable to criteria, zero invented tasks
-- rfc BLOCKER/MAJOR findings flagged before execution
+- propose BLOCKER/MAJOR findings flagged before execution
 - {detected_stack} detected from lockfile/manifest, unknown stacks asked
 
 ## FAILURE MODES:
 
-- Treating the "Do NOT implement" header as the gate -> Recovery: real gate is prd.md status: ready
-- Executing a non-Accepted RFC -> Recovery: HALT until status Accepted
+- Treating the "Do NOT implement" header as the gate -> Recovery: real gate is brief.md status: ready
+- Executing a non-Accepted proposal -> Recovery: HALT until status Accepted
 - Inventing tasks not in the artifact -> Recovery: parse only what the spec lists
 - Hardcoding pnpm -> Recovery: detect via lockfile/manifest, ask if unknown
 

@@ -1,13 +1,13 @@
 ---
 artifact: "{artifact_path}"
-artifact_kind: "{prd|rfc}"
+artifact_kind: "{brief|propose}"
 engine_tier: "{teams|subagents|solo}"
 stepsCompleted: []
 final_status: ""
 updated: "{date}"
 ---
 
-# Trace Ledger: {feature_or_rfc_title}
+# Trace Ledger: {feature_or_proposal_title}
 
 > Single source of truth for progress. A fresh session reads ONLY this file to resume. One row per task/T-id.
 
@@ -25,4 +25,4 @@ updated: "{date}"
 
 ## HALT events
 
-- {none, or: task X failed self-check 3x / rfc BLOCKER unresolved}
+- {none, or: task X failed self-check 3x / propose BLOCKER unresolved}

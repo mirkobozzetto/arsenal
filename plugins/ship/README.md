@@ -1,6 +1,6 @@
 # ship
 
-The **build** stage of the `prd → rfc → ship` pipeline. `ship` executes a predetermined spec: it does not re-write one. Give it a finalized PRD or an Accepted RFC and it implements the spec, then hands you a verification bundle to run and a trace ledger you can resume from.
+The **build** stage of the `brief → propose → ship` pipeline. `ship` executes a predetermined spec: it does not re-write one. Give it a finalized brief or an Accepted proposal and it implements the spec, then hands you a verification bundle to run and a trace ledger you can resume from.
 
 **Compatibility:** native install on Claude Code v2.1+. The skill is plain markdown: any agent that can read markdown skills and spawn subagents can use it from `plugins/ship/skills/ship/`.
 
@@ -12,8 +12,8 @@ The **build** stage of the `prd → rfc → ship` pipeline. `ship` executes a pr
 
 | Input | Run-gate | Notes |
 |-------|----------|-------|
-| A `prd` folder `docs/prd/<slug>/` | `prd.md` is `status: ready` | Parses `tasks.md` + the PRD's acceptance criteria. |
-| An `RFC.md` | frontmatter `status: Accepted` | Builds the DAG from the impl-plan task table; never mutates the RFC. |
+| A `brief` folder `docs/brief/<slug>/` | `brief.md` is `status: ready` | Parses `tasks.md` + the brief's acceptance criteria. |
+| An `PROPOSAL.md` | frontmatter `status: Accepted` | Builds the DAG from the impl-plan task table; never mutates the proposal. |
 | A bare prompt | your confirmation | Derives a **minimal inline contract** (task list + acceptance items), then builds. |
 
 It then:
@@ -37,8 +37,8 @@ It **never runs your tests/builds/typechecks by default**: that stays yours. It 
 ## Usage
 
 ```bash
-/ship docs/prd/oauth-login/          # execute a finalized PRD
-/ship docs/rfcs/0007-auth/RFC.md     # execute an Accepted RFC
+/ship docs/brief/oauth-login/          # execute a finalized brief
+/ship docs/proposals/0007-auth/PROPOSAL.md     # execute an Accepted proposal
 /ship add a rate limiter to the API  # bare prompt -> inline contract -> build
 /ship -h                             # full help
 ```
@@ -65,4 +65,4 @@ It **never runs your tests/builds/typechecks by default**: that stays yours. It 
 
 ## What it writes
 
-`contract.md` · `verification-bundle.md` · `trace.md` (single source of truth for resume). During the build, `trace.md` is the only live ledger; for a PRD the `tasks.md` checkboxes are reconciled from it **once, at finish** (every `done` row flips `[ ] -> [x]`, byte-preserving, no per-unit confirm), so the count stays honest even under `-a`. It never mutates an Accepted `RFC.md`.
+`contract.md` · `verification-bundle.md` · `trace.md` (single source of truth for resume). During the build, `trace.md` is the only live ledger; for a brief the `tasks.md` checkboxes are reconciled from it **once, at finish** (every `done` row flips `[ ] -> [x]`, byte-preserving, no per-unit confirm), so the count stays honest even under `-a`. It never mutates an Accepted `PROPOSAL.md`.

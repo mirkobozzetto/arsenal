@@ -13,7 +13,13 @@
       "description": "Power search via Exa MCP. 8 modes: quick, deep, code, docs, debug, news, compare, research.",
       "version": "1.0.0",
       "category": "research",
-      "tags": ["exa", "search", "research", "docs", "debug"],
+      "tags": [
+        "exa",
+        "search",
+        "research",
+        "docs",
+        "debug"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/mirkobozzetto/arsenal"
     },
@@ -21,39 +27,60 @@
       "name": "code-roadmap",
       "source": "./plugins/code-roadmap",
       "description": "Orientation map at task start: matches intent to available skills, prints a recommended chain + execution mode + reflection level. Advisory only.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "orientation",
-      "tags": ["orientation", "router", "roadmap", "planning"],
+      "tags": [
+        "orientation",
+        "router",
+        "roadmap",
+        "planning"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/code-roadmap"
     },
     {
-      "name": "prd",
-      "source": "./plugins/prd",
-      "description": "Author a product PRD by interview, then emit user stories, scope, metrics, and a derived nested task list (folder per feature).",
-      "version": "1.1.0",
+      "name": "brief",
+      "source": "./plugins/brief",
+      "description": "Author a product brief by interview (the PRD tradition, under a plainer name), then emit user stories, scope, metrics, and a derived nested task list.",
+      "version": "2.0.0",
       "category": "planning",
-      "tags": ["prd", "product-spec", "tasks", "planning"],
+      "tags": [
+        "brief",
+        "product-spec",
+        "tasks",
+        "planning"
+      ],
       "license": "MIT",
-      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/prd"
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/brief"
     },
     {
-      "name": "rfc",
-      "source": "./plugins/rfc",
-      "description": "Multi-step RFC workflow: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Reasoning before action.",
-      "version": "1.1.0",
+      "name": "propose",
+      "source": "./plugins/propose",
+      "description": "Design workflow in the RFC tradition: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Two sizes with hard ceilings.",
+      "version": "2.0.0",
       "category": "planning",
-      "tags": ["rfc", "design-doc", "architecture", "adr"],
+      "tags": [
+        "propose",
+        "design-doc",
+        "architecture",
+        "rfc"
+      ],
       "license": "MIT",
-      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/rfc"
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/propose"
     },
     {
       "name": "ship",
       "source": "./plugins/ship",
       "description": "Spec executor. Implements a finalized prd or Accepted rfc (or a bare prompt via inline contract) on agent-teams/subagents/solo, emits a user-run verification bundle + trace ledger.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "category": "implementation",
-      "tags": ["implement", "spec", "agent-teams", "verification", "executor"],
+      "tags": [
+        "implement",
+        "spec",
+        "agent-teams",
+        "verification",
+        "executor"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/ship"
     },
@@ -61,9 +88,15 @@
       "name": "next",
       "source": "./plugins/next",
       "description": "Query unfinished prd/rfc/ship work and the exact command to resume it. Derives an open-work board from artifact frontmatter; a SessionStart hook auto-surfaces it so context survives /clear.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "category": "orientation",
-      "tags": ["resume", "status", "next", "continuity", "handoff"],
+      "tags": [
+        "resume",
+        "status",
+        "next",
+        "continuity",
+        "handoff"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/next"
     },
@@ -73,7 +106,12 @@
       "description": "Use GitHub issues as cross-session resolution memory. Create/update/resume self-contained, cold-readable issues via gh CLI.",
       "version": "1.0.0",
       "category": "memory",
-      "tags": ["github", "memory", "issues", "gh"],
+      "tags": [
+        "github",
+        "memory",
+        "issues",
+        "gh"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/issue"
     },
@@ -81,9 +119,15 @@
       "name": "trace",
       "source": "./plugins/trace",
       "description": "Project progress ledger written automatically. A Stop hook logs the working-tree delta each turn that touched files (ship, rfc, or plain conversation), so what moved is recorded without remembering to log; next reads it.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "memory",
-      "tags": ["trace", "ledger", "continuity", "hook", "progress"],
+      "tags": [
+        "trace",
+        "ledger",
+        "continuity",
+        "hook",
+        "progress"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/trace"
     }

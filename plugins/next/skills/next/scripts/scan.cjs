@@ -120,8 +120,12 @@ function collect(root) {
     }
     const fm = frontmatter(text);
     if (!fm) continue;
-    const isPrd = fm.type === "prd";
-    const isRfc = fm.type === "rfc" || path.basename(file) === "RFC.md";
+    // New vocabulary (brief / propose) with legacy acceptance (prd / rfc).
+    const isPrd = fm.type === "brief" || fm.type === "prd";
+    const isRfc =
+      fm.type === "propose" ||
+      fm.type === "rfc" ||
+      ["PROPOSAL.md", "RFC.md"].includes(path.basename(file));
     if (!isPrd && !isRfc) continue;
     const kind = isPrd ? "prd" : "rfc";
     const status = fm.status || (isRfc ? "Draft" : "draft");
@@ -171,7 +175,12 @@ all.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
 // is stale (work landed outside ship). Flag it instead of trusting the checkbox.
 const shippedCtx = new Set(trace.filter((t) => /shipped/i.test(t.status)).map((t) => t.context));
 for (const i of all) {
-  if (i.kind === "prd" && i.bucket === "open" && shippedCtx.has(`prd:${i.slug}`)) i.traceShipped = true;
+  if (
+    i.kind === "prd" &&
+    i.bucket === "open" &&
+    (shippedCtx.has(`brief:${i.slug}`) || shippedCtx.has(`prd:${i.slug}`))
+  )
+    i.traceShipped = true;
 }
 
 const open = all.filter((i) => i.bucket === "open");
@@ -218,8 +227,8 @@ const out = [];
 if (open.length === 0 && wip.length === 0) {
   out.push(
     trace.length
-      ? "No open prd/rfc work. Recent activity below (from trace)."
-      : "No open prd/rfc work found. Nothing to resume.",
+      ? "No open brief/propose work. Recent activity below (from trace)."
+      : "No open brief/propose work found. Nothing to resume.",
   );
 } else {
   if (open.length) {

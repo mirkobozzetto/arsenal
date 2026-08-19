@@ -1,0 +1,11 @@
+{
+  "name": "propose",
+  "version": "2.0.0",
+  "description": "Design workflow in the RFC tradition: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Two sizes with hard ceilings. Forces reasoning before action. Optional GitNexus + Exa integration.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/propose"
+}

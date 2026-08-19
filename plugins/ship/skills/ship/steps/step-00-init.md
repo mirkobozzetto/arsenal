@@ -59,8 +59,8 @@ project_root = git rev-parse --show-toplevel (fallback: PWD)
 
 Resolve `{output_dir}` by artifact kind:
 ```
-prd    -> output_dir = the prd folder itself (docs/prd/<slug>/)         # write alongside the spec
-rfc    -> output_dir = the RFC.md's parent folder (<out>/NNNN-slug/)     # never touch RFC.md
+brief    -> output_dir = the brief folder itself (docs/brief/<slug>/)         # write alongside the spec
+propose    -> output_dir = the PROPOSAL.md's parent folder (<out>/NNNN-slug/)     # never touch PROPOSAL.md
 inline -> output_dir = {project_root}/.claude/output/ship/<slug>/        # slug derived from {raw_prompt}
 ```
 

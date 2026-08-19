@@ -66,7 +66,7 @@ REFLECTION (suggest one, driven by S4 → S3 → S5):
 |-------|------|
 | trivial | S4=0 and S3≤1: just do it |
 | standard | S4=1 or S5=1 |
-| deep | S4=2, or S3=2 with S4≥1: design first (rfc if boundary-crossing, plan-mode if design settled + high risk, prd if the gap is a product spec) |
+| deep | S4=2, or S3=2 with S4≥1: design first (propose if boundary-crossing, plan-mode if design settled + high risk, brief if the gap is a product spec) |
 | ultracode | when parallelising the thinking is worth it: only the USER can toggle this (effort menu); the skill ASKS, it cannot set it |
 
 EXECUTION (offer a MENU with WHY, driven by S2 → S1 → S3): examples of the option set, choose from the live skills:
@@ -74,7 +74,7 @@ EXECUTION (offer a MENU with WHY, driven by S2 → S1 → S3): examples of the o
 | option | when |
 |--------|------|
 | direct edit | S1=0, S2=0, S3≤1 |
-| spec-driven exec (e.g. ship from a prd tasks.md / Accepted rfc) | a locked upstream spec already exists: execute it, don't re-spec |
+| spec-driven exec (e.g. ship from a brief tasks.md / Accepted propose) | a locked upstream spec already exists: execute it, don't re-spec |
 | structured impl (e.g. ship inline contract; +adversarial if S3≥1) | one feature-shaped change, no upstream spec |
 | multi-surface (e.g. ship, teams tier) | 2-3 independent surfaces |
 | test-first (e.g. tdd) | behaviour-critical / fragile |

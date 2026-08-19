@@ -58,10 +58,15 @@ function saveState(state) {
   fs.writeFileSync(STATE_FILE, JSON.stringify(state));
 }
 
-// docs/prd/<slug>/... -> prd:<slug>; docs/rfcs/<NNNN-...>/... -> rfc:<NNNN>;
+// docs/brief/<slug>/... -> brief:<slug>; docs/proposals/<NNNN-...>/... ->
+// proposal:<NNNN>; legacy docs/prd and docs/rfcs keep their old tags;
 // otherwise the top-level dir of the first path, else "chat".
 function inferContext(files) {
   for (const f of files) {
+    const brief = f.match(/(?:^|\/)docs\/brief\/([^/]+)\//);
+    if (brief) return `brief:${brief[1]}`;
+    const proposal = f.match(/(?:^|\/)docs\/proposals\/(\d+)[^/]*\//);
+    if (proposal) return `proposal:${proposal[1]}`;
     const prd = f.match(/(?:^|\/)docs\/prd\/([^/]+)\//);
     if (prd) return `prd:${prd[1]}`;
     const rfc = f.match(/(?:^|\/)docs\/rfcs\/(\d+)[^/]*\//);

@@ -2,7 +2,7 @@
 
 `trace` answers a question `next` could not: **what did I actually do - even when I was not running `ship`?**
 
-It is a project-level **progress ledger** that writes itself. A Stop hook records the working-tree delta at the end of every turn that touched files, so the work lands in `.claude/trace.md` whether it happened inside `ship`, inside `rfc`, or in plain back-and-forth. You never have to remember to log it. `next` then reads the ledger and shows what moved.
+It is a project-level **progress ledger** that writes itself. A Stop hook records the working-tree delta at the end of every turn that touched files, so the work lands in `.claude/trace.md` whether it happened inside `ship`, inside `propose`, or in plain back-and-forth. You never have to remember to log it. `next` then reads the ledger and shows what moved.
 
 It captures (that is `trace`); it does not build (that is `ship`) and it does not derive the board (that is `next`).
 
@@ -17,7 +17,7 @@ It captures (that is `trace`); it does not build (that is `ship`) and it does no
             │                              │                               │
             ▼                              ▼                               ▼
    ┌───────────────────────────────────────────────────────────────────────────┐
-   │   tasks.md checkboxes / prd.md status   =   UNCHANGED                       │
+   │   tasks.md checkboxes / brief.md status   =   UNCHANGED                       │
    └───────────────────────────────────────────────────────────────────────────┘
             │
             ▼
@@ -95,11 +95,11 @@ Without the second guard, the hook's own write would dirty the tree, look like n
 ## What an entry looks like
 
 ```
-- [prd:oauth-login] 2026-06-26T09:14:02Z | done: edited 3 files | files: docs/prd/oauth-login/tasks.md, src/auth/token.ts, +1 more | status: wip
+- [brief:oauth-login] 2026-06-26T09:14:02Z | done: edited 3 files | files: docs/brief/oauth-login/tasks.md, src/auth/token.ts, +1 more | status: wip
 - [chat]            2026-06-26T10:02:55Z | done: fixed the porcelain parse off-by-one | files: plugins/trace/.../trace.cjs | status: shipped
 ```
 
-- **context** - inferred from the changed paths: a change under `docs/prd/<slug>/` becomes `prd:<slug>`, under `docs/rfcs/<NNNN>/` becomes `rfc:<NNNN>`, otherwise the top-level dir or `chat`.
+- **context** - inferred from the changed paths: a change under `docs/brief/<slug>/` becomes `brief:<slug>`, under `docs/proposals/<NNNN>/` becomes `propose:<NNNN>`, otherwise the top-level dir or `chat`.
 - **what** - the automatic hook says `edited N files` (it cannot know *why*). A manual entry carries the intent you give it.
 - **status** - the hook always writes `wip`. `shipped` is a claim of *verified done* and only ever comes from a manual entry.
 

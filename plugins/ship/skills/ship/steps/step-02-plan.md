@@ -19,7 +19,7 @@ next_step: steps/step-03-engine.md
 
 - Available: `{tasks}`, `{detected_stack}`, `{artifact_kind}`, `{artifact_path}`, `{output_dir}`
 - Tools: Read, Write, Glob, Grep
-- The DAG comes FROM the artifact (prd order + parent grouping / rfc Depends-on + Mermaid)
+- The DAG comes FROM the artifact (brief order + parent grouping / propose Depends-on + Mermaid)
 
 ## YOUR TASK:
 
@@ -32,7 +32,7 @@ Order the tasks into a DAG, identify independent disjoint-file groups and same-f
 ### 1. Build the DAG
 
 ```
-Nodes = {tasks}. Edges = dependencies (prd: parent order + explicit deps / rfc: Depends-on column).
+Nodes = {tasks}. Edges = dependencies (brief: parent order + explicit deps / propose: Depends-on column).
 Topologically order. Reject cycles (report + HALT if a cycle exists in the spec).
 ```
 
@@ -52,8 +52,8 @@ Optionally seed the three artifacts in one shot with `bash scripts/scaffold.sh {
 
 Write `{output_dir}/contract.md` from `templates/contract.md`:
 ```
-- One row per acceptance criterion (prd Given/When/Then) OR rfc Accept-criteria cell.
-- Out-of-scope list (prd Out-of-scope / rfc Non-Goals) = never build.
+- One row per acceptance criterion (brief Given/When/Then) OR propose Accept-criteria cell.
+- Out-of-scope list (brief Out-of-scope / propose Non-Goals) = never build.
 - Edit scope = the union of the spec's authorized files.
 Store {contract_path} = {output_dir}/contract.md.
 ```

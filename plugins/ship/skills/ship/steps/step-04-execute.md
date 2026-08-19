@@ -46,7 +46,7 @@ For each task in topological order:
   - Implement ONLY the contract items for this task. No scope creep.
   - Risk-boundary check (see step 2) before any hazardous op.
   - Update trace.md row -> done (files touched + 1-line diff summary).
-  - For prd: record the unit in trace.md only; tasks.md checkboxes are synced once at finish (step-06), not here.
+  - For brief: record the unit in trace.md only; tasks.md checkboxes are synced once at finish (step-06), not here.
 ```
 
 **SUBAGENTS (`engine_tier` = subagents):**
@@ -83,10 +83,10 @@ Never let a worker perform these: only the lead, after approval.
 ### 3. Task ledger = trace.md only (no live checkbox writes)
 
 ```
-During execute, trace.md is the ONLY live ledger. Do NOT mutate tasks.md (prd) or RFC.md (rfc) here.
-The prd tasks.md checkboxes are reconciled from trace.md exactly once, at finish (step-06 CASE A):
+During execute, trace.md is the ONLY live ledger. Do NOT mutate tasks.md (brief) or PROPOSAL.md (propose) here.
+The brief tasks.md checkboxes are reconciled from trace.md exactly once, at finish (step-06 CASE A):
 shipped + criteria satisfied authorizes the [ ] -> [x] flip, so there is no per-unit confirm and no
-auto_mode hole where progress silently never lands. For rfc: RFC.md stays immutable; progress lives only in trace.md.
+auto_mode hole where progress silently never lands. For propose: PROPOSAL.md stays immutable; progress lives only in trace.md.
 ```
 
 ### 4. Anti-premature-stop + HALT
@@ -95,7 +95,7 @@ auto_mode hole where progress silently never lands. For rfc: RFC.md stays immuta
 Do NOT stop for milestones, "significant progress", or session boundaries.
 Continue until every task is done in trace.md, UNLESS a HALT fires:
   - a task fails its read-only self-check 3x (carry to step-05),
-  - an rfc BLOCKER blocks a task,
+  - an propose BLOCKER blocks a task,
   - a risk-boundary returns Halt.
 On HALT: set {final_status} = halted, jump to step-06-finish.
 ```
@@ -115,7 +115,7 @@ final_status: "shipped"   # or halted
 
 - Every task implemented within its contract edit scope, no scope creep
 - Risk-boundary checkpoints fired on hazards; DB/destructive asked even in auto_mode
-- trace.md updated per unit; tasks.md/RFC.md untouched here (checkbox sync happens once at finish)
+- trace.md updated per unit; tasks.md/PROPOSAL.md untouched here (checkbox sync happens once at finish)
 - No build/test toolchain run here
 - Teams order TeamCreate -> TaskCreate -> Agent; never run_in_background
 
@@ -125,7 +125,7 @@ final_status: "shipped"   # or halted
 - Worker runs an irreversible op -> Recovery: forbidden; lead-only after approval
 - Auto-proceeding on a DB change -> Recovery: ALWAYS ask, even with -a
 - Same-file tasks parallelized -> Recovery: serialize them
-- Mutating an Accepted RFC.md -> Recovery: never; trace.md only
+- Mutating an Accepted PROPOSAL.md -> Recovery: never; trace.md only
 
 ## EXECUTE PROTOCOLS:
 

@@ -1,0 +1,154 @@
+## MANDATORY EXECUTION RULES (READ FIRST):
+
+- 🛑 NEVER skip summary: section 1 must be filled last (not first)
+- 🛑 NEVER set status without user confirmation (unless auto_mode)
+- ✅ ALWAYS write section 1 (Summary) now, with full doc as context
+- ✅ ALWAYS update proposal index (`docs/proposals/README.md`) if present
+- 📋 YOU ARE a closer, not a designer
+- 💬 FOCUS on summary + status + handoff
+- 🚫 FORBIDDEN to modify sections 2-11 substance
+
+## EXECUTION PROTOCOLS:
+
+- 🎯 Summary written LAST → reflects full doc accurately
+- 💾 Finalize PROPOSAL.md + update index + emit next-step suggestion
+- 📖 Terminal step: no further loads
+- 🚫 FORBIDDEN to execute impl plan: handoff via ship
+
+## CONTEXT BOUNDARIES:
+
+- Variables: all from previous steps
+- Output: section 1 (Summary), updated frontmatter, optional proposal index entry
+
+## YOUR TASK:
+
+Write the executive summary, set final status, register in index, surface handoff options.
+
+## EXECUTION SEQUENCE:
+
+### 1. Generate summary (section 1)
+
+Read full PROPOSAL.md. Write 3-paragraph summary:
+
+```markdown
+## 1. Summary
+
+**Problem:** {1-2 sentences from section 3}
+
+**Recommendation:** {1-2 sentences from section 9: recommendation + confidence}
+
+**Impact:** {1-2 sentences: modules touched, breaking changes, effort, key risks}
+```
+
+≤ 6 sentences total. Someone reading only section 1 knows the verdict.
+
+### 2. Determine final status
+
+If `{auto_mode}` → set `Draft`.
+Else AskUserQuestion:
+
+```yaml
+questions:
+  - header: "Status"
+    question: "Final proposal status?"
+    options:
+      - label: "Draft (Recommended)"
+        description: "Ready to circulate for human review"
+      - label: "Review"
+        description: "Under review by others"
+      - label: "Accepted"
+        description: "Validated: permission to implement"
+      - label: "Rejected"
+        description: "Decision = do not do it (archive)"
+    multiSelect: false
+```
+
+### 3. Update frontmatter
+
+```yaml
+status: {chosen}
+stepsCompleted: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+finalized: "{today}"
+next_action: "{one line: what implementing this delivers}"
+resume_cmd: "/ship {proposal_path}"
+```
+
+`next_action` + `resume_cmd` are the fields the `next` open-work board reads so an Accepted proposal surfaces with its exact resume command. On `status: shipped` (set by ship at finish, or a sibling `PROPOSAL.shipped` marker since PROPOSAL.md stays immutable) the item leaves the board.
+
+### 4. Update proposal index (if applicable)
+
+If `{out_dir}/README.md` exists OR ≥2 proposals in `{out_dir}`:
+
+Append/update entry:
+
+```markdown
+| {proposal_id} | [{title}](./NNNN-slug/PROPOSAL.md) | {status} | {finalized} | {recommendation summary} |
+```
+
+Create `README.md` with header row if none exists.
+
+### 4b. Enforce the size ceiling
+
+Count the lines of `{proposal_path}`. Ceilings: `short` 80, `propose` 250, `full`
+600 (`references/proposal-template.md`).
+
+Over the ceiling means the SUBJECT is too wide, not the prose too long.
+Say so in one line, name the section that grew, and offer to split it into
+a second proposal. Never compress the writing to fit, and never silently pass.
+
+Under the ceiling with an empty section: delete the section.
+
+### 5. Display summary to user
+
+```
+proposal {proposal_id}: {title}
+Status: {status} | Format: {format} | {N} lines (ceiling {ceiling})
+Path: {proposal_path}
+```
+
+### 5b. Open a readable HTML view
+
+After PROPOSAL.md is written and the status set, render it to a clean, styled HTML page and open it in the browser for easy reading, by invoking the `show` skill on `{proposal_path}` (Skill tool, skill "show", argument = the PROPOSAL.md path). This gives the user a visual, readable summary of the whole proposal, with Section 1 leading on the verdict. Best-effort: if rendering fails, report it in one line and continue; never block finalization on it.
+
+### 6. Suggest handoff
+
+Use AskUserQuestion (unless `auto_mode`):
+
+```yaml
+questions:
+  - header: "Next"
+    question: "proposal finalized. Next action?"
+    options:
+      - label: "Run ship on the plan"
+        description: "Spec-driven executor: ship reads this proposal (gate status: Accepted), builds the DAG from section 10, implements, returns a verification-bundle + trace. Honors 'no auto tests/builds'. Terminal of the propose -> ship chain."
+      - label: "Stop here"
+        description: "proposal = artifact. Impl later via ship on the Accepted proposal."
+      - label: "Save to brain"
+        description: "Push to the Obsidian vault via /brain"
+    multiSelect: false
+```
+
+If ship is chosen -> invoke it with `{proposal_path}` (it refuses if status != Accepted). If brain -> invoke /brain with `{proposal_path}`. (sdd stays available manually: /speckit.specify.) proposal Accepted != implemented: only launch on explicit choice.
+
+## SUCCESS METRICS:
+
+✅ Section 1 (Summary) ≤ 6 sentences, factual
+✅ Status explicitly defined
+✅ Frontmatter `stepsCompleted` complete 0→9
+✅ Index `{out_dir}/README.md` up to date (if applicable)
+✅ User sees recap + handoff options
+
+## FAILURE MODES:
+
+❌ Summary too long → it is not a summary
+❌ Status left `Draft` when user validated blockers (should be Accepted)
+❌ No index update → orphaned proposal
+❌ Auto-exec ship without asking: proposal = decision, not execution
+
+## NEXT STEP:
+
+Terminal. If user chooses handoff → Skill tool on ship/brain.
+
+<critical>
+proposal is artifact + decision. Implementation is a separate concern. Don't conflate. "Accepted ≠ implemented."
+</critical>

@@ -1,19 +1,19 @@
 # ship: usage
 
-Execute a spec. ship is the terminal executor of `prd -> rfc -> ship`: it consumes a finalized prd folder or an Accepted RFC and implements it. It can also ship a bare prompt directly, building a small inline contract first. Either way it hands back a user-run verification bundle + a trace ledger, and never runs your build/test toolchain by default.
+Execute a spec. ship is the terminal executor of `brief -> propose -> ship`: it consumes a finalized brief folder or an Accepted proposal and implements it. It can also ship a bare prompt directly, building a small inline contract first. Either way it hands back a user-run verification bundle + a trace ledger, and never runs your build/test toolchain by default.
 
 ## Invocation
 
 ```
-/ship docs/prd/<slug>/            # CASE A: prd folder (prd.md status: ready)
-/ship docs/rfcs/0007-foo/RFC.md   # CASE B: rfc (status: Accepted)
-/ship -a docs/prd/<slug>/         # autonomous (non-safety gates auto-picked)
-/ship --yolo docs/prd/<slug>/     # ship may run SAFE verification commands itself
-/ship -m solo docs/prd/<slug>/    # force solo tier
-/ship -r docs/prd/<slug>/         # resume from existing trace.md
+/ship docs/brief/<slug>/            # CASE A: brief folder (brief.md status: ready)
+/ship docs/proposals/0007-foo/PROPOSAL.md   # CASE B: propose (status: Accepted)
+/ship -a docs/brief/<slug>/         # autonomous (non-safety gates auto-picked)
+/ship --yolo docs/brief/<slug>/     # ship may run SAFE verification commands itself
+/ship -m solo docs/brief/<slug>/    # force solo tier
+/ship -r docs/brief/<slug>/         # resume from existing trace.md
 ```
 
-### Direct ship (no prd/rfc)
+### Direct ship (no brief/propose)
 
 Hand ship a bare prompt and it offers a choice:
 
@@ -22,10 +22,10 @@ Hand ship a bare prompt and it offers a choice:
 ```
 
 1. Ship direct (default): ship runs a short interview, structures your prompt into context / task / requirements / success, builds a small inline contract, confirms it, then executes.
-2. Write a PRD first: ship points you to `/prd <idea>` for a durable what/why spec.
-3. Write an RFC first: ship points you to `/rfc <title>` for a design doc.
+2. Write a brief first: ship points you to `/brief <idea>` for a durable what/why spec.
+3. Write an proposal first: ship points you to `/propose <title>` for a design doc.
 
-`-a` skips the questions and ships direct. The interview never becomes a full PRD; for that, use `/prd`. Note: `--yolo` is unrelated, it only lets ship run the SAFE verification commands itself.
+`-a` skips the questions and ships direct. The interview never becomes a full brief; for that, use `/brief`. Note: `--yolo` is unrelated, it only lets ship run the SAFE verification commands itself.
 
 ## Flags
 
@@ -51,12 +51,12 @@ ultracode is NOT a tier. ship cannot read or set the effort level. If the spec l
 - `contract.md`: locked definition of done.
 - `verification-bundle.md`: the commands YOU run, stack-detected.
 - `trace.md`: per-task ledger, single source of truth for resume.
-- For prd: the `tasks.md` checkboxes (reconciled from trace.md once, at finish). Never mutates an Accepted RFC.md.
+- For brief: the `tasks.md` checkboxes (reconciled from trace.md once, at finish). Never mutates an Accepted PROPOSAL.md.
 
 ## Gates (minimal)
 
-1. Ingest gate: refuse if prd `status != ready` or rfc `status != Accepted`.
+1. Ingest gate: refuse if brief `status != ready` or propose `status != Accepted`.
 2. Engine-confirm: announce tier; suggest ultracode if complex.
 3. Risk-boundary: only on irreversible ops (DB/migration/deletion/dep-removal/public-API/security). DB + destructive ALWAYS ask, even with -a.
 4. Verification-run: default asks before running; `--yolo` runs safe set after listing.
-5. HALT: task fails self-check 3x, or an rfc BLOCKER blocks a task.
+5. HALT: task fails self-check 3x, or an propose BLOCKER blocks a task.

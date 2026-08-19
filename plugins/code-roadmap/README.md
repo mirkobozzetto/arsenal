@@ -41,7 +41,7 @@ Because the inventory is read live, adding or removing a skill changes its routi
 
 ## What it will and won't do
 
-- **Will** suggest a chain (e.g. `prd → rfc → ship`), a reflection level, and an execution menu, each with a reason.
+- **Will** suggest a chain (e.g. `brief → propose → ship`), a reflection level, and an execution menu, each with a reason.
 - **Will** point you to a creator skill or `find-skills` when nothing installed fits.
 - **Won't** run any skill, force one executor, or set your effort level (it can *suggest* `ultracode`, but only you toggle `/effort`).
 

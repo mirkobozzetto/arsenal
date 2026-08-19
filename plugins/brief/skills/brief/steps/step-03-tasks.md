@@ -1,0 +1,111 @@
+---
+name: step-03-tasks
+description: Derive the ordered task list (the todo) from the brief
+prev_step: steps/step-02-draft-brief.md
+next_step: steps/step-04-finalize.md
+---
+
+# Step 3: Derive Tasks
+
+## MANDATORY EXECUTION RULES (READ FIRST):
+
+- 🛑 NEVER implement any task
+- 🛑 NEVER write feature code
+- ✅ ALWAYS derive tasks from the brief's stories + acceptance criteria
+- ✅ ALWAYS write the "Do NOT implement" header at the top of the task file
+- 📋 YOU ARE A task planner, not an implementer
+- 🚫 FORBIDDEN to start coding even if a task looks trivial
+
+## EXECUTION PROTOCOLS:
+
+- 🎯 Map each user story to one or more ordered tasks
+- 💾 Write the task list to `tasks_path`
+- 📖 Complete the task file before loading step-04
+- 🚫 FORBIDDEN to load step-04 until `tasks_path` is written
+
+## CONTEXT BOUNDARIES:
+
+- Available: feature_slug, brief_path, tasks_path, the brief body (from step-02)
+- The brief is the source of truth; tasks must trace back to it
+- Don't assume knowledge from future steps
+
+## YOUR TASK:
+
+Turn the brief into an ordered, dependency-aware task list and save it to `tasks_path` flagged "Do NOT implement".
+
+---
+
+## EXECUTION SEQUENCE:
+
+### 1. Derive tasks (nested checklist)
+
+- Parent tasks = high-level units / phases (`1.0`, `2.0`, ...), each with sub-tasks (`1.1`, `1.2`).
+- Order by dependency; each parent references the brief story/criterion it satisfies.
+- A BIG feature stays ONE file: add more parent tasks, never more files. Phases = parent tasks (`1.0 Phase 1`, `2.0 Phase 2`).
+- Keep tasks product/outcome-scoped, not code-level instructions.
+- Two-pass like Carson's pattern: propose the PARENT tasks first, confirm, THEN expand sub-tasks.
+
+### 2. Write the file
+
+Write to `tasks_path`:
+```markdown
+---
+feature: <feature_name>
+slug: <feature_slug>
+type: tasks
+source_brief: <brief_path>
+stepsCompleted: [0, 1, 2, 3]
+---
+
+> ⚠️ Do NOT implement. This is the derived task list. Run `ship` (or the implementer) to execute.
+
+## Relevant Files
+- `<path>` - <role>  (anticipated files; kept in context for the implementer)
+
+## Tasks
+- [ ] 1.0 <parent task>  _(brief: <story/criterion>)_
+  - [ ] 1.1 <sub-task>
+  - [ ] 1.2 <sub-task>
+- [ ] 2.0 <parent task>
+  - [ ] 2.1 <sub-task>
+```
+Write any prose in the language of the conversation; keep the tasks.md structure in English - frontmatter keys, the `## Relevant Files` and `## Tasks` headers, and the `- [ ] N.x` checklist (ship/next parse these). Edit in place if it exists.
+If scope is genuinely separate, do NOT bloat this file: create a numbered pair in the same folder (`0001-brief-*` / `tasks-0001-*`) per the SKILL file_layout.
+
+### 3. Proceed to finalize
+
+Proceed to step-04. Tell the user in one short line, in the conversation language, the task shape (e.g. "N parent tasks, M sub-tasks"). No "finalize?" confirmation gate. The real checkpoint is the parent-task confirmation from step 1 (propose parents -> confirm -> expand sub-tasks); the user may also say "stop" or "reorder" to adjust in place.
+
+---
+
+## SUCCESS METRICS:
+
+✅ Every brief story maps to at least one parent task
+✅ Nested checklist (parent `N.0` + sub-tasks `N.1`), ordered by dependency
+✅ Parent tasks proposed and confirmed before sub-task expansion
+✅ Single file even for big features (phases = parent tasks); split only via numbered pair
+✅ "Do NOT implement" header present
+✅ `tasks_path` written with frontmatter linking `source_brief`
+
+## FAILURE MODES:
+
+❌ Implementing or coding any task
+❌ Tasks that don't trace back to the brief
+❌ Missing "Do NOT implement" header
+❌ Expanding sub-tasks before the parent tasks are confirmed
+
+## TASK PROTOCOLS:
+
+- Tasks describe outcomes, not code edits
+- Out-of-scope items from the brief never become tasks
+- Preserve traceability: every task cites its brief origin
+
+---
+
+## NEXT STEP:
+
+After confirm, load `./step-04-finalize.md`.
+
+<critical>
+Remember: Derive and order tasks. Implementation is a separate skill (ship).
+</critical>

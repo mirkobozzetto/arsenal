@@ -26,10 +26,10 @@ project root (so the ledger and git detection resolve to this repo).
 
 - **`/trace done <what> [flags]`** -> write one clean entry:
   ```bash
-  node "$S" done "<what>" [--files a,b] [--id N.x] [--status shipped|in_progress|wip] [--context prd:<slug>]
+  node "$S" done "<what>" [--files a,b] [--id N.x] [--status shipped|in_progress|wip] [--context brief:<slug>]
   ```
   Map the user's words to `<what>`. Pass `--files` when they name files,
-  `--id` for a prd Unit (`N.x`) or rfc task (`T0n`), `--status shipped` when the
+  `--id` for a brief Unit (`N.x`) or propose task (`T0n`), `--status shipped` when the
   work is truly done and verified (default `wip`). Context is inferred from the
   files when omitted.
 

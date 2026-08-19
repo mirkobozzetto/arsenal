@@ -5,7 +5,7 @@ generated: "{date}"
 ran_by: "user"
 ---
 
-# Verification Bundle: {feature_or_rfc_title}
+# Verification Bundle: {feature_or_proposal_title}
 
 > ship does NOT run these by default (your rule: tests/builds are yours). Run them yourself; each line states what it proves and the expected pass signal. Commands are STACK-DETECTED, not assumed.
 

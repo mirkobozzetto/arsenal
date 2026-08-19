@@ -2,7 +2,7 @@
 
 `/next` answers one question: **what is left to do, and what is the exact command to resume it?** A bundled SessionStart hook surfaces the same answer automatically, so a `/clear` or a new session never loses the thread.
 
-It is the **resume lens** of the `prd → rfc → ship` pipeline. It builds nothing (that is `ship`); it reads, ranks, and routes.
+It is the **resume lens** of the `brief → propose → ship` pipeline. It builds nothing (that is `ship`); it reads, ranks, and routes.
 
 ---
 
@@ -28,8 +28,8 @@ The fix is not a bigger memory. It is to stop *remembering* the answer and start
 
 The state already exists, in the artifacts the pipeline writes:
 
-- `prd` writes `docs/prd/<slug>/prd.md` with a `status` (and `tasks.md` with checkboxes).
-- `rfc` writes `RFC.md` with a `status`.
+- `brief` writes `docs/brief/<slug>/brief.md` with a `status` (and `tasks.md` with checkboxes).
+- `propose` writes `PROPOSAL.md` with a `status`.
 - `ship` flips that `status` to `shipped` when it finishes, and reconciles the `tasks.md` checkboxes from its run trace so the board's count is current, not a stale 0/N.
 
 So "what is left" is not a note you keep up to date. It is **computed** from those statuses, every time you ask. Nothing to maintain, nothing to drift.
@@ -41,8 +41,8 @@ So "what is left" is not a note you keep up to date. It is **computed** from tho
 A single scanner reads the artifact frontmatter and derives the board. Both the on-demand command and the automatic hook call that same scanner, so they can never disagree.
 
 ```
-        WRITE SIDE  (prd / rfc / ship stamp state as they work)
-        prd.md             RFC.md            ship trace.md
+        WRITE SIDE  (brief / propose / ship stamp state as they work)
+        brief.md             PROPOSAL.md            ship trace.md
         status: ready      status: Accepted  done / remaining
               \                 |                 /
                \                |                /
@@ -69,7 +69,7 @@ An item is only "open" while it is genuinely unfinished. `ship` flips the status
    (WIP)      (OPEN)        (OPEN, -r)        (DONE, hidden)
                 ▲              ▲                  │
                 │              │                  │
-          prd finalize    ship halts        ship finishes
+          brief finalize    ship halts        ship finishes
                                              = loop closed
 
    the board shows OPEN, hides DONE.
@@ -88,12 +88,12 @@ This loop close is the whole point. Without it, an item you already built keeps 
   ─────────                          ─────────────────────────
   work on a feature                  [ context wiped ]
       │                                   │
-      │ prd / ship stamp status           │ SessionStart hook fires:
+      │ brief / ship stamp status           │ SessionStart hook fires:
       ▼ continuously, onto disk           ▼ runs scan.cjs --banner
-  prd.md: status: ready   ───────────▶  injects, before your first prompt:
+  brief.md: status: ready   ───────────▶  injects, before your first prompt:
   (this file survives /clear)            "OPEN WORK:
                                            - OAuth login [ready] 6/14
-                                             -> /ship docs/prd/oauth-login"
+                                             -> /ship docs/brief/oauth-login"
                                           │
                                           ▼  you resume in one read,
                                              not fifteen minutes of re-reading
@@ -129,16 +129,16 @@ It prints **raw text** to stdout on purpose, so it coexists with other raw-text 
 
 ```
 OPEN (ready to act):
-  OAuth login [in_progress] (PRD)  6/14 tasks
-      resume: /ship -r docs/prd/oauth-login
-  Rate limiter [ready] (PRD)  0/9 tasks
-      resume: /ship docs/prd/rate-limiter
-  Event bus migration [Accepted] (RFC)
-      resume: /ship docs/rfcs/0007-event-bus/RFC.md
+  OAuth login [in_progress] (brief)  6/14 tasks
+      resume: /ship -r docs/brief/oauth-login
+  Rate limiter [ready] (brief)  0/9 tasks
+      resume: /ship docs/brief/rate-limiter
+  Event bus migration [Accepted] (proposal)
+      resume: /ship docs/proposals/0007-event-bus/PROPOSAL.md
 
 (1 in authoring; --all to show)
 
-Next: /ship -r docs/prd/oauth-login
+Next: /ship -r docs/brief/oauth-login
 ```
 
 Ranking is `in_progress` first, then `ready` / `Accepted`, then alphabetical. The `Next:` line is a deterministic pick, not a judgment of importance: it does not know your priorities, only the lifecycle order.
@@ -147,7 +147,7 @@ Ranking is `in_progress` first, then `ready` / `Accepted`, then alphabetical. Th
 
 ## The state contract
 
-The exact frontmatter fields `prd` / `rfc` / `ship` maintain (`status`, `next_action`, `resume_cmd`, `shipped_at`) and how each bucket is classified live in [`skills/next/references/state-contract.md`](./skills/next/references/state-contract.md).
+The exact frontmatter fields `brief` / `propose` / `ship` maintain (`status`, `next_action`, `resume_cmd`, `shipped_at`) and how each bucket is classified live in [`skills/next/references/state-contract.md`](./skills/next/references/state-contract.md).
 
 ---
 
