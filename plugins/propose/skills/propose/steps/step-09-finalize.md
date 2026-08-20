@@ -106,9 +106,9 @@ Status: {status} | Format: {format} | {N} lines (ceiling {ceiling})
 Path: {proposal_path}
 ```
 
-### 5b. Open a readable HTML view
+### 5b. Open the HTML view (MANDATORY)
 
-After PROPOSAL.md is written and the status set, render it to a clean, styled HTML page and open it in the browser for easy reading, by invoking the `show` skill on `{proposal_path}` (Skill tool, skill "show", argument = the PROPOSAL.md path). This gives the user a visual, readable summary of the whole proposal, with Section 1 leading on the verdict. Best-effort: if rendering fails, report it in one line and continue; never block finalization on it.
+After PROPOSAL.md is written and the status set, render it to a clean, styled HTML page and open it in the browser for easy reading, by invoking the `show` skill on `{proposal_path}` (Skill tool, skill "show", argument = the PROPOSAL.md path). This gives the user a visual, readable summary of the whole proposal, with Section 1 leading on the verdict. MANDATORY: ending finalize without the browser opening is a FAILURE of this step, like a missing status. The rendered page is the deliverable; raw markdown is storage. Only a rendering ERROR (script crash, no browser) may be reported in one line and skipped past.
 
 ### 6. Suggest handoff
 
@@ -136,6 +136,7 @@ If ship is chosen -> invoke it with `{proposal_path}` (it refuses if status != A
 ✅ Status explicitly defined
 ✅ Frontmatter `stepsCompleted` complete 0→9
 ✅ Index `{out_dir}/README.md` up to date (if applicable)
+✅ HTML view rendered and opened in the browser (or its failure reported)
 ✅ User sees recap + handoff options
 
 ## FAILURE MODES:
@@ -143,6 +144,7 @@ If ship is chosen -> invoke it with `{proposal_path}` (it refuses if status != A
 ❌ Summary too long → it is not a summary
 ❌ Status left `Draft` when user validated blockers (should be Accepted)
 ❌ No index update → orphaned proposal
+❌ Finalize ends without the HTML view opening: the user reads raw markdown in a terminal, the exact experience this step exists to prevent
 ❌ Auto-exec ship without asking: proposal = decision, not execution
 
 ## NEXT STEP:

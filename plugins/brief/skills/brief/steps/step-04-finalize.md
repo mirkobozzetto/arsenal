@@ -57,9 +57,9 @@ brief ready: <brief_path>
 Tasks:     <tasks_path>  (Do NOT implement)
 ```
 
-### 3b. Open a readable HTML view
+### 3b. Open the HTML view (MANDATORY)
 
-After both artifacts are marked ready, render the brief to a clean, styled HTML page and open it in the browser for easy reading, by invoking the `show` skill on `brief_path` (Skill tool, skill "show", argument = the brief.md path). This gives the user a visual, readable summary of the whole brief, with `## En bref` leading. Best-effort: if rendering fails, report it in one line and continue; never block the handoff on it.
+After both artifacts are marked ready, render the brief to a clean, styled HTML page and open it in the browser for easy reading, by invoking the `show` skill on `brief_path` (Skill tool, skill "show", argument = the brief.md path). This gives the user a visual, readable summary of the whole brief, with `## En bref` leading. MANDATORY: ending the handoff without the browser opening is a FAILURE of this step. The rendered page is the deliverable; raw markdown is storage. Only a rendering ERROR (script crash, no browser) may be reported in one line and skipped past.
 
 ### 4. Ask what to do next
 
