@@ -39,15 +39,13 @@ Skills here are plain markdown, portable across any coding agent or CLI (Claude 
 
 The four planning-to-build plugins form one chain. An idea enters, passes the **brief** gate (what/why) and, when the how is genuinely open, the **propose** gate (how), and comes out the other side as shipped code.
 
-```
-            code-roadmap                          issue
-          (orient: which path?)             (memory: resume cold)
-                  │                                  ▲
-                  ▼                                  │  (log when work must
-   idea ──▶ brief ──▶ propose ──▶ ship ──▶ shipped  │   survive a reset)
-          what/why      how       build      code   │
-            │            │          │                │
-            └────────────┴──────────┴────────────────┘
+```mermaid
+flowchart LR
+    R[code-roadmap<br/><i>orient</i>] -.-> I((idea))
+    I --> B[brief<br/><i>what / why</i>] --> P[propose<br/><i>how</i>] --> S[ship<br/><i>build</i>] --> C((shipped<br/>code))
+    I -.->|short path| S
+    B -.->|how is obvious| S
+    Q[issue<br/><i>resume cold</i>] -.-> B & P & S
 ```
 
 **The default path is the short one.** Small senior teams that ship well (Basecamp's Shape Up pitch, Linear's 1-2 page spec, Amazon's single iterated PR/FAQ) write ONE document before code, not a pipeline. arsenal works the same way: `brief → ship` is the normal route, and `propose` is the exception that must justify itself. The threshold is rollback cost, never diff size.
@@ -81,47 +79,25 @@ The four planning-to-build plugins form one chain. An idea enters, passes the **
 
 ---
 
-## A bit of history: where brief and propose come from
+## Where brief and propose come from
 
-The names are plain on purpose, but the artifacts are decades-old engineering discipline: `brief` runs the PRD tradition, `propose` runs the RFC tradition. The plugins just turn them into repeatable workflows, and drop the acronyms at the door.
+The names are plain on purpose; the artifacts are decades-old discipline, with the acronyms dropped at the door.
 
-### propose: the RFC tradition (1969)
+**propose** runs the RFC tradition: since Steve Crocker's [RFC 1](https://www.rfc-editor.org/rfc/rfc1.html) (1969), the move is to write the proposal down, weigh alternatives and tradeoffs, and reach consensus before building - the discipline behind the [Rust RFC process](https://rust-lang.github.io/rfcs/) and Oxide's [RFDs](https://oxide.computer/blog/rfd-1-requests-for-discussion). Its one-page size inherits from Michael Nygard's [decision records](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions): one decision, one page, never re-litigated.
 
-The RFC series began in **April 1969**, when **Steve Crocker**, then a UCLA graduate student, wrote **[RFC 1, "Host Software"](https://www.rfc-editor.org/rfc/rfc1.html)** to organize the working notes of the ARPANET's Network Working Group. The name was deliberately humble: in Crocker's words, *"the basic ground rules were that anyone could say anything and that nothing was official... and to emphasize the point, I labeled the notes 'Request for Comments'"* ([The Origins of RFCs](https://datatracker.ietf.org/doc/html/rfc1000)). The goal was to **start the conversation, not freeze a standard**. The series went on to become the Internet's permanent record of design decisions, managed today through the IETF, and edited for 28 years by Jon Postel.
+**brief** runs the PRD tradition ([Marty Cagan](https://www.svpg.com/wp-content/uploads/2024/07/How-To-Write-a-Good-PRD.pdf)): state **what** a release does, **who** it is for, **why** it matters - and stay deliberately silent on how. The short-doc school ([Design Docs at Google](https://www.industrialempathy.com/posts/design-docs-at-google/), [Shape Up](https://basecamp.com/shapeup/1.5-chapter-06), [Linear](https://www.lennysnewsletter.com/p/how-linear-builds-product)) is why the short path is this pipeline's default.
 
-Engineering organizations later borrowed the form for internal design docs: the [Rust RFC process](https://rust-lang.github.io/rfcs/), Oxide's [Requests for Discussion](https://oxide.computer/blog/rfd-1-requests-for-discussion), Google design docs, the Kubernetes and Go proposal processes. The throughline never changed: **write the proposal down, weigh the alternatives and tradeoffs, reach consensus, all before you build.** The one-page size of `propose` inherits from a sibling tradition, Michael Nygard's [Architecture Decision Records](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions): one decision, one page, written so it never gets re-litigated.
-
-### brief: the PRD tradition
-
-The PRD comes from product management. The acronym standardized in the **1990s** waterfall era; the artifact was rewritten for agile in the 2000s. **Marty Cagan's ~2006 [How to Write a Good PRD](https://www.svpg.com/wp-content/uploads/2024/07/How-To-Write-a-Good-PRD.pdf)** was the canonical guide of its generation and led to his 2008 book *Inspired*.
-
-The enduring definition: a brief states **what** a release will do, **who** it's for, and **why** it matters, and is *deliberately silent on how*. The "how" belongs to the engineering-owned design doc (`propose`). Modern practice keeps it short: 1-3 pages, a living document, not a 50-page frozen spec. Cagan himself later [pushed teams toward discovery and prototypes over heavy documents](https://www.svpg.com/discovery-vs-documentation/): a reminder that the spec is a means to clarity, not an end. The `brief` plugin runs it as an interview → a tight spec + a derived task list, and stops before code.
-
-> **Why this ordering matters:** the single most common failure is letting the *what* and the *how* bleed together. Keeping `brief` (what/why) upstream of `propose` (how) upstream of `ship` (build), each a separate and checkable artifact, is the whole point of the chain.
-
-**Further reading**
-
-- Brief / PRD: [How to Write a Good PRD (Marty Cagan / SVPG)](https://www.svpg.com/wp-content/uploads/2024/07/How-To-Write-a-Good-PRD.pdf) · [Discovery vs. Documentation (SVPG)](https://www.svpg.com/discovery-vs-documentation/) · [Product document naming (Peter Hilton)](https://hilton.org.uk/blog/product-documents)
-- Propose / RFC: [RFC Editor history](https://www.rfc-editor.org/history/) · [RFC 1: Host Software (1969)](https://www.rfc-editor.org/rfc/rfc1.html) · [The Rust RFC Book](https://rust-lang.github.io/rfcs/) · [Oxide RFD 1](https://oxide.computer/blog/rfd-1-requests-for-discussion) · [Documenting Architecture Decisions (Michael Nygard)](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
-- Short docs: [Design Docs at Google (Malte Ubl)](https://www.industrialempathy.com/posts/design-docs-at-google/) · [Shape Up: the pitch (Basecamp)](https://basecamp.com/shapeup/1.5-chapter-06) · [How Linear builds product](https://www.lennysnewsletter.com/p/how-linear-builds-product)
+> The single most common failure is letting the *what* and the *how* bleed together. Keeping `brief` upstream of `propose` upstream of `ship`, each a separate checkable artifact, is the whole point of the chain.
 
 ---
 
 ## Why I built this
 
-Splitting a task into checkable artifacts changed how I work.
+`brief` pins down the what and the why. `propose` decides the how, when the how is a real question. `ship` executes.
 
-`brief` pins down the what and the why.
-`propose` decides the how, when the how is a real question.
-`ship` executes the plan.
+Each stage keeps the previous one honest: `ship` refuses a brief that is not `ready` and a proposal that is not `Accepted`. The spec has to be real before code gets written - that gate gave me a precision I had never reached before.
 
-When I run the full chain, each stage keeps the previous one honest: `ship` will not execute a brief that is not marked `ready` or a proposal that is not `Accepted`. The spec has to be real before any code gets written.
-
-That gate is what gave me a precision I had never reached before.
-
-But the chain is never forced on me. When I just want to move, I hand `ship` a one-line prompt. It asks a couple of quick questions, builds a small contract on the spot, and ships.
-
-The discipline is there when the stakes call for it, and out of the way when they do not. That balance is the whole point.
+But the chain is never forced on me: when I just want to move, I hand `ship` a one-line prompt and it ships. The discipline is there when the stakes call for it, out of the way when they do not.
 
 - Mirko
 
@@ -180,7 +156,7 @@ Plugins are published **as I actually use them**: adapt them to your own setup.
 
 ---
 
-## Install on other agents (Codex, Cursor, ...)
+## Install on other agents (pi, oh-my-pi, Cursor, Codex, ...)
 
 The skills are plain markdown. To use them outside Claude Code:
 
