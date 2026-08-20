@@ -108,7 +108,7 @@ Path: {proposal_path}
 
 ### 5b. Open the HTML view (MANDATORY)
 
-After PROPOSAL.md is written and the status set, render it to a clean, styled HTML page and open it in the browser for easy reading, by invoking the `show` skill on `{proposal_path}` (Skill tool, skill "show", argument = the PROPOSAL.md path). This gives the user a visual, readable summary of the whole proposal, with Section 1 leading on the verdict. MANDATORY: ending finalize without the browser opening is a FAILURE of this step, like a missing status. The rendered page is the deliverable; raw markdown is storage. Only a rendering ERROR (script crash, no browser) may be reported in one line and skipped past.
+After PROPOSAL.md is written and the status set, render it to a clean, styled HTML page and open it in the browser for easy reading, by running the plugin renderer: `python3 <this skill dir>/scripts/render.py {proposal_path}` (Bash tool; the script writes the page to $TMPDIR and opens it). This gives the user a visual, readable summary of the whole proposal, with Section 1 leading on the verdict. MANDATORY: ending finalize without the browser opening is a FAILURE of this step, like a missing status. The rendered page is the deliverable; raw markdown is storage. Only a rendering ERROR (script crash, no browser) may be reported in one line and skipped past.
 
 ### 6. Suggest handoff
 
