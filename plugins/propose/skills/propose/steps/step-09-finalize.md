@@ -1,7 +1,7 @@
 ## MANDATORY EXECUTION RULES (READ FIRST):
 
 - 🛑 NEVER skip summary: section 1 must be filled last (not first)
-- 🛑 NEVER set status without user confirmation (unless auto_mode)
+- 🛑 NEVER downgrade from Accepted silently: the default IS Accepted, the user objects to change it
 - ✅ ALWAYS write section 1 (Summary) now, with full doc as context
 - ✅ ALWAYS update proposal index (`docs/proposals/README.md`) if present
 - 📋 YOU ARE a closer, not a designer
@@ -44,24 +44,15 @@ Read full PROPOSAL.md. Write 3-paragraph summary:
 
 ### 2. Determine final status
 
-If `{auto_mode}` → set `Draft`.
-Else AskUserQuestion:
+Default is `Accepted`: the user read the reviewed proposal and stays in
+command through objection, not through a gate. Set `Accepted` when every
+review BLOCKER is resolved; tell the user in ONE line that the proposal is
+Accepted and that saying "repasse en Draft" / "Review" / "Rejected"
+downgrades it. Do NOT ask a status question.
 
-```yaml
-questions:
-  - header: "Status"
-    question: "Final proposal status?"
-    options:
-      - label: "Draft (Recommended)"
-        description: "Ready to circulate for human review"
-      - label: "Review"
-        description: "Under review by others"
-      - label: "Accepted"
-        description: "Validated: permission to implement"
-      - label: "Rejected"
-        description: "Decision = do not do it (archive)"
-    multiSelect: false
-```
+Exceptions, the only ones:
+- an unresolved BLOCKER from step-08 → status `Review`, say which blocker;
+- the user already asked for a different status this session → honor it.
 
 ### 3. Update frontmatter
 
@@ -142,7 +133,8 @@ If ship is chosen -> invoke it with `{proposal_path}` (it refuses if status != A
 ## FAILURE MODES:
 
 ❌ Summary too long → it is not a summary
-❌ Status left `Draft` when user validated blockers (should be Accepted)
+❌ Asking a status question instead of defaulting to Accepted
+❌ Accepting with an unresolved BLOCKER: that is the one hard stop
 ❌ No index update → orphaned proposal
 ❌ Finalize ends without the HTML view opening: the user reads raw markdown in a terminal, the exact experience this step exists to prevent
 ❌ Auto-exec ship without asking: proposal = decision, not execution
