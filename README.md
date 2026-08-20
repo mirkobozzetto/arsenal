@@ -6,8 +6,6 @@
 
 <p align="center">
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-  <img src="https://img.shields.io/badge/plugins-8-blue.svg" alt="8 plugins">
-  <img src="https://img.shields.io/badge/agents-Claude%20Code%20%C2%B7%20pi%20%C2%B7%20Cursor%20%C2%B7%20Codex%20%C2%B7%20any%20CLI-7c3aed.svg" alt="Claude Code, pi, Cursor, Codex, any coding CLI">
 </p>
 
 <p align="center">
@@ -77,9 +75,11 @@ Plain names, old discipline. **propose** is the RFC tradition ([RFC 1, 1969](htt
 
 ## Why I built this
 
-`brief` pins the what and why. `propose` settles the how. `ship` builds. The gates gave me a precision I never had; and when I just want to move, `ship` takes a one-line prompt. Discipline when the stakes call for it, out of the way when they don't.
+`brief` pins the what and why. `propose` settles the how. `ship` builds. 
+The gates gave me a precision I never had; and when I just want to move, `ship` takes a one-line prompt. 
+Discipline when the stakes call for it, out of the way when they don't.
 
-- Mirko
+Mirko
 
 ---
 
@@ -126,10 +126,6 @@ Per-plugin setup, flags, and dependencies live in each plugin's README.
 - Companion: [**espresso**](https://github.com/mirkobozzetto/espresso), the token-economy side. arsenal is what you build with; espresso keeps it cheap.
 
 ---
-
-## Contributing
-
-Issues and PRs welcome at [mirkobozzetto/arsenal](https://github.com/mirkobozzetto/arsenal). One concern per PR, bump the semver.
 
 ## License
 
