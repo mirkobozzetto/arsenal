@@ -20,18 +20,18 @@ Plain markdown skills, portable to any coding agent or CLI: Claude Code, pi, oh-
 
 | Plugin | What it does | You type |
 |--------|--------------|----------|
-| 🧭 [`code-roadmap`](./plugins/code-roadmap) | Tells you which path fits the task. Advisory, never forces. | `/code-roadmap add OAuth login` |
-| 📝 [`brief`](./plugins/brief) | The **what & why**. Interview → product spec + task list. | `/brief add OAuth login` |
-| ⚖️ [`propose`](./plugins/propose) | The **how**. Alternatives, tradeoffs, risks, plan. One page or a few, hard ceilings. | `/propose OAuth token storage` |
-| 🚀 [`ship`](./plugins/ship) | The **build**. Executes the spec, hands back a verification bundle. | `/ship docs/brief/oauth-login/` |
-| 🐛 [`issue`](./plugins/issue) | The 1am bug, logged so you can pick it up cold. | `/issue log this bug` |
-| 🧵 [`next`](./plugins/next) | Monday morning: what's open, what's next, exact resume command. | `/next` |
-| 👣 [`trace`](./plugins/trace) | Progress ledger that writes itself. A hook, not a habit. | nothing |
-| 🔎 [`websearch`](./plugins/websearch) | Intent-routed web search via [Exa](https://exa.ai), 8 modes. | `/websearch <question>` |
+|  [`code-roadmap`](./plugins/code-roadmap) | Tells you which path fits the task. Advisory, never forces. | `/code-roadmap add OAuth login` |
+|  [`brief`](./plugins/brief) | The **what & why**. Interview → product spec + task list. | `/brief add OAuth login` |
+|  [`propose`](./plugins/propose) | The **how**. Alternatives, tradeoffs, risks, plan. One page or a few, hard ceilings. | `/propose OAuth token storage` |
+|  [`ship`](./plugins/ship) | The **build**. Executes the spec, hands back a verification bundle. | `/ship docs/brief/oauth-login/` |
+|  [`issue`](./plugins/issue) | The 1am bug, logged so you can pick it up cold. | `/issue log this bug` |
+|  [`next`](./plugins/next) | Monday morning: what's open, what's next, exact resume command. | `/next` |
+|  [`trace`](./plugins/trace) | Progress ledger that writes itself. A hook, not a habit. | nothing |
+|  [`websearch`](./plugins/websearch) | Intent-routed web search via [Exa](https://exa.ai), 8 modes. | `/websearch <question>` |
 
 ---
 
-## The pipeline 🛤️
+## The pipeline
 
 An idea enters, passes the gates it needs, comes out as shipped code.
 
@@ -57,15 +57,15 @@ Gates keep it honest: `ship` refuses a brief that is not `ready`, a proposal tha
 
 Meanwhile, three tools watch your back, never in your way:
 
-- 🧵 `/next` after any `/clear`: what's open, and the exact command to resume.
-- 🐛 `/issue` when a bug must survive the night: hypothesis and state, resumable cold.
-- 👣 `trace` writes the ledger on its own; `next` reads it, you type nothing.
+-  `/next` after any `/clear`: what's open, and the exact command to resume.
+-  `/issue` when a bug must survive the night: hypothesis and state, resumable cold.
+-  `trace` writes the ledger on its own; `next` reads it, you type nothing.
 
 **The document IS the deliverable** - each workflow ends on a clean HTML page: decision first, details after, presentable to a client.
 
 ---
 
-## The lineage 📜
+## The lineage
 
 Plain names, old discipline. **propose** is the RFC tradition ([RFC 1, 1969](https://www.rfc-editor.org/rfc/rfc1.html), [Rust](https://rust-lang.github.io/rfcs/), [Oxide](https://oxide.computer/blog/rfd-1-requests-for-discussion)) plus [Nygard's one-page decision records](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions). **brief** is the PRD tradition ([Cagan](https://www.svpg.com/wp-content/uploads/2024/07/How-To-Write-a-Good-PRD.pdf)) sized by the short-doc school ([Google](https://www.industrialempathy.com/posts/design-docs-at-google/), [Shape Up](https://basecamp.com/shapeup/1.5-chapter-06), [Linear](https://www.lennysnewsletter.com/p/how-linear-builds-product)).
 
@@ -83,7 +83,7 @@ Mirko
 
 ---
 
-## Quick install ⚡ (Claude Code)
+## Quick install (Claude Code)
 
 ```bash
 # Inside Claude Code:
@@ -116,7 +116,7 @@ Per-plugin setup, flags, and dependencies live in each plugin's README.
 
 ---
 
-## Good to know 🔧
+## Good to know
 
 - Published **as I actually use them** - adapt to your setup.
 - Web lookups go through [Exa](https://exa.ai) MCP; `propose` also taps [GitNexus](https://github.com/mirkobozzetto/gitnexus) when present, greps when not.
