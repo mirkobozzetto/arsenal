@@ -92,6 +92,11 @@ function bucket(kind, status) {
     if (s === "shipped" || s === "superseded") return "done";
     return "wip"; // draft or unknown = still being authored
   }
+  if (kind === "roadmap") {
+    if (s === "ready") return "open"; // next move: /brief a phase, or re-discuss
+    if (s === "superseded") return "done";
+    return "wip";
+  }
   // rfc
   if (s === "accepted") return "open";
   if (s === "shipped" || s === "rejected") return "done";
@@ -126,8 +131,9 @@ function collect(root) {
       fm.type === "propose" ||
       fm.type === "rfc" ||
       ["PROPOSAL.md", "RFC.md"].includes(path.basename(file));
-    if (!isPrd && !isRfc) continue;
-    const kind = isPrd ? "prd" : "rfc";
+    const isRoadmap = fm.type === "roadmap";
+    if (!isPrd && !isRfc && !isRoadmap) continue;
+    const kind = isPrd ? "prd" : isRoadmap ? "roadmap" : "rfc";
     const status = fm.status || (isRfc ? "Draft" : "draft");
     const b = bucket(kind, status);
 
@@ -141,8 +147,11 @@ function collect(root) {
     // resume command: explicit frontmatter wins; else derive from the artifact path.
     let resume = fm.resume_cmd;
     if (!resume) {
-      const target = isPrd ? relTo(root, path.dirname(file)) : relTo(root, file);
-      resume = `/ship ${target}`;
+      if (isRoadmap) resume = `/arsenal -r ${fm.slug || path.basename(path.dirname(file))}`;
+      else {
+        const target = isPrd ? relTo(root, path.dirname(file)) : relTo(root, file);
+        resume = `/ship ${target}`;
+      }
     }
 
     items.push({

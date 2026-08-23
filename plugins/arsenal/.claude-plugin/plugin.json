@@ -1,0 +1,11 @@
+{
+  "name": "arsenal",
+  "version": "1.0.0",
+  "description": "Socratic roadmap interviewer. Clarifies what you actually want to build through a one-question-at-a-time conversation, researches how others solved it, then delivers a phased roadmap as a styled HTML page with a wireframe mockup and copy-paste command blocks. Re-discussable at any time; hands off to /brief or /ship.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/arsenal"
+}

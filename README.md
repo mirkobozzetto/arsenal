@@ -12,7 +12,7 @@
   Mirko Bozzetto's curated skills for AI coding agents: a spec-driven build pipeline plus the tools around it.
 </p>
 
-Plain markdown skills, portable to any coding agent or CLI: Claude Code, pi, oh-my-pi, Cursor, Codex. Install one plugin or all eight.
+Plain markdown skills, portable to any coding agent or CLI: Claude Code, pi, oh-my-pi, Cursor, Codex. Install one plugin or all nine.
 
 ---
 
@@ -21,6 +21,7 @@ Plain markdown skills, portable to any coding agent or CLI: Claude Code, pi, oh-
 | Plugin | What it does | You type |
 |--------|--------------|----------|
 |  [`code-roadmap`](./plugins/code-roadmap) | Tells you which path fits the task. Advisory, never forces. | `/code-roadmap add OAuth login` |
+|  [`arsenal`](./plugins/arsenal) | The **objective**. Socratic interview → phased roadmap as an HTML page (mockup + commands). | `/arsenal an app that...` |
 |  [`brief`](./plugins/brief) | The **what & why**. Interview → product spec + task list. | `/brief add OAuth login` |
 |  [`propose`](./plugins/propose) | The **how**. Alternatives, tradeoffs, risks, plan. One page or a few, hard ceilings. | `/propose OAuth token storage` |
 |  [`ship`](./plugins/ship) | The **build**. Executes the spec, hands back a verification bundle. | `/ship docs/brief/oauth-login/` |
@@ -38,6 +39,7 @@ An idea enters, passes the gates it needs, comes out as shipped code.
 ```mermaid
 flowchart LR
     R[code-roadmap<br/><i>orient</i>] -.-> I((idea))
+    A[arsenal<br/><i>objective</i>] -.->|vague idea| I
     I --> B[brief<br/><i>what / why</i>] --> P[propose<br/><i>how</i>] --> S[ship<br/><i>build</i>] --> C((shipped<br/>code))
     I -.->|short path| S
     B -.->|how is obvious| S
@@ -48,6 +50,7 @@ flowchart LR
 
 | Your situation | Path |
 |---|---|
+| Idea still fuzzy, objective unclear | `arsenal → brief → ...` |
 | Reversible in a day, known pattern | `ship` it |
 | One feature, obvious how | `brief → ship` |
 | A choice to settle | `propose → ship` |
@@ -90,6 +93,7 @@ Mirko
 /plugin marketplace add mirkobozzetto/arsenal
 
 # Install the whole pipeline:
+/plugin install arsenal@arsenal
 /plugin install code-roadmap@arsenal
 /plugin install brief@arsenal
 /plugin install propose@arsenal
@@ -105,6 +109,7 @@ Mirko
 Then drive the pipeline:
 
 ```bash
+/arsenal a tool that does X somehow    # objective -> docs/roadmap/<slug>/ + HTML page
 /code-roadmap add OAuth login          # orient
 /brief add OAuth login                 # what/why  -> docs/brief/oauth-login/
 /propose OAuth token storage           # how       -> the proposal document
@@ -121,6 +126,7 @@ Per-plugin setup, flags, and dependencies live in each plugin's README.
 - Published **as I actually use them** - adapt to your setup.
 - Web lookups go through [Exa](https://exa.ai) MCP; `propose` also taps [GitNexus](https://github.com/mirkobozzetto/gitnexus) when present, greps when not.
 - `ship` detects your toolchain (pnpm/bun/cargo/go/uv...) and **never runs your tests or builds** - it hands you the bundle.
+- `ship` commits progressively by default: one branch checkpoint, one commit per finished task, and a PR only after you validate its plain-words user story (`--no-commit` to opt out).
 - `issue` needs an authenticated `gh` CLI.
 - **Other agents** (pi, oh-my-pi, Cursor, Codex): copy `plugins/<name>/skills/<name>/` into your agent's skill directory, wire the MCPs, done.
 - Companion: [**espresso**](https://github.com/mirkobozzetto/espresso), the token-economy side. arsenal is what you build with; espresso keeps it cheap.
