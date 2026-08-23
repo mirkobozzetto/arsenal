@@ -31,4 +31,15 @@ Default run-authority for ship itself:
 
 - Removal is `trash` only, NEVER `rm -rf`.
 - Team/task orphan files: `trash ~/.claude/teams/{team_name}/` and `trash ~/.claude/tasks/{team_name}/`.
-- Never auto-commit/push/PR; the git write-guard prompt must fire on any git write the user explicitly requests.
+
+## Git boundary
+
+- Progressive commits are the default flow: authorized ONCE per run by the
+  step-02 branch checkpoint (the grant file), one commit per finished trace
+  unit, staged with explicit paths only — NEVER `git add -a`, NEVER `git add .`.
+- The grant covers `git commit` on the run's repo+branch, nothing else.
+  Remove it at finish and on HALT.
+- NEVER push outside the step-06 PR gate. `gh pr create` / `gt submit` only
+  after the validation user story is accepted; the guard prompt on that
+  push/PR is the single expected confirmation.
+- Workers never touch git; the lead commits.

@@ -33,6 +33,7 @@ Execute a locked upstream spec end to end. ship consumes EITHER a finalized brie
 | `-r` | `--resume` | Resume from an existing trace.md (stepsCompleted) |
 | `--yolo` | | After listing the commands and how they run, ship may run the SAFE verification commands itself to completion (destructive/DB/deploy stay user-only) |
 | `-m <tier>` | `--mode <tier>` | Force engine tier: `teams` / `subagents` / `solo` (overrides the probe) |
+| | `--no-commit` | Disable per-task progressive commits (default is ON: one commit per finished trace unit) |
 
 **Parsing:** Defaults from `steps/step-00-init.md`. Flags override. Remainder of input = the artifact path (a `docs/brief/<slug>/` folder OR an `PROPOSAL.md`).
 </parameters>
@@ -48,6 +49,8 @@ Execute a locked upstream spec end to end. ship consumes EITHER a finalized brie
 | `{resume_mode}` | boolean | step-00-init |
 | `{yolo_mode}` | boolean | step-00-init |
 | `{engine_override}` | enum(teams,subagents,solo)\|null | step-00-init |
+| `{commit_mode}` | boolean | step-00-init (default true; `--no-commit` -> false) |
+| `{work_branch}` | string\|null | step-02-plan (branch checkpoint) |
 | `{project_root}` | string | step-00-init |
 | `{output_dir}` | string | step-00-init |
 | `{detected_stack}` | object | step-01-ingest |
@@ -117,5 +120,7 @@ Auto-detected by artifact shape (set in step-00-triage, parsed in step-01-ingest
 - NEVER hardcode a toolchain (pnpm/Node). Detect the stack; ask when unknown.
 - NEVER use `rm -rf`. Use `trash`. NEVER modify a database without explicit approval.
 - Cleanup (step-06) is MANDATORY on every path (shipped / halted / rejected).
-- Prose in English; identifiers in English. Web via Exa MCP only. Honor the git write-guard.
+- Prose in English; identifiers in English. Web via Exa MCP only.
+- Git policy: progressive commits are part of the flow. One branch checkpoint at step-02 (create `ship/<slug>` or stay), ONE commit authorization for the whole run (the grant), then one commit per finished trace unit (`git add` of that unit's files only, Conventional Commits, no Claude signature). NEVER push. A PR happens only through the step-06 user-story validation gate.
+
 </critical>

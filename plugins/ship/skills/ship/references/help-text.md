@@ -37,6 +37,7 @@ Hand ship a bare prompt and it offers a choice:
 | `-r` / `--resume` | Continue from trace.md stepsCompleted |
 | `--yolo` | After listing commands + how, run the SAFE verification set to completion. Destructive/DB/deploy stay user-only always. |
 | `-m teams\|subagents\|solo` | Force the engine tier (override the probe) |
+| `--no-commit` | Turn off progressive commits (default: one commit per finished task) |
 
 ## Engine tiers (auto-selected, bounded by the spec's dependency DAG)
 
@@ -52,6 +53,19 @@ ultracode is NOT a tier. ship cannot read or set the effort level. If the spec l
 - `verification-bundle.md`: the commands YOU run, stack-detected.
 - `trace.md`: per-task ledger, single source of truth for resume.
 - For brief: the `tasks.md` checkboxes (reconciled from trace.md once, at finish). Never mutates an Accepted PROPOSAL.md.
+
+## Git flow (progressive commits + PR gate)
+
+- At plan time ship asks ONCE where commits land: a new `ship/<slug>` branch
+  (recommended) or the current branch. That answer authorizes the run's
+  commits (a scoped grant keeps the git guard quiet for `git commit` only).
+- Each finished task is committed on its own (explicit paths, Conventional
+  Commits, no signature); the short sha lands in trace.md.
+- ship NEVER pushes mid-run. At finish, if verification is green, it writes
+  a plain-words validation user story (what to test, how). Once you validate
+  it, ship creates the PR directly (`gh pr create`, base `dev` if it exists,
+  else `main`; Graphite -> `gt submit`).
+- `--no-commit` restores the old hands-off behavior.
 
 ## Gates (minimal)
 

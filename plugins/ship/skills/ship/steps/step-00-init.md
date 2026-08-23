@@ -35,6 +35,7 @@ economy_mode: false    # -e
 resume_mode: false     # -r
 yolo_mode: false       # --yolo
 engine_override: null  # -m teams|subagents|solo
+commit_mode: true      # --no-commit flips to false
 ```
 
 ---
@@ -49,6 +50,7 @@ engine_override: null  # -m teams|subagents|solo
 -r / --resume    -> resume_mode = true
 --yolo           -> yolo_mode = true
 -m <tier>        -> engine_override = teams|subagents|solo (reject other values)
+--no-commit      -> commit_mode = false
 ```
 
 ### 2. Resolve paths
@@ -102,6 +104,7 @@ auto_mode: <bool>
 economy_mode: <bool>
 resume_mode: <bool>
 yolo_mode: <bool>
+commit_mode: <bool>
 engine_override: <tier|null>
 project_root: "<path>"
 output_dir: "<path>"

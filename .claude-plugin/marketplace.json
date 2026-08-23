@@ -39,6 +39,22 @@
       "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/code-roadmap"
     },
     {
+      "name": "arsenal",
+      "source": "./plugins/arsenal",
+      "description": "Socratic roadmap interviewer: clarifies a fuzzy idea into a phased roadmap (interview -> Exa research -> HTML page with mockup + command blocks), re-discussable, hands off to /brief.",
+      "version": "1.0.0",
+      "category": "orientation",
+      "tags": [
+        "roadmap",
+        "interview",
+        "socratic",
+        "planning",
+        "orientation"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/arsenal"
+    },
+    {
       "name": "brief",
       "source": "./plugins/brief",
       "description": "Author a product brief by interview (the PRD tradition, under a plainer name), then emit user stories, scope, metrics, and a derived nested task list.",
@@ -72,7 +88,7 @@
       "name": "ship",
       "source": "./plugins/ship",
       "description": "Spec executor. Implements a finalized prd or Accepted rfc (or a bare prompt via inline contract) on agent-teams/subagents/solo, emits a user-run verification bundle + trace ledger.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "category": "implementation",
       "tags": [
         "implement",
@@ -88,7 +104,7 @@
       "name": "next",
       "source": "./plugins/next",
       "description": "Query unfinished prd/rfc/ship work and the exact command to resume it. Derives an open-work board from artifact frontmatter; a SessionStart hook auto-surfaces it so context survives /clear.",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "category": "orientation",
       "tags": [
         "resume",

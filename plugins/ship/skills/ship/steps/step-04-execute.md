@@ -46,6 +46,7 @@ For each task in topological order:
   - Implement ONLY the contract items for this task. No scope creep.
   - Risk-boundary check (see step 2) before any hazardous op.
   - Update trace.md row -> done (files touched + 1-line diff summary).
+  - Progressive commit (see step 3) for the unit's files.
   - For brief: record the unit in trace.md only; tasks.md checkboxes are synced once at finish (step-06), not here.
 ```
 
@@ -80,7 +81,23 @@ Other irreversible ops (e.g. new dependency, scope-edge):
 Never let a worker perform these: only the lead, after approval.
 ```
 
-### 3. Task ledger = trace.md only (no live checkbox writes)
+### 3. Progressive commit per finished unit
+
+Skip if `{commit_mode}` = false.
+
+```
+When a unit's trace.md row flips to done:
+  - git add ONLY that unit's touched files (explicit paths; NEVER -a, NEVER `git add .`)
+  - git commit -m "<type>(<scope>): <unit title>" — Conventional Commits,
+    body optional ("unit N.x of {slug}"), no Claude signature.
+  - Record the short sha in the trace.md row's Commit column.
+The step-02 grant makes these commits promptless; if the grant is missing
+(e.g. resume on another branch), the guard prompt firing once is expected.
+Workers NEVER commit: the lead commits after collecting each unit report.
+On a failed self-check, no commit for that unit (nothing half-done lands).
+```
+
+### 3b. Task ledger = trace.md only (no live checkbox writes)
 
 ```
 During execute, trace.md is the ONLY live ledger. Do NOT mutate tasks.md (brief) or PROPOSAL.md (propose) here.
@@ -97,7 +114,8 @@ Continue until every task is done in trace.md, UNLESS a HALT fires:
   - a task fails its read-only self-check 3x (carry to step-05),
   - an propose BLOCKER blocks a task,
   - a risk-boundary returns Halt.
-On HALT: set {final_status} = halted, jump to step-06-finish.
+On HALT: set {final_status} = halted, remove the commit grant
+(`rm -f ~/.claude/.git-guard-commit-grant`), jump to step-06-finish.
 ```
 
 ### 5. Update state

@@ -52,6 +52,19 @@ It **never runs your tests/builds/typechecks by default**: that stays yours. It 
 | `-r` / `--resume` | Continue from an existing `trace.md`. |
 | `--yolo` | After **listing** the commands, run the SAFE verification set itself. Destructive/DB/deploy stay yours, always. |
 | `-m teams\|subagents\|solo` | Force the engine tier. |
+| `--no-commit` | Turn off progressive commits (default: one commit per finished task). |
+
+### Git flow
+
+Progressive commits are the default. At plan time `ship` asks once where the
+work lands: a new `ship/<slug>` branch (recommended) or the current branch.
+That single answer authorizes the run's commits; each finished task is then
+committed on its own (explicit paths, Conventional Commits, no signature),
+with the sha recorded in `trace.md`. `ship` never pushes mid-run. At finish,
+if verification is green, it writes a plain-words **validation user story**
+(what to test, how); once you validate it, it creates the PR directly
+(`gh pr create`, base `dev` if that branch exists, else `main`;
+Graphite repos use `gt submit`).
 
 ### ultracode
 
@@ -60,7 +73,7 @@ It **never runs your tests/builds/typechecks by default**: that stays yours. It 
 ## Dependencies
 
 - Exa MCP for any web lookup (no native WebSearch/WebFetch).
-- `git` write-guard friendly: `ship` never commits/pushes; it hands off and you ship the commit.
+- `git` guard friendly: one scoped grant per run covers the progressive commits; push/PR always prompt once, at the validated PR gate.
 - Removal uses `trash`, never destructive deletes; never modifies a database without an explicit prompt.
 
 ## What it writes

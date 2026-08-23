@@ -13,9 +13,9 @@ updated: "{date}"
 
 ## Tasks
 
-| Unit | Contract item | Status | Files touched | Engine | Notes |
-|------|---------------|--------|---------------|--------|-------|
-| 1.0 / T01 | C1 | done / in_progress / blocked | `path` | solo | {diff summary} |
+| Unit | Contract item | Status | Files touched | Engine | Commit | Notes |
+|------|---------------|--------|---------------|--------|--------|-------|
+| 1.0 / T01 | C1 | done / in_progress / blocked | `path` | solo | `abc1234` | {diff summary} |
 
 ## Checkpoints
 

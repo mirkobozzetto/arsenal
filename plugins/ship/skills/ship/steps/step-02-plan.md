@@ -60,7 +60,38 @@ Store {contract_path} = {output_dir}/contract.md.
 
 The contract is the immutable target the verification bundle validates against. A requirement change later gets a NEW row, never a silent rewrite.
 
-### 4. Confirm the plan
+### 4. Branch checkpoint + run commit grant
+
+Skip entirely if `{commit_mode}` = false.
+
+This checkpoint ALWAYS asks, even in auto_mode (it is a git write decision,
+never inferred). One question, answered once per run:
+
+```yaml
+questions:
+  - header: "Branch"
+    question: "Progressive commits are on: one commit per finished task. Where should they land? (current branch: {current_branch})"
+    options:
+      - label: "New branch ship/{slug} (Recommended)"
+        description: "Create it from {current_branch} and commit there"
+      - label: "Stay on {current_branch}"
+        description: "Commit directly on the current branch"
+      - label: "No commits this run"
+        description: "Behave like --no-commit"
+    multiSelect: false
+```
+
+On a branch answer:
+```
+IF new branch: Graphite repo (.graphite_repo_config or `gt log` answers) -> `gt create -ai ship/{slug}`, else `git checkout -b ship/{slug}`.
+Set {work_branch}. The branch answer IS the run's commit authorization:
+write the grant so the git guard stays quiet for this run's commits only:
+  printf '%s %s\n' "$(git rev-parse --show-toplevel)" "{work_branch}" > ~/.claude/.git-guard-commit-grant
+The grant covers ONLY `git commit` on this repo+branch. push / PR / rebase still prompt.
+IF "No commits": set {commit_mode} = false, no grant.
+```
+
+### 5. Confirm the plan
 
 **If `{auto_mode}` = true:** proceed to step-03.
 
@@ -77,12 +108,14 @@ questions:
     multiSelect: false
 ```
 
-### 5. Update state
+### 6. Update state
 
 ```yaml
 stepsCompleted: [0, 1, 2]
 independent_groups: [...]
 contract_path: "{output_dir}/contract.md"
+work_branch: "{work_branch}"
+commit_mode: {commit_mode}
 ```
 
 ---
