@@ -115,6 +115,21 @@ Auto-detected by artifact shape (set in step-00-triage, parsed in step-01-ingest
 | `scripts/scaffold.sh` | Seed contract.md / verification-bundle.md / trace.md from templates into the output dir |
 </references>
 
+<output_discipline>
+A check that PASSES is silent. Never narrate the run-gate, the task filter,
+the detected stack, the satisfied dependencies, the single-repo check, or any
+step's success metrics: they land in trace.md, where the user reads them if
+he wants to.
+
+ship writes only for three reasons:
+1. it needs a decision (ask it, nothing else around it),
+2. it refuses to go further (say why, and what unblocks it),
+3. work landed (what was done, what is left).
+
+No preamble, no recap of what the user already knows, no restating the spec
+back at him. If a sentence would not change what he does next, delete it.
+</output_discipline>
+
 <critical>
 - NEVER re-author product or spec work. ship only executes the artifact.
 - NEVER run build/test/typecheck toolchain by default. Emit a user-run bundle. `--yolo` runs only SAFE commands, after listing them; DB/destructive/deploy stay user-only ALWAYS.

@@ -69,8 +69,8 @@ brief given   -> if its frontmatter has `proposal: <path>`, or a proposal
                  declares `source_brief` pointing here: the proposal owns
                  the HOW. Say it in one line and ship the PROPOSAL instead,
                  unless the user insists on the brief.
-propose given -> if its frontmatter has `source_brief`, say in one line that
-                 the sibling brief is covered by this run. Never run both.
+propose given -> if its frontmatter has `source_brief`, the sibling brief is
+                 covered by this run. Silent: never run both, never say so.
 Either way, ONE run per feature. A second concurrent run on the sibling is
 refused, not silently allowed.
 ```

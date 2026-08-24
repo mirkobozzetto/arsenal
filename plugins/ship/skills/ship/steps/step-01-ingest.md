@@ -104,7 +104,7 @@ IF {task_filter} is set:
   - Keep only those ids in {tasks}. A kept task whose dependency was filtered
     OUT must have that dependency already done (check the sibling ledgers in
     {output_dir}); if not, HALT and name the missing task and its run.
-  - Say in one line: N of M spec tasks in this run, and which ids.
+  - Record the scope in trace.md. Do not narrate it.
 The spec itself is never edited: the filter lives in this run only.
 ```
 
@@ -117,14 +117,13 @@ author knew about. Read them and hand the decision back once:
 
 ```
 Collect every open/unresolved question from the spec.
-IF none: say nothing, continue.
-IF any:
-  - list them in prose, one line each, and for each say whether it blocks a
-    task in {tasks} (name the task) or not.
-  - a question that BLOCKS a task -> that task is HALT-gated, exactly like a
-    section 11 BLOCKER. Never build a task whose question is open.
-  - questions that block nothing -> one confirmation to proceed with them
-    still open (auto_mode proceeds and logs them to trace.md Checkpoints).
+A question that BLOCKS a task (the task has no content without the answer):
+  -> ask it, name the task, propose a defensible default. HALT-gated like a
+     section 11 BLOCKER until answered.
+A question that blocks nothing:
+  -> SILENT. Log it to trace.md Checkpoints and move on. Never list it,
+     never ask to "proceed with it still open".
+No open question at all: say nothing.
 ```
 
 ### 3. Detect the toolchain ({detected_stack})
