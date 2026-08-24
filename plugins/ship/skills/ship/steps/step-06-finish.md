@@ -79,13 +79,20 @@ IF tasks remain uncovered by a shipped run, append to the handoff:
   Spec progress: {done}/{total} tasks. Runs left:
 
   # <repo or scope>, tasks <ids>{, waits on <run> for <dep>}
-  cd <repo-abs-path>
   /clear
+  cd <repo-abs-path>
   /ship --tasks <ids> {artifact_path}
 
   One block per remaining run, in dependency order, ready to paste.
 IF nothing remains: say the spec is fully shipped, in one line.
 ```
+
+Reproduce that block VERBATIM, three lines, one per remaining run. Do not
+reformat it into a table, do not collapse it to the /ship line alone, do not
+drop `/clear` or `cd`. A summary table of the remaining tasks may sit ABOVE
+the blocks, never instead of them. The next run usually starts in a
+DIFFERENT repo than this one: a bare /ship line sends the user's next run
+into the wrong working directory.
 
 For `final_status` = halted: state the HALT reason (gate failed / 3x self-check / propose BLOCKER) and what to fix.
 
