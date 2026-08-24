@@ -67,6 +67,26 @@ Next:
 Do NOT suggest clearing before the bundle and the PR gate: verification and
 the user story need what just happened. The clear belongs to a LATER resume.
 
+### 2b. Remaining runs of this spec (MANDATORY when any remain)
+
+A spec split into several runs is only half delivered when one run ends.
+Ending without naming what is left is how a plan gets abandoned mid-way.
+
+```
+Compare the spec's full task list against every trace{*}.md in {output_dir}.
+IF tasks remain uncovered by a shipped run, append to the handoff:
+
+  Spec progress: {done}/{total} tasks. Runs left:
+
+  # <repo or scope>, tasks <ids>{, waits on <run> for <dep>}
+  cd <repo-abs-path>
+  /clear
+  /ship --tasks <ids> {artifact_path}
+
+  One block per remaining run, in dependency order, ready to paste.
+IF nothing remains: say the spec is fully shipped, in one line.
+```
+
 For `final_status` = halted: state the HALT reason (gate failed / 3x self-check / propose BLOCKER) and what to fix.
 
 ### 3. Git closeout: leftovers, user story, PR
@@ -138,6 +158,7 @@ workflow_complete: true
 - Team (if any) shut down gracefully, TeamDelete + trash failsafe run
 - Handoff printed: artifact, contract status, bundle path, trace path, next actions
 - Commit grant removed on every path; no push outside the PR gate
+- Remaining runs of the spec named with their pasteable commands, or the spec declared fully shipped
 - Plain ASCII, no emojis
 - Runs on every path (shipped / halted / rejected)
 
@@ -146,6 +167,7 @@ workflow_complete: true
 - `rm -rf` used -> CRITICAL Recovery: abort, use `trash`
 - PR created without a validated user story -> Recovery: never; the gate is mandatory
 - Grant left behind -> Recovery: rm -f it here, every path
+- Ending a scoped run without naming the remaining ones -> Recovery: the spec looks done when it is not; always print the runs left
 - Skipped on HALT -> Recovery: finish is mandatory on every path
 - Emojis in the report -> Recovery: strip, plain ASCII
 - Zombie teammate blocks cleanup -> Recovery: 10s timeout, mark zombie, proceed
