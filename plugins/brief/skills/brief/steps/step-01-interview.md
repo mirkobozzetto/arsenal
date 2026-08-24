@@ -46,7 +46,11 @@ Ask until each is answered (group into 1-2 AskUserQuestion rounds, one question 
 - **Problem**: what pain/cost exists today? Why now?
 - **Constraints**: hard limits (deadline, platform, compliance, budget).
 - **Data source**: where does the data come from / live?
-- **Business rule**: the core rules that govern correct behavior.
+- **Business rule**: the core rules that govern correct behavior. A rule that
+  names a limit ("a cap", "a quota", "a maximum", "a retention", "a delay")
+  is not a rule until it carries its NUMBER and its unit. Ask for the value
+  right there, propose a defensible default, and never let "we'll set it
+  later" through: later means the number gets invented during implementation.
 - **Exception**: edge cases, failure handling, what must NOT happen.
 - **Success metric**: the one number that defines success - baseline today -> target -> measurement window (e.g. "drop-off 34% -> 20% within 30 days"). The single most-skipped, most-important input. If the user cannot name one, the goal is not sharp enough yet; press once.
 

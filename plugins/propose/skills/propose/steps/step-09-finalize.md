@@ -42,6 +42,31 @@ Read full PROPOSAL.md. Write 3-paragraph summary:
 
 ≤ 6 sentences total. Someone reading only section 1 knows the verdict.
 
+### 1b. Cross open questions against the task table (HARD GATE)
+
+A proposal holds two lists that never look at each other: the open
+questions, and the implementation tasks. When an open question IS what a
+task must produce, that task has no content, the proposal still reads
+complete, and the hole surfaces mid-ship with the design context long gone.
+
+```
+For every open/unresolved question in the document, ask ONE thing:
+  "does a task in the section 10 table need this answer to have any content?"
+IF yes for a question -> that task is UNPLANNED. Before setting any status:
+  - name the task and the question in one line,
+  - ask for the missing values, proposing concrete defaults you justify in
+    half a line each (a number with a reason beats an open field),
+  - write the answers INTO the owning section, and strike the question from
+    the open list.
+IF the user declines to decide -> that task is CUT from the plan (say so and
+remove its row) or the proposal goes `Review`. Never Accept a task whose
+content is an open question.
+IF no question feeds a task: say nothing, continue.
+```
+
+Questions that touch no task (legal, ops, a later phase) stay open. They are
+not a problem: they block nothing.
+
 ### 2. Determine final status
 
 Default is `Accepted`: the user read the reviewed proposal and stays in
@@ -156,6 +181,7 @@ If ship is chosen -> invoke it with `{proposal_path}` (it refuses if status != A
 
 ✅ Section 1 (Summary) ≤ 6 sentences, factual
 ✅ Status explicitly defined
+✅ No task in section 10 depends on a still-open question
 ✅ Frontmatter `stepsCompleted` complete 0→9
 ✅ Index `{out_dir}/README.md` up to date (if applicable)
 ✅ HTML view rendered and opened in the browser (or its failure reported)
@@ -166,6 +192,7 @@ If ship is chosen -> invoke it with `{proposal_path}` (it refuses if status != A
 ❌ Summary too long → it is not a summary
 ❌ Asking a status question instead of defaulting to Accepted
 ❌ Accepting with an unresolved BLOCKER: that is the one hard stop
+❌ Accepting a task whose content is an open question: ship stops on it later, with the design context gone
 ❌ No index update → orphaned proposal
 ❌ Finalize ends without the HTML view opening: the user reads raw markdown in a terminal, the exact experience this step exists to prevent
 ❌ Auto-exec ship without asking: proposal = decision, not execution
