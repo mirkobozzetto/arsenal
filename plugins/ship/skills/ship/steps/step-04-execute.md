@@ -93,6 +93,17 @@ When a unit's trace.md row flips to done:
   - git commit -m "<type>(<scope>): <unit title>" — Conventional Commits,
     body optional ("unit N.x of {slug}"), no Claude signature.
   - Record the short sha in the trace.md row's Commit column.
+
+NEVER fold two units into one commit, whatever their size or how close they
+landed in time. N units done = at least N commits. A "while I was there"
+merge destroys the per-task history the whole flow exists to give.
+
+A unit MAY be split into several commits when each piece stands on its own:
+it compiles, and it leaves the tree in a state someone could check out.
+The natural cuts are things like a migration alone, a module before its
+wiring, a fix before its test. Split when the pieces are genuinely coherent,
+never mechanically per file, never a commit that does not build. Record every
+sha on the unit's row.
 The step-02 grant makes these commits promptless; if the grant is missing
 (e.g. resume on another branch), the guard prompt firing once is expected.
 Workers NEVER commit: the lead commits after collecting each unit report.
@@ -162,6 +173,8 @@ final_status: "shipped"   # or halted
 - Auto-proceeding on a DB change -> Recovery: ALWAYS ask, even with -a
 - Same-file tasks parallelized -> Recovery: serialize them
 - Mutating an Accepted PROPOSAL.md -> Recovery: never; trace.md only
+- Two units in one commit -> Recovery: never; one commit per unit, minimum
+- A split commit that does not build -> Recovery: do not split there; a piece must stand alone
 
 ## EXECUTE PROTOCOLS:
 
