@@ -33,7 +33,7 @@ Implement every task on `{engine_tier}`, checkpoint at risk boundaries, and keep
 ### 0. Initialize the ledger
 
 ```
-Write {output_dir}/trace.md from templates/trace.md (artifact, kind, engine_tier,
+Write {output_dir}/trace{run_id}.md from templates/trace.md (artifact, kind, engine_tier,
 work_branch, commit_mode). work_branch + commit_mode MUST land in the frontmatter:
 they are what a later `-r` reads back to keep committing on the same branch.
 Set {trace_path}. One row per task; status starts "todo".
@@ -141,7 +141,7 @@ On HALT: set {final_status} = halted, remove the commit grant
 ```yaml
 stepsCompleted: [0, 1, 2, 3, 4]
 team_name: "<name|null>"
-trace_path: "{output_dir}/trace.md"
+trace_path: "{output_dir}/trace{run_id}.md"
 final_status: "shipped"   # or halted
 ```
 

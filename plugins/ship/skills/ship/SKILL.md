@@ -34,6 +34,7 @@ Execute a locked upstream spec end to end. ship consumes EITHER a finalized brie
 | `--yolo` | | After listing the commands and how they run, ship may run the SAFE verification commands itself to completion (destructive/DB/deploy stay user-only) |
 | `-m <tier>` | `--mode <tier>` | Force engine tier: `teams` / `subagents` / `solo` (overrides the probe) |
 | | `--no-commit` | Disable per-task progressive commits (default is ON: one commit per finished trace unit) |
+| | `--tasks <ids>` | Run only these spec tasks (`T01-T06`, `T01,T04`, `1.0-3.0`). Scopes the run; its ledger is kept separate so parallel scoped runs never collide |
 
 **Parsing:** Defaults from `steps/step-00-init.md`. Flags override. Remainder of input = the artifact path (a `docs/brief/<slug>/` folder OR an `PROPOSAL.md`).
 </parameters>
@@ -50,6 +51,8 @@ Execute a locked upstream spec end to end. ship consumes EITHER a finalized brie
 | `{yolo_mode}` | boolean | step-00-init |
 | `{engine_override}` | enum(teams,subagents,solo)\|null | step-00-init |
 | `{commit_mode}` | boolean | step-00-init (default true; `--no-commit` -> false) |
+| `{task_filter}` | array\|null | step-00-init (`--tasks`) |
+| `{run_id}` | string | step-00-init (`""` for a whole-spec run, else `-<scope>`) |
 | `{work_branch}` | string\|null | step-02-plan (branch checkpoint) |
 | `{project_root}` | string | step-00-init |
 | `{output_dir}` | string | step-00-init |

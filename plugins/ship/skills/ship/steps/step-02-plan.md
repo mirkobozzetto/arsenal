@@ -50,12 +50,12 @@ Store `{independent_groups}`. This count drives the engine probe in step-03 (>=2
 
 Optionally seed the three artifacts in one shot with `bash scripts/scaffold.sh {output_dir}` (copies the templates if absent), then fill them.
 
-Write `{output_dir}/contract.md` from `templates/contract.md`:
+Write `{output_dir}/contract{run_id}.md` from `templates/contract.md`:
 ```
 - One row per acceptance criterion (brief Given/When/Then) OR propose Accept-criteria cell.
 - Out-of-scope list (brief Out-of-scope / propose Non-Goals) = never build.
 - Edit scope = the union of the spec's authorized files.
-Store {contract_path} = {output_dir}/contract.md.
+Store {contract_path} = {output_dir}/contract{run_id}.md.
 ```
 
 The contract is the immutable target the verification bundle validates against. A requirement change later gets a NEW row, never a silent rewrite.
@@ -70,11 +70,27 @@ there. A plan whose files span two repos would half-land, silently.
 Resolve the git root of every path in the contract edit scope
 (`git -C <dir> rev-parse --show-toplevel`).
 IF more than one distinct root, or a path outside {project_root}:
-  -> HALT. Name each repo and which tasks belong to it, and say the plan
-     needs one ship run per repo (the spec stays as is; run ship from each
-     repo with the tasks that belong to it).
+  -> HALT, and hand back a SPLIT PLAN, not a diagnosis.
 Never attempt a cross-repo run: ship has no cross-repo branch, commit or PR.
 ```
+
+The split plan is a table (repo, task ids, why it goes first) FOLLOWED by
+the exact pasteable commands, in dependency order, one block per run:
+
+```
+cd <repo-1-abs-path>
+/ship --tasks T01-T06 {artifact_path}
+
+# then, once run 1 is shipped:
+cd <repo-2-abs-path>
+/ship --tasks T07-T16 {artifact_path}
+```
+
+`--tasks` is what makes a partial run legal, and `{run_id}` keeps each
+run's contract / trace / bundle separate inside the same spec folder. Say
+in ONE line which run to start with and why (the dependency that decides
+it). Ambiguity here is the failure: the user must not have to work out
+the commands.
 
 ### 4. Branch checkpoint + run commit grant
 
@@ -129,7 +145,7 @@ questions:
 ```yaml
 stepsCompleted: [0, 1, 2]
 independent_groups: [...]
-contract_path: "{output_dir}/contract.md"
+contract_path: "{output_dir}/contract{run_id}.md"
 work_branch: "{work_branch}"
 commit_mode: {commit_mode}
 ```

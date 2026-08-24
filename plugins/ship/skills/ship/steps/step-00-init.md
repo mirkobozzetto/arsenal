@@ -51,7 +51,24 @@ commit_mode: true      # --no-commit flips to false
 --yolo           -> yolo_mode = true
 -m <tier>        -> engine_override = teams|subagents|solo (reject other values)
 --no-commit      -> commit_mode = false
+--tasks <ids>    -> task_filter = expanded id list (T01-T06 -> T01..T06; commas allowed)
 ```
+
+### 1b. Resolve {run_id} (keeps parallel runs from overwriting each other)
+
+A spec can need more than one run: one per repo when the plan spans two,
+or a deliberate slice via `--tasks`. All of them write into the SAME
+output_dir, so a single `trace.md` would have the second run clobber the
+first and `-r` would not know which to resume.
+
+```
+IF {task_filter} is null: run_id = ""            (whole-spec run, files keep their plain names)
+ELSE: run_id = "-" + <shortest readable tag>     (e.g. "-T01-T06", or the repo name for a repo split)
+Artifacts of this run: contract{run_id}.md, trace{run_id}.md, verification-bundle{run_id}.md
+```
+
+Every later step reads and writes those names. A whole-spec run is
+unchanged (`trace.md`), so nothing existing breaks.
 
 ### 2. Resolve paths
 
@@ -71,7 +88,7 @@ If `{output_dir}` cannot be resolved or is ambiguous, AskUserQuestion (unless au
 ### 3. Detect resume
 
 ```
-IF {output_dir}/trace.md exists with stepsCompleted in frontmatter:
+IF {output_dir}/trace{run_id}.md exists with stepsCompleted in frontmatter:
   -> Read it, restore state, set resume_mode = true
   -> Resume at the first incomplete step
   -> STOP fresh init
@@ -124,6 +141,8 @@ economy_mode: <bool>
 resume_mode: <bool>
 yolo_mode: <bool>
 commit_mode: <bool>
+task_filter: <ids|null>
+run_id: "<''|-tag>"
 engine_override: <tier|null>
 project_root: "<path>"
 output_dir: "<path>"

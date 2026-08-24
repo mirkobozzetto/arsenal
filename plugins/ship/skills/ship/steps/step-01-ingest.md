@@ -97,6 +97,17 @@ For CASE C (inline), {tasks} comes from the confirmed derived list in step 1 (no
 - Build {tasks}: one entry per T-id with deps, accept-criterion, files, ordered topologically.
 ```
 
+### 2a. Apply {task_filter} (scoped run)
+
+```
+IF {task_filter} is set:
+  - Keep only those ids in {tasks}. A kept task whose dependency was filtered
+    OUT must have that dependency already done (check the sibling ledgers in
+    {output_dir}); if not, HALT and name the missing task and its run.
+  - Say in one line: N of M spec tasks in this run, and which ids.
+The spec itself is never edited: the filter lives in this run only.
+```
+
 ### 2b. Surface the spec's open questions (CASE B, and CASE A's Open questions if any)
 
 An Accepted proposal can still carry unanswered questions (section 8 Open

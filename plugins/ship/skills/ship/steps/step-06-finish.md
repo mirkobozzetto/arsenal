@@ -49,7 +49,7 @@ ELSE: skip (subagents/solo have no team).
 ===========================================
   ship: {final_status}
 ===========================================
-Artifact:  {artifact_path} ({artifact_kind})
+Artifact:  {artifact_path} ({artifact_kind}){scoped: "  run: {run_id} ({N}/{M} spec tasks)"}
 Engine:    {engine_tier}
 Contract:  {contract_path}   ({P}/{N} criteria satisfied)
 Bundle:    {bundle_path}      <- run these checks yourself
@@ -100,6 +100,11 @@ IF verification NOT green or halted: no PR offer at all.
 ### 4. Close the loop (upstream status + task ledger)
 
 Keep the `next` open-work board honest: an item must leave it once shipped, a halted run must point back to its resume command, and the upstream task checkboxes must match what trace.md recorded as done. trace.md is the live ledger during execute; this is the SINGLE point where its result is synced back into the brief's tasks.md, so `next` never reads a stale 0/N after a successful run.
+
+A SCOPED run ({run_id} non-empty) only ever closes its own slice: it never
+marks the spec shipped while sibling runs remain. Check the sibling ledgers
+in {output_dir}; close the spec only when every task of the spec is done
+across all of them, and otherwise print the next run's command.
 
 ```
 IF final_status = shipped AND contract criteria all satisfied:

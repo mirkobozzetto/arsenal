@@ -52,7 +52,7 @@ Do NOT run them yet.
 ### 3. Write the verification bundle
 
 ```
-Write {output_dir}/verification-bundle.md from templates/verification-bundle.md:
+Write {output_dir}/verification-bundle{run_id}.md from templates/verification-bundle.md:
   - SAFE checks table: command + what it validates + expected pass signal, each tied to a contract item.
   - DESTRUCTIVE table: USER ONLY, with warnings.
   - Contract coverage: C1..Cn -> command/self-check; list any uncovered criterion needing a manual check.
@@ -88,7 +88,7 @@ Set frontmatter final_status (shipped / halted).
 
 ```yaml
 stepsCompleted: [0, 1, 2, 3, 4, 5]
-bundle_path: "{output_dir}/verification-bundle.md"
+bundle_path: "{output_dir}/verification-bundle{run_id}.md"
 final_status: "shipped|halted"
 ```
 

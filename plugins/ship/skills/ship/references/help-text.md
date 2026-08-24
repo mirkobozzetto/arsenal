@@ -38,6 +38,16 @@ Hand ship a bare prompt and it offers a choice:
 | `--yolo` | After listing commands + how, run the SAFE verification set to completion. Destructive/DB/deploy stay user-only always. |
 | `-m teams\|subagents\|solo` | Force the engine tier (override the probe) |
 | `--no-commit` | Turn off progressive commits (default: one commit per finished task) |
+| `--tasks <ids>` | Run only these spec tasks (`T01-T06`, `1.0-3.0`, commas allowed) |
+
+## Partial runs
+
+One spec sometimes needs more than one run: the plan spans two repos, or you
+deliberately slice it. `--tasks` scopes a run, and each scoped run keeps its
+own `contract-<tag>.md` / `trace-<tag>.md` / `verification-bundle-<tag>.md`
+in the spec folder, so runs never overwrite each other and `-r` resumes the
+right one. A task whose dependency belongs to another run is refused until
+that run has shipped it.
 
 ## Engine tiers (auto-selected, bounded by the spec's dependency DAG)
 
