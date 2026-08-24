@@ -46,12 +46,19 @@ Read full PROPOSAL.md. Write 3-paragraph summary:
 
 Default is `Accepted`: the user read the reviewed proposal and stays in
 command through objection, not through a gate. Set `Accepted` when every
-review BLOCKER is resolved; tell the user in ONE line that the proposal is
-Accepted and that saying "repasse en Draft" / "Review" / "Rejected"
-downgrades it. Do NOT ask a status question.
+review BLOCKER is resolved. A blocker you FIXED during step-08 counts as
+resolved: it does not license a status question.
+
+WRITE the status, THEN say in ONE line, verbatim in shape:
+"Statut : Accepted. Dis 'repasse en Draft/Review/Rejected' pour le
+redescendre."
+
+FORBIDDEN, in every phrasing: "Je le passe en Accepted ?", "ou tu veux le
+relire d'abord ?", "je finalise ?". The user objects after the fact; a
+status question here is a failure of this step.
 
 Exceptions, the only ones:
-- an unresolved BLOCKER from step-08 → status `Review`, say which blocker;
+- an UNRESOLVED BLOCKER from step-08 → status `Review`, say which blocker;
 - the user already asked for a different status this session → honor it.
 
 ### 3. Update frontmatter

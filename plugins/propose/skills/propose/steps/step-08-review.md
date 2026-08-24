@@ -136,10 +136,14 @@ changed. Write no section 11.
 
 ### 6. Surface blockers
 
-If any BLOCKER found, list them to the user in prose, one line each, and
-name the three ways out: revisit the proposal, accept the blocker and document
-it in its section, or abandon (status Rejected). Ask in plain prose, not
-with AskUserQuestion. Under `auto_mode`, revisit.
+A BLOCKER you already RESOLVED by editing the proposal is not a blocker
+any more: report what you fixed in one line each and go straight to
+step-09. Do NOT pause, do NOT ask what to do about it.
+
+Only an UNRESOLVED blocker stops the flow. List those in prose, one line
+each, and name the three ways out: revisit the proposal, accept the
+blocker and document it in its section, or abandon (status Rejected).
+Ask in plain prose, not with AskUserQuestion. Under `auto_mode`, revisit.
 
 ### 7. Update frontmatter
 
