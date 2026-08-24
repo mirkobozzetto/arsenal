@@ -73,4 +73,13 @@ ultracode is NOT a tier. ship cannot read or set the effort level. If the spec l
 2. Engine-confirm: announce tier; suggest ultracode if complex.
 3. Risk-boundary: only on irreversible ops (DB/migration/deletion/dep-removal/public-API/security). DB + destructive ALWAYS ask, even with -a.
 4. Verification-run: default asks before running; `--yolo` runs safe set after listing.
-5. HALT: task fails self-check 3x, or an propose BLOCKER blocks a task.
+5. HALT: task fails self-check 3x, an propose BLOCKER blocks a task, an open
+   spec question blocks a task, or the edit scope spans two git repos
+   (one ship run per repo).
+
+Resume keeps its git context: `work_branch` and `commit_mode` live in
+trace.md, so `-r` returns to the same branch and re-arms the commit grant
+instead of prompting on every commit.
+
+One feature, one run: a brief whose HOW moved into a proposal is marked
+`superseded`, so `/next` shows one target and ship refuses to build both.

@@ -60,6 +60,22 @@ Store {contract_path} = {output_dir}/contract.md.
 
 The contract is the immutable target the verification bundle validates against. A requirement change later gets a NEW row, never a silent rewrite.
 
+### 3b. Single-repo check
+
+Everything downstream assumes ONE repository: `{project_root}` comes from a
+single `git rev-parse`, the branch, the per-task commits and the PR all live
+there. A plan whose files span two repos would half-land, silently.
+
+```
+Resolve the git root of every path in the contract edit scope
+(`git -C <dir> rev-parse --show-toplevel`).
+IF more than one distinct root, or a path outside {project_root}:
+  -> HALT. Name each repo and which tasks belong to it, and say the plan
+     needs one ship run per repo (the spec stays as is; run ship from each
+     repo with the tasks that belong to it).
+Never attempt a cross-repo run: ship has no cross-repo branch, commit or PR.
+```
+
 ### 4. Branch checkpoint + run commit grant
 
 Skip entirely if `{commit_mode}` = false.

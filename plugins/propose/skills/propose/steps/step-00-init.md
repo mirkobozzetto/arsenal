@@ -39,6 +39,21 @@ Extract from raw args:
 - `--no-review` → `{skip_review} = true`
 - `--out <dir>` → `{out_dir}`
 
+### 1b. Detect a sibling brief
+
+A brief and a proposal for the SAME feature both look shippable, and
+nothing links them: two open items, two possible runs, one feature. Close
+that hole here.
+
+```
+IF the title (or --scope) points at a docs/brief/<slug>/ folder, OR a
+docs/brief/<slug>/ exists whose slug matches this proposal's slug:
+  -> set {source_brief} = docs/brief/<slug>/
+  -> say in ONE line that this proposal designs the HOW of that brief,
+     and that ship must be pointed at ONE of the two, not both.
+ELSE: {source_brief} = null.
+```
+
 ### 2. Settle the format
 
 `{format}` drives the section set and the size ceiling

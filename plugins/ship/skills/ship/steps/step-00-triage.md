@@ -59,6 +59,22 @@ ambiguous IF a path that is neither -> probe with Glob (brief.md/tasks.md vs PRO
 
 Quick disambiguation when a file is given but kind is unclear: a body with nested `- [ ] N.0/N.1` checkboxes => brief; a body with a flat `| T0n |` task table => propose.
 
+### 3b. One feature, one run (sibling artifact check)
+
+Shipping the brief AND the proposal of the same feature builds it twice, on
+two branches, with two ledgers. Detect the pair before anything runs:
+
+```
+brief given   -> if its frontmatter has `proposal: <path>`, or a proposal
+                 declares `source_brief` pointing here: the proposal owns
+                 the HOW. Say it in one line and ship the PROPOSAL instead,
+                 unless the user insists on the brief.
+propose given -> if its frontmatter has `source_brief`, say in one line that
+                 the sibling brief is covered by this run. Never run both.
+Either way, ONE run per feature. A second concurrent run on the sibling is
+refused, not silently allowed.
+```
+
 ### 4. Inline route (CASE C): offer the choice
 
 ```

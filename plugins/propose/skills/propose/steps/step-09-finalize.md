@@ -71,6 +71,18 @@ next_action: "{one line: what implementing this delivers}"
 resume_cmd: "/ship {proposal_path}"
 ```
 
+### 3b. Close the sibling brief (only if `{source_brief}`)
+
+Two shippable artifacts for one feature is how a feature gets built twice.
+The proposal now carries the HOW, so the brief stops being a ship target:
+
+```
+- Write `proposal: <proposal_path>` into {source_brief}/brief.md frontmatter.
+- Set that brief.md `status: superseded` (it leaves the /next board; its
+  content stays readable, nothing is deleted).
+- Say it in ONE line: "le brief passe en superseded, /ship vise la proposal".
+```
+
 `next_action` + `resume_cmd` are the fields the `next` open-work board reads so an Accepted proposal surfaces with its exact resume command. On `status: shipped` (set by ship at finish, or a sibling `PROPOSAL.shipped` marker since PROPOSAL.md stays immutable) the item leaves the board.
 
 ### 4. Update proposal index (if applicable)

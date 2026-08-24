@@ -73,7 +73,7 @@
       "name": "propose",
       "source": "./plugins/propose",
       "description": "Design workflow in the RFC tradition: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Two sizes with hard ceilings.",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "category": "planning",
       "tags": [
         "propose",
@@ -88,7 +88,7 @@
       "name": "ship",
       "source": "./plugins/ship",
       "description": "Spec executor. Implements a finalized prd or Accepted rfc (or a bare prompt via inline contract) on agent-teams/subagents/solo, emits a user-run verification bundle + trace ledger.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "category": "implementation",
       "tags": [
         "implement",
@@ -104,7 +104,7 @@
       "name": "next",
       "source": "./plugins/next",
       "description": "Query unfinished prd/rfc/ship work and the exact command to resume it. Derives an open-work board from artifact frontmatter; a SessionStart hook auto-surfaces it so context survives /clear.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "category": "orientation",
       "tags": [
         "resume",

@@ -97,6 +97,25 @@ For CASE C (inline), {tasks} comes from the confirmed derived list in step 1 (no
 - Build {tasks}: one entry per T-id with deps, accept-criterion, files, ordered topologically.
 ```
 
+### 2b. Surface the spec's open questions (CASE B, and CASE A's Open questions if any)
+
+An Accepted proposal can still carry unanswered questions (section 8 Open
+Questions in `full`, folded into section 7 otherwise). They are not review
+blockers, so nothing stops on them today: ship would build around a hole the
+author knew about. Read them and hand the decision back once:
+
+```
+Collect every open/unresolved question from the spec.
+IF none: say nothing, continue.
+IF any:
+  - list them in prose, one line each, and for each say whether it blocks a
+    task in {tasks} (name the task) or not.
+  - a question that BLOCKS a task -> that task is HALT-gated, exactly like a
+    section 11 BLOCKER. Never build a task whose question is open.
+  - questions that block nothing -> one confirmation to proceed with them
+    still open (auto_mode proceeds and logs them to trace.md Checkpoints).
+```
+
 ### 3. Detect the toolchain ({detected_stack})
 
 Prefer the deterministic helper: `bash scripts/detect-stack.sh {project_root}` prints `{"language","package_manager"}`. Use it first; fall back to the manual mapping below only if it errors or returns "unknown".

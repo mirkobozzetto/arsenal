@@ -88,6 +88,7 @@ created: "YYYY-MM-DD"
 updated: "YYYY-MM-DD"
 stepsCompleted: []
 scope_path: "/path"
+source_brief: "docs/brief/<slug>/"   # omit when the proposal has no sibling brief
 auto_mode: false
 skip_review: false
 ---

@@ -33,7 +33,9 @@ Implement every task on `{engine_tier}`, checkpoint at risk boundaries, and keep
 ### 0. Initialize the ledger
 
 ```
-Write {output_dir}/trace.md from templates/trace.md (artifact, kind, engine_tier).
+Write {output_dir}/trace.md from templates/trace.md (artifact, kind, engine_tier,
+work_branch, commit_mode). work_branch + commit_mode MUST land in the frontmatter:
+they are what a later `-r` reads back to keep committing on the same branch.
 Set {trace_path}. One row per task; status starts "todo".
 ```
 

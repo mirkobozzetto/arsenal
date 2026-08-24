@@ -2,6 +2,8 @@
 artifact: "{artifact_path}"
 artifact_kind: "{brief|propose}"
 engine_tier: "{teams|subagents|solo}"
+work_branch: "{branch the run commits on, or null}"
+commit_mode: {true|false}
 stepsCompleted: []
 final_status: ""
 updated: "{date}"

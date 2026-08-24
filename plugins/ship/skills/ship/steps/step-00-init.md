@@ -79,6 +79,25 @@ ELSE:
   -> Continue
 ```
 
+### 3b. Re-arm the run on resume (git continuity)
+
+A resume skips step-02, where the branch checkpoint and the commit grant
+are set. Without this, a resumed run commits on whatever branch happens to
+be checked out and prompts on every single commit. So on resume:
+
+```
+Restore {work_branch} and {commit_mode} from the trace.md frontmatter.
+IF {commit_mode} AND {work_branch}:
+  - checkout it if the current branch differs (`git checkout {work_branch}`;
+    Graphite repo -> `gt co {work_branch}`). If it no longer exists, say so
+    in one line and re-run the step-02 branch checkpoint instead.
+  - re-arm the grant (finish deleted the previous run's):
+      printf '%s %s\n' "$(git rev-parse --show-toplevel)" "{work_branch}" > ~/.claude/.git-guard-commit-grant
+  - state the branch in one line so the user sees where commits land.
+IF the trace has no work_branch (pre-1.3 ledger): run the step-02 branch
+checkpoint once before executing, then continue the resume.
+```
+
 ### 4. Confirm start
 
 **If `{auto_mode}` = true:** proceed to step-01.
@@ -117,11 +136,13 @@ output_dir: "<path>"
 - All flags parsed; invalid -m value rejected
 - project_root + output_dir resolved (output_dir matches artifact kind)
 - Resume detected and honored when trace.md exists
+- On resume: branch restored and commit grant re-armed from the ledger
 - No toolchain assumed, no path hardcoded
 
 ## FAILURE MODES:
 
 - Fresh init over an existing trace -> Recovery: always check trace.md first
+- Resuming onto the wrong branch, or prompting on every commit -> Recovery: restore work_branch + re-arm the grant (3b)
 - output_dir hardcoded -> Recovery: derive from {artifact_path}
 - -m given a bad tier -> Recovery: reject, ask or fall back to the probe
 
