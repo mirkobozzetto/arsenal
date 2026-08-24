@@ -124,6 +124,37 @@ IF {commit_mode} AND uncommitted contract-scoped changes remain (git status):
 IF verification NOT green or halted: no PR offer at all.
 ```
 
+**"Green" means THIS run's code checks passed.** It does NOT mean the whole
+system is live. A run whose own checks are clean but whose end-to-end test
+waits on a deploy, another repo, or a manual step is still PR-ready: the PR
+is often what unblocks the rest. Never withhold the offer because something
+downstream is pending; say what is still pending in the PR body instead.
+
+### 3b. Pending sibling PRs (re-offer until they exist)
+
+A PR offered once and declined is forgotten forever today, so a green branch
+sits unopened while the user waits on it.
+
+```
+For every sibling run of this spec (its trace{*}.md in {output_dir}) that
+shipped green and whose branch has no PR yet (`gh pr list --head <branch>`):
+  -> re-offer it here, one line each: branch, target base, what it unblocks.
+```
+
+### 3c. Propose the next move, do not just list it
+
+The handoff enumerates what is left (that stays). Then pick the ONE step
+that unblocks the most of it and OFFER to take it now:
+
+```
+Choose the unblocker: an unopened green PR beats a local check, which beats
+anything waiting on a deploy the user must trigger.
+Ask it as one plain question ("j'ouvre la PR backend vers main ?"), do it on
+a yes, and stop there. ONE offer, never a queue of them.
+Steps the user must run himself (deploy, device test, credentials) are listed,
+never offered: naming who does what is the point.
+```
+
 ### 4. Close the loop (upstream status + task ledger)
 
 Keep the `next` open-work board honest: an item must leave it once shipped, a halted run must point back to its resume command, and the upstream task checkboxes must match what trace.md recorded as done. trace.md is the live ledger during execute; this is the SINGLE point where its result is synced back into the brief's tasks.md, so `next` never reads a stale 0/N after a successful run.
@@ -166,6 +197,7 @@ workflow_complete: true
 - Handoff printed: artifact, contract status, bundle path, trace path, next actions
 - Commit grant removed on every path; no push outside the PR gate
 - Remaining runs of the spec named with their pasteable commands, or the spec declared fully shipped
+- Every green branch without a PR re-offered; exactly one next move proposed, not just listed
 - Plain ASCII, no emojis
 - Runs on every path (shipped / halted / rejected)
 
@@ -173,6 +205,8 @@ workflow_complete: true
 
 - `rm -rf` used -> CRITICAL Recovery: abort, use `trash`
 - PR created without a validated user story -> Recovery: never; the gate is mandatory
+- Listing "open the PR, then deploy" as prose instead of offering the PR -> Recovery: enumerate, then offer the unblocker
+- Withholding the PR because a deploy or another repo is pending -> Recovery: green means this run's checks, not the whole system
 - Grant left behind -> Recovery: rm -f it here, every path
 - Ending a scoped run without naming the remaining ones -> Recovery: the spec looks done when it is not; always print the runs left
 - Skipped on HALT -> Recovery: finish is mandatory on every path
