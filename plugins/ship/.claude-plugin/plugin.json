@@ -1,6 +1,6 @@
 {
   "name": "ship",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Spec executor. Implements a finalized brief or an Accepted propose (or a bare prompt via an inline contract) on agent-teams / subagents / solo, then emits a user-run verification bundle + a trace ledger.",
   "author": {
     "name": "Mirko Bozzetto",

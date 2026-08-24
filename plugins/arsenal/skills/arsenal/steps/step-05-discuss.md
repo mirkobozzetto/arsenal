@@ -35,9 +35,13 @@ next_action: "<one line: brief phase 1>".
 
 ```
 Roadmap:  docs/roadmap/<slug>/roadmap.md   (rendered page already open)
-Next:     /brief <phase-1 idea>     -> spec phase 1
-          /arsenal -r <slug>        -> re-discuss this roadmap later
+Next:     /clear
+          /brief <phase-1 idea>     -> spec phase 1
+Later:    /arsenal -r <slug>        -> re-discuss this roadmap
 ```
+
+The interview and the research are spent: the roadmap carries what brief
+needs. Never clear anything yourself - `/clear` is the user's to type.
 
 ## WORKFLOW COMPLETE
 

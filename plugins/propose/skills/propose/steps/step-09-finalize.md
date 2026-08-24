@@ -138,6 +138,18 @@ questions:
     multiSelect: false
 ```
 
+Whatever the choice, print the next command as a pasteable two-line block:
+
+```
+/clear
+/ship {proposal_path}
+```
+
+The design debate and the adversarial review are spent context: ship reads
+the document, not the conversation, and carrying the argument in biases it
+toward what was discussed instead of what was written. Say that in half a
+line. Never clear anything yourself - `/clear` is the user's to type.
+
 If ship is chosen -> invoke it with `{proposal_path}` (it refuses if status != Accepted). If brain -> invoke /brain with `{proposal_path}`. (sdd stays available manually: /speckit.specify.) proposal Accepted != implemented: only launch on explicit choice.
 
 ## SUCCESS METRICS:

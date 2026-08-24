@@ -60,8 +60,12 @@ Branch:    {work_branch}          ({K} progressive commits, see trace)
 Next:
   1. Run the verification bundle: {bundle_path}
   2. If green, validate the user story below to open the PR.
-  3. Resume later if needed: /ship -r {artifact_path}
+  3. Resume later if needed:  /clear
+                              /ship -r {artifact_path}
 ```
+
+Do NOT suggest clearing before the bundle and the PR gate: verification and
+the user story need what just happened. The clear belongs to a LATER resume.
 
 For `final_status` = halted: state the HALT reason (gate failed / 3x self-check / propose BLOCKER) and what to fix.
 

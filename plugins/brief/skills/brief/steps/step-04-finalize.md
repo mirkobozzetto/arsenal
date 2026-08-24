@@ -84,6 +84,18 @@ questions:
 - **ship** → tell the user to run `ship <feature_dir>` (the brief folder); ship reads tasks.md + brief.md, gated on `status: ready`. Do NOT run it automatically.
 - **Stop here** → end; print the resume hint (`ship <feature_dir>` later).
 
+Print the routed command as a two-line block the user can paste whole:
+
+```
+/clear
+/propose <title>          # or /ship <feature_dir>
+```
+
+The interview transcript is spent: the brief carries everything the next
+skill reads, and the `next` SessionStart hook resurfaces the board after the
+clear. Say that in half a line, once, and never clear anything yourself -
+`/clear` is the user's to type.
+
 ### 5. Commit?
 
 **If `auto_mode` = true:**

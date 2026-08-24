@@ -108,6 +108,22 @@ shipped + criteria satisfied authorizes the [ ] -> [x] flip, so there is no per-
 auto_mode hole where progress silently never lands. For propose: PROPOSAL.md stays immutable; progress lives only in trace.md.
 ```
 
+### 3c. Long-run breakpoint (suggest, never take)
+
+A plan too big for one session degrades as the context fills. The clean
+break is between two INDEPENDENT groups, never mid-group: every finished
+unit is already committed and recorded, so nothing is lost.
+
+```
+When an independent group completes AND tasks remain AND the run is long
+(rough signal: >8 units done, or the user says the session is heavy):
+  say in ONE line that this is a clean break, and print:
+      /clear
+      /ship -r {artifact_path}
+  Then CONTINUE working unless the user stops you. This is a suggestion,
+  not a gate: never stop on your own, never clear anything yourself.
+```
+
 ### 4. Anti-premature-stop + HALT
 
 ```

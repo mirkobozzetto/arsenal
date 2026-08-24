@@ -1,6 +1,6 @@
 {
   "name": "brief",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Author a product brief by interview (the PRD tradition, under a plainer name), then emit user stories, scope, success metrics, and a derived nested task list. Stops at the task list and hands off.",
   "author": {
     "name": "Mirko Bozzetto",
