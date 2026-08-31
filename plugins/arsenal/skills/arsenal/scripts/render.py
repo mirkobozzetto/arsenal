@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a brief/proposal markdown artifact to its deliverable HTML page.
+"""Render a roadmap markdown artifact to its deliverable HTML page.
 
 Status banner, side TOC, inverted-pyramid typography, mermaid rendered
 client-side. The markdown is base64-embedded so accents, code fences and
@@ -11,7 +11,7 @@ Usage: render.py <artifact.md> [--no-open]
 import base64
 import re
 import sys
-import subprocess
+import webbrowser
 import tempfile
 import time
 from pathlib import Path
@@ -20,17 +20,18 @@ STATUS_TONES = {
     "accepted": "good", "ready": "good", "shipped": "good",
     "review": "warn", "draft": "neutral", "rejected": "bad",
 }
+VENDOR_DIR = Path(__file__).resolve().parent.parent / "assets" / "vendor"
 
 TEMPLATE = """<!doctype html>
-<html lang="fr">
+<html lang="und">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>__TITLE__</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>__MARKED__</script>
+<script>__MERMAID__</script>
 <style>
 :root {
   --ground:#f6f6f4; --sheet:#fff; --sunk:#ededea; --ink:#17191d;
@@ -209,10 +210,16 @@ def main():
 
     m = re.search(r"^#\s+(.+)$", body, re.M)
     title = meta.get("title") or (m.group(1) if m else src.stem)
+    marked = (VENDOR_DIR / "marked.min.js").read_text(encoding="utf-8")
+    mermaid = (VENDOR_DIR / "mermaid.min.js").read_text(encoding="utf-8")
+    marked = re.sub(r"</script", r"<\\/script", marked, flags=re.I)
+    mermaid = re.sub(r"</script", r"<\\/script", mermaid, flags=re.I)
     page = (
         TEMPLATE
         .replace("__TITLE__", title)
         .replace("__BANNER__", banner(meta))
+        .replace("__MARKED__", marked)
+        .replace("__MERMAID__", mermaid)
         .replace("__B64__", base64.b64encode(body.encode("utf-8")).decode("ascii"))
     )
 
@@ -220,7 +227,12 @@ def main():
     out.write_text(page, encoding="utf-8")
     print(out)
     if "--no-open" not in sys.argv:
-        subprocess.run(["open", str(out)], check=False)
+        try:
+            opened = webbrowser.open(out.as_uri())
+        except (OSError, webbrowser.Error):
+            opened = False
+        if not opened:
+            print("Browser unavailable; open the HTML path above.", file=sys.stderr)
 
 
 if __name__ == "__main__":

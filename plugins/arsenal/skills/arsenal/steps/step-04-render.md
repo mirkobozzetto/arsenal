@@ -1,26 +1,25 @@
 ---
 name: step-04-render
-description: Render the roadmap to a styled HTML page and open it
+description: Render a self-contained HTML roadmap and optionally open it
 prev_step: steps/step-03-plan.md
 next_step: steps/step-05-discuss.md
 ---
 
-# Step 4 (Render): The HTML Deliverable
+# Step 4: Render the HTML Deliverable
 
-## YOUR TASK:
+Run:
 
+```text
+python3 <skill-dir>/scripts/render.py {roadmap_dir}/roadmap.md
 ```
-python3 <this skill dir>/scripts/render.py {roadmap_dir}/roadmap.md
-```
 
-The script writes the page to $TMPDIR and opens it in the browser: status
-banner, side TOC, mermaid and inline HTML mockup rendered, command blocks
-styled. MANDATORY: ending this step without the browser opening is a
-FAILURE. Only a rendering ERROR (script crash, no browser) may be reported
-in one line and skipped past.
+The script writes a self-contained HTML file to the platform temporary
+directory and prints its path. Marked and Mermaid are bundled and inlined. No
+network access is required.
 
-The rendered page is the deliverable; the markdown is storage.
+Opening the default browser is best effort. A missing browser is not failure
+when the HTML file was written and its path was printed. Use `--no-open` on a
+headless host.
 
-## NEXT STEP:
-
-Load `./step-05-discuss.md`.
+The rendered page is the deliverable. The Markdown file is durable storage.
+Load `./step-05-discuss.md` after a successful render.

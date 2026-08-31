@@ -41,8 +41,8 @@
     {
       "name": "arsenal",
       "source": "./plugins/arsenal",
-      "description": "Socratic roadmap interviewer: clarifies a fuzzy idea into a phased roadmap (interview -> Exa research -> HTML page with mockup + command blocks), re-discussable, hands off to /brief.",
-      "version": "1.1.0",
+      "description": "Portable Socratic roadmap workflow with native Claude Code, OMP, and Codex agents, a complete solo fallback, and self-contained offline HTML rendering.",
+      "version": "1.2.0",
       "category": "orientation",
       "tags": [
         "roadmap",

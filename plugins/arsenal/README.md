@@ -1,43 +1,87 @@
 # arsenal
 
-The **orientation** stage, upstream of the whole `brief → propose → ship`
-pipeline. `arsenal` takes a fuzzy idea ("I want to build something like…")
-and turns it into a phased roadmap you believe in - by interviewing you
-first, one non-obvious question at a time, then researching how others
-solved the same problem.
+The orientation stage before product specification, technical design, and
+implementation. Arsenal turns a fuzzy idea into a phased roadmap through a
+Socratic interview, capability-aware research, and adversarial review.
 
-**Deliverable:** `docs/roadmap/<slug>/roadmap.md`, rendered and opened as a
-styled HTML page with:
+## Deliverable
 
-- the objective, out-of-scope, and cited inspirations,
-- a wireframe mockup of the core screen or flow,
-- 2-4 ruthless phases, each with copy-paste command blocks,
-- a handoff line: which phase to `/brief` first.
+A normal run writes only `docs/roadmap/<slug>/roadmap.md` in the project. The
+same roadmap is rendered as a self-contained HTML page with:
 
-The roadmap stays re-discussable: `/arsenal -r <slug>` reopens the loop,
-edits the same artifact, re-renders the page.
+- the objective, exclusions, and cited inspirations;
+- one wireframe or flow diagram;
+- two to four shippable phases with runnable commands;
+- a semantic handoff for the first phase;
+- optional agent routing evidence.
+
+The renderer bundles pinned Marked and Mermaid assets. It works offline and
+uses the platform default browser when one is available.
+
+## Portability
+
+The canonical workflow is an Agent Skills `SKILL.md`. Harness-specific model
+and agent details live outside the portable core.
+
+| Harness | Agent discovery | Fast | Balanced |
+|---------|-----------------|------|----------|
+| Claude Code | Plugin agents, automatic | Haiku | Sonnet |
+| OMP | Explicit user or project installation | GPT-5.6 Luna | GPT-5.6 Terra |
+| Codex | Explicit user or project installation | GPT-5.6 Luna | GPT-5.6 Terra |
+| Other | Solo in the parent session | Parent | Parent |
+
+The lead always owns the interview, scope, synthesis, roadmap write, and final
+discussion. Read-only agents handle independent research and one adversarial
+review. Missing agents, models, authentication, search, or browser capability
+falls back to the complete solo workflow.
 
 ## Install
 
-```bash
+Claude Code plugin:
+
+```text
 /plugin marketplace add mirkobozzetto/arsenal
 /plugin install arsenal@arsenal
 ```
 
+OMP and Codex agents are never installed automatically. Invoke the explicit
+skill action after installing the plugin:
+
+```text
+/arsenal --install-omp-agents
+/arsenal --install-codex-agents
+```
+
+Both installers preserve replaced files and support reversal:
+
+```text
+/arsenal --uninstall-omp-agents
+/arsenal --uninstall-codex-agents
+```
+
 ## Usage
 
-```bash
-/arsenal a tool that turns my meeting notes into follow-up emails
-/arsenal -r meeting-notes-emails     # re-discuss an existing roadmap
-/arsenal -a <idea>                   # infer instead of interviewing (vague ideas: don't)
+```text
+/arsenal a tool that turns meeting notes into follow-up emails
+/arsenal -r meeting-notes-emails
+/arsenal -a a local photo organization CLI
+/arsenal --no-agents a roadmap that must run in solo mode
 ```
+
+## Verification
+
+```text
+python3 -m unittest discover -s plugins/arsenal/tests -v
+```
+
+The suite validates portable skill metadata, native agent formats, reversible
+installation, canonical roadmap structure, and offline rendering. Runtime
+routing still requires each harness: OMP model proof comes from child session
+transcripts, not from configured aliases.
 
 ## Boundaries
 
-- Chain: `arsenal → brief → propose → ship`. arsenal decides WHAT and in
-  which order; it never specs (brief), designs (propose) or implements
-  (ship).
-- Writes `docs/roadmap/<slug>/roadmap.md` and nothing else in the repo.
-- Web research via Exa MCP only; every inspiration is cited.
-- Not `code-roadmap`: that plugin routes to skills, this one shapes the
-  product objective.
+- Arsenal decides what to build and in which order. It does not implement.
+- Research uses the best available semantic web capability.
+- Existing roadmaps resume in place without migration or forks.
+- Global user configuration changes only after an explicit install action.
