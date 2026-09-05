@@ -1,0 +1,9 @@
+{
+  "name": "arsenal-workflow-runtime",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@langchain/langgraph": "^1.0.0",
+    "acorn": "^8.15.0"
+  }
+}

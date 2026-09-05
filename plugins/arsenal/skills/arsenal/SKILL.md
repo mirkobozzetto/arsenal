@@ -1,96 +1,46 @@
 ---
 name: arsenal
-description: Clarify a fuzzy project idea into a phased roadmap through a Socratic interview, capability-aware research, and adversarial review. Use for roadmap discovery, product direction, or deciding what to build before brief, proposal, or implementation work.
-compatibility: Python 3 is required only for HTML rendering. Network access and subagents are optional; the complete workflow has a solo fallback.
-metadata:
-  version: "1.2.0"
+description: Clarify a genuinely fuzzy idea into a concise phased roadmap. Optional bounded research, no automatic agents.
+argument-hint: "<idea> [-a] [-r slug] [--no-agents] [--html]"
 ---
 
-<objective>
-Turn a vague idea into a clear phased roadmap the user believes in. Interview
-first, research existing solutions, draft the smallest useful sequence, review
-it adversarially, and render one durable roadmap artifact.
-</objective>
+# Arsenal roadmap
 
-<parameters>
-| Flag | Description |
-|------|-------------|
-| `-a` / `--auto` | Infer interview answers from the idea |
-| `-r` / `--resume` | Reopen an existing roadmap for discussion |
-| `--no-agents` | Force the complete solo workflow |
-| `--install-omp-agents` | Explicitly install bundled OMP agents |
-| `--install-codex-agents` | Explicitly install bundled Codex agents |
-| `--uninstall-omp-agents` | Restore or remove installed OMP agents |
-| `--uninstall-codex-agents` | Restore or remove installed Codex agents |
+Keep the existing roadmap schema and resume behavior. Read the requested
+roadmap if resuming; do not restart a finished phase.
 
-The remaining input is the project idea or resume slug.
-</parameters>
+Clarify the actual pain, intended user, smallest useful result, non-goals and
+constraints only where missing. Ask a relevant plain-text question, not a
+fixed interview quota. Stop interviewing when the direction is actionable.
 
-<state_variables>
-| Variable | Type | Set by |
-|----------|------|--------|
-| `{idea}` | string | step-00-init |
-| `{slug}` | string | step-00-init |
-| `{auto_mode}` | boolean | step-00-init |
-| `{resume_mode}` | boolean | step-00-init |
-| `{force_solo}` | boolean | step-00-init |
-| `{roadmap_dir}` | string | step-00-init |
-| `{capabilities}` | object | step-00-init |
-| `{answers}` | object | step-01-interview |
-| `{research}` | array | step-02-research |
-| `{execution_trace}` | array | steps 02 and 03 |
-| `{stepsCompleted}` | array | every step |
-</state_variables>
+Run targeted research only where external evidence changes the roadmap.
+Keep useful sources, what to borrow/avoid and uncertainty; no minimum count.
+Use available native search capabilities. No web access means disclose the
+limitation, not fabricate citations.
 
-<delimitation>
-- Arsenal decides what is worth building and in which order.
-- It does not write a product brief, technical proposal, or implementation.
-- The workflow hands off through semantic next actions. Harness adapters format
-  any concrete command shown to the user.
-</delimitation>
+Write docs/roadmap/<slug>/roadmap.md. Keep its six numbered sections from the
+existing schema, but omit decorative content within them. Use as many phases
+as the objective needs, no invented diagram or feature. Review in the lead.
 
-<entry_point>
-**FIRST ACTION:** Load `steps/step-00-init.md`.
-</entry_point>
+Agents are optional: only after approval, and only genuinely independent
+read-only units. Read references/agent-contracts.md and the matching adapter
+only then. At most three; no fallback chain of agent launches. If a worker
+fails, handle the missing part once in the lead. Do not open test sessions
+to prove model routing during a roadmap task.
 
-<step_files>
-| Step | File | Purpose |
-|------|------|---------|
-| 00 | `steps/step-00-init.md` | Parse input and detect capabilities |
-| 01 | `steps/step-01-interview.md` | Find the real objective |
-| 02 | `steps/step-02-research.md` | Research through available capabilities |
-| 03 | `steps/step-03-plan.md` | Draft and adversarially review the roadmap |
-| 04 | `steps/step-04-render.md` | Render the HTML deliverable |
-| 05 | `steps/step-05-discuss.md` | Re-discuss, finalize, and hand off |
-</step_files>
+Render scripts/render.py only with --html or an explicit request. Mark ready
+when the user approves. Do not execute the next phase automatically.
 
-<references>
-- `references/capability-contract.md`: probe and fallback contract.
-- `references/agent-contracts.md`: bounded agent inputs and outputs.
-- `references/adapters/`: harness-specific discovery and routing.
-- `scripts/install_agents.py`: explicit OMP and Codex agent installation.
-- `scripts/render.py`: offline, cross-platform HTML renderer.
-</references>
+Explicit install/uninstall flags remain supported: --install-omp-agents,
+--install-codex-agents, --uninstall-omp-agents, --uninstall-codex-agents. Use
+scripts/install_agents.py for the selected operation only, with backups.
+They never run as a side effect of creating a roadmap. A restricted harness
+may require the user to authorize this separate configuration action.
 
-<interaction>
-- The interview is interactive unless `--auto` is present.
-- Ask one plain-text question at a time.
-- Use the conversation language for chat and the roadmap. Keep versioned
-  repository content, identifiers, commands, and frontmatter keys in English.
-- The lead owns interpretation, scope, synthesis, roadmap writing, and final
-  discussion. Agents never question the user or write the roadmap.
-</interaction>
+## Execution policy
 
-<critical>
-- Resolve research, delegation, and rendering as semantic capabilities. Never
-  require a particular tool name in the portable core.
-- Delegate only two or more independent, read-only units. Maximum fan-out is
-  three. Run the same contracts sequentially in the lead when delegation is
-  unavailable.
-- Preserve the roadmap schema and resume behavior. Optional execution trace
-  metadata is additive.
-- Never modify global user configuration automatically. Agent installation is
-  explicit and reversible.
-- Rendering the HTML is mandatory. Opening a browser is optional.
-- Write only `docs/roadmap/<slug>/roadmap.md` during a normal workflow.
-</critical>
+Work solo. Ask before any subagent or reviewer, even in auto mode. Explain
+the independent scope and expected benefit first. No hidden advisor, nested
+delegation, model retuning, repeated successful checks, or progress spam.
+Use existing context before asking questions. Stop when the requested result
+is delivered. User stops and scope changes override pending steps.

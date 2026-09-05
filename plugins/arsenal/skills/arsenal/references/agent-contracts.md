@@ -12,7 +12,7 @@ Agents receive a frozen context packet under 3,000 tokens:
 
 Semantic role: `fast`.
 
-Return only a JSON array containing two to five objects:
+Return only a JSON array containing zero to five supported objects:
 
 ```json
 [{"name":"","url":"","borrow":"","avoid":"","confidence":"high|medium|low","risk":""}]

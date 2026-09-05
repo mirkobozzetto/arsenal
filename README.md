@@ -21,7 +21,7 @@ Plain markdown skills, portable to any coding agent or CLI: Claude Code, pi, oh-
 | Plugin | What it does | You type |
 |--------|--------------|----------|
 |  [`code-roadmap`](./plugins/code-roadmap) | Tells you which path fits the task. Advisory, never forces. | `/code-roadmap add OAuth login` |
-|  [`arsenal`](./plugins/arsenal) | The **objective**. Socratic interview → phased roadmap as an HTML page (mockup + commands). | `/arsenal an app that...` |
+|  [`arsenal`](./plugins/arsenal) | The **objective**. Targeted interview and phased roadmap; HTML on request. | `/arsenal an app that...` |
 |  [`brief`](./plugins/brief) | The **what & why**. Interview → product spec + task list. | `/brief add OAuth login` |
 |  [`propose`](./plugins/propose) | The **how**. Alternatives, tradeoffs, risks, plan. One page or a few, hard ceilings. | `/propose OAuth token storage` |
 |  [`ship`](./plugins/ship) | The **build**. Executes the spec, hands back a verification bundle. | `/ship docs/brief/oauth-login/` |
@@ -64,7 +64,30 @@ Meanwhile, three tools watch your back, never in your way:
 -  `/issue` when a bug must survive the night: hypothesis and state, resumable cold.
 -  `trace` writes the ledger on its own; `next` reads it, you type nothing.
 
-**The document IS the deliverable** - each workflow ends on a clean HTML page: decision first, details after, presentable to a client.
+Work solo by default. Delegation and independent review require user consent.
+HTML is optional; no mandatory interview, reviewer or artifact bundle for a
+bounded implementation request.
+
+### Optional controlled OMP runtime (macOS)
+
+Install dependencies in `plugins/ship/runtime` with Bun, then add its absolute
+`extension.ts` path to OMP's `extensions` configuration and restart OMP.
+The nine skill commands activate the controller; ordinary sessions stay native.
+`/arsenal-mode runtime [root]` or `edit-only [root]` selects scope and proof
+policy. `status` reports persisted state; `off` explicitly restores native tools.
+
+The LangGraph controller persists transitions, serializes shell commands and
+reuses an identical successful check until the revision changes. Runtime
+completion requires recorded successful execution, not an assertion from a
+reviewer. Exit status alone does not prove semantic correctness.
+
+Controlled Eval accepts literal tool calls only. The macOS sandbox refuses
+shell networking and writes outside the root/scratch. This deliberately
+excludes browser automation, dependency downloads and external GitHub writes;
+authorize a separate native operation when needed. A missing command result
+stays blocked rather than assuming its process stopped. Other operating
+systems refuse controlled shell execution. No general-purpose security or
+token-saving percentage is claimed.
 
 ---
 

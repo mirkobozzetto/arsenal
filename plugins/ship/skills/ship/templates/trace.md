@@ -1,30 +1,18 @@
 ---
-artifact: "{artifact_path}"
-artifact_kind: "{brief|propose}"
-engine_tier: "{teams|subagents|solo}"
-work_branch: "{branch the run commits on, or null}"
-commit_mode: {true|false}
+artifact: ""
+project_root: ""
+run_id: ""
+task_filter: null
+engine_tier: solo
+commit_mode: false
+work_branch: null
 stepsCompleted: []
-final_status: ""
-updated: "{date}"
+final_status: in_progress
 ---
 
-# Trace Ledger: {feature_or_proposal_title}
+# Progress
 
-> Single source of truth for progress. A fresh session reads ONLY this file to resume. One row per task/T-id.
+| Unit | Status | Files | Evidence | Commit if requested |
+|---|---|---|---|---|
 
-## Tasks
-
-| Unit | Contract item | Status | Files touched | Engine | Commit | Notes |
-|------|---------------|--------|---------------|--------|--------|-------|
-| 1.0 / T01 | C1 | done / in_progress / blocked | `path` | solo | `abc1234` | {diff summary} |
-
-## Checkpoints
-
-| Step | Kind | Decision | Why |
-|------|------|----------|-----|
-| step-04 | risk-boundary | proceeded / halted | {irreversible op + user choice} |
-
-## HALT events
-
-- {none, or: task X failed self-check 3x / propose BLOCKER unresolved}
+## Remaining decisions

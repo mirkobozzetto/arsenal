@@ -134,7 +134,8 @@ function collect(root) {
     const isRoadmap = fm.type === "roadmap";
     if (!isPrd && !isRfc && !isRoadmap) continue;
     const kind = isPrd ? "prd" : isRoadmap ? "roadmap" : "rfc";
-    const status = fm.status || (isRfc ? "Draft" : "draft");
+    const shippedMarker = isRfc && fs.existsSync(path.join(path.dirname(file), `${path.basename(file, ".md")}.shipped`));
+    const status = shippedMarker ? "shipped" : fm.status || (isRfc ? "Draft" : "draft");
     const b = bucket(kind, status);
 
     let progress = null;

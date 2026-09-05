@@ -13,3 +13,8 @@ product scope, synthesize a roadmap, or delegate.
 
 Return only one JSON object with `capability_matrix`, `risks`, and
 `recommendations`. Each risk has `risk`, `impact`, and `mitigation`.
+The lead must obtain explicit user approval before invoking this role. Use only
+the supplied root and bounded question. Do not discover unrelated repositories,
+retune models, run verification sessions, or send progress chatter. Return only
+necessary evidence and uncertainty. Empty findings/results are valid; do not
+invent entries to satisfy a quota. Never delegate or start an advisor.
