@@ -1,7 +1,7 @@
 {
   "name": "code-roadmap",
-  "version": "1.1.0",
-  "description": "Orientation map at the start of a coding task: matches your intent against the skills available in this session and prints a recommended chain + execution mode + reflection level. Advisory only.",
+  "version": "1.2.0",
+  "description": "Deprecated advisory compatibility alias for Arsenal. Requires the Arsenal plugin.",
   "author": {
     "name": "Mirko Bozzetto",
     "url": "https://github.com/mirkobozzetto"

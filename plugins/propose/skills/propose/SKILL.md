@@ -28,6 +28,13 @@ a source brief. Do not supersede that brief until the design is accepted.
 Render via scripts/render.py only on --html or request. Do not launch ship,
 open a browser, create an index, or start another agent just to finish.
 
+## Arsenal handoff
+
+When called by Arsenal, return the proposal, status and unresolved decisions
+to Arsenal. Do not launch ship yourself. Explicit user acceptance remains
+required before Arsenal can consume the proposal for implementation, even
+when the original request was to build the feature.
+
 ## Execution policy
 
 Work solo. Ask before any subagent or reviewer, even in auto mode. Explain

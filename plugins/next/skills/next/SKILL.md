@@ -16,6 +16,12 @@ Distinguish implemented work waiting for user acceptance from work to redo.
 An old todo or reminder is not evidence that a completed fix needs another
 diagnosis. Never execute the recommended action without a user request.
 
+## Arsenal handoff
+
+Return the open-work result to Arsenal when it called this skill. A request
+to resume work authorizes Arsenal to inspect the selected artifact and choose
+the next step; a status-only request stops here. Never reopen shipped work.
+
 ## Execution policy
 
 Work solo. Ask before any subagent or reviewer, even in auto mode. Explain

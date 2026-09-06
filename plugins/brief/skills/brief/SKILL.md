@@ -22,6 +22,13 @@ Render with scripts/render.py only for --html or an explicit request. No
 mandatory browser, commit, test run, or handoff menu. Report paths and the
 next action if requested. Existing files are updated, not duplicated.
 
+## Arsenal handoff
+
+When called by Arsenal for an explicitly requested broader task, return the
+brief, its readiness and unresolved decisions to Arsenal. Do not launch ship
+yourself. Arsenal may continue an authorized implementation once the brief is
+ready; a request for a brief alone never authorizes implementation.
+
 ## Execution policy
 
 Work solo. Ask before any subagent or reviewer, even in auto mode. Explain

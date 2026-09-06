@@ -1,0 +1,7 @@
+{
+  "name": "websearch", "version": "1.0.0", "description": "Route web research through the available Exa tools.",
+  "author": { "name": "Mirko Bozzetto", "url": "https://github.com/mirkobozzetto" },
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/websearch", "repository": "https://github.com/mirkobozzetto/arsenal",
+  "license": "MIT", "skills": "./skills/",
+  "interface": { "displayName": "Websearch", "shortDescription": "Run focused research with Exa.", "developerName": "Mirko Bozzetto", "category": "Research", "defaultPrompt": ["Research this question with Exa and cite the sources."] }
+}

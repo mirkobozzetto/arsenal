@@ -1,87 +1,81 @@
 # arsenal
 
-The orientation stage before product specification, technical design, and
-implementation. Arsenal turns a fuzzy idea into a phased roadmap through a
-Socratic interview, capability-aware research, and adversarial review.
-
-## Deliverable
-
-A normal run writes only `docs/roadmap/<slug>/roadmap.md` in the project. The
-same roadmap is rendered as a self-contained HTML page with:
-
-- the objective, exclusions, and cited inspirations;
-- one wireframe or flow diagram;
-- two to four shippable phases with runnable commands;
-- a semantic handoff for the first phase;
-- optional agent routing evidence.
-
-The renderer bundles pinned Marked and Mermaid assets. It works offline and
-uses the platform default browser when one is available.
-
-## Portability
-
-The canonical workflow is an Agent Skills `SKILL.md`. Harness-specific model
-and agent details live outside the portable core.
-
-| Harness | Agent discovery | Fast | Balanced |
-|---------|-----------------|------|----------|
-| Claude Code | Plugin agents, automatic | Haiku | Sonnet |
-| OMP | Explicit user or project installation | GPT-5.6 Luna | GPT-5.6 Terra |
-| Codex | Explicit user or project installation | GPT-5.6 Luna | GPT-5.6 Terra |
-| Other | Solo in the parent session | Parent | Parent |
-
-The lead always owns the interview, scope, synthesis, roadmap write, and final
-discussion. Read-only agents handle independent research and one adversarial
-review. Missing agents, models, authentication, search, or browser capability
-falls back to the complete solo workflow.
-
-## Install
-
-Claude Code plugin:
-
-```text
-/plugin marketplace add mirkobozzetto/arsenal
-/plugin install arsenal@arsenal
-```
-
-OMP and Codex agents are never installed automatically. Invoke the explicit
-skill action after installing the plugin:
-
-```text
-/arsenal --install-omp-agents
-/arsenal --install-codex-agents
-```
-
-Both installers preserve replaced files and support reversal:
-
-```text
-/arsenal --uninstall-omp-agents
-/arsenal --uninstall-codex-agents
-```
+One entry point for Claude Code and Codex. Arsenal chooses and applies installed
+skills; the specialist skills remain the source of their own procedures.
 
 ## Usage
 
-```text
-/arsenal a tool that turns meeting notes into follow-up emails
-/arsenal -r meeting-notes-emails
-/arsenal -a a local photo organization CLI
-/arsenal --no-agents a roadmap that must run in solo mode
-```
+| Claude Code | Codex |
+|---|---|
+| `/arsenal` | `$arsenal` |
+| `/arsenal implement the agreed login flow` | `$arsenal implement the agreed login flow` |
+| `/arsenal compare storage options, no code` | `$arsenal compare storage options, no code` |
 
-## Verification
+Without a description, a small native form clarifies the goal and desired action.
+If the runtime cannot show a form, Arsenal asks the same questions in conversation.
+With a description, it uses existing context and asks only what changes the route.
 
-```text
-python3 -m unittest discover -s plugins/arsenal/tests -v
-```
+## Routing
 
-The suite validates portable skill metadata, native agent formats, reversible
-installation, canonical roadmap structure, and offline rendering. Runtime
-routing still requires each harness: OMP model proof comes from child session
-transcripts, not from configured aliases.
+- Unresolved product specification: brief.
+- Consequential technical decision: propose.
+- Clear authorized implementation: ship.
+- External evidence: websearch.
+- GitHub issue memory: issue.
+- Open work: next. Activity history: trace.
+- Requested phased planning: the optional roadmap workflow.
 
-## Boundaries
+Arsenal reads each selected SKILL.md before applying it, loads only necessary
+references and carries decisions, artifact paths and permissions between steps.
+It can use other installed Arsenal skills by matching their declared purpose.
+It reassesses after each result instead of imposing a fixed pipeline.
 
-- Arsenal decides what to build and in which order. It does not implement.
-- Research uses the best available semantic web capability.
-- Existing roadmaps resume in place without migration or forks.
-- Global user configuration changes only after an explicit install action.
+Advice stops at advice. Proposal acceptance, issue confirmations, Git delivery
+and delegation keep their approval gates. A completed task stays completed.
+The old code-roadmap command is an advisory compatibility alias.
+
+## Install
+
+Follow the [shared installation instructions](../../README.md#quick-install).
+Arsenal and its specialists are separate plugins: install the ones you need.
+The router reports missing skills; it does not install them automatically.
+Both runtimes use the same skill files through their native plugin manifests.
+
+## Optional roadmap and agents
+
+Request a roadmap explicitly, or use `-r <slug>` to resume
+`docs/roadmap/<slug>/roadmap.md`. Existing phases and the six-section schema
+are preserved. `--html` requests the bundled offline renderer.
+A roadmap request does not authorize implementing its phases.
+
+Work stays solo. `-a` allows assumptions, not extra permissions;
+`--no-agents` explicitly retains solo mode. Approved independent research can
+use the existing adapters and read-only agents, at most three.
+
+Agent installation is a separate explicit action:
+`--install-omp-agents` or `--install-codex-agents`.
+Matching `--uninstall-*` actions restore backed-up files.
+Routing never installs agents or changes models.
+
+## Manual routing checks
+
+Use fresh conversations in each runtime; these are expected outcomes, not
+a claim of measured performance.
+
+| Request or state | Expected behavior |
+|---|---|
+| Arsenal, no context | Ask goal and action; wait for answers |
+| Clear small fix | Read ship; no brief or proposal |
+| Product requirements uncertain | Clarify; brief if a durable specification is needed |
+| Unresolved storage architecture | Read propose; wait for acceptance before implementation |
+| Accepted proposal, implement it | Read ship and exact artifact; no repeated interview |
+| Compare current tools, no code | Read websearch; cited answer, no implementation |
+| Save this bug as an issue | Read issue; retain creation confirmation |
+| Show unfinished work | Read next; report, do not resume |
+| Fix issue #42 | Read issue context, then ship if actionable and authorized |
+| Required skill absent | Report gap; no fabricated skill invocation |
+| Shipped artifact or unchanged blocker | Stop; do not rerun completed steps |
+| Explicit phased roadmap | Use existing schema; HTML only on request |
+
+Observe selected skills, unnecessary questions, approval violations and outcome.
+Measure duration and tokens only from actual runtime evidence, not estimates.

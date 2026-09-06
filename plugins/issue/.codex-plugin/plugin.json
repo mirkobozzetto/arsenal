@@ -1,0 +1,22 @@
+{
+  "name": "issue",
+  "version": "1.0.1+codex.20260906204335",
+  "description": "Use GitHub issues as durable cross-session resolution memory.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/issue",
+  "repository": "https://github.com/mirkobozzetto/arsenal",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Issue",
+    "shortDescription": "Record and resume GitHub issue investigations.",
+    "developerName": "Mirko Bozzetto",
+    "category": "Developer Tools",
+    "defaultPrompt": [
+      "Record this investigation in a GitHub issue."
+    ]
+  }
+}

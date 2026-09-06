@@ -9,10 +9,10 @@
 </p>
 
 <p align="center">
-  Mirko Bozzetto's curated skills for AI coding agents: a spec-driven build pipeline plus the tools around it.
+  Mirko Bozzetto's curated skills for AI coding agents: one entry point, specialized skills underneath.
 </p>
 
-Plain markdown skills, portable to any coding agent or CLI: Claude Code, pi, oh-my-pi, Cursor, Codex. Install one plugin or all nine.
+Native plugins for Claude Code and Codex, built from the same portable markdown skills. Install Arsenal and the specialist plugins you need. Eight primary plugins share one workflow; code-roadmap remains a legacy alias.
 
 ---
 
@@ -20,53 +20,46 @@ Plain markdown skills, portable to any coding agent or CLI: Claude Code, pi, oh-
 
 | Plugin | What it does | You type |
 |--------|--------------|----------|
-|  [`code-roadmap`](./plugins/code-roadmap) | Tells you which path fits the task. Advisory, never forces. | `/code-roadmap add OAuth login` |
-|  [`arsenal`](./plugins/arsenal) | The **objective**. Targeted interview and phased roadmap; HTML on request. | `/arsenal an app that...` |
+|  [`arsenal`](./plugins/arsenal) | One entry point: clarify, select and apply the skills the task needs. | `/arsenal add OAuth login` |
 |  [`brief`](./plugins/brief) | The **what & why**. Interview → product spec + task list. | `/brief add OAuth login` |
 |  [`propose`](./plugins/propose) | The **how**. Alternatives, tradeoffs, risks, plan. One page or a few, hard ceilings. | `/propose OAuth token storage` |
-|  [`ship`](./plugins/ship) | The **build**. Executes the spec, hands back a verification bundle. | `/ship docs/brief/oauth-login/` |
+|  [`ship`](./plugins/ship) | The **build**. Implements a clear request or approved spec and reports verification. | `/ship docs/brief/oauth-login/` |
 |  [`issue`](./plugins/issue) | The 1am bug, logged so you can pick it up cold. | `/issue log this bug` |
 |  [`next`](./plugins/next) | Monday morning: what's open, what's next, exact resume command. | `/next` |
 |  [`trace`](./plugins/trace) | Progress ledger that writes itself. A hook, not a habit. | nothing |
-|  [`websearch`](./plugins/websearch) | Intent-routed web search via [Exa](https://exa.ai), 8 modes. | `/websearch <question>` |
+|  [`websearch`](./plugins/websearch) | Evidence-backed web search via [Exa](https://exa.ai). | `/websearch <question>` |
 
 ---
 
-## The pipeline
+## One entry point
 
-An idea enters, passes the gates it needs, comes out as shipped code.
+Use `/arsenal` in Claude Code or `$arsenal` in Codex.
 
-```mermaid
-flowchart LR
-    R[code-roadmap<br/><i>orient</i>] -.-> I((idea))
-    A[arsenal<br/><i>objective</i>] -.->|vague idea| I
-    I --> B[brief<br/><i>what / why</i>] --> P[propose<br/><i>how</i>] --> S[ship<br/><i>build</i>] --> C((shipped<br/>code))
-    I -.->|short path| S
-    B -.->|how is obvious| S
-    Q[issue<br/><i>resume cold</i>] -.-> B & P & S
-```
+- Without a description: a short adaptive form clarifies the outcome and whether you want advice, a document or implementation.
+- With a description: Arsenal reads the available context first and asks only route-changing questions.
+- It selects an installed skill, reads its complete instructions and applies them.
+- After each result it reassesses what remains, within your authorization.
 
-**The short path is the default** - the same instinct as Basecamp's pitch, Linear's 1-2 page spec, Amazon's PR/FAQ: one document before code, more only when the rollback cost demands it.
-
-| Your situation | Path |
+| What is missing or requested | Route |
 |---|---|
-| Idea still fuzzy, objective unclear | `arsenal → brief → ...` |
-| Reversible in a day, known pattern | `ship` it |
-| One feature, obvious how | `brief → ship` |
-| A choice to settle | `propose → ship` |
-| A feature AND an open design question | `brief → propose → ship` |
+| Product decisions need a specification | `brief` |
+| A consequential technical choice needs resolution | `propose` |
+| Implementation is clear and authorized | `ship` |
+| External evidence | `websearch` |
+| GitHub issue memory | `issue` |
+| Unfinished work or activity history | `next` or `trace` |
+| A real phased roadmap | Arsenal's optional roadmap branch |
 
-Gates keep it honest: `ship` refuses a brief that is not `ready`, a proposal that is not `Accepted`.
+There is no complexity score and no mandatory `brief → propose → ship` sequence.
+A bug does not automatically create an issue; a small clear change goes straight to ship.
+A proposal still needs explicit acceptance. Advice-only requests never become implementation.
 
-Meanwhile, three tools watch your back, never in your way:
+The specialist skills remain directly usable. Their procedures are not copied into Arsenal.
+Install each needed plugin separately: Arsenal does not bundle or silently install its dependencies.
+Missing skills are reported, with installation or an explicitly labeled fallback offered.
 
--  `/next` after any `/clear`: what's open, and the exact command to resume.
--  `/issue` when a bug must survive the night: hypothesis and state, resumable cold.
--  `trace` writes the ledger on its own; `next` reads it, you type nothing.
-
-Work solo by default. Delegation and independent review require user consent.
-HTML is optional; no mandatory interview, reviewer or artifact bundle for a
-bounded implementation request.
+`code-roadmap` is deprecated: it forwards advisory requests to Arsenal, without a second router.
+Work stays solo unless you approve delegation. No mandatory roadmap, HTML or new state file.
 
 ### Optional controlled OMP runtime (macOS)
 
@@ -109,7 +102,9 @@ Mirko
 
 ---
 
-## Quick install (Claude Code)
+## Quick install
+
+### Claude Code
 
 ```bash
 # Inside Claude Code:
@@ -117,30 +112,56 @@ Mirko
 
 # Install the whole pipeline:
 /plugin install arsenal@arsenal
-/plugin install code-roadmap@arsenal
 /plugin install brief@arsenal
 /plugin install propose@arsenal
 /plugin install ship@arsenal
 /plugin install issue@arsenal
 /plugin install next@arsenal
 /plugin install trace@arsenal
+/plugin install websearch@arsenal
 
 # ...or just one:
 /plugin install ship@arsenal
 ```
 
-Then drive the pipeline:
+Then use the entry point or a specialist directly:
 
-```bash
-/arsenal a tool that does X somehow    # objective -> docs/roadmap/<slug>/ + HTML page
-/code-roadmap add OAuth login          # orient
-/brief add OAuth login                 # what/why  -> docs/brief/oauth-login/
-/propose OAuth token storage           # how       -> the proposal document
-/ship docs/brief/oauth-login/          # build     -> code + verification bundle + trace
-/next                                  # what's left -> the next /ship, after any /clear
+```text
+/arsenal
+/arsenal implement the agreed OAuth login
+/arsenal compare token storage approaches, do not implement
+/arsenal create a phased roadmap for a meeting-notes app
+/brief add OAuth login
+/propose OAuth token storage
+/ship docs/brief/oauth-login/
+/next
 ```
 
 Per-plugin setup, flags, and dependencies live in each plugin's README.
+
+### Codex
+
+```bash
+# Add the repository marketplace:
+codex plugin marketplace add https://github.com/mirkobozzetto/arsenal
+
+# Install the plugins you need:
+codex plugin add arsenal@arsenal
+codex plugin add brief@arsenal
+codex plugin add propose@arsenal
+codex plugin add ship@arsenal
+codex plugin add issue@arsenal
+codex plugin add next@arsenal
+codex plugin add trace@arsenal
+codex plugin add websearch@arsenal
+```
+
+In Codex, invoke a skill with `$arsenal`, `$brief`, `$propose`, `$ship`, `$next`,
+or the corresponding skill name. In Claude Code, use the `/` forms shown above.
+
+`next` and `trace` bundle lifecycle hooks for both runtimes. Codex asks you to
+review and trust those hooks before running them. ChatGPT does not run plugin
+hooks, so both skills remain available there on demand without automation.
 
 ---
 
@@ -148,10 +169,11 @@ Per-plugin setup, flags, and dependencies live in each plugin's README.
 
 - Published **as I actually use them** - adapt to your setup.
 - Web lookups go through [Exa](https://exa.ai) MCP; `propose` also taps [GitNexus](https://github.com/mirkobozzetto/gitnexus) when present, greps when not.
-- `ship` detects your toolchain (pnpm/bun/cargo/go/uv...) and **never runs your tests or builds** - it hands you the bundle.
-- `ship` commits progressively by default: one branch checkpoint, one commit per finished task, and a PR only after you validate its plain-words user story (`--no-commit` to opt out).
+- `ship` uses the smallest meaningful verification permitted by your project instructions and reports what was actually checked.
+- Commits and pushes are not automatic. Request Git delivery explicitly; `ship --commit` requests progressive commits.
 - `issue` needs an authenticated `gh` CLI.
-- **Other agents** (pi, oh-my-pi, Cursor, Codex): copy `plugins/<name>/skills/<name>/` into your agent's skill directory, wire the MCPs, done.
+- **Other agents** (pi, oh-my-pi, Cursor): copy `plugins/<name>/skills/<name>/` into the agent's skill directory and wire its MCPs.
+- **Codex and Claude Code:** both use the native plugin manifests included in each plugin folder.
 - Companion: [**espresso**](https://github.com/mirkobozzetto/espresso), the token-economy side. arsenal is what you build with; espresso keeps it cheap.
 
 ---

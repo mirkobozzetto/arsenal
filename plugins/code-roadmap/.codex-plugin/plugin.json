@@ -1,0 +1,22 @@
+{
+  "name": "code-roadmap",
+  "version": "1.2.0+codex.20260906204334",
+  "description": "Deprecated advisory compatibility alias for Arsenal. Requires the Arsenal plugin.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/code-roadmap",
+  "repository": "https://github.com/mirkobozzetto/arsenal",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Code Roadmap",
+    "shortDescription": "Legacy advisory alias for Arsenal.",
+    "developerName": "Mirko Bozzetto",
+    "category": "Developer Tools",
+    "defaultPrompt": [
+      "Use Arsenal to recommend an approach without implementing."
+    ]
+  }
+}

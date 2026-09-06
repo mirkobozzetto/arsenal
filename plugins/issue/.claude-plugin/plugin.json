@@ -1,6 +1,6 @@
 {
   "name": "issue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Use GitHub issues as cross-session resolution memory. Create, update, and resume self-contained, cold-readable issues via the gh CLI, recording the hypothesis and the resolution.",
   "author": {
     "name": "Mirko Bozzetto",

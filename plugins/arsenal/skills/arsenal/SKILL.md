@@ -1,46 +1,90 @@
 ---
 name: arsenal
-description: Clarify a genuinely fuzzy idea into a concise phased roadmap. Optional bounded research, no automatic agents.
-argument-hint: "<idea> [-a] [-r slug] [--no-agents] [--html]"
+description: Use when the user invokes Arsenal, needs help choosing an approach, or wants an end-to-end task handled with the installed Arsenal skills.
 ---
 
-# Arsenal roadmap
+# Arsenal
 
-Keep the existing roadmap schema and resume behavior. Read the requested
-roadmap if resuming; do not restart a finished phase.
+One entry point, the shortest sufficient workflow. Read and apply selected
+skills; do not reproduce their procedures here. Work solo by default.
 
-Clarify the actual pain, intended user, smallest useful result, non-goals and
-constraints only where missing. Ask a relevant plain-text question, not a
-fixed interview quota. Stop interviewing when the direction is actionable.
+## Start
 
-Run targeted research only where external evidence changes the roadmap.
-Keep useful sources, what to borrow/avoid and uncertainty; no minimum count.
-Use available native search capabilities. No web access means disclose the
-limitation, not fabricate citations.
+Load steps/step-00-init.md. Keep the objective, scope, constraints, decisions,
+artifact paths, permissions and remaining questions in conversation.
+Reuse existing artifacts; no mandatory orchestration file or roadmap.
 
-Write docs/roadmap/<slug>/roadmap.md. Keep its six numbered sections from the
-existing schema, but omit decorative content within them. Use as many phases
-as the objective needs, no invented diagram or feature. Review in the lead.
+With no description, ask what outcome the user wants and whether they want
+advice, a document, or implementation. Use the runtime's native question form
+when available and permitted in the active mode; otherwise ask in plain text.
+Wait for the answer: a preselected option is not submitted consent.
 
-Agents are optional: only after approval, and only genuinely independent
-read-only units. Read references/agent-contracts.md and the matching adapter
-only then. At most three; no fallback chain of agent launches. If a worker
-fails, handle the missing part once in the lead. Do not open test sessions
-to prove model routing during a roadmap task.
+With a description, inspect supplied context and relevant project instructions
+first. Ask only missing questions that could change the route, scope or safety.
+Use small adaptive batches, not a fixed questionnaire or complexity score.
+Existing answers and accepted artifacts are not another interview.
 
-Render scripts/render.py only with --html or an explicit request. Mark ready
-when the user approves. Do not execute the next phase automatically.
+## Choose the next useful step
 
-Explicit install/uninstall flags remain supported: --install-omp-agents,
---install-codex-agents, --uninstall-omp-agents, --uninstall-codex-agents. Use
-scripts/install_agents.py for the selected operation only, with backups.
-They never run as a side effect of creating a roadmap. A restricted harness
-may require the user to authorize this separate configuration action.
+Use the live installed skill inventory, including actual names and paths.
+These routes express intent, not a required sequence or proof of installation:
 
-## Execution policy
+| Evidence or requested outcome | Next step |
+|---|---|
+| Product outcome, audience or scope needs a durable specification | brief |
+| Consequential technical choice remains unresolved | propose |
+| Clear implementation request or approved implementation artifact | ship |
+| External facts are needed to answer the current question | websearch |
+| Save, update, read or resume a specific GitHub issue | issue |
+| Discover unfinished work | next |
+| Read project activity or explicitly record progress | trace |
+| Explicit phased roadmap or genuine multi-workstream sequencing | Roadmap below |
 
-Work solo. Ask before any subagent or reviewer, even in auto mode. Explain
-the independent scope and expected benefit first. No hidden advisor, nested
-delegation, model retuning, repeated successful checks, or progress spam.
-Use existing context before asking questions. Stop when the requested result
-is delivered. User stops and scope changes override pending steps.
+For another installed Arsenal skill, match its declared purpose to the missing
+result. Do not route back to Arsenal or its code-roadmap compatibility alias.
+A bug does not imply a GitHub issue; a large change does not imply a brief.
+A short clarification can resolve uncertainty without creating a document.
+For advice-only requests, recommend the shortest path and stop before execution.
+
+## Apply, then reassess
+
+1. Name the selected skill and the concrete reason in one short update.
+2. Resolve it from the live inventory and read its complete SKILL.md before
+   acting. Load only the linked references/scripts required by that skill.
+   Resolve relative resources from that skill's directory, never Arsenal's.
+   Plugins may be installed separately; do not guess sibling cache paths.
+3. Pass the current objective, constraints, decisions, artifacts, authorizations
+   and unknowns into the step. Follow its actual instructions, not its summary.
+4. When it returns a result, update that context and reassess what remains.
+   Continue only inside the user's original authorized outcome. Child skills
+   do not launch one another; Arsenal owns the transition.
+
+Missing or unreadable skill: state the gap. Do not claim to have used it or
+silently install it. Offer installation or a clearly labeled native fallback;
+stop if the missing capability is essential. No whole-config scan by default.
+
+Standalone stop rules end that skill's step, not an already authorized broader
+Arsenal task. They never waive approval gates: a proposal remains Draft/Review
+until explicitly accepted; ship requires a ready brief or Accepted proposal
+when consuming one. Analysis is not permission to implement. Issue creation,
+closure, commits, pushes, installs and delegation retain their approval rules.
+If a selected skill explicitly forbids the required transition, stop and ask.
+
+Stop when the outcome is delivered, approval is needed, the user stops, or a
+step cannot progress. No repeated unchanged route, redoing completed work,
+automatic reviewers, model retuning or ceremonial launch confirmations.
+
+## Optional roadmap and configuration
+
+For a requested roadmap or `-r <slug>`, read the existing roadmap if present
+and steps/step-03-plan.md. Preserve its schema and finished phases. Research
+only unresolved external questions through websearch when available.
+Render scripts/render.py only for `--html` or an explicit request. Mark ready
+when approved; a roadmap request alone does not authorize implementation.
+
+`-a` permits explicit assumptions, not new permissions; `--no-agents` stays solo.
+Any delegation requires consent, references/agent-contracts.md and the matching
+adapter; at most three independent read-only units, no nested delegation.
+Explicit `--install-omp-agents`, `--install-codex-agents` and matching
+`--uninstall-*` actions use scripts/install_agents.py with backups, then stop.
+Never install agents as a side effect of routing.

@@ -1,27 +1,16 @@
 ---
 name: code-roadmap
-description: Recommend the shortest sufficient approach and relevant installed skills when asked how to approach a task. Advisory only.
-argument-hint: "<task>"
+description: Use when the user explicitly invokes the legacy code-roadmap command for advisory orientation. Prefer Arsenal for new tasks.
 ---
 
-# Code roadmap
+# Code roadmap compatibility alias
 
-Use the injected skill inventory; do not rescan configuration by default.
-Recommend direct execution for a clear bounded request. Suggest a brief only
-for an unresolved product decision, propose for a consequential design choice,
-and ship for implementation. Do not assemble a pipeline just because several
-skills exist.
+Resolve Arsenal from the live installed skill inventory and read its SKILL.md.
+Pass through the user's context with an advisory-only outcome: recommend the
+shortest sufficient route, without executing it. Arsenal owns all routing rules.
+Never resolve this alias again from Arsenal.
 
-Choose one recommended path and explain the material reason. Mention another
-only when its tradeoff matters. High reasoning effort does not imply multiple
-agents. Delegation requires consent and real independence, not a file count.
-Never change effort, install a skill, or launch the recommended workflow.
-Return the next useful action and stop.
-
-## Execution policy
-
-Work solo. Ask before any subagent or reviewer, even in auto mode. Explain
-the independent scope and expected benefit first. No hidden advisor, nested
-delegation, model retuning, repeated successful checks, or progress spam.
-Use existing context before asking questions. Stop when the requested result
-is delivered. User stops and scope changes override pending steps.
+If Arsenal is missing or unreadable, explain that code-roadmap now requires
+Arsenal and offer its installation. Do not install automatically or maintain
+a second routing implementation. For execution, invoke Arsenal with an explicit
+implementation request.

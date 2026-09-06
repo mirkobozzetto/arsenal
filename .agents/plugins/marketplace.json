@@ -1,0 +1,15 @@
+{
+  "name": "arsenal",
+  "interface": { "displayName": "Arsenal" },
+  "plugins": [
+    { "name": "code-roadmap", "source": { "source": "local", "path": "./plugins/code-roadmap" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
+    { "name": "arsenal", "source": { "source": "local", "path": "./plugins/arsenal" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
+    { "name": "brief", "source": { "source": "local", "path": "./plugins/brief" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
+    { "name": "propose", "source": { "source": "local", "path": "./plugins/propose" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
+    { "name": "ship", "source": { "source": "local", "path": "./plugins/ship" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
+    { "name": "issue", "source": { "source": "local", "path": "./plugins/issue" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
+    { "name": "next", "source": { "source": "local", "path": "./plugins/next" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
+    { "name": "trace", "source": { "source": "local", "path": "./plugins/trace" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
+    { "name": "websearch", "source": { "source": "local", "path": "./plugins/websearch" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Research" }
+  ]
+}

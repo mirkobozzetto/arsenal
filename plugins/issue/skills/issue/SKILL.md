@@ -21,6 +21,13 @@ items and stops. If the controlled shell has no external networking, report
 that authorization/capability boundary instead of claiming the GitHub action
 happened or attempting an execution escape.
 
+## Arsenal handoff
+
+Return issue context and remaining actions to Arsenal when it called this
+skill. A request to fix the issue can continue through Arsenal's implementation
+route; reading or resuming context alone does not authorize code changes.
+Issue creation and closure retain their confirmation gates.
+
 ## Execution policy
 
 Work solo. Ask before any subagent or reviewer, even in auto mode. Explain

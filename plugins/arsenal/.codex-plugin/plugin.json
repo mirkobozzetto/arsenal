@@ -1,0 +1,22 @@
+{
+  "name": "arsenal",
+  "version": "2.0.0+codex.20260906204334",
+  "description": "One entry point for adaptive clarification and authorized workflows using installed Arsenal skills.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/arsenal",
+  "repository": "https://github.com/mirkobozzetto/arsenal",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Arsenal",
+    "shortDescription": "Choose and apply the skills your task needs.",
+    "developerName": "Mirko Bozzetto",
+    "category": "Developer Tools",
+    "defaultPrompt": [
+      "Use Arsenal to clarify and handle my task."
+    ]
+  }
+}

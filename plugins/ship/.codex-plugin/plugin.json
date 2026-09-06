@@ -1,0 +1,7 @@
+{
+  "name": "ship", "version": "1.10.0", "description": "Implement a clear request or approved specification with focused verification.",
+  "author": { "name": "Mirko Bozzetto", "url": "https://github.com/mirkobozzetto" },
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/ship", "repository": "https://github.com/mirkobozzetto/arsenal",
+  "license": "MIT", "skills": "./skills/",
+  "interface": { "displayName": "Ship", "shortDescription": "Implement and verify a clear request.", "developerName": "Mirko Bozzetto", "category": "Developer Tools", "defaultPrompt": ["Implement this request and verify the changed behavior."] }
+}

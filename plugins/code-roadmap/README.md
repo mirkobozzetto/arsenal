@@ -1,50 +1,12 @@
 # code-roadmap
 
-Orientation for the **start** of a coding task. Given an intent, `code-roadmap` matches it against the skills you have installed this session and prints a recommended chain of skills + a suggested execution mode + a suggested reflection level: options with a *why*, never a forced path. It is advisory only: it never launches a skill and never makes the choice for you.
+Deprecated advisory compatibility alias for [Arsenal](../arsenal).
 
----
+Use `/arsenal` in Claude Code or `$arsenal` in Codex for new tasks.
+Arsenal handles both orientation and explicitly requested execution.
 
-## What it does
+Existing code-roadmap invocations read Arsenal's installed skill and request
+advice only. They do not execute the recommended work. Arsenal must be installed;
+the alias reports a missing dependency instead of maintaining a second router.
 
-`code-roadmap` reads the **live** skill inventory (the list your agent already has in context), reasons about the *shape* of your task across a few signals (scope, independent surfaces, risk, ambiguity, repo familiarity), and prints:
-
-```
-CANONICAL CHAIN
-1. <skill>   : why
-2. <skill>   : why
-
-REFLECTION (suggested) : <trivial | standard | deep | ultracode> : why
-EXECUTION (your call) :
-  <option> -> why
-  <option> -> why
-
-ALTERNATIVES / GAP / Your call.
-```
-
-Because the inventory is read live, adding or removing a skill changes its routing next session with **zero edits** to the plugin: there is no hardcoded catalog to drift. It has **no Skill tool on purpose**: it structurally cannot execute anything, only orient.
-
----
-
-## Install
-
-```bash
-/plugin marketplace add mirkobozzetto/arsenal
-/plugin install code-roadmap@arsenal
-```
-
-## Usage
-
-```bash
-/code-roadmap migrate the auth module to the new token format
-/code-roadmap where do I start to add a Redis cache
-```
-
-## What it will and won't do
-
-- **Will** suggest a chain (e.g. `brief → propose → ship`), a reflection level, and an execution menu, each with a reason.
-- **Will** point you to a creator skill or `find-skills` when nothing installed fits.
-- **Won't** run any skill, force one executor, or set your effort level (it can *suggest* `ultracode`, but only you toggle `/effort`).
-
-## Notes
-
-The plugin references code-intelligence index gates and creator skills that you may or may not have installed: it only ever *suggests*, so adapt the printed chain to your own toolbox.
+See the [shared installation instructions](../../README.md#quick-install).

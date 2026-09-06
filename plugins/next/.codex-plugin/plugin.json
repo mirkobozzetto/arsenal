@@ -1,0 +1,22 @@
+{
+  "name": "next",
+  "version": "1.4.1+codex.20260906204335",
+  "description": "Report unfinished work and the exact next action.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/next",
+  "repository": "https://github.com/mirkobozzetto/arsenal",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Next",
+    "shortDescription": "Find unfinished work and its next action.",
+    "developerName": "Mirko Bozzetto",
+    "category": "Developer Tools",
+    "defaultPrompt": [
+      "What unfinished work should I resume next?"
+    ]
+  }
+}

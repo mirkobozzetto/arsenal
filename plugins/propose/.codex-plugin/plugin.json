@@ -1,0 +1,22 @@
+{
+  "name": "propose",
+  "version": "2.3.1+codex.20260906204334",
+  "description": "Create a technical proposal with alternatives, tradeoffs and risks.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/propose",
+  "repository": "https://github.com/mirkobozzetto/arsenal",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Propose",
+    "shortDescription": "Settle a technical design before implementation.",
+    "developerName": "Mirko Bozzetto",
+    "category": "Developer Tools",
+    "defaultPrompt": [
+      "Write a technical proposal for this decision."
+    ]
+  }
+}

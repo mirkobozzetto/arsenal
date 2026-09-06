@@ -1,0 +1,7 @@
+{
+  "name": "trace", "version": "1.1.0", "description": "Maintain a deterministic project progress ledger.",
+  "author": { "name": "Mirko Bozzetto", "url": "https://github.com/mirkobozzetto" },
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/trace", "repository": "https://github.com/mirkobozzetto/arsenal",
+  "license": "MIT", "skills": "./skills/",
+  "interface": { "displayName": "Trace", "shortDescription": "Keep a project progress ledger automatically.", "developerName": "Mirko Bozzetto", "category": "Developer Tools", "defaultPrompt": ["Show the recent project trace."] }
+}

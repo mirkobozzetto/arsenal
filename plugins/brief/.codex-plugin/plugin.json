@@ -1,0 +1,22 @@
+{
+  "name": "brief",
+  "version": "2.2.1+codex.20260906204334",
+  "description": "Create a focused product brief and derived task list.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/brief",
+  "repository": "https://github.com/mirkobozzetto/arsenal",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Brief",
+    "shortDescription": "Define what to build and why.",
+    "developerName": "Mirko Bozzetto",
+    "category": "Developer Tools",
+    "defaultPrompt": [
+      "Write a product brief for this feature."
+    ]
+  }
+}

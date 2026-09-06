@@ -26,8 +26,8 @@
     {
       "name": "code-roadmap",
       "source": "./plugins/code-roadmap",
-      "description": "Orientation map at task start: matches intent to available skills, prints a recommended chain + execution mode + reflection level. Advisory only.",
-      "version": "1.1.0",
+      "description": "Deprecated advisory compatibility alias for Arsenal. Requires the Arsenal plugin.",
+      "version": "1.2.0",
       "category": "orientation",
       "tags": [
         "orientation",
@@ -41,8 +41,8 @@
     {
       "name": "arsenal",
       "source": "./plugins/arsenal",
-      "description": "Portable Socratic roadmap workflow with native Claude Code, OMP, and Codex agents, a complete solo fallback, and self-contained offline HTML rendering.",
-      "version": "1.2.0",
+      "description": "One entry point for adaptive clarification and authorized workflows using installed Arsenal skills.",
+      "version": "2.0.0",
       "category": "orientation",
       "tags": [
         "roadmap",
@@ -58,7 +58,7 @@
       "name": "brief",
       "source": "./plugins/brief",
       "description": "Author a product brief by interview (the PRD tradition, under a plainer name), then emit user stories, scope, metrics, and a derived nested task list.",
-      "version": "2.2.0",
+      "version": "2.2.1",
       "category": "planning",
       "tags": [
         "brief",
@@ -73,7 +73,7 @@
       "name": "propose",
       "source": "./plugins/propose",
       "description": "Design workflow in the RFC tradition: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Two sizes with hard ceilings.",
-      "version": "2.3.0",
+      "version": "2.3.1",
       "category": "planning",
       "tags": [
         "propose",
@@ -104,7 +104,7 @@
       "name": "next",
       "source": "./plugins/next",
       "description": "Query unfinished prd/rfc/ship work and the exact command to resume it. Derives an open-work board from artifact frontmatter; a SessionStart hook auto-surfaces it so context survives /clear.",
-      "version": "1.4.0",
+      "version": "1.4.1",
       "category": "orientation",
       "tags": [
         "resume",
@@ -120,7 +120,7 @@
       "name": "issue",
       "source": "./plugins/issue",
       "description": "Use GitHub issues as cross-session resolution memory. Create/update/resume self-contained, cold-readable issues via gh CLI.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "memory",
       "tags": [
         "github",
