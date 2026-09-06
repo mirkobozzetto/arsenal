@@ -1,5 +1,5 @@
 {
-  "name": "ship", "version": "1.11.0", "description": "Implement a clear request or approved specification with focused verification.",
+  "name": "ship", "version": "1.11.1", "description": "Implement a clear request or approved specification with focused verification.",
   "author": { "name": "Mirko Bozzetto", "url": "https://github.com/mirkobozzetto" },
   "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/ship", "repository": "https://github.com/mirkobozzetto/arsenal",
   "license": "MIT", "skills": "./skills/",

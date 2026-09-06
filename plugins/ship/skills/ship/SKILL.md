@@ -27,6 +27,12 @@ Do not turn a small fix into a brief, proposal, interview, or document bundle.
   its actual effects instead of trusting its name.
 - Stop on user interruption. A completed task is not reopened by a reminder.
 
+Efficiency plugins such as Espresso are optional. Their automatic mode does
+not waive Ship's per-delegation consent, solo mode, specialist/model choices,
+artifact gates, verification or commit rules. Do not add a parallel team or
+reviewer, or bypass the controlled runtime with an external worker. Without
+the plugin, Ship behaves unchanged.
+
 ## Choose the shortest sufficient path
 
 **Clear request:** identify the target and success condition from the request

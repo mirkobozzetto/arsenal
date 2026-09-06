@@ -27,7 +27,7 @@
       "name": "arsenal",
       "source": "./plugins/arsenal",
       "description": "One entry point for adaptive clarification and authorized workflows using installed Arsenal skills.",
-      "version": "2.0.1",
+      "version": "2.0.2",
       "category": "orientation",
       "tags": [
         "roadmap",
@@ -73,7 +73,7 @@
       "name": "ship",
       "source": "./plugins/ship",
       "description": "Spec executor. Implements a finalized prd or Accepted rfc (or a bare prompt via inline contract) on agent-teams/subagents/solo, emits a user-run verification bundle + trace ledger.",
-      "version": "1.11.0",
+      "version": "1.11.1",
       "category": "implementation",
       "tags": [
         "implement",

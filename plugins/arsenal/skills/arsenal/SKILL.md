@@ -74,6 +74,15 @@ Stop when the outcome is delivered, approval is needed, the user stops, or a
 step cannot progress. No repeated unchanged route, redoing completed work,
 automatic reviewers, model retuning or ceremonial launch confirmations.
 
+## Optional efficiency plugins
+
+With Espresso or another efficiency plugin, Arsenal still owns routing and
+the selected skill retains its approval gates, specialized agents, model
+assignments, schemas, artifacts and verification. An automatic delegation
+setting does not waive these rules or authorize a competing team/reviewer.
+Use the stricter applicable scope and concurrency limit. No plugin is required;
+without one, the workflow is unchanged. Never install one as a routing side effect.
+
 ## Optional roadmap and configuration
 
 For a requested roadmap or `-r <slug>`, read the existing roadmap if present
