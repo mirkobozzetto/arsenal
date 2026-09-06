@@ -24,25 +24,10 @@
       "homepage": "https://github.com/mirkobozzetto/arsenal"
     },
     {
-      "name": "code-roadmap",
-      "source": "./plugins/code-roadmap",
-      "description": "Deprecated advisory compatibility alias for Arsenal. Requires the Arsenal plugin.",
-      "version": "1.2.0",
-      "category": "orientation",
-      "tags": [
-        "orientation",
-        "router",
-        "roadmap",
-        "planning"
-      ],
-      "license": "MIT",
-      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/code-roadmap"
-    },
-    {
       "name": "arsenal",
       "source": "./plugins/arsenal",
       "description": "One entry point for adaptive clarification and authorized workflows using installed Arsenal skills.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "category": "orientation",
       "tags": [
         "roadmap",
@@ -88,7 +73,7 @@
       "name": "ship",
       "source": "./plugins/ship",
       "description": "Spec executor. Implements a finalized prd or Accepted rfc (or a bare prompt via inline contract) on agent-teams/subagents/solo, emits a user-run verification bundle + trace ledger.",
-      "version": "1.10.0",
+      "version": "1.10.1",
       "category": "implementation",
       "tags": [
         "implement",

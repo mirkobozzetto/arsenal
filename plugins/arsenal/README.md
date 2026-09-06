@@ -32,7 +32,6 @@ It reassesses after each result instead of imposing a fixed pipeline.
 
 Advice stops at advice. Proposal acceptance, issue confirmations, Git delivery
 and delegation keep their approval gates. A completed task stays completed.
-The old code-roadmap command is an advisory compatibility alias.
 
 ## Install
 

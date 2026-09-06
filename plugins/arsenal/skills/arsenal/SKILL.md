@@ -41,7 +41,7 @@ These routes express intent, not a required sequence or proof of installation:
 | Explicit phased roadmap or genuine multi-workstream sequencing | Roadmap below |
 
 For another installed Arsenal skill, match its declared purpose to the missing
-result. Do not route back to Arsenal or its code-roadmap compatibility alias.
+result. Do not route back to Arsenal.
 A bug does not imply a GitHub issue; a large change does not imply a brief.
 A short clarification can resolve uncertainty without creating a document.
 For advice-only requests, recommend the shortest path and stop before execution.

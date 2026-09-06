@@ -85,7 +85,7 @@ export default function arsenalRuntime(pi: ExtensionAPI) {
     }),
   });
 
-  for (const skill of ['ship', 'brief', 'propose', 'arsenal', 'next', 'trace', 'issue', 'code-roadmap', 'websearch']) {
+  for (const skill of ['ship', 'brief', 'propose', 'arsenal', 'next', 'trace', 'issue', 'websearch']) {
     pi.registerCommand(skill, {
       description: `Run ${skill} with the Arsenal controller.`,
       handler: async (args, ctx) => serialized(async () => {

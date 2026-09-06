@@ -12,7 +12,7 @@
   Mirko Bozzetto's curated skills for AI coding agents: one entry point, specialized skills underneath.
 </p>
 
-Native plugins for Claude Code and Codex, built from the same portable markdown skills. Install Arsenal and the specialist plugins you need. Eight primary plugins share one workflow; code-roadmap remains a legacy alias.
+Native plugins for Claude Code and Codex, built from the same portable markdown skills. Install Arsenal and the specialist plugins you need. Eight plugins share one workflow.
 
 ---
 
@@ -58,14 +58,14 @@ The specialist skills remain directly usable. Their procedures are not copied in
 Install each needed plugin separately: Arsenal does not bundle or silently install its dependencies.
 Missing skills are reported, with installation or an explicitly labeled fallback offered.
 
-`code-roadmap` is deprecated: it forwards advisory requests to Arsenal, without a second router.
 Work stays solo unless you approve delegation. No mandatory roadmap, HTML or new state file.
 
 ### Optional controlled OMP runtime (macOS)
 
 Install dependencies in `plugins/ship/runtime` with Bun, then add its absolute
 `extension.ts` path to OMP's `extensions` configuration and restart OMP.
-The nine skill commands activate the controller; ordinary sessions stay native.
+The skill commands activate the controller; ordinary sessions stay native.
+OMP reserves `/trace` for its own dashboard; use `/skill:trace` for Arsenal's ledger.
 `/arsenal-mode runtime [root]` or `edit-only [root]` selects scope and proof
 policy. `status` reports persisted state; `off` explicitly restores native tools.
 
@@ -138,6 +138,25 @@ Then use the entry point or a specialist directly:
 ```
 
 Per-plugin setup, flags, and dependencies live in each plugin's README.
+
+### OMP: local development
+
+To use the current checkout without stale marketplace copies, run this from
+the repository root after reviewing any existing links in the destination:
+
+```bash
+mkdir -p "$HOME/.omp/agent/skills"
+for skill in arsenal brief propose ship issue next trace websearch; do
+  ln -sfn "$PWD/plugins/$skill/skills/$skill" "$HOME/.omp/agent/skills/$skill"
+done
+```
+
+Start a new OMP session. `/skill:arsenal` loads the native skill;
+`/arsenal` uses the optional controller when the extension above is configured.
+The native `ask` tool provides the clarification form in interactive sessions.
+Other skills follow the same `/skill:<name>` syntax, including `/skill:trace`.
+Do not force-reinstall a marketplace plugin whose recorded install path is your
+source checkout: OMP may remove that path while replacing the installation.
 
 ### Codex
 

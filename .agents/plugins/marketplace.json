@@ -2,7 +2,6 @@
   "name": "arsenal",
   "interface": { "displayName": "Arsenal" },
   "plugins": [
-    { "name": "code-roadmap", "source": { "source": "local", "path": "./plugins/code-roadmap" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
     { "name": "arsenal", "source": { "source": "local", "path": "./plugins/arsenal" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
     { "name": "brief", "source": { "source": "local", "path": "./plugins/brief" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
     { "name": "propose", "source": { "source": "local", "path": "./plugins/propose" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Developer Tools" },
