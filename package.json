@@ -1,8 +1,7 @@
 {
   "name": "arsenal-agent-skills",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Portable workflow skills and controlled runtime for Pi, OMP, Codex, and Claude Code.",
-  "private": true,
   "type": "module",
   "license": "MIT",
   "repository": "github:mirkobozzetto/arsenal",
@@ -12,6 +11,20 @@
     "coding-agent",
     "codex",
     "claude-code"
+  ],
+  "files": [
+    "plugins/arsenal/skills",
+    "plugins/brief/skills",
+    "plugins/propose/skills",
+    "plugins/ship/skills",
+    "plugins/issue/skills",
+    "plugins/next/skills",
+    "plugins/trace/skills",
+    "plugins/websearch/skills",
+    "plugins/ship/runtime/pi-extension.ts",
+    "plugins/ship/runtime/controller.mjs",
+    "plugins/ship/runtime/runner.mjs",
+    "assets/social-preview.png"
   ],
   "pi": {
     "extensions": [

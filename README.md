@@ -143,10 +143,16 @@ Per-plugin setup, flags, and dependencies live in each plugin's README.
 
 ### Pi
 
-Install the complete Arsenal package directly from GitHub:
+Install the complete Arsenal package from npm:
 
 ```bash
-pi install git:github.com/mirkobozzetto/arsenal@v2.1.0
+pi install npm:arsenal-agent-skills@2.1.1
+```
+
+Or install the pinned GitHub release:
+
+```bash
+pi install git:github.com/mirkobozzetto/arsenal@v2.1.1
 ```
 
 Start a fresh Pi session, then run `/arsenal-mode`. Choose `runtime` for code
