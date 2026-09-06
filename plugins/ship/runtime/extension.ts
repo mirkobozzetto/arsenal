@@ -73,9 +73,24 @@ export default function arsenalRuntime(pi: ExtensionAPI) {
 
   pi.registerCommand('arsenal-mode', {
     description: 'Controlled workflow: runtime [root], edit-only [root], status, or off. No model call.',
+    getArgumentCompletions: prefix => ['runtime', 'edit-only', 'status', 'off']
+      .filter(value => value.startsWith(prefix))
+      .map(value => ({ value, label: value })),
     handler: async (args, ctx) => serialized(async () => {
       await settle();
-      const [mode = 'status', ...parts] = args.trim().split(/\s+/);
+      const tokens = args.trim().split(/\s+/).filter(Boolean);
+      if (!tokens.length) {
+        const choices = [
+          'runtime - code changes with execution checks',
+          'edit-only - prose and configuration changes',
+          'status - show the active mode',
+          'off - disable controlled mode',
+        ];
+        const selected = await ctx.ui.select('Choose Arsenal mode', choices);
+        if (!selected) return;
+        tokens.push(selected.split(' ', 1)[0]);
+      }
+      const [mode, ...parts] = tokens;
       if (mode === 'status') { ctx.ui.notify(JSON.stringify({ run, pending }), 'info'); return; }
       if (pending.length) throw new Error('A command is pending; recover or await it before changing mode.');
       if (mode === 'off') { run = null; save(); ctx.ui.notify('Controlled mode disabled explicitly. Native OMP permissions apply.', 'warning'); return; }

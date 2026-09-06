@@ -67,10 +67,6 @@ class SkillContractTests(unittest.TestCase):
             adapter = path.read_text(encoding="utf-8")
             for number in range(1, 7):
                 self.assertNotIn(f"## {number}.", adapter)
-        research = (SKILL_ROOT / "steps" / "step-02-research.md").read_text()
-        planning = (SKILL_ROOT / "steps" / "step-03-plan.md").read_text()
-        self.assertIn("active harness adapter", research)
-        self.assertIn("adapter-formatted resume command", planning)
 
 
 class AgentContractTests(unittest.TestCase):

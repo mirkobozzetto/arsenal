@@ -12,7 +12,7 @@
   Mirko Bozzetto's curated skills for AI coding agents: one entry point, specialized skills underneath.
 </p>
 
-Native plugins for Claude Code and Codex, built from the same portable markdown skills. Install Arsenal and the specialist plugins you need. Eight plugins share one workflow.
+Portable skills for Claude Code, Codex, OMP, and Pi, built from one shared workflow. Install Arsenal once, then add only the specialist skills you need.
 
 ---
 
@@ -33,7 +33,7 @@ Native plugins for Claude Code and Codex, built from the same portable markdown 
 
 ## One entry point
 
-Use `/arsenal` in Claude Code or `$arsenal` in Codex.
+Use `/arsenal` in Claude Code, `$arsenal` in Codex, or `/arsenal-mode` in OMP and Pi.
 
 - Without a description: a short adaptive form clarifies the outcome and whether you want advice, a document or implementation.
 - With a description: Arsenal reads the available context first and asks only route-changing questions.
@@ -60,14 +60,16 @@ Missing skills are reported, with installation or an explicitly labeled fallback
 
 Work stays solo unless you approve delegation. No mandatory roadmap, HTML or new state file.
 
-### Optional controlled OMP runtime (macOS)
+### Optional controlled OMP and Pi runtime (macOS)
 
-Install dependencies in `plugins/ship/runtime` with Bun, then add its absolute
-`extension.ts` path to OMP's `extensions` configuration and restart OMP.
+Install dependencies in `plugins/ship/runtime` with Bun. For OMP, add the
+absolute `extension.ts` path to its `extensions` configuration and restart OMP.
+For Pi 0.84+, install the local package with
+`pi install ./plugins/ship/runtime`; it loads `pi-extension.ts`.
 The skill commands activate the controller; ordinary sessions stay native.
 OMP reserves `/trace` for its own dashboard; use `/skill:trace` for Arsenal's ledger.
-`/arsenal-mode runtime [root]` or `edit-only [root]` selects scope and proof
-policy. `status` reports persisted state; `off` explicitly restores native tools.
+`/arsenal-mode` opens an interactive mode picker in both harnesses. Explicit
+`runtime [root]`, `edit-only [root]`, `status`, and `off` arguments also work.
 
 The LangGraph controller persists transitions, serializes shell commands and
 reuses an identical successful check until the revision changes. Runtime
@@ -138,6 +140,19 @@ Then use the entry point or a specialist directly:
 ```
 
 Per-plugin setup, flags, and dependencies live in each plugin's README.
+
+### Pi
+
+Install the complete Arsenal package directly from GitHub:
+
+```bash
+pi install git:github.com/mirkobozzetto/arsenal@v2.1.0
+```
+
+Start a fresh Pi session, then run `/arsenal-mode`. Choose `runtime` for code
+changes that require execution proof or `edit-only` for prose and configuration.
+The package also installs every Arsenal skill, available through Pi's native
+`/skill:<name>` commands.
 
 ### OMP: local development
 

@@ -2,21 +2,21 @@ import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { homedir, tmpdir } from 'node:os';
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const [rootArg, resultFile, command, timeoutArg] = process.argv.slice(2);
+const [rootArg, resultFile, command, timeoutArg, storageArg] = process.argv.slice(2);
 let lock;
 let scratch;
 let exitCode = 125;
 let failure;
 try {
-  if (!rootArg || !resultFile || !command) throw new Error('Usage: runner root result command timeoutSeconds');
+  if (!rootArg || !resultFile || !command) throw new Error('Usage: runner root result command timeoutSeconds [storage]');
   const root = realpathSync(rootArg);
   const timeout = Number(timeoutArg ?? 1800);
   if (!Number.isFinite(timeout) || timeout < 1 || timeout > 3600) throw new Error('Timeout must be between 1 and 3600 seconds.');
   if (process.platform !== 'darwin' || !existsSync('/usr/bin/sandbox-exec')) throw new Error('Controlled shell requires the verified macOS sandbox backend; refusing unsandboxed execution.');
-  const storage = join(homedir(), '.omp', 'agent', 'arsenal-runtime');
+  const storage = storageArg ? resolve(storageArg) : join(homedir(), '.omp', 'agent', 'arsenal-runtime');
   const lockRoot = join(storage, 'locks');
   mkdirSync(lockRoot, { recursive: true });
   const candidate = join(lockRoot, createHash('sha256').update(root).digest('hex'));
