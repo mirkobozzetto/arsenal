@@ -60,29 +60,20 @@ Missing skills are reported, with installation or an explicitly labeled fallback
 
 Work stays solo unless you approve delegation. No mandatory roadmap, HTML or new state file.
 
-### Optional controlled OMP and Pi runtime (macOS)
+### Optional continuous Arsenal mode for OMP and Pi
 
 Install dependencies in `plugins/ship/runtime` with Bun. For OMP, add the
-absolute `extension.ts` path to its `extensions` configuration and restart OMP.
-For Pi 0.84+, install the local package with
+absolute `extension.ts` path to its `extensions` configuration and restart
+OMP. For Pi 0.84+, install the local package with
 `pi install ./plugins/ship/runtime`; it loads `pi-extension.ts`.
-The skill commands activate the controller; ordinary sessions stay native.
-OMP reserves `/trace` for its own dashboard; use `/skill:trace` for Arsenal's ledger.
-`/arsenal-mode` opens an interactive mode picker in both harnesses. Explicit
-`runtime [root]`, `edit-only [root]`, `status`, and `off` arguments also work.
 
-The LangGraph controller persists transitions, serializes shell commands and
-reuses an identical successful check until the revision changes. Runtime
-completion requires recorded successful execution, not an assertion from a
-reviewer. Exit status alone does not prove semantic correctness.
-
-Controlled Eval accepts literal tool calls only. The macOS sandbox refuses
-shell networking and writes outside the root/scratch. This deliberately
-excludes browser automation, dependency downloads and external GitHub writes;
-authorize a separate native operation when needed. A missing command result
-stays blocked rather than assuming its process stopped. Other operating
-systems refuse controlled shell execution. No general-purpose security or
-token-saving percentage is claimed.
+Use `/arsenal-mode on` to route every request through the Arsenal skill and
+`/arsenal-mode off` to return to native behavior. `/arsenal-mode status`
+shows the current state. The mode never changes the active tools, filesystem
+scope, shell access, network access, or native approval policy. Specialist
+skills remain directly available through each harness's native skill commands.
+OMP reserves `/trace` for its own dashboard; use `/skill:trace` for
+Arsenal's ledger.
 
 ---
 
@@ -146,19 +137,18 @@ Per-plugin setup, flags, and dependencies live in each plugin's README.
 Install the complete Arsenal package from npm:
 
 ```bash
-pi install npm:arsenal-agent-skills@2.1.3
+pi install npm:arsenal-agent-skills@2.2.0
 ```
 
 Or install the pinned GitHub release:
 
 ```bash
-pi install git:github.com/mirkobozzetto/arsenal@v2.1.3
+pi install git:github.com/mirkobozzetto/arsenal@v2.2.0
 ```
 
-Start a fresh Pi session, then run `/arsenal-mode`. Choose `runtime` for code
-changes that require execution proof or `edit-only` for prose and configuration.
-The package also installs every Arsenal skill, available through Pi's native
-`/skill:<name>` commands.
+Start a fresh Pi session, then run `/arsenal-mode on`. The package also
+installs every Arsenal skill, available through Pi's native
+`/skill:<name>` commands. Use `/arsenal-mode off` for native Pi behavior.
 
 ### OMP: local development
 

@@ -6,12 +6,7 @@
   "pi": {
     "extensions": ["./pi-extension.ts"]
   },
-  "dependencies": {
-    "@langchain/langgraph": "^1.0.0",
-    "acorn": "^8.15.0"
-  },
   "peerDependencies": {
-    "@earendil-works/pi-coding-agent": "*",
-    "typebox": "*"
+    "@earendil-works/pi-coding-agent": "*"
   }
 }

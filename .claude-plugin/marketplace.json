@@ -72,8 +72,8 @@
     {
       "name": "ship",
       "source": "./plugins/ship",
-      "description": "Spec executor. Implements a finalized prd or Accepted rfc (or a bare prompt via inline contract) on agent-teams/subagents/solo, emits a user-run verification bundle + trace ledger.",
-      "version": "1.11.1",
+      "description": "Focused implementation workflow plus optional continuous Arsenal routing for OMP and Pi.",
+      "version": "1.12.0",
       "category": "implementation",
       "tags": [
         "implement",

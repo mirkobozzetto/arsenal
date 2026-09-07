@@ -1,7 +1,7 @@
 {
   "name": "arsenal-agent-skills",
-  "version": "2.1.4",
-  "description": "Portable workflow skills and controlled runtime for Pi, OMP, Codex, and Claude Code.",
+  "version": "2.2.0",
+  "description": "Portable workflow skills and optional continuous Arsenal routing for OMP and Pi.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -25,8 +25,6 @@
     "plugins/trace/skills",
     "plugins/websearch/skills",
     "plugins/ship/runtime/pi-extension.ts",
-    "plugins/ship/runtime/controller.mjs",
-    "plugins/ship/runtime/runner.mjs",
     "assets/social-preview.png",
     "!**/__pycache__/**",
     "!**/*.pyc"
@@ -40,15 +38,7 @@
     ],
     "image": "https://raw.githubusercontent.com/mirkobozzetto/arsenal/main/assets/social-preview.png"
   },
-  "dependencies": {
-    "@langchain/core": "^1.0.1",
-    "@langchain/langgraph": "^1.0.0",
-    "acorn": "^8.15.0",
-    "zod": "^4.1.0",
-    "zod-to-json-schema": "^3.24.6"
-  },
   "peerDependencies": {
-    "@earendil-works/pi-coding-agent": "*",
-    "typebox": "*"
+    "@earendil-works/pi-coding-agent": "*"
   }
 }

@@ -16,9 +16,6 @@ Do not turn a small fix into a brief, proposal, interview, or document bundle.
   the independent scope and expected benefit. Auto mode never grants consent.
 - Use the active model and configured routing. Do not inspect or tune models
   during an unrelated task. No hidden advisor or nested delegation.
-- Prefer native read/search/edit tools. In OMP controlled mode, Eval accepts
-  only literal tool-bridge calls, for example:
-  `display(await tool.read({path:"src/example.ts"}));`
 - Read the relevant existing code, fix the cause, run the smallest meaningful
   behavioral check, and deliver. Reuse current evidence until code or inputs
   relevant to that evidence change. No routine full-file read-back.
@@ -30,8 +27,7 @@ Do not turn a small fix into a brief, proposal, interview, or document bundle.
 Efficiency plugins such as Espresso are optional. Their automatic mode does
 not waive Ship's per-delegation consent, solo mode, specialist/model choices,
 artifact gates, verification or commit rules. Do not add a parallel team or
-reviewer, or bypass the controlled runtime with an external worker. Without
-the plugin, Ship behaves unchanged.
+reviewer. Without the plugin, Ship behaves unchanged.
 
 ## Choose the shortest sufficient path
 

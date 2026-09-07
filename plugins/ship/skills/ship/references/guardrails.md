@@ -10,6 +10,5 @@ other workers. Read-only tools are preferred for investigation. Use the
 smallest meaningful runtime check for code; no automatic validation of prose.
 
 One owner handles shared build resources. Inspect real command effects.
-Timeouts do not prove child exit. In controlled mode, shell is sandboxed and
-Eval is restricted to native tool calls; never attempt an alternate escape.
-The runtime enforces mechanical boundaries, not semantic correctness.
+Timeouts do not prove child exit. Runtime permissions and approval policies
+remain owned by the active harness.
