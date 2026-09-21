@@ -13,3 +13,19 @@ no durable files unless requested. A native todo mirrors this progress.
 If a command is still running, recover its job instead of starting another.
 The OMP controller status is authoritative for its processes and execution
 evidence; the trace stores task intent and cross-session acceptance status.
+
+## Branch
+
+On the first run of a spec, when `vcs` is `git`: read `base` and `branch`
+from the artifact frontmatter. Missing, ask once in one line (`base` defaults
+to the branch checked out now, `branch` to `feat/<slug>`) and write both. Then
+`git fetch origin` and `git switch -c <branch> origin/<base>`; if `<branch>`
+already exists, switch to it and rebase it on `origin/<base>` only when it
+is behind. Never commit on `base`. Graphite repositories use `gt create`.
+A dirty tree that is not this spec's work stays untouched and is reported.
+
+## Issue context
+
+A task heading that links an issue: read that issue's Pickup Directive and
+comments before the task, with `gh issue view <N>`. They are input, not a
+second spec; the brief's acceptance criteria still decide what done means.

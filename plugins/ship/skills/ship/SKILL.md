@@ -1,7 +1,7 @@
 ---
 name: ship
 description: Implement a clear request or an approved brief/proposal. Work solo, make the smallest sufficient change, verify the changed behavior, and stop. Ask before any delegation.
-argument-hint: "<request or spec> [-r] [--tasks ids] [--commit] [--yolo]"
+argument-hint: "<request or spec> [-r] [--tasks ids] [--no-commit] [--no-push] [--yolo]"
 ---
 
 # Ship
@@ -37,12 +37,25 @@ result. Implement directly; no mandatory artifact files or step-by-step gates.
 
 **Approved spec:** read the exact artifact once. Brief requires `ready`;
 proposal requires explicit `Accepted`. Honor scope, dependencies, acceptance
-criteria and non-goals. A shipped marker means done, not another run.
+criteria and non-goals. A shipped marker means done, not another run. On the
+first run of a spec in a Git repository, work on its `branch` created from
+`origin/<base>` (steps/step-00-init.md); a task that carries an issue is
+read together with that issue's Pickup Directive.
 
 **Long or resumed work:** load `steps/step-00-init.md` and maintain one
 per-run `trace.md`. Existing contract/bundle files remain readable but are
 not mandatory new outputs. Record completed units immediately. Native todo
 is a projection of progress, not another authority to arbitrate against it.
+
+**Every closed unit is committed and pushed at once** on the work branch,
+never on `base` (steps/step-02-plan.md). The history is the record; one
+catch-all commit at the end is a defect. `--no-commit` turns both off,
+`--no-push` keeps the commits local.
+
+**A finding outside the task** (a bug met on the way, a gap in a sibling
+task, a missing capability) gets one line proposing an issue through the
+`issue` skill, never a brief and never silent work on it. Then the task
+continues.
 
 ## Commands and verification
 
@@ -83,9 +96,14 @@ Load only when needed:
 Flags: `-a/--auto` suppresses redundant questions, not safety/agent consent;
 `-e/--economy` and `-m solo` retain solo; another `-m` requests a mode,
 not a permission bypass. `--tasks` scopes to named spec tasks and completed
-dependencies. `-r` resumes. `--commit` requests progressive green commits;
-`--no-commit` keeps them off. `--yolo` requests relevant safe checks, never
-live-data edits, deployment or a full suite unrelated to the change.
+dependencies. `-r` resumes. Commit and push per closed unit are the default;
+`--no-commit` turns both off, `--no-push` keeps commits local, `--commit` is
+accepted for compatibility and changes nothing. `--yolo` requests relevant
+safe checks, never live-data edits, deployment or a full suite unrelated to
+the change.
 
-Final response: result, exact proof, material limitation. No automatic PR
-offer after the user deferred it, no required HTML, no next-work expansion.
+Final response, in this order (steps/step-06-finish.md): result, exact
+proof, material limitation, where to see it running, and as the last line
+the next command. When the spec is fully shipped, the ready PR command
+towards `base` with a one-word go question. A PR the user deferred in this
+run is not offered again in it. No required HTML, no next-work expansion.
