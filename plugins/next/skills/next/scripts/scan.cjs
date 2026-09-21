@@ -126,11 +126,14 @@ function collect(root) {
     const fm = frontmatter(text);
     if (!fm) continue;
     // New vocabulary (brief / propose) with legacy acceptance (prd / rfc).
-    const isPrd = fm.type === "brief" || fm.type === "prd";
+    // Filename is authoritative alongside `type`: state-contract.md never
+    // required a `type` field, so a brief written to spec must still be seen.
+    const base = path.basename(file);
+    const isPrd = fm.type === "brief" || fm.type === "prd" || base === "brief.md";
     const isRfc =
       fm.type === "propose" ||
       fm.type === "rfc" ||
-      ["PROPOSAL.md", "RFC.md"].includes(path.basename(file));
+      ["PROPOSAL.md", "RFC.md"].includes(base);
     const isRoadmap = fm.type === "roadmap";
     if (!isPrd && !isRfc && !isRoadmap) continue;
     const kind = isPrd ? "prd" : isRoadmap ? "roadmap" : "rfc";
