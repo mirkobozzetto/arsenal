@@ -14,6 +14,26 @@ The frontmatter fields the brief/propose/ship skills maintain so `next` can deri
 
 `tasks.md` checkbox counts (`- [ ]` vs `- [x]`) give progress.
 
+## Derived, never written
+
+| Field | Source |
+|-------|--------|
+| `progress` | `tasks.md` checkbox counts |
+| `next_task` | the first unfinished checkbox in `tasks.md`, reported with the `##` heading it sits under |
+
+The scanner recomputes both on every run, so they cannot go stale. Do not
+mirror the current task into `next_action`: that field is the artifact-level
+outcome — one line on what shipping this does — and a hand-written task name
+becomes wrong the moment a box is ticked.
+
+## Detection
+
+An artifact is a brief when its frontmatter says `type: brief` (or the legacy
+`prd`) **or** the file is named `brief.md`; a proposal when `type` says so or
+the file is `PROPOSAL.md` / `RFC.md`. The filename is authoritative on its own,
+so an artifact written to this contract — which requires no `type` field — is
+always seen.
+
 A brief whose HOW moved into a proposal is set `superseded` by propose at
 finalize: it leaves the board, and ship has ONE target for the feature
 instead of two.

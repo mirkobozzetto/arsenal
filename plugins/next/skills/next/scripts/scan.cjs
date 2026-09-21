@@ -45,6 +45,9 @@ function frontmatter(text) {
   return map;
 }
 
+// Counts checkboxes and derives the first unfinished one, with the heading
+// it sits under. Derived on every scan, so it cannot go stale the way a
+// hand-written frontmatter line does. tasks.md stays the single source.
 function countTasks(file) {
   let text;
   try {
@@ -52,15 +55,30 @@ function countTasks(file) {
   } catch {
     return null;
   }
-  const boxes = text.match(/^\s*-\s*\[( |x|X|~|-)\]/gm);
-  if (!boxes) return null;
   let done = 0;
   let inprog = 0;
-  for (const b of boxes) {
-    if (/\[x\]/i.test(b)) done++;
-    else if (/\[(~|-)\]/.test(b)) inprog++;
+  let total = 0;
+  let heading = "";
+  let next = null;
+  for (const line of text.split(/\r?\n/)) {
+    const h = line.match(/^#{2,3}\s+(.*\S)\s*$/);
+    if (h) {
+      heading = h[1];
+      continue;
+    }
+    const box = line.match(/^\s*-\s*\[( |x|X|~|-)\]\s*(.*)$/);
+    if (!box) continue;
+    total++;
+    const mark = box[1];
+    if (/x/i.test(mark)) {
+      done++;
+      continue;
+    }
+    if (/[~-]/.test(mark)) inprog++;
+    if (!next) next = heading || box[2].trim();
   }
-  return { done, inprog, total: boxes.length };
+  if (!total) return null;
+  return { done, inprog, total, next };
 }
 
 // Project activity ledger (written by the `trace` plugin). Parsed best-effort:
@@ -142,10 +160,14 @@ function collect(root) {
     const b = bucket(kind, status);
 
     let progress = null;
+    let nextTask = null;
     if (isPrd) {
       const tasks = path.join(path.dirname(file), "tasks.md");
       const c = countTasks(tasks);
-      if (c) progress = `${c.done}/${c.total} tasks`;
+      if (c) {
+        progress = `${c.done}/${c.total} tasks`;
+        nextTask = c.next;
+      }
     }
 
     // resume command: explicit frontmatter wins; else derive from the artifact path.
@@ -166,6 +188,7 @@ function collect(root) {
       bucket: b,
       rank: rank(status),
       progress,
+      next_task: nextTask,
       next: fm.next_action || "",
       resume,
       repo: path.basename(root),
@@ -232,8 +255,9 @@ function row(i) {
   const tag = i.kind.toUpperCase();
   const prog = i.progress ? `  ${i.progress}` : "";
   const stale = i.traceShipped ? "  (trace: shipped - board may be stale)" : "";
+  const nextTask = i.next_task ? `\n      next task: ${i.next_task}` : "";
   const nxt = i.next ? `\n      ${i.next}` : "";
-  return `  ${i.name} [${i.status}] (${tag}${i.repo ? ", " + i.repo : ""})${prog}${stale}\n      resume: ${i.resume}${nxt}`;
+  return `  ${i.name} [${i.status}] (${tag}${i.repo ? ", " + i.repo : ""})${prog}${stale}\n      resume: ${i.resume}${nextTask}${nxt}`;
 }
 
 const out = [];

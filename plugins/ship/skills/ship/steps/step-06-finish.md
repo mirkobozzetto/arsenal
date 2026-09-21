@@ -9,6 +9,10 @@ checkboxes and mark the brief shipped only when its entire scope is complete.
 For a fully completed proposal, write PROPOSAL.shipped and leave the accepted
 proposal unchanged. A scoped run does not close unfinished sibling work.
 
+After a run scoped by `--tasks`, state the remaining checkbox count and the
+first unfinished task in one factual line. Reporting what is left is not
+expanding scope; do not offer to continue, and do not start it.
+
 No mandatory HTML, extra report, fresh agent, final catch-all commit or PR
 offer. Publish/push/create a PR only after explicit authorization. Preserve
 a declined/deferred Git decision. Stop approved workers through the native
