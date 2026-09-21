@@ -11,8 +11,16 @@ The frontmatter fields the brief/propose/ship skills maintain so `next` can deri
 | `resume_cmd` | brief at finalize | `/ship docs/brief/<slug>` |
 | `shipped_at` | ship on finish | ISO timestamp |
 | `proposal` | propose at finalize, when it designs this brief | path to the sibling `PROPOSAL.md` |
+| `base` | brief at finalize (the branch checked out at that moment); ship on its first run when missing | integration branch the work returns to, e.g. `pre-dev`, `main` |
+| `branch` | brief at finalize; ship on its first run when missing | work branch, `feat/<slug>` by default |
+| `issues` | brief at finalize when the user accepts one issue per task; issue in batch mode | `#6-#11`, or a comma-separated list |
 
 `tasks.md` checkbox counts (`- [ ]` vs `- [x]`) give progress.
+
+`base`, `branch` and `issues` are optional: a brief written before they
+existed still scans, ships and resumes. Ship asks once for the missing
+`base` and `branch` on its first run and writes them; the board shows
+`branch -> base` only when both are present.
 
 ## Derived, never written
 

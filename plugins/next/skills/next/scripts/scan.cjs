@@ -205,6 +205,8 @@ function collect(root) {
       next_task: nextTask,
       next_task_id: nextTaskId,
       next: fm.next_action || "",
+      base: fm.base || null,
+      branch: fm.branch || null,
       resume,
       next_command: nextCommand,
       repo: path.basename(root),
@@ -274,8 +276,9 @@ function row(i) {
   const prog = i.progress ? `  ${i.progress}` : "";
   const stale = i.traceShipped ? "  (trace: shipped - board may be stale)" : "";
   const nextTask = i.next_task ? `\n      next task: ${i.next_task}` : "";
+  const git = i.branch && i.base ? `\n      branch: ${i.branch} -> ${i.base}` : "";
   const nxt = i.next ? `\n      ${i.next}` : "";
-  return `  ${i.name} [${i.status}] (${tag}${i.repo ? ", " + i.repo : ""})${prog}${stale}\n      resume: ${i.next_command}${nextTask}${nxt}`;
+  return `  ${i.name} [${i.status}] (${tag}${i.repo ? ", " + i.repo : ""})${prog}${stale}\n      resume: ${i.next_command}${nextTask}${git}${nxt}`;
 }
 
 const out = [];
