@@ -6,7 +6,7 @@ and model detection are separate operations.
 ## Shape
 
 ```yaml
-harness: claude-code | omp | codex | unknown
+harness: claude-code | omp | codex | pi | unknown
 provider: anthropic | openai | other | unknown
 active_model: string | null
 questions: plain-text

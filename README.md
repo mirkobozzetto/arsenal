@@ -14,6 +14,12 @@
 
 Portable skills for Claude Code, Codex, OMP, and Pi, built from one shared workflow. Install Arsenal once, then add only the specialist skills you need.
 
+Each runtime has its own adapter under
+`plugins/arsenal/skills/arsenal/references/adapters/`, so agent
+discovery, model resolution and resume syntax stay runtime-specific while
+the workflow stays shared. Pi uses its builtin `scout`, `oracle` and
+`reviewer` agents and needs no agent installation.
+
 ---
 
 ## What's in the arsenal

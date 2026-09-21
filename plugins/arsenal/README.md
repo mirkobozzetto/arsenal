@@ -56,6 +56,16 @@ Agent installation is a separate explicit action:
 Matching `--uninstall-*` actions restore backed-up files.
 Routing never installs agents or changes models.
 
+Pi needs no installation step: its builtin `scout`, `oracle` and
+`reviewer` agents already cover the three semantic roles, and
+`subagent({ action: "list", capabilities: true })` is the authoritative
+probe. Pi still requires an explicit request before any delegation.
+
+One adapter per runtime normalizes these facts, in
+`skills/arsenal/references/adapters/`: `claude-code.md`, `codex.md`,
+`omp.md`, `pi.md`, and `solo.md` when the harness is unknown or agents
+are unavailable.
+
 ## Manual routing checks
 
 Use fresh conversations in each runtime; these are expected outcomes, not
