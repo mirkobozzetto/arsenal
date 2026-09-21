@@ -35,6 +35,15 @@ to Arsenal. Do not launch ship yourself. Explicit user acceptance remains
 required before Arsenal can consume the proposal for implementation, even
 when the original request was to build the feature.
 
+## Verify external facts
+
+Before stating an external fact (a version, an API, a price, a date, a
+regulation, the behaviour of a tool or library, a person or company), search
+first when the runtime offers web search: read the `websearch` skill and run
+one quick search, then cite the source. One search per fact; `--deep` only on
+request. Without web search, mark the claim unverified. Facts visible in the
+repository or the request need no search.
+
 ## Execution policy
 
 Work solo. Ask before any subagent or reviewer, even in auto mode. Explain

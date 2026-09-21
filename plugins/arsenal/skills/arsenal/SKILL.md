@@ -57,7 +57,9 @@ For advice-only requests, recommend the shortest path and stop before execution.
    and unknowns into the step. Follow its actual instructions, not its summary.
 4. When it returns a result, update that context and reassess what remains.
    Continue only inside the user's original authorized outcome. Child skills
-   do not launch one another; Arsenal owns the transition.
+   do not launch one another; Arsenal owns the transition. The one inline
+   exception is the shared "Verify external facts" lookup: any skill may read
+   the `websearch` skill and run one search without handing control over.
 
 Missing or unreadable skill: state the gap. Do not claim to have used it or
 silently install it. Offer installation or a clearly labeled native fallback;
@@ -73,6 +75,15 @@ If a selected skill explicitly forbids the required transition, stop and ask.
 Stop when the outcome is delivered, approval is needed, the user stops, or a
 step cannot progress. No repeated unchanged route, redoing completed work,
 automatic reviewers, model retuning or ceremonial launch confirmations.
+
+## Verify external facts
+
+Before stating an external fact (a version, an API, a price, a date, a
+regulation, the behaviour of a tool or library, a person or company), search
+first when the runtime offers web search: read the `websearch` skill and run
+one quick search, then cite the source. One search per fact; `--deep` only on
+request. Without web search, mark the claim unverified. Facts visible in the
+repository or the request need no search.
 
 ## Optional efficiency plugins
 

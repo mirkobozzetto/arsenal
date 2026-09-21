@@ -11,6 +11,8 @@ provider: anthropic | openai | other | unknown
 active_model: string | null
 questions: plain-text
 web_search: exa | firecrawl | native | none
+vcs: git | none
+git_host: github-cli | none
 subagents: parallel | sequential | none
 structured_output: true | false
 model_roles: true | false
@@ -33,7 +35,11 @@ browser_open: true | false
 3. Inspect only readable local configuration and authenticated model catalogs.
 4. Detect native agent definitions using the matching adapter.
 5. Select web search by available capability, not by preferred vendor.
-6. Normalize unknown or contradictory evidence to the conservative value.
+6. `vcs` is `git` when the working directory is a Git repository; `git_host`
+   is `github-cli` when an authenticated `gh` reaches the origin, else `none`.
+   Branch, commit, push, issue and PR steps run on these two fields and print
+   the manual equivalent when a field is `none`; they never block a run.
+7. Normalize unknown or contradictory evidence to the conservative value.
 
 A model name is never evidence of the harness. Do not rewrite global settings.
 Do not treat a configured alias as proof that its concrete model resolved.

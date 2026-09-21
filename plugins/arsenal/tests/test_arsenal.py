@@ -69,6 +69,20 @@ class SkillContractTests(unittest.TestCase):
                 self.assertNotIn(f"## {number}.", adapter)
 
 
+class SharedLineTests(unittest.TestCase):
+    SKILLS = ("arsenal", "brief", "propose", "ship", "issue")
+
+    def test_verify_external_facts_block_is_identical_everywhere(self):
+        blocks = {}
+        for name in self.SKILLS:
+            text = (PLUGIN_ROOT.parent / name / "skills" / name / "SKILL.md").read_text(encoding="utf-8")
+            start = text.find("## Verify external facts\n")
+            self.assertGreaterEqual(start, 0, name)
+            end = text.find("\n## ", start + 1)
+            blocks[name] = text[start:end].strip()
+        self.assertEqual(len(set(blocks.values())), 1, blocks)
+
+
 class AgentContractTests(unittest.TestCase):
     def test_three_agents_exist_for_every_harness(self):
         claude = sorted((PLUGIN_ROOT / "agents").glob("arsenal-*.md"))

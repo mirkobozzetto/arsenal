@@ -62,6 +62,15 @@ Use the existing job handle or `arsenal_status` before any retry.
 - Sandbox shell networking and out-of-root writes are refused. Report an
   unavailable capability; do not escape the controller through another tool.
 
+## Verify external facts
+
+Before stating an external fact (a version, an API, a price, a date, a
+regulation, the behaviour of a tool or library, a person or company), search
+first when the runtime offers web search: read the `websearch` skill and run
+one quick search, then cite the source. One search per fact; `--deep` only on
+request. Without web search, mark the claim unverified. Facts visible in the
+repository or the request need no search.
+
 ## Optional branches
 
 Load only when needed:
