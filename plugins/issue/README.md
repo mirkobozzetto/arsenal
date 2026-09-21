@@ -17,7 +17,7 @@ Natural-language routing to four actions:
 | "resume issue #N", "pick up where I left off" | **resume** |
 | "what issues am I tracking" | **list** |
 
-Every issue carries a **Pickup Directive**: a self-contained section (context, current state, next step, how to verify) that lets a cold session resume from the issue alone, no prior chat. Progress goes in comments; the body stays the stable directive. Issues are tagged `claude-memory` so `resume` / `list` can filter them.
+Every issue carries a **Pickup Directive**: a self-contained section (context, current state, next step, how to verify) that lets a cold session resume from the issue alone, no prior chat. Progress goes in comments; the body stays the stable directive. Issues are tagged `arsenal` so `resume` / `list` can filter them; issues created before the rename carry `claude-memory` and are still matched.
 
 ---
 

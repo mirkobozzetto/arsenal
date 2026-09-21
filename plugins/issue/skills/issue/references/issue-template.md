@@ -26,6 +26,7 @@ Render this as the GitHub issue body on `create`. Every section is required; the
 ## Conventions
 
 - Title: concise, problem-first (e.g. `Auth: token expiry off-by-one on refresh`).
-- Label: `claude-memory` (filter for `resume` / `list`).
+- Label: `arsenal` (filter for `resume` / `list`). Issues created before
+  the rename carry `claude-memory`; keep it on them and search both.
 - Progress goes in **comments**, not by editing the original body: the body stays the stable Pickup Directive.
 - On close: append a `Resolution:` comment, then `gh issue close <N> --reason completed`.

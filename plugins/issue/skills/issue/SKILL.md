@@ -12,8 +12,9 @@ attempts, remaining action and verification so the issue can be resumed cold.
 Use references/issue-template.md when creating one.
 
 Confirm before creating or closing an issue. Append requested progress as
-comments instead of overwriting the body. Preserve the existing claude-memory
-label and Pickup Directive contract. No code changes, commits or agents.
+comments instead of overwriting the body. Label new issues `arsenal`; keep
+`claude-memory` on the ones that already carry it and match either when
+listing or resuming. Preserve the Pickup Directive contract. No code changes, commits or agents.
 
 Resume reconstructs the current state from the issue, not stale memory. A
 solved issue does not trigger another diagnosis. List returns concise open
