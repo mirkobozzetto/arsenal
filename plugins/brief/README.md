@@ -46,7 +46,14 @@ A big feature adds **more parent tasks**, never more files. The task list traces
 
 ## Hand-off
 
-When the brief is `ready`, `brief` asks what's next and explains the benefit of each path:
+When the brief is `ready`, it records `base` (the branch you are on) and
+`branch` (`feat/<slug>`) in the frontmatter so `ship` knows where the work
+starts and where the PR returns, and offers one GitHub issue per task (via
+`issue from-tasks`, one confirmation for the batch): each issue carries a
+Pickup Directive, and `ship` reads it with the task. Both are optional; a
+brief without them still ships.
+
+Then `brief` asks what's next and explains the benefit of each path:
 
 - **`propose`**: design the *how* first (alternatives, tradeoffs, risks). Choose this when the technical solution isn't obvious or the decision crosses a boundary.
 - **`ship`**: build directly from `tasks.md`. Choose this when the feature is clear and there's no architecture debate.

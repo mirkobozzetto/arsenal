@@ -52,19 +52,32 @@ It **never runs your tests/builds/typechecks by default**: that stays yours. It 
 | `-r` / `--resume` | Continue from an existing `trace.md`. |
 | `--yolo` | After **listing** the commands, run the SAFE verification set itself. Destructive/DB/deploy stay yours, always. |
 | `-m teams\|subagents\|solo` | Force the engine tier. |
-| `--no-commit` | Turn off progressive commits (default: one commit per finished task). |
+| `--no-commit` | Turn off the per-unit commit and push (default: one commit, pushed, per closed unit). |
+| `--no-push` | Keep the per-unit commits local. |
+| `--tasks T01,T02` | Scope the run to named tasks and their completed dependencies. |
 
 ### Git flow
 
-Progressive commits are the default. At plan time `ship` asks once where the
-work lands: a new `ship/<slug>` branch (recommended) or the current branch.
-That single answer authorizes the run's commits; each finished task is then
-committed on its own (explicit paths, Conventional Commits, no signature),
-with the sha recorded in `trace.md`. `ship` never pushes mid-run. At finish,
-if verification is green, it writes a plain-words **validation user story**
-(what to test, how); once you validate it, it creates the PR directly
-(`gh pr create`, base `dev` if that branch exists, else `main`;
-Graphite repos use `gt submit`).
+The brief declares `base` (the integration branch, e.g. `pre-dev`) and
+`branch` (`feat/<slug>`); an older brief without them is asked once, on the
+first run. `ship` creates the work branch from `origin/<base>`, never commits
+on `base`, and commits **and pushes** each closed unit on its own (explicit
+paths, Conventional Commits, no signature). The first push of a branch asks
+once; that answer covers the run. Graphite repos use `gt create` / `gt submit`.
+
+Each closed task ends with its trace row, its checkbox, the issue's
+resolution comment when the task carries one, the running app opened at the
+page where the change shows (or the nearest trace when nothing is visible),
+and the exact next command as the last line.
+
+When the whole spec is shipped, the last lines are the ready PR command
+towards `base` (`gh pr create`, `Closes #N` for the brief's issues) and a
+one-word go question. After you report the merge, `ship` realigns `base` on
+origin, deletes the work branch and, when `base` is not the default branch
+(where GitHub closes nothing), closes the issues itself with the PR as
+resolution.
+
+A finding outside the task gets a one-line issue proposal, never a brief.
 
 ### ultracode
 
@@ -73,7 +86,8 @@ Graphite repos use `gt submit`).
 ## Dependencies
 
 - Exa MCP for any web lookup (no native WebSearch/WebFetch).
-- `git` guard friendly: one scoped grant per run covers the progressive commits; push/PR always prompt once, at the validated PR gate.
+- `git` guard friendly: one grant per branch covers the per-unit pushes; the PR always prompts once, at the end.
+- Without `gh` (no GitHub, other host): issues and PR are printed as the manual equivalent, nothing blocks.
 - Removal uses `trash`, never destructive deletes; never modifies a database without an explicit prompt.
 
 ## What it writes

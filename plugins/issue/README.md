@@ -16,6 +16,8 @@ Natural-language routing to four actions:
 | "note progress on #N", "I found the cause" | **update** |
 | "resume issue #N", "pick up where I left off" | **resume** |
 | "what issues am I tracking" | **list** |
+| `from-tasks docs/brief/<slug>` (offered by `brief` at finalize) | **from-tasks**: one issue per top-level task, link written back into `tasks.md` |
+| `close #N` (called by `ship` after a merge into a non-default branch) | **close** with a `Resolution:` comment |
 
 Every issue carries a **Pickup Directive**: a self-contained section (context, current state, next step, how to verify) that lets a cold session resume from the issue alone, no prior chat. Progress goes in comments; the body stays the stable directive. Issues are tagged `arsenal` so `resume` / `list` can filter them; issues created before the rename carry `claude-memory` and are still matched.
 
@@ -34,6 +36,8 @@ Every issue carries a **Pickup Directive**: a self-contained section (context, c
 /issue track this race condition in the auth refresh
 /issue resume 42
 /issue list
+/issue from-tasks docs/brief/oauth-login
+/issue close 42
 ```
 
 ## Guardrails

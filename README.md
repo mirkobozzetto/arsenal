@@ -66,6 +66,17 @@ Missing skills are reported, with installation or an explicitly labeled fallback
 
 Work stays solo unless you approve delegation. No mandatory roadmap, HTML or new state file.
 
+The loop closes by itself: `brief` records the Git `base` and work `branch`
+and offers one issue per task; `ship` branches from `origin/<base>`, commits
+and pushes each closed unit, shows you where to see the result, ends with the
+next command, proposes the PR when the spec is shipped and, after the merge,
+closes the issues and realigns `base`. Every authoring skill verifies an
+external fact (version, API, price, date, behaviour of a tool) through
+`websearch` before stating it. Each of these steps runs on a detected
+capability (`git`, `gh`, web search, a browser) and prints the manual
+equivalent when it is missing, so an older brief or a host without `gh`
+works unchanged.
+
 ### Optional continuous Arsenal mode for OMP and Pi
 
 Install dependencies in `plugins/ship/runtime` with Bun. For OMP, add the

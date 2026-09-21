@@ -147,7 +147,7 @@ Ranking is `in_progress` first, then `ready` / `Accepted`, then alphabetical. Th
 
 ## The state contract
 
-The exact frontmatter fields `brief` / `propose` / `ship` maintain (`status`, `next_action`, `resume_cmd`, `shipped_at`) and how each bucket is classified live in [`skills/next/references/state-contract.md`](./skills/next/references/state-contract.md).
+The exact frontmatter fields `brief` / `propose` / `ship` maintain (`status`, `next_action`, `resume_cmd`, `shipped_at`, and the optional `base`, `branch`, `issues` shown as `branch -> base` on the board) and how each bucket is classified live in [`skills/next/references/state-contract.md`](./skills/next/references/state-contract.md).
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "arsenal-agent-skills",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Portable workflow skills and optional continuous Arsenal routing for OMP and Pi.",
   "type": "module",
   "license": "MIT",
