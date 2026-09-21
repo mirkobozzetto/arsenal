@@ -20,8 +20,10 @@ The frontmatter fields the brief/propose/ship skills maintain so `next` can deri
 |-------|--------|
 | `progress` | `tasks.md` checkbox counts |
 | `next_task` | the first unfinished checkbox in `tasks.md`, reported with the `##` heading it sits under |
+| `next_task_id` | the leading `T01` identifier, or legacy numeric identifier, of that heading |
+| `next_command` | `resume_cmd` scoped with `--tasks <next_task_id>` when the target is a brief |
 
-The scanner recomputes both on every run, so they cannot go stale. Do not
+The scanner recomputes these on every run, so they cannot go stale. Do not
 mirror the current task into `next_action`: that field is the artifact-level
 outcome — one line on what shipping this does — and a hand-written task name
 becomes wrong the moment a box is ticked.

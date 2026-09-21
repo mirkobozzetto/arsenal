@@ -59,11 +59,16 @@ function countTasks(file) {
   let inprog = 0;
   let total = 0;
   let heading = "";
+  let headingId = null;
   let next = null;
+  let nextId = null;
   for (const line of text.split(/\r?\n/)) {
-    const h = line.match(/^#{2,3}\s+(.*\S)\s*$/);
+    const h = line.match(/^(#{2,3})\s+(.*\S)\s*$/);
     if (h) {
-      heading = h[1];
+      if (h[1] === "##") {
+        heading = h[2];
+        headingId = heading.match(/^(T\d+|\d+(?:\.\d+)*)\b/i)?.[1] || null;
+      }
       continue;
     }
     const box = line.match(/^\s*-\s*\[( |x|X|~|-)\]\s*(.*)$/);
@@ -75,10 +80,13 @@ function countTasks(file) {
       continue;
     }
     if (/[~-]/.test(mark)) inprog++;
-    if (!next) next = heading || box[2].trim();
+    if (!next) {
+      next = heading || box[2].trim();
+      nextId = headingId;
+    }
   }
   if (!total) return null;
-  return { done, inprog, total, next };
+  return { done, inprog, total, next, nextId };
 }
 
 // Project activity ledger (written by the `trace` plugin). Parsed best-effort:
@@ -161,12 +169,14 @@ function collect(root) {
 
     let progress = null;
     let nextTask = null;
+    let nextTaskId = null;
     if (isPrd) {
       const tasks = path.join(path.dirname(file), "tasks.md");
       const c = countTasks(tasks);
       if (c) {
         progress = `${c.done}/${c.total} tasks`;
         nextTask = c.next;
+        nextTaskId = c.nextId;
       }
     }
 
@@ -179,6 +189,10 @@ function collect(root) {
         resume = `/ship ${target}`;
       }
     }
+    const nextCommand =
+      isPrd && nextTaskId && /^\/ship(?:\s|$)/.test(resume)
+        ? resume.replace(/^\/ship/, `/ship --tasks ${nextTaskId}`)
+        : resume;
 
     items.push({
       kind,
@@ -189,8 +203,10 @@ function collect(root) {
       rank: rank(status),
       progress,
       next_task: nextTask,
+      next_task_id: nextTaskId,
       next: fm.next_action || "",
       resume,
+      next_command: nextCommand,
       repo: path.basename(root),
       path: relTo(root, file),
     });
@@ -238,7 +254,9 @@ if (flags.has("--banner")) {
   if (open.length) {
     lines.push("OPEN WORK (run /next for detail):");
     for (const i of open.slice(0, 3)) {
-      lines.push(`  - ${i.name} [${i.status}]${i.progress ? " " + i.progress : ""} -> ${i.resume}`);
+      lines.push(
+        `  - ${i.name} [${i.status}]${i.progress ? " " + i.progress : ""} -> ${i.next_command}`,
+      );
     }
     if (open.length > 3) lines.push(`  (+${open.length - 3} more)`);
   }
@@ -257,7 +275,7 @@ function row(i) {
   const stale = i.traceShipped ? "  (trace: shipped - board may be stale)" : "";
   const nextTask = i.next_task ? `\n      next task: ${i.next_task}` : "";
   const nxt = i.next ? `\n      ${i.next}` : "";
-  return `  ${i.name} [${i.status}] (${tag}${i.repo ? ", " + i.repo : ""})${prog}${stale}\n      resume: ${i.resume}${nextTask}${nxt}`;
+  return `  ${i.name} [${i.status}] (${tag}${i.repo ? ", " + i.repo : ""})${prog}${stale}\n      resume: ${i.next_command}${nextTask}${nxt}`;
 }
 
 const out = [];
@@ -278,7 +296,7 @@ if (open.length === 0 && wip.length === 0) {
   } else if (wip.length) {
     out.push(`\n(${wip.length} in authoring; --all to show)`);
   }
-  if (open.length) out.push(`\nNext: ${open[0].resume}`);
+  if (open.length) out.push(`\nNext: ${open[0].next_command}`);
 }
 if (done.length && flags.has("--all")) {
   out.push("\nDONE:");
