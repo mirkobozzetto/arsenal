@@ -18,9 +18,13 @@ Relevant Files and Tasks. Derive outcome tasks from acceptance criteria; do
 not inflate them into a fixed number of phases. One feature, one folder.
 
 Mark ready only when the brief is complete; never implement automatically.
-Render with scripts/render.py only for --html or an explicit request. No
-mandatory browser, commit, test run, or handoff menu. Report paths and the
-next action if requested. Existing files are updated, not duplicated.
+At finalize (steps/step-04-finalize.md), record the Git `base` and `branch`
+when the directory is a repository, and offer one issue per task through the
+`issue` skill when `gh` is available; both are optional and a brief without
+them still ships. Render with scripts/render.py only for --html or an
+explicit request. No mandatory browser, commit, test run, or handoff menu.
+Report paths and the next action if requested. Existing files are updated,
+not duplicated.
 
 ## Arsenal handoff
 

@@ -1,7 +1,7 @@
 ---
 name: issue
 description: Create, update or resume a GitHub issue as durable resolution memory when requested.
-argument-hint: "[create|update|resume|list] [#N | problem]"
+argument-hint: "[create|update|resume|list|from-tasks|close] [#N | problem | brief folder]"
 ---
 
 # Issue memory
@@ -15,6 +15,19 @@ Confirm before creating or closing an issue. Append requested progress as
 comments instead of overwriting the body. Label new issues `arsenal`; keep
 `claude-memory` on the ones that already carry it and match either when
 listing or resuming. Preserve the Pickup Directive contract. No code changes, commits or agents.
+
+`from-tasks <brief folder>` creates one issue per top-level `##` task of
+`tasks.md`, after a single confirmation for the whole batch. Each body uses
+the template: Problem from the task and the acceptance criteria it cites,
+Pickup Directive with the brief path, `base` and `branch` from the brief
+frontmatter, the task identifier and its check command. It then writes
+`[#N](url)` into each task heading and the range into the brief `issues`
+field. Existing links are kept, never duplicated.
+
+`close #N` appends a `Resolution:` comment from the evidence given (trace
+row, commit, PR) and closes the issue as completed. Ship calls it after a
+merge into a branch that is not the default one, where GitHub's `Closes #N`
+does nothing.
 
 Resume reconstructs the current state from the issue, not stale memory. A
 solved issue does not trigger another diagnosis. List returns concise open

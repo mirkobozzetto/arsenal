@@ -8,7 +8,7 @@ Render this as the GitHub issue body on `create`. Every section is required; the
 
 ## Pickup Directive
 > Self-contained. A future session reads ONLY this section + comments to resume, with no prior chat.
-- Context: <repo, branch, files/areas involved>
+- Context: <repo, base and work branch, brief path and task id when it comes from a brief, files/areas involved>
 - Current state: <what is done / not done>
 - Next step: <the concrete action to resume>
 - How to verify: <command / test / success signal>
@@ -30,3 +30,4 @@ Render this as the GitHub issue body on `create`. Every section is required; the
   the rename carry `claude-memory`; keep it on them and search both.
 - Progress goes in **comments**, not by editing the original body: the body stays the stable Pickup Directive.
 - On close: append a `Resolution:` comment, then `gh issue close <N> --reason completed`.
+- From a brief (`from-tasks`): title `<Area>: <task heading>`, one issue per top-level task, link written back into the task heading as `[#N](url)`.
