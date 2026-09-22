@@ -61,6 +61,17 @@ class SkillContractTests(unittest.TestCase):
         self.assertNotIn("## 7.", plan)
         self.assertIn("execution_trace: <single-line JSON array, optional>", plan)
 
+    def test_every_harness_adapter_can_open_a_worktree_session(self):
+        adapter_dir = SKILL_ROOT / "references" / "adapters"
+        for name in ("claude-code", "codex", "omp", "pi"):
+            adapter = (adapter_dir / f"{name}.md").read_text(encoding="utf-8")
+            self.assertIn("## Worktree session", adapter, name)
+            self.assertIn("ship", adapter, name)
+        solo = (adapter_dir / "solo.md").read_text(encoding="utf-8")
+        self.assertIn("session_launcher: none", solo)
+        contract = (SKILL_ROOT / "references" / "capability-contract.md").read_text(encoding="utf-8")
+        self.assertIn("session_launcher: herdr | tmux | none", contract)
+
     def test_all_adapters_use_the_canonical_roadmap_schema(self):
         adapter_dir = SKILL_ROOT / "references" / "adapters"
         for path in adapter_dir.glob("*.md"):

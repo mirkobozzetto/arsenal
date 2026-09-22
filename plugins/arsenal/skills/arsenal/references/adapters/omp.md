@@ -16,3 +16,11 @@ Do not infer it from the active model.
   An alias or agent file alone is insufficient proof.
 - If native agents, authentication, or proof are missing, run solo.
 - Format resume as `/arsenal -r <slug>` only when routed by the harness.
+
+## Worktree session
+
+- Start the harness in an existing worktree with `omp` run from that
+  directory.
+- Send ship as `/ship <absolute spec path> -a`, and as `/skill:ship` when
+  OMP reserves the bare name for its own command, the way it does for
+  `/trace`.

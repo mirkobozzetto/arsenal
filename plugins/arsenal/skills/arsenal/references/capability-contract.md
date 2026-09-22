@@ -25,6 +25,7 @@ models:
   balanced: string | null
   frontier: string | null
 browser_open: true | false
+session_launcher: herdr | tmux | none
 ```
 
 ## Probe order
@@ -39,7 +40,11 @@ browser_open: true | false
    is `github-cli` when an authenticated `gh` reaches the origin, else `none`.
    Branch, commit, push, issue and PR steps run on these two fields and print
    the manual equivalent when a field is `none`; they never block a run.
-7. Normalize unknown or contradictory evidence to the conservative value.
+7. `session_launcher` is `herdr` when `HERDR_ENV` is set or `herdr status`
+   answers, else `tmux` when `TMUX` is set, else `none`. It names the only
+   supported way to open a second session in another directory, which ship
+   needs for `-w`. With `none`, that step prints the command to run instead.
+8. Normalize unknown or contradictory evidence to the conservative value.
 
 A model name is never evidence of the harness. Do not rewrite global settings.
 Do not treat a configured alias as proof that its concrete model resolved.

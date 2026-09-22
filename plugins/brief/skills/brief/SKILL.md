@@ -14,8 +14,14 @@ not invented certainty or external permissions.
 
 Write docs/brief/<slug>/brief.md and tasks.md. Keep the existing frontmatter
 and structural headings Acceptance criteria, Success metrics, Out-of-scope,
-Relevant Files and Tasks. Derive outcome tasks from acceptance criteria; do
-not inflate them into a fixed number of phases. One feature, one folder.
+Boundary, Relevant Files and Tasks. Derive outcome tasks from acceptance
+criteria; do not inflate them into a fixed number of phases. One feature,
+one folder.
+
+Boundary names what this feature owns and what it must not touch, in two
+short lists of paths. It is what makes two briefs safe to run at the same
+time, so write it whenever the answer is knowable and leave it out rather
+than guess. It bounds the work, not the reader: it is not a file inventory.
 
 Mark ready only when the brief is complete; never implement automatically.
 At finalize (steps/step-04-finalize.md), record the Git `base` and `branch`

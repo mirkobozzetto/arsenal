@@ -55,6 +55,7 @@ It **never runs your tests/builds/typechecks by default**: that stays yours. It 
 | `--no-commit` | Turn off the per-unit commit and push (default: one commit, pushed, per closed unit). |
 | `--no-push` | Keep the per-unit commits local. |
 | `--tasks T01,T02` | Scope the run to named tasks and their completed dependencies. |
+| `-w` / `--worktree` | Run the spec in its own worktree, through a session opened there, so another spec can run at the same time. |
 
 ### Git flow
 
@@ -76,6 +77,19 @@ one-word go question. After you report the merge, `ship` realigns `base` on
 origin, deletes the work branch and, when `base` is not the default branch
 (where GitHub closes nothing), closes the issues itself with the PR as
 resolution.
+
+### Two specs at once
+
+`-w` gives the spec its own checkout at `.worktrees/<slug>`, branched from
+`origin/<base>` and not from the repository's default branch, carries in the
+gitignored files listed in `.worktreeinclude` while leaving the originals
+untouched, runs the project's install command there, then hands the run to a
+session opened in that directory and returns. One spec, one branch, one
+worktree, one pull request: never one per task, because the tasks of a spec
+build on each other. Inside a worktree the main checkout keeps owning the
+running services, so `ship` starts no second stack. On merge it removes the
+worktree and the branch with plain Git, which refuses while anything is
+unmerged, and that refusal is reported rather than forced.
 
 A finding outside the task gets a one-line issue proposal, never a brief.
 

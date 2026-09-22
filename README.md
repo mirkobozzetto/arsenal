@@ -66,16 +66,29 @@ Missing skills are reported, with installation or an explicitly labeled fallback
 
 Work stays solo unless you approve delegation. No mandatory roadmap, HTML or new state file.
 
-The loop closes by itself: `brief` records the Git `base` and work `branch`
-and offers one issue per task; `ship` branches from `origin/<base>`, commits
-and pushes each closed unit, shows you where to see the result, ends with the
-next command, proposes the PR when the spec is shipped and, after the merge,
-closes the issues and realigns `base`. Every authoring skill verifies an
-external fact (version, API, price, date, behaviour of a tool) through
-`websearch` before stating it. Each of these steps runs on a detected
-capability (`git`, `gh`, web search, a browser) and prints the manual
-equivalent when it is missing, so an older brief or a host without `gh`
-works unchanged.
+The loop closes by itself: `brief` records the Git `base` and work `branch`,
+names what the work owns and must not touch, and offers one issue per task;
+an accepted `propose` records the same two fields; `ship` branches from
+`origin/<base>`, commits and pushes each closed unit, shows you where to see
+the result, ends with the next command, proposes the PR when the spec is
+shipped and, after the merge, closes the issues and realigns `base`. Every
+authoring skill verifies an external fact (version, API, price, date,
+behaviour of a tool) through `websearch` before stating it. Each of these
+steps runs on a detected capability (`git`, `gh`, web search, a browser) and
+prints the manual equivalent when it is missing, so an older brief or a host
+without `gh` works unchanged.
+
+### Two specs at once
+
+`/ship -w <spec>` gives that spec its own worktree under `.worktrees/<slug>`,
+branched from `origin/<base>` the spec recorded, carries in the gitignored
+files listed in `.worktreeinclude`, and hands the run to a session opened
+there, so you can start the next spec straight away. One spec, one branch,
+one worktree, one pull request: never one per task. The main checkout keeps
+owning the running services, and on merge `ship` removes the worktree and the
+branch through Git, which refuses while anything is unmerged. Without `-w`
+nothing changes, and Arsenal only offers it when another spec is already
+running in the repository.
 
 ### Optional continuous Arsenal mode for OMP and Pi
 
@@ -154,13 +167,13 @@ Per-plugin setup, flags, and dependencies live in each plugin's README.
 Install the complete Arsenal package from npm:
 
 ```bash
-pi install npm:arsenal-agent-skills@2.3.0
+pi install npm:arsenal-agent-skills@2.4.0
 ```
 
 Or install the pinned GitHub release:
 
 ```bash
-pi install git:github.com/mirkobozzetto/arsenal@v2.3.0
+pi install git:github.com/mirkobozzetto/arsenal@v2.4.0
 ```
 
 Start a fresh Pi session, then run `/arsenal-mode on`. The package also

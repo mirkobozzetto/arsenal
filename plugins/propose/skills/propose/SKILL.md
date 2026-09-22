@@ -25,6 +25,8 @@ the proposal; writing it is not implementation approval.
 
 Keep the existing docs/proposals/<id>-<slug>/PROPOSAL.md layout and links to
 a source brief. Do not supersede that brief until the design is accepted.
+On acceptance, record the Git `base` and `branch` in the frontmatter
+(steps/step-09-finalize.md) so ship branches without asking again.
 Render via scripts/render.py only on --html or request. Do not launch ship,
 open a browser, create an index, or start another agent just to finish.
 

@@ -1,7 +1,7 @@
 ---
 name: ship
 description: Implement a clear request or an approved brief/proposal. Work solo, make the smallest sufficient change, verify the changed behavior, and stop. Ask before any delegation.
-argument-hint: "<request or spec> [-r] [--tasks ids] [--no-commit] [--no-push] [--yolo]"
+argument-hint: "<request or spec> [-r] [-w] [--tasks ids] [--no-commit] [--no-push] [--yolo]"
 ---
 
 # Ship
@@ -41,6 +41,12 @@ criteria and non-goals. A shipped marker means done, not another run. On the
 first run of a spec in a Git repository, work on its `branch` created from
 `origin/<base>` (steps/step-00-init.md); a task that carries an issue is
 read together with that issue's Pickup Directive.
+
+**Another spec already running here:** with `-w`, do not implement in this
+session. Create the spec's worktree, hand the run to a session opened there,
+and return the worktree path and how to reach that session
+(steps/step-00-init.md). One spec, one branch, one worktree, one pull
+request: never a worktree per task. Without `-w` nothing changes.
 
 **Long or resumed work:** load `steps/step-00-init.md` and maintain one
 per-run `trace.md`. Existing contract/bundle files remain readable but are
@@ -96,7 +102,9 @@ Load only when needed:
 Flags: `-a/--auto` suppresses redundant questions, not safety/agent consent;
 `-e/--economy` and `-m solo` retain solo; another `-m` requests a mode,
 not a permission bypass. `--tasks` scopes to named spec tasks and completed
-dependencies. `-r` resumes. Commit and push per closed unit are the default;
+dependencies. `-r` resumes. `-w/--worktree` runs the spec in its own
+worktree through a second session instead of this one, and is never implied.
+Commit and push per closed unit are the default;
 `--no-commit` turns both off, `--no-push` keeps commits local, `--commit` is
 accepted for compatibility and changes nothing. `--yolo` requests relevant
 safe checks, never live-data edits, deployment or a full suite unrelated to

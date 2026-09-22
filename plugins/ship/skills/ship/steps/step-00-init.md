@@ -24,6 +24,34 @@ already exists, switch to it and rebase it on `origin/<base>` only when it
 is behind. Never commit on `base`. Graphite repositories use `gt create`.
 A dirty tree that is not this spec's work stays untouched and is reported.
 
+## Worktree, with `-w` only
+
+A second session in the same directory overwrites the first. With `-w`, and
+only then, give this spec its own checkout and hand the run over. Read the
+spec's `base` and `branch` first, exactly as above: the worktree branches
+from `origin/<base>`, never from the repository's default branch.
+
+1. Refuse and stop if `vcs` is not `git`, if `.worktrees/<slug>` already
+   exists, or if `git worktree list` already holds `<branch>`. Report which.
+2. `git fetch origin`, then
+   `git worktree add .worktrees/<slug> -b <branch> origin/<base>`. When
+   `<branch>` already exists, `git worktree add .worktrees/<slug> <branch>`.
+3. Copy the local files the checkout lacks, from the repository root:
+   `git ls-files -z --others --ignored --exclude-from=.worktreeinclude`
+   piped through `tar` into the worktree. Never move or link `.env` itself;
+   the originals stay untouched. Without a `.worktreeinclude`, offer one
+   holding `.env` and `.env.local` in one line before continuing, and say
+   which files were copied.
+4. Run the project's own install command, read from its manifest, inside the
+   worktree. No symlinked dependency directory by default.
+5. Open a session there according to `session_launcher` and send it the
+   spec's ship run with `-a` and the absolute spec path, in the syntax of
+   the matching adapter. With `herdr`, create the tab without stealing
+   focus; with `tmux`, a new window; with `none`, print the directory and
+   the command for the user to run.
+6. Return immediately: the worktree path, the branch, and where that session
+   is. Do not implement any task in this session.
+
 ## Issue context
 
 A task heading that links an issue: read that issue's Pickup Directive and

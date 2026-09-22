@@ -27,6 +27,10 @@ This is what keeps `ship` working on every format without changes: it reads
 | 10 | Implementation Plan | ✓ | ✓ | ✓ | step-07 |
 | 11 | Review Findings | - | - | ✓ | step-08 |
 
+Section 10 opens with one `Boundary` line when the answer is knowable: the
+paths this work owns, and those it must not touch. It is what lets this
+proposal ship beside another one, and it is left out rather than guessed.
+
 In `short`, section 1 is the decision itself (2-4 lines), not a summary of a
 longer text. In `short` and `propose`, review findings are APPLIED to the text
 instead of being appended as section 11.

@@ -12,3 +12,10 @@ smallest meaningful runtime check for code; no automatic validation of prose.
 One owner handles shared build resources. Inspect real command effects.
 Timeouts do not prove child exit. Runtime permissions and approval policies
 remain owned by the active harness.
+
+Inside a worktree, the main checkout owns the running services. Never start
+a second stack there: no `docker compose up` or equivalent, no second
+database, no duplicate daemon. Verify against the services already running
+for the repository, and say so in the final response. A spec that genuinely
+needs its own stack is reported as a limitation, not resolved by starting
+one.

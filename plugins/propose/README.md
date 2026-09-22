@@ -47,6 +47,12 @@ The final step sets a **status**: `Draft` / `Review` / `Accepted` / `Rejected`. 
 
 Once `Accepted`, run `ship <path>/PROPOSAL.md` to execute the impl plan. `ship` builds the dependency graph straight from the proposal's task table and refuses to run anything that isn't `Accepted`.
 
+Acceptance also records `base` and `branch` in the frontmatter, exactly as a
+`ready` brief does, so `ship` branches from `origin/<base>` and returns the
+PR there without asking. Section 10 opens with a `Boundary` line naming what
+the work owns and must not touch, which is what lets this proposal ship
+beside another spec.
+
 ## Dependencies
 
 - **[GitNexus](https://github.com/) (optional).** When present, `propose` uses it for codebase context (symbols, impact, execution flows). When absent, it degrades to grep/Read.

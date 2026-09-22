@@ -46,6 +46,13 @@ A bug does not imply a GitHub issue; a large change does not imply a brief.
 A short clarification can resolve uncertainty without creating a document.
 For advice-only requests, recommend the shortest path and stop before execution.
 
+Before routing to ship in a Git repository, check whether another spec is
+already running there: a checkout under `.worktrees/`, or an unfinished
+`trace.md` beside a different spec. If there is one, say so in one line and
+ask whether to run this spec with `-w`, in its own worktree and its own
+session. Follow the answer; never pick `-w` on your own, and never propose
+it when nothing else is running.
+
 ## Apply, then reassess
 
 1. Name the selected skill and the concrete reason in one short update.
