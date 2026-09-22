@@ -27,7 +27,7 @@
       "name": "arsenal",
       "source": "./plugins/arsenal",
       "description": "One entry point for adaptive clarification and authorized workflows using installed Arsenal skills.",
-      "version": "2.2.0",
+      "version": "2.2.1",
       "category": "orientation",
       "tags": [
         "roadmap",
@@ -73,7 +73,7 @@
       "name": "ship",
       "source": "./plugins/ship",
       "description": "Focused implementation workflow plus optional continuous Arsenal routing for OMP and Pi.",
-      "version": "1.14.0",
+      "version": "1.14.1",
       "category": "implementation",
       "tags": [
         "implement",
@@ -89,7 +89,7 @@
       "name": "next",
       "source": "./plugins/next",
       "description": "Query unfinished prd/rfc/ship work and the exact command to resume it. Derives an open-work board from artifact frontmatter; a SessionStart hook auto-surfaces it so context survives /clear.",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "category": "orientation",
       "tags": [
         "resume",

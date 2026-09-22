@@ -13,7 +13,11 @@ capabilities. Do not infer it from an Anthropic model name.
 - Product and harness research may use any available read-only web capability.
 - Record resolved model from runtime metadata when exposed. Otherwise record
   the model requested by the native file and provenance `agent-file`.
-- Format resume as `/arsenal -r <slug>` only when the command is available.
+- Plugin skills are scoped too: `/brief` is unknown, `/brief:brief` works.
+  Write every Arsenal command as `/<skill>:<skill>` (`/ship:ship`,
+  `/brief:brief`, `/propose:propose`, `/next:next`, `/issue:issue`).
+- Format resume as `/arsenal:arsenal -r <slug>` only when the command is
+  available.
 
 ## Worktree session
 
@@ -22,4 +26,4 @@ capabilities. Do not infer it from an Anthropic model name.
   `.worktreeinclude`: they branch from the repository default branch and
   place the worktree under `.claude/`, while ship owns both the `base` the
   spec recorded and the shared `.worktrees/<slug>` path.
-- Send ship as `/ship <absolute spec path> -a`.
+- Send ship as `/ship:ship <absolute spec path> -a`.

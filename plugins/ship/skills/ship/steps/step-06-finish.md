@@ -35,7 +35,9 @@ without a place to see it.
 After a run scoped by `--tasks`, state the remaining checkbox count and the
 first unfinished task in one factual line, then end with the exact next
 command as the last line (`/ship --tasks <id> <artifact>`, in the harness's
-own syntax). Reporting what is left is not expanding scope; do not offer to
+own syntax: Claude Code scopes plugin skills, so it is
+`/ship:ship --tasks <id> <artifact>`, and likewise `/brief:brief`,
+`/propose:propose`, `/next:next`, `/issue:issue`). Reporting what is left is not expanding scope; do not offer to
 continue, and do not start it.
 
 ## Closing a spec

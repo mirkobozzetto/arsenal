@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/next/scripts/scan.cjs\" --banner"
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/next/scripts/scan.cjs\" --banner --claude-code"
           }
         ]
       }

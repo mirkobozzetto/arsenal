@@ -14,6 +14,17 @@ if (roots.length === 0) roots.push(process.cwd());
 
 const SKIP = new Set(["node_modules", ".git", "target", "dist", ".next", "vendor"]);
 
+// Claude Code scopes plugin skills: `/ship` is only callable as `/ship:ship`. Artifacts
+// keep the neutral form; it is rewritten here, at display time.
+const ARSENAL_SKILLS = new Set(["arsenal", "brief", "propose", "ship", "next", "issue", "trace", "websearch"]);
+const IN_CLAUDE_CODE =
+  flags.has("--claude-code") || Boolean(process.env.CLAUDECODE || process.env.CLAUDE_PLUGIN_ROOT);
+
+function harnessCommand(cmd) {
+  if (!IN_CLAUDE_CODE) return cmd;
+  return cmd.replace(/^\/([a-z-]+)(?=\s|$)/, (m, name) => (ARSENAL_SKILLS.has(name) ? `/${name}:${name}` : m));
+}
+
 function walk(dir, out) {
   let entries;
   try {
@@ -207,8 +218,8 @@ function collect(root) {
       next: fm.next_action || "",
       base: fm.base || null,
       branch: fm.branch || null,
-      resume,
-      next_command: nextCommand,
+      resume: harnessCommand(resume),
+      next_command: harnessCommand(nextCommand),
       repo: path.basename(root),
       path: relTo(root, file),
     });
@@ -254,7 +265,7 @@ if (flags.has("--banner")) {
   if (open.length === 0 && trace.length === 0) process.exit(0);
   const lines = [];
   if (open.length) {
-    lines.push("OPEN WORK (run /next for detail):");
+    lines.push(`OPEN WORK (run ${harnessCommand("/next")} for detail):`);
     for (const i of open.slice(0, 3)) {
       lines.push(
         `  - ${i.name} [${i.status}]${i.progress ? " " + i.progress : ""} -> ${i.next_command}`,

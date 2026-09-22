@@ -1,6 +1,6 @@
 {
   "name": "ship",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "description": "Focused implementation workflow plus optional continuous Arsenal routing for OMP and Pi.",
   "author": {
     "name": "Mirko Bozzetto",

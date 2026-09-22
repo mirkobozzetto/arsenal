@@ -7,8 +7,9 @@ argument-hint: "[--all] [feature]"
 # Next
 
 Run scripts/scan.cjs from the intended repository, not the launch directory
-by assumption. --json is for tooling; --all includes completed work. The
-scanner recognizes shipped markers as terminal.
+by assumption. --json is for tooling; --all includes completed work. In
+Claude Code pass --claude-code, so commands come out callable
+(`/ship:ship`). The scanner recognizes shipped markers as terminal.
 
 Report the most useful open action. Do not re-read every artifact body after
 a sufficient scan. Read a specific artifact only for a requested detail.
