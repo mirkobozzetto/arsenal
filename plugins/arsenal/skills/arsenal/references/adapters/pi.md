@@ -77,6 +77,15 @@ Pi exposes skills as `/skill:<name>` when `enableSkillCommands` is on.
 Format resume as `/arsenal -r <slug>` only when that routing is active;
 otherwise show the plain-text action without assuming a command syntax.
 
+## Worktree session
+
+- Start the harness in an existing worktree with `pi` run from that
+  directory. Pi's own `worktree: true` belongs to `subagent` and creates a
+  child's checkout; it never opens the session ship needs, and it ignores
+  the `base` the spec recorded.
+- Send ship as `/skill:ship <absolute spec path> -a` when
+  `enableSkillCommands` is on, otherwise as the plain sentence.
+
 ## Fallback
 
 Missing agents, missing authentication, or an unprovable model resolution

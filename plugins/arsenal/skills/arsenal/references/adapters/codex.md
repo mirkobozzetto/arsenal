@@ -15,3 +15,10 @@ infer it from an OpenAI model name.
 - Record the model from spawn metadata when exposed. Otherwise use the native
   file value with provenance `agent-file`.
 - Format resume as `arsenal -r <slug>` when slash commands are unavailable.
+
+## Worktree session
+
+- Start the harness in an existing worktree with `codex` run from that
+  directory.
+- Send ship as `$ship <absolute spec path> -a`, or as the plain sentence
+  when slash and `$` commands are unavailable.

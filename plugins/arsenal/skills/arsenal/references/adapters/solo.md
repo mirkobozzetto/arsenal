@@ -11,3 +11,5 @@ or authentication and model resolution cannot be proved.
 - Set trace provenance to `parent` and status to `solo`.
 - Render with Python. Opening the browser remains optional.
 - Show plain-text next actions without assuming a command syntax.
+- Set `session_launcher: none`. A step that would open a second session
+  prints the directory and the sentence to run there instead.

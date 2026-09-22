@@ -14,3 +14,12 @@ capabilities. Do not infer it from an Anthropic model name.
 - Record resolved model from runtime metadata when exposed. Otherwise record
   the model requested by the native file and provenance `agent-file`.
 - Format resume as `/arsenal -r <slug>` only when the command is available.
+
+## Worktree session
+
+- Start the harness in an existing worktree with `claude` run from that
+  directory. Do not use `claude --worktree`, `EnterWorktree` or
+  `.worktreeinclude`: they branch from the repository default branch and
+  place the worktree under `.claude/`, while ship owns both the `base` the
+  spec recorded and the shared `.worktrees/<slug>` path.
+- Send ship as `/ship <absolute spec path> -a`.
