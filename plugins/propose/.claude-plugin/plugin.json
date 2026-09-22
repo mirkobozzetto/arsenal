@@ -1,6 +1,6 @@
 {
   "name": "propose",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "Design workflow in the RFC tradition: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Two sizes with hard ceilings. Forces reasoning before action. Optional GitNexus + Exa integration.",
   "author": {
     "name": "Mirko Bozzetto",

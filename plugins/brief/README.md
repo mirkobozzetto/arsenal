@@ -53,6 +53,14 @@ starts and where the PR returns, and offers one GitHub issue per task (via
 Pickup Directive, and `ship` reads it with the task. Both are optional; a
 brief without them still ships.
 
+A `ready` brief also carries a `Boundary`: the paths this feature owns and
+those it must not touch. That is what tells you whether two briefs can run
+side by side or have to follow each other, and `ship -w` needs the answer
+before it puts two specs in two worktrees. It is left out rather than
+guessed. Finalizing also offers, in one line, to add `docs/brief/` and
+`.worktrees/` to `.gitignore`, since both are working state rather than
+source.
+
 Then `brief` asks what's next and explains the benefit of each path:
 
 - **`propose`**: design the *how* first (alternatives, tradeoffs, risks). Choose this when the technical solution isn't obvious or the decision crosses a boundary.

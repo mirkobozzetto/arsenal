@@ -78,6 +78,7 @@ a claim of measured performance.
 | Product requirements uncertain | Clarify; brief if a durable specification is needed |
 | Unresolved storage architecture | Read propose; wait for acceptance before implementation |
 | Accepted proposal, implement it | Read ship and exact artifact; no repeated interview |
+| Implement a spec while another one runs here | Offer `ship -w` in one line; follow the answer, never choose it |
 | Compare current tools, no code | Read websearch; cited answer, no implementation |
 | Save this bug as an issue | Read issue; retain creation confirmation |
 | Show unfinished work | Read next; report, do not resume |
