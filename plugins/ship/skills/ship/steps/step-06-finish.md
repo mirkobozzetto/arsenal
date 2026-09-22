@@ -56,6 +56,15 @@ branch. If `base` is not the repository's default branch, GitHub closes no
 issue: close each one through the `issue` skill with the PR as resolution.
 Then say what was closed and realigned.
 
+A spec that ran in its own worktree is torn down in that same update, from
+the main checkout: `git worktree remove .worktrees/<slug>`, then
+`git branch -d <branch>`. Both refuse while something is unmerged or
+uncommitted, and that refusal is the guardrail: report it as it came and
+stop, never `--force` or `-D`. Close the tab or window that session used.
+When `docs/brief/<slug>` is untracked, it has served its purpose: remove it
+with `trash` when that exists, otherwise leave it and give the command. A
+tracked spec directory is left alone.
+
 No mandatory HTML, extra report, fresh agent or final catch-all commit.
 Publish/push/create a PR only after explicit authorization. Preserve a
 declined/deferred Git decision. Stop approved workers through the native
