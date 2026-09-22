@@ -57,10 +57,12 @@ issue: close each one through the `issue` skill with the PR as resolution.
 Then say what was closed and realigned.
 
 A spec that ran in its own worktree is torn down in that same update, from
-the main checkout: `git worktree remove .worktrees/<slug>`, then
-`git branch -d <branch>`. Both refuse while something is unmerged or
-uncommitted, and that refusal is the guardrail: report it as it came and
-stop, never `--force` or `-D`. Close the tab or window that session used.
+the main checkout and in this order, because each step is what unblocks the
+next: realign `base` on origin first, then `git worktree remove
+.worktrees/<slug>`, then `git branch -d <branch>`. Deleting the branch while
+its worktree still exists is refused outright, and `-d` measures merged
+against the upstream, so before the realignment it refuses too. Both refusals
+are the guardrail: report one as it came and stop, never `--force` or `-D`. Close the tab or window that session used.
 When `docs/brief/<slug>` is untracked, it has served its purpose: remove it
 with `trash` when that exists, otherwise leave it and give the command. A
 tracked spec directory is left alone.
