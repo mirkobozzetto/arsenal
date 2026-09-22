@@ -7,6 +7,11 @@ When `vcs` is `git`, write `base` (the branch checked out now) and `branch`
 creates the work branch from `origin/<base>` and returns the PR to `base`.
 Skip both fields when `vcs` is `none`.
 
+When `vcs` is `git`, offer once, in one line, to add `docs/brief/` and
+`.worktrees/` to the repository `.gitignore`, yes by default: the spec is
+working memory, and the worktrees ship creates are checkouts. Add only what
+is missing; never duplicate an entry or rewrite existing ones.
+
 When `git_host` is `github-cli`, offer once, in one line: one GitHub issue
 per top-level task, each with its Pickup Directive drawn from the task and
 its acceptance criteria. On yes, read the `issue` skill and run its
