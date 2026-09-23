@@ -11,7 +11,27 @@ const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 
-const ROOT = process.cwd();
+// Resolve the project root, not the launch directory: a command run from
+// inside a git submodule must still land the ledger in the superproject,
+// never inside the submodule (which then shows as a dirty submodule pointer).
+function resolveRoot() {
+  const tryGit = (args) => {
+    try {
+      return execSync(`git ${args}`, { cwd: process.cwd(), stdio: ["ignore", "pipe", "ignore"] })
+        .toString()
+        .trim();
+    } catch {
+      return "";
+    }
+  };
+  return (
+    tryGit("rev-parse --show-superproject-working-tree") ||
+    tryGit("rev-parse --show-toplevel") ||
+    process.cwd()
+  );
+}
+
+const ROOT = resolveRoot();
 const TRACE_DIR = path.join(ROOT, ".claude");
 const TRACE_FILE = path.join(TRACE_DIR, "trace.md");
 const STATE_FILE = path.join(TRACE_DIR, ".trace-state");

@@ -7,10 +7,13 @@ When `vcs` is `git`, write `base` (the branch checked out now) and `branch`
 creates the work branch from `origin/<base>` and returns the PR to `base`.
 Skip both fields when `vcs` is `none`.
 
-When `vcs` is `git`, offer once, in one line, to add `docs/brief/` and
-`.worktrees/` to the repository `.gitignore`, yes by default: the spec is
-working memory, and the worktrees ship creates are checkouts. Add only what
-is missing; never duplicate an entry or rewrite existing ones.
+When `vcs` is `git`, offer once, in one line, to add `docs/brief/**/trace.md`
+and `.worktrees/` to the repository `.gitignore`, yes by default: `brief.md`
+and `tasks.md` are the durable spec history that `ship` commits and later
+removes explicitly once the spec closes, `trace.md` is a churny working
+ledger that should never enter a commit, and the worktrees ship creates are
+checkouts. Add only what is missing; never duplicate an entry or rewrite
+existing ones.
 
 When `git_host` is `github-cli`, offer once, in one line: one GitHub issue
 per top-level task, each with its Pickup Directive drawn from the task and

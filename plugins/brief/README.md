@@ -57,9 +57,10 @@ A `ready` brief also carries a `Boundary`: the paths this feature owns and
 those it must not touch. That is what tells you whether two briefs can run
 side by side or have to follow each other, and `ship -w` needs the answer
 before it puts two specs in two worktrees. It is left out rather than
-guessed. Finalizing also offers, in one line, to add `docs/brief/` and
-`.worktrees/` to `.gitignore`, since both are working state rather than
-source.
+guessed. Finalizing also offers, in one line, to add
+`docs/brief/**/trace.md` and `.worktrees/` to `.gitignore`: `brief.md` and
+`tasks.md` stay tracked as the spec's history, `trace.md` is a working
+ledger that should never enter a commit, and the worktrees are checkouts.
 
 Then `brief` asks what's next and explains the benefit of each path:
 

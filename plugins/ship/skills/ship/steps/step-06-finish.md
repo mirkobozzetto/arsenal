@@ -51,12 +51,17 @@ and `Closes #N` for every issue of the brief. Graphite repositories use
 same run is not asked for again. With `git_host` `none`, print the manual
 equivalent (branch pushed, base, title, body) and stop.
 
+The spec closes on a reported merge, or on the user's explicit acceptance of
+the end when there was no PR (`git_host` `none`, or none was ever opened).
+Before any switch or new branch below, the tree must be clean and the
+current branch pushed: commit and push the in-scope work first; anything out
+of scope is reported, never carried across the switch.
+
 When the user reports the merge: `git fetch origin`, check that
 `git log origin/<base>..<base>` holds nothing outside the merged work,
 `git switch <base>`, `git reset --hard origin/<base>`, delete the work
 branch. If `base` is not the repository's default branch, GitHub closes no
 issue: close each one through the `issue` skill with the PR as resolution.
-Then say what was closed and realigned.
 
 A spec that ran in its own worktree is torn down in that same update, from
 the main checkout and in this order, because each step is what unblocks the
@@ -65,9 +70,18 @@ next: realign `base` on origin first, then `git worktree remove
 its worktree still exists is refused outright, and `-d` measures merged
 against the upstream, so before the realignment it refuses too. Both refusals
 are the guardrail: report one as it came and stop, never `--force` or `-D`. Close the tab or window that session used.
-When `docs/brief/<slug>` is untracked, it has served its purpose: remove it
-with `trash` when that exists, otherwise leave it and give the command. A
-tracked spec directory is left alone.
+
+The spec directory (`docs/brief/<slug>` or `docs/proposals/<id>-<slug>`) is
+then removed on its own branch, tracked or not, because a base updated by
+squash merge never takes a local commit directly: `git fetch origin`,
+`git switch -c chore/remove-<slug> origin/<base>`, `rm -r` that directory
+(its `trace.md` included), `git add -A` the path, commit
+(`chore(<slug>): remove shipped spec`), push. History still holds it:
+`git show <commit>^:docs/brief/<slug>/brief.md` reads it back. Opening a PR
+for this branch still needs the user's go, like any PR. This is the rule for
+every project: a merged spec is removed immediately on its own branch rather
+than carried into whatever branch comes next, so it never lingers as open
+work. Say what was closed, realigned, and removed.
 
 No mandatory HTML, extra report, fresh agent or final catch-all commit.
 Publish/push/create a PR only after explicit authorization. Preserve a

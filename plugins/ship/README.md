@@ -76,7 +76,12 @@ towards `base` (`gh pr create`, `Closes #N` for the brief's issues) and a
 one-word go question. After you report the merge, `ship` realigns `base` on
 origin, deletes the work branch and, when `base` is not the default branch
 (where GitHub closes nothing), closes the issues itself with the PR as
-resolution.
+resolution. It then removes the spec directory itself, tracked or not, on
+its own `chore/remove-<slug>` branch cut from `origin/<base>` (never a
+commit on `base`, since a squash-merged base takes no local commits): the
+spec stops being reported as open work, and its history is still readable
+with `git show`. Opening the PR for that branch still needs your go, like
+any PR.
 
 ### Two specs at once
 
@@ -102,7 +107,7 @@ A finding outside the task gets a one-line issue proposal, never a brief.
 - Exa MCP for any web lookup (no native WebSearch/WebFetch).
 - `git` guard friendly: one grant per branch covers the per-unit pushes; the PR always prompts once, at the end.
 - Without `gh` (no GitHub, other host): issues and PR are printed as the manual equivalent, nothing blocks.
-- Removal uses `trash`, never destructive deletes; never modifies a database without an explicit prompt.
+- A shipped spec is removed with `git rm`/`rm` on its own branch, never `--force` or `-D`, and never a destructive delete of anything else; never modifies a database without an explicit prompt.
 
 ## What it writes
 

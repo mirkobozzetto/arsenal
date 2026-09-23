@@ -22,7 +22,10 @@ to the branch checked out now, `branch` to `feat/<slug>`) and write both. Then
 `git fetch origin` and `git switch -c <branch> origin/<base>`; if `<branch>`
 already exists, switch to it and rebase it on `origin/<base>` only when it
 is behind. Never commit on `base`. Graphite repositories use `gt create`.
-A dirty tree that is not this spec's work stays untouched and is reported.
+Before this or any later switch, the tree must be clean and the current
+branch pushed: commit and push the in-scope work first. A dirty tree holding
+work outside this spec stays untouched and is reported, never committed,
+reset or discarded to force the switch through.
 
 ## Worktree, with `-w` only
 
