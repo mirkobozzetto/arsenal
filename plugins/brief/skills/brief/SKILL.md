@@ -12,11 +12,12 @@ numeric business metric for a small usability change. Group related questions
 in plain prose; no start/proceed confirmations. -a/-s allow explicit assumptions,
 not invented certainty or external permissions.
 
-Write docs/brief/<slug>/brief.md and tasks.md. Keep the existing frontmatter
-and structural headings Acceptance criteria, Success metrics, Out-of-scope,
-Boundary, Relevant Files and Tasks. Derive outcome tasks from acceptance
-criteria; do not inflate them into a fixed number of phases. One feature,
-one folder.
+Write docs/brief/<slug>/brief.md and tasks.md from
+references/brief-template.md, never from a brief found in another project.
+Keep its frontmatter and structural headings Acceptance criteria, Success
+metrics, Out-of-scope, Boundary, Relevant Files and Tasks. Derive outcome
+tasks from acceptance criteria; do not inflate them into a fixed number of
+phases. One feature, one folder.
 
 Boundary names what this feature owns and what it must not touch, in two
 short lists of paths. It is what makes two briefs safe to run at the same

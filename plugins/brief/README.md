@@ -13,10 +13,10 @@ A short interview (jobs-to-be-done, target user, problem, constraints, the three
 ```
 docs/brief/<slug>/
   brief.md      # problem, goals, user stories, scope, out-of-scope, success metrics, acceptance criteria
-  tasks.md    # a single nested checklist: 1.0 parent -> 1.1, 1.2 sub-tasks (phases = parent tasks)
+  tasks.md      # one `## T01` heading per task, its checkboxes under it
 ```
 
-A big feature adds **more parent tasks**, never more files. The task list traces every task back to a brief criterion. At the end, `brief.md` is marked `status: ready` and it hands off: to `propose` (design the how) or straight to `ship` (build it).
+A big feature adds **more tasks**, never more files. The task list traces every task back to a brief criterion. At the end, `brief.md` is marked `status: ready` and it hands off: to `propose` (design the how) or straight to `ship` (build it).
 
 > Convention follows Ryan Carson's [ai-dev-tasks](https://github.com/snarktank/ai-dev-tasks) pattern: two files per feature, tasks as one nested checklist.
 
