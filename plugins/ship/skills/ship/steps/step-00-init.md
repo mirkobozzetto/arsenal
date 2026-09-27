@@ -5,7 +5,8 @@ root, completed units, current work, outstanding permissions, and anything an
 earlier unit recorded as carried forward for this one. Do not re-run completed
 units. A terminal trace or shipped marker means done.
 
-Defaults: solo, no commits, no extra reviewers, no full suite. Ask only for
+Defaults: solo, commit and push per closed unit, no extra reviewers, no
+full suite. Ask only for
 a blocking missing decision. Use absolute target paths, never the Eval cwd.
 For multi-session work, keep one trace.md beside the spec. Inline work needs
 no durable files unless requested. A native todo mirrors this progress.
