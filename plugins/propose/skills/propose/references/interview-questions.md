@@ -1,6 +1,6 @@
 # Interview Questions Bank
 
-Used by steps that need user input. AskUserQuestion preferred; free-text for follow-ups.
+Used by the default interview (no --auto). One question per message, plain text.
 
 ## Step 02: Problem & Motivation
 

@@ -1,6 +1,6 @@
 # step 03 alternatives
 
-Compare genuine alternatives and status quo where useful. Never add an option to meet a count. State concrete tradeoffs and what evidence would change the choice.
+Compare genuine alternatives and status quo where useful. Never add an option to meet a count. State concrete tradeoffs and what evidence would change the choice. Without --auto, ask the Step 03 questions first, one at a time.
 
 The current SKILL.md owns the workflow policy. User consent is required
 before any agent, reviewer or advisor. No automatic validation sessions

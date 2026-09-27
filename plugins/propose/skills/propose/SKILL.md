@@ -15,8 +15,16 @@ Use references/proposal-template.md for stable section numbers and artifact
 shape. Write problem, real alternatives (including status quo when relevant),
 tradeoffs, design, risks, recommendation and runnable implementation tasks.
 Do not manufacture alternatives, diagrams, metrics or verification layers
-to fill a template. Ask only about a blocking decision not recoverable from
-code or the request. Research only unresolved external questions.
+to fill a template. Research only unresolved external questions.
+
+## Interview
+
+Without --auto, interview the user before drafting: problem, scope,
+goals/non-goals, alternatives direction, design choices. One question per
+message, in plain text, then wait for the answer. Draw questions from
+references/interview-questions.md; skip one only when the request already
+answers it. Never infer an answer the user can give. Under --auto, infer
+from code and the request and ask only about a blocking decision.
 
 Review the draft yourself. An independent review is optional and requires
 explicit user consent, never merely omission of --no-review. Retain supported
@@ -51,5 +59,5 @@ repository or the request need no search.
 Work solo. Ask before any subagent or reviewer, even in auto mode. Explain
 the independent scope and expected benefit first. No hidden advisor, nested
 delegation, model retuning, repeated successful checks, or progress spam.
-Use existing context before asking questions. Stop when the requested result
+Stop when the requested result
 is delivered. User stops and scope changes override pending steps.
