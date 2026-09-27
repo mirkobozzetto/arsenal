@@ -84,6 +84,7 @@ than carried into whatever branch comes next, so it never lingers as open
 work. Say what was closed, realigned, and removed.
 
 No mandatory HTML, extra report, fresh agent or final catch-all commit.
-Publish/push/create a PR only after explicit authorization. Preserve a
+Per-unit pushes of the work branch follow steps/step-02-plan.md; publishing,
+merging or creating a PR still needs explicit authorization. Preserve a
 declined/deferred Git decision. Stop approved workers through the native
 harness; do not delete unrelated team/session files.

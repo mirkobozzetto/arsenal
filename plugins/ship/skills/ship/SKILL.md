@@ -94,7 +94,7 @@ repository or the request need no search.
 
 Load only when needed:
 - `steps/step-01-ingest.md`: artifact formats and task filtering.
-- `steps/step-02-plan.md`: complex dependencies and optional green commits.
+- `steps/step-02-plan.md`: complex dependencies and per-unit commit and push.
 - `steps/step-03-engine.md`: user-approved delegation.
 - `references/guardrails.md`: hazardous operations.
 - `steps/step-06-finish.md`: durable status and requested Git delivery.

@@ -73,7 +73,7 @@
       "name": "ship",
       "source": "./plugins/ship",
       "description": "Focused implementation workflow plus optional continuous Arsenal routing for OMP and Pi.",
-      "version": "1.14.1",
+      "version": "1.14.2",
       "category": "implementation",
       "tags": [
         "implement",
