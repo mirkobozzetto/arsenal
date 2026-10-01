@@ -28,8 +28,11 @@ One line per work block, newest at the bottom:
 ## Mechanical vs intent
 
 The Stop hook is deterministic and cheap: it logs the working-tree delta since
-its last fire, every turn that changed files, with no model call. It captures
-*what files moved*, never *why*.
+its last fire, every turn that changed files, with no model call. It also logs
+one `commit <hash> <subject>` entry per commit made since its last fire (at
+most 10, older ones folded into one line), because a file edited and committed
+in the same turn never shows in the working tree. The first fire only records
+`HEAD`. It captures *what moved*, never *why*.
 
 The upgrade path (not built): a Stop hook that returns
 `hookSpecificOutput.additionalContext` asking the model to write the entry,

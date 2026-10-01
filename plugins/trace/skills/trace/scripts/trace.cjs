@@ -35,6 +35,8 @@ const ROOT = resolveRoot();
 const TRACE_DIR = path.join(ROOT, ".claude");
 const TRACE_FILE = path.join(TRACE_DIR, "trace.md");
 const STATE_FILE = path.join(TRACE_DIR, ".trace-state");
+// A branch switch can put hundreds of commits between two fires.
+const MAX_COMMITS = 10;
 
 // Working-tree state as a path -> status-code map. Parsed by fixed porcelain
 // columns (2 status chars, then the path); no global trim, which would eat the
@@ -112,29 +114,68 @@ function appendEntry({ context, what, files, status }) {
 
 // ---- modes ----
 
+function git(args) {
+  try {
+    return execSync(`git ${args}`, { cwd: ROOT, stdio: ["ignore", "pipe", "ignore"] }).toString();
+  } catch {
+    return null;
+  }
+}
+
+// Commits made since the last fire. A file edited then committed in the same
+// turn never shows in porcelain, so without this, per-unit commits leave no trace.
+function commitsSince(sha) {
+  if (!sha) return [];
+  const raw = git(`log --reverse --format=%x1e%h%x09%s --name-only ${sha}..HEAD`);
+  if (!raw) return [];
+  return raw
+    .split("\x1e")
+    .filter((c) => c.trim())
+    .map((chunk) => {
+      const [header, ...rest] = chunk.split("\n");
+      const [hash, subject] = header.split("\t");
+      const files = rest.map((l) => l.trim()).filter((l) => l && !l.startsWith(".claude/"));
+      return { hash, subject, files };
+    });
+}
+
+function shortList(files) {
+  const shown = files.slice(0, 8);
+  const extra = files.length - shown.length;
+  return extra > 0 ? shown.concat(`+${extra} more`) : shown;
+}
+
 function runHook() {
   const cur = porcelain();
   if (cur === null) process.exit(0); // not a git repo: nothing to observe
   const state = loadState();
   const prev = state.files || {};
+  const head = (git("rev-parse HEAD") || "").trim() || null;
 
   // delta = paths that are newly dirty or whose status changed since last fire.
   // ponytail: re-edits that leave the porcelain code identical are not re-logged;
   //           upgrade path is the model-written entry (see references/format.md).
   const changed = Object.keys(cur).filter((f) => cur[f] !== prev[f]);
+  // First fire has no previous HEAD: record it, never dump the whole history.
+  const commits = commitsSince(state.head);
 
   // always advance the snapshot so a later revert/commit is detected as a change.
   // merge, never overwrite: the digest cursor lives in the same state file.
-  saveState({ ...state, files: cur });
+  saveState({ ...state, files: cur, head });
+
+  const recent = commits.slice(-MAX_COMMITS);
+  if (commits.length > recent.length) {
+    appendEntry({ context: "git", what: `${commits.length - recent.length} earlier commits`, files: [], status: "wip" });
+  }
+  for (const c of recent) {
+    const context = c.files.length ? inferContext(c.files) : "chat";
+    appendEntry({ context, what: `commit ${c.hash} ${c.subject}`, files: shortList(c.files), status: "wip" });
+  }
 
   if (changed.length === 0) process.exit(0); // zero noise: nothing moved
 
-  const context = inferContext(changed);
-  const shown = changed.slice(0, 8);
-  const extra = changed.length - shown.length;
   const what = `edited ${changed.length} file${changed.length > 1 ? "s" : ""}`;
-  const files = extra > 0 ? shown.concat(`+${extra} more`) : shown;
-  appendEntry({ context, what, files, status: "wip" });
+  appendEntry({ context: inferContext(changed), what, files: shortList(changed), status: "wip" });
   process.exit(0);
 }
 
