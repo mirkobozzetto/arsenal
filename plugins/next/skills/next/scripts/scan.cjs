@@ -6,17 +6,18 @@
 
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
 
 const args = process.argv.slice(2);
 const flags = new Set(args.filter((a) => a.startsWith("--")));
-const roots = args.filter((a) => !a.startsWith("--"));
+const roots = args.filter((a, i) => !a.startsWith("--") && args[i - 1] !== "--resume");
 if (roots.length === 0) roots.push(process.cwd());
 
 const SKIP = new Set(["node_modules", ".git", "target", "dist", ".next", "vendor"]);
 
 // Claude Code scopes plugin skills: `/ship` is only callable as `/ship:ship`. Artifacts
 // keep the neutral form; it is rewritten here, at display time.
-const ARSENAL_SKILLS = new Set(["arsenal", "brief", "propose", "ship", "next", "issue", "trace", "websearch"]);
+const ARSENAL_SKILLS = new Set(["arsenal", "brief", "propose", "ship", "next", "issue", "trace", "review", "websearch"]);
 const IN_CLAUDE_CODE =
   flags.has("--claude-code") || Boolean(process.env.CLAUDECODE || process.env.CLAUDE_PLUGIN_ROOT);
 
@@ -120,6 +121,74 @@ function readTrace(root) {
   return out;
 }
 
+// End-of-session saves written by `/trace` (format: trace references/format.md).
+const SAVE_HEADER = /^### save (\S+) \| branch (.*?) \| status: (\w+)\s*$/;
+const SAVE_FIELDS = ["done", "left", "next", "remember", "planned"];
+
+function readSaves(root) {
+  let text;
+  try {
+    text = fs.readFileSync(path.join(root, ".claude", "trace.md"), "utf8");
+  } catch {
+    return [];
+  }
+  const saves = [];
+  let cur = null;
+  for (const line of text.split("\n")) {
+    const h = line.match(SAVE_HEADER);
+    if (h) {
+      cur = { date: h[1], branch: h[2], status: h[3], repo: path.basename(root), root };
+      saves.push(cur);
+      continue;
+    }
+    const f = cur && line.match(/^- (\w+): (.*)$/);
+    if (f && SAVE_FIELDS.includes(f[1])) cur[f[1]] = f[2];
+    else if (line.startsWith("#")) cur = null;
+  }
+  return saves.filter((s) => s.status === "open").reverse();
+}
+
+// Marks a save as taken up once the user picked it, so it is not offered again.
+function resumeSave(root, date) {
+  const file = path.join(root, ".claude", "trace.md");
+  let text;
+  try {
+    text = fs.readFileSync(file, "utf8");
+  } catch {
+    return false;
+  }
+  const target = `### save ${date} |`;
+  const out = text
+    .split("\n")
+    .map((l) => (l.startsWith(target) ? l.replace(/status: open\s*$/, "status: resumed") : l))
+    .join("\n");
+  if (out === text) return false;
+  fs.writeFileSync(file, out);
+  return true;
+}
+
+// Open GitHub issues left by the `issue` skill. Network, so never in --banner.
+// ponytail: only the `arsenal` label; legacy `claude-memory` issues are not listed.
+const ISSUE_TIMEOUT_MS = 4000;
+function readIssues(root) {
+  try {
+    const origin = execSync("git remote get-url origin", { cwd: root, stdio: ["ignore", "pipe", "ignore"] }).toString();
+    if (!origin.includes("github.com")) return [];
+  } catch {
+    return [];
+  }
+  try {
+    const raw = execSync("gh issue list --label arsenal --state open --limit 10 --json number,title,url", {
+      cwd: root,
+      timeout: ISSUE_TIMEOUT_MS,
+      stdio: ["ignore", "pipe", "ignore"],
+    }).toString();
+    return JSON.parse(raw).map((i) => ({ ...i, repo: path.basename(root) }));
+  } catch {
+    return null;
+  }
+}
+
 // status -> bucket. open = actionable now; wip = still authoring; done = hidden by default.
 function bucket(kind, status) {
   const s = (status || "").toLowerCase();
@@ -129,6 +198,7 @@ function bucket(kind, status) {
     if (s === "shipped" || s === "superseded") return "done";
     return "wip"; // draft or unknown = still being authored
   }
+  if (kind === "review") return status === "done" ? "done" : "open";
   if (kind === "roadmap") {
     if (s === "ready") return "open"; // next move: /brief a phase, or re-discuss
     if (s === "superseded") return "done";
@@ -172,11 +242,11 @@ function collect(root) {
       fm.type === "rfc" ||
       ["PROPOSAL.md", "RFC.md"].includes(base);
     const isRoadmap = fm.type === "roadmap";
-    if (!isPrd && !isRfc && !isRoadmap) continue;
-    const kind = isPrd ? "prd" : isRoadmap ? "roadmap" : "rfc";
+    const isReview = fm.type === "review";
+    if (!isPrd && !isRfc && !isRoadmap && !isReview) continue;
+    const kind = isPrd ? "prd" : isRoadmap ? "roadmap" : isReview ? "review" : "rfc";
     const shippedMarker = isRfc && fs.existsSync(path.join(path.dirname(file), `${path.basename(file, ".md")}.shipped`));
-    const status = shippedMarker ? "shipped" : fm.status || (isRfc ? "Draft" : "draft");
-    const b = bucket(kind, status);
+    let status = shippedMarker ? "shipped" : fm.status || (isRfc ? "Draft" : "draft");
 
     let progress = null;
     let nextTask = null;
@@ -190,11 +260,19 @@ function collect(root) {
         nextTaskId = c.nextId;
       }
     }
+    // A review report is open while one of its points is unchecked.
+    if (isReview) {
+      const c = countTasks(file);
+      status = c && c.done < c.total ? "open" : "done";
+      if (c) progress = `${c.done}/${c.total} points`;
+    }
+    const b = bucket(kind, status);
 
     // resume command: explicit frontmatter wins; else derive from the artifact path.
     let resume = fm.resume_cmd;
     if (!resume) {
       if (isRoadmap) resume = `/arsenal -r ${fm.slug || path.basename(path.dirname(file))}`;
+      else if (isReview) resume = `/review ${relTo(root, file)}`;
       else {
         const target = isPrd ? relTo(root, path.dirname(file)) : relTo(root, file);
         resume = `/ship ${target}`;
@@ -207,7 +285,7 @@ function collect(root) {
 
     items.push({
       kind,
-      slug: isPrd ? path.basename(path.dirname(file)) : path.basename(file, ".md"),
+      slug: isPrd || isReview ? path.basename(path.dirname(file)) : path.basename(file, ".md"),
       name: fm.feature || fm.title || fm.slug || path.basename(path.dirname(file)),
       status,
       bucket: b,
@@ -227,12 +305,30 @@ function collect(root) {
   return items;
 }
 
+const resumeIdx = args.indexOf("--resume");
+if (resumeIdx !== -1) {
+  const date = args[resumeIdx + 1];
+  const ok = roots.some((r) => resumeSave(path.resolve(r), date));
+  process.stdout.write(ok ? `Resumed save ${date}\n` : `No open save ${date}\n`);
+  process.exit(ok ? 0 : 1);
+}
+
 let all = [];
 let trace = [];
+let saves = [];
+let issues = [];
+let issuesFailed = false;
+const BANNER = flags.has("--banner");
 for (const root of roots) {
   const r = path.resolve(root);
   all = all.concat(collect(r));
   trace = trace.concat(readTrace(r));
+  saves = saves.concat(readSaves(r));
+  if (!BANNER) {
+    const found = readIssues(r);
+    if (found === null) issuesFailed = true;
+    else issues = issues.concat(found);
+  }
 }
 all.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
 
@@ -254,14 +350,48 @@ const done = all.filter((i) => i.bucket === "done");
 
 if (flags.has("--json")) {
   process.stdout.write(
-    JSON.stringify({ open, wip, done, top: open[0] || null, trace: trace.slice(-20) }, null, 2) + "\n",
+    JSON.stringify(
+      { saves, open, wip, done, issues, issues_failed: issuesFailed, top: open[0] || null, trace: trace.slice(-20) },
+      null,
+      2,
+    ) + "\n",
   );
   process.exit(0);
 }
 
 // --banner: terse, raw text for the SessionStart hook. Silent only when there is
 // neither open artifact work nor recent trace activity to resurface.
-if (flags.has("--banner")) {
+function saveLines(sv, n) {
+  const head = `  ${n}. session ${sv.date} (branch ${sv.branch})`;
+  const body = ["done", "left", "next", "remember"].filter((k) => sv[k]).map((k) => `       ${k}: ${sv[k]}`);
+  return [head, ...body];
+}
+
+// The numbered resume list: open saves first, newest first, then open specs
+// and reviews, then issues. Shared by the banner and the board.
+function resumeList(withIssues) {
+  const lines = [];
+  let n = 0;
+  for (const sv of saves) lines.push(...saveLines(sv, ++n));
+  for (const i of open) lines.push(`  ${++n}. ${i.name} [${i.status}]${i.progress ? " " + i.progress : ""} -> ${i.next_command}`);
+  if (withIssues) for (const is of issues) lines.push(`  ${++n}. issue #${is.number} ${is.title} -> ${harnessCommand("/issue")} resume #${is.number}`);
+  return lines;
+}
+
+if (BANNER && saves.length) {
+  const lines = ["RESUME (left by the last sessions):", ...resumeList(false)];
+  lines.push(
+    "",
+    "INSTRUCTION: in your first reply, before anything else, show this numbered list to the user in their language,",
+    `then ask only "On continue quoi ?" (translated) and wait. Open issues: ${harnessCommand("/next")}.`,
+    `When the user picks a session, run: node "${__filename}" "${roots[0]}" --resume <its date>,`,
+    "then hand its next action to Arsenal. Never start the work before the user picks.",
+  );
+  process.stdout.write(lines.join("\n") + "\n");
+  process.exit(0);
+}
+
+if (BANNER) {
   if (open.length === 0 && trace.length === 0) process.exit(0);
   const lines = [];
   if (open.length) {
@@ -293,6 +423,12 @@ function row(i) {
 }
 
 const out = [];
+if (saves.length || issues.length) {
+  out.push("TO RESUME (pick a number):");
+  out.push(resumeList(true).join("\n"));
+  out.push("");
+}
+if (issuesFailed) out.push("(GitHub issues not listed: gh unavailable or too slow)\n");
 if (open.length === 0 && wip.length === 0) {
   out.push(
     trace.length
