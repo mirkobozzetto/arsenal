@@ -5,6 +5,8 @@
 //                 fire, but only when real work happened. Silent otherwise.
 //   --read [n]    Print the last n entries (the /trace reader).
 //   done <what>   Manual entry with the intent the mechanical hook can't infer.
+//   save ...      End-of-session save that next offers to resume.
+//   resume <date> Mark a save as taken up.  saves [--all]: list them as JSON.
 // Zero dependencies. Mechanical mode never calls the model.
 
 const fs = require("fs");
@@ -99,7 +101,7 @@ function inferContext(files) {
   return top && top.includes(".") === false ? top : "chat";
 }
 
-function appendEntry({ context, what, files, status }) {
+function ensureLedger() {
   fs.mkdirSync(TRACE_DIR, { recursive: true });
   if (!fs.existsSync(TRACE_FILE)) {
     fs.writeFileSync(
@@ -107,6 +109,10 @@ function appendEntry({ context, what, files, status }) {
       "# Trace\n\nProject progress ledger. Written automatically by the Stop hook and by `/trace`.\nNewest entries at the bottom. `next` reads this to show what moved.\n\n",
     );
   }
+}
+
+function appendEntry({ context, what, files, status }) {
+  ensureLedger();
   const fileStr = files && files.length ? files.join(", ") : "-";
   const line = `- [${context}] ${now()} | done: ${what} | files: ${fileStr} | status: ${status}\n`;
   fs.appendFileSync(TRACE_FILE, line);
@@ -220,6 +226,90 @@ function runDone(rest) {
   process.exit(0);
 }
 
+// ---- saves: what /trace leaves for the next session ----
+
+const SAVE_FIELDS = ["done", "left", "next", "remember", "planned"];
+const SAVE_HEADER = /^### save (\S+) \| branch (.*?) \| status: (\w+)\s*$/;
+
+// Saves are private to this machine. .git/info/exclude is local and never
+// shared, so the project's .gitignore stays untouched.
+function keepPrivate() {
+  if (git("check-ignore -q .claude/trace.md") !== null) return;
+  const rel = (git("rev-parse --git-path info/exclude") || "").trim();
+  if (!rel) return;
+  const file = path.resolve(ROOT, rel);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.appendFileSync(file, "\n.claude/trace.md\n.claude/.trace-state\n");
+}
+
+function parseSaves(text) {
+  const saves = [];
+  let cur = null;
+  for (const line of text.split("\n")) {
+    const h = line.match(SAVE_HEADER);
+    if (h) {
+      cur = { date: h[1], branch: h[2], status: h[3] };
+      saves.push(cur);
+      continue;
+    }
+    const f = cur && line.match(/^- (\w+): (.*)$/);
+    if (f && SAVE_FIELDS.includes(f[1])) cur[f[1]] = f[2];
+    else if (line.startsWith("#")) cur = null;
+  }
+  return saves;
+}
+
+function runSave(rest) {
+  const fields = {};
+  for (let i = 0; i < rest.length; i++) {
+    const key = rest[i].replace(/^--/, "");
+    if (SAVE_FIELDS.includes(key)) fields[key] = (rest[++i] || "").replace(/\s+/g, " ").trim();
+  }
+  if (!fields.done && !fields.next) {
+    process.stderr.write('Usage: trace.cjs save --done "<what>" --next "<a ; b>" [--left ..] [--remember ..] [--planned ..]\n');
+    process.exit(1);
+  }
+  ensureLedger();
+  keepPrivate();
+  const branch = (git("branch --show-current") || "").trim() || "-";
+  const date = now();
+  const lines = [`\n### save ${date} | branch ${branch} | status: open`];
+  for (const k of SAVE_FIELDS) if (fields[k]) lines.push(`- ${k}: ${fields[k]}`);
+  fs.appendFileSync(TRACE_FILE, lines.join("\n") + "\n\n");
+  process.stdout.write(`Saved ${date}\n`);
+  process.exit(0);
+}
+
+function runResume(date) {
+  let text;
+  try {
+    text = fs.readFileSync(TRACE_FILE, "utf8");
+  } catch {
+    process.exit(1);
+  }
+  const target = `### save ${date} |`;
+  const out = text
+    .split("\n")
+    .map((l) => (l.startsWith(target) ? l.replace(/status: open\s*$/, "status: resumed") : l));
+  if (out.join("\n") === text) {
+    process.stderr.write(`No open save ${date}\n`);
+    process.exit(1);
+  }
+  fs.writeFileSync(TRACE_FILE, out.join("\n"));
+  process.stdout.write(`Resumed ${date}\n`);
+  process.exit(0);
+}
+
+function runSaves(all) {
+  let text = "";
+  try {
+    text = fs.readFileSync(TRACE_FILE, "utf8");
+  } catch {}
+  const saves = parseSaves(text).filter((s) => all || s.status === "open").reverse();
+  process.stdout.write(JSON.stringify(saves, null, 2) + "\n");
+  process.exit(0);
+}
+
 // Memory feed: append entries not yet digested to the .remember/ buffer so the
 // session ledger survives a /clear. Consumer side, decoupled from the writer.
 // Best-effort: SessionEnd can miss on /clear, and a manual /trace stays the
@@ -247,7 +337,10 @@ if (argv[0] === "--hook") runHook();
 else if (argv[0] === "--digest") runDigest();
 else if (argv[0] === "--read") runRead(parseInt(argv[1], 10) || 10);
 else if (argv[0] === "done") runDone(argv.slice(1));
+else if (argv[0] === "save") runSave(argv.slice(1));
+else if (argv[0] === "resume") runResume(argv[1]);
+else if (argv[0] === "saves") runSaves(argv.includes("--all"));
 else {
-  process.stderr.write("Usage: trace.cjs --hook | --digest | --read [n] | done <what> [...]\n");
+  process.stderr.write("Usage: trace.cjs --hook | --digest | --read [n] | done <what> [...] | save [...] | resume <date> | saves [--all]\n");
   process.exit(1);
 }
