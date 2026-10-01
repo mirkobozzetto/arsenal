@@ -184,6 +184,17 @@ Start a fresh Pi session, then run `/arsenal-mode on`. The package also
 installs every Arsenal skill, available through Pi's native
 `/skill:<name>` commands. Use `/arsenal-mode off` for native Pi behavior.
 
+### OMP
+
+Install from the marketplace:
+
+```bash
+omp plugin marketplace add mirkobozzetto/arsenal
+omp plugin install arsenal@arsenal
+omp plugin install ship@arsenal
+# ...and any other plugin: brief, propose, issue, next, trace, review, websearch
+```
+
 ### OMP: local development
 
 To use the current checkout without stale marketplace copies, run this from
@@ -236,6 +247,7 @@ hooks, so both skills remain available there on demand without automation.
 | Claude Code | `/plugin marketplace update arsenal`, then restart or `/reload-plugins`. To get updates on their own, enable auto-update for `arsenal` in `/plugin` > Marketplaces (off by default for third-party marketplaces). |
 | Codex | `codex plugin marketplace upgrade arsenal`, then `codex plugin add <name>@arsenal` for each installed plugin. |
 | Pi | `pi update --extensions` for an unpinned install. A pinned one moves with `pi install npm:arsenal-agent-skills@<version>` or `pi install git:github.com/mirkobozzetto/arsenal@<tag>`. |
+| OMP (marketplace) | `omp plugin marketplace update arsenal`, then `omp plugin upgrade` (`--dry-run` to preview). In a session: `/marketplace update arsenal`, then `/marketplace upgrade`. To get updates on their own, set `marketplace.autoUpdate: auto` in the OMP config. |
 | OMP (linked checkout) | `git pull` in the checkout. Link any new skill with the loop above. |
 
 Start a new session after updating.
