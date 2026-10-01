@@ -1,6 +1,6 @@
 {
   "name": "review",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Deep code review with read-only readers, verified findings and a route to the skill that fixes each point.",
   "author": {
     "name": "Mirko Bozzetto",

@@ -136,7 +136,7 @@
       "name": "review",
       "source": "./plugins/review",
       "description": "Deep code review driven by a short interview: read-only readers per angle, verified findings, each point routed to ship, issue, brief or propose.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "development",
       "tags": [
         "review",
