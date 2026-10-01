@@ -69,3 +69,14 @@ ship closes the loop at finish: a `shipped` run flips the upstream `status`, whi
 - WIP (authoring): brief `draft`, propose `Draft`/`Review`.
 - DONE (hidden by default): `shipped`, `superseded`, `Rejected`.
 - roadmap (`type: roadmap`): OPEN when `ready`, else WIP; `superseded` is DONE.
+
+## Other sources
+
+| Source | Read from | Open while |
+|--------|-----------|------------|
+| trace save | `### save <date> \| branch <b> \| status: open` blocks in `.claude/trace.md` | `status: open`; `scan.cjs --resume <date>` sets `resumed` |
+| review report | `docs/review/<date>-<slug>/report.md`, `type: review` | one point checkbox is unchecked |
+| issue | `gh issue list --label arsenal --state open`, only when `origin` is on GitHub and never in `--banner` | open on GitHub |
+
+The resume list puts open saves first, newest first, then open specs and
+reviews, then issues.
