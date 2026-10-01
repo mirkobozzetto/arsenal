@@ -38,7 +38,7 @@ The final step sets a **status**: `Draft` / `Review` / `Accepted` / `Rejected`. 
 
 | Flag | Meaning |
 |------|---------|
-| `--auto` | Skip the AskUserQuestion confirmations between steps. |
+| `--auto` | Skip the interview: infer from code and the request. Without it, propose asks one question at a time. |
 | `--scope <path>` | Limit codebase context gathering to a path. |
 | `--no-review` | Skip the step-08 adversarial review. |
 | `--out <dir>` | Output directory (default `docs/proposals/` in a git repo). |

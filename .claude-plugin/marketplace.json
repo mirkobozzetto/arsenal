@@ -58,7 +58,7 @@
       "name": "propose",
       "source": "./plugins/propose",
       "description": "Design workflow in the RFC tradition: problem -> alternatives -> tradeoffs -> design -> risks -> recommendation -> impl plan. Two sizes with hard ceilings.",
-      "version": "2.4.0",
+      "version": "2.5.0",
       "category": "planning",
       "tags": [
         "propose",
