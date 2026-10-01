@@ -36,7 +36,9 @@ These routes express intent, not a required sequence or proof of installation:
 | Clear implementation request or approved implementation artifact | ship |
 | External facts are needed to answer the current question | websearch |
 | Save, update, read or resume a specific GitHub issue | issue |
-| Discover unfinished work | next |
+| Start a session, resume what was left, discover unfinished work | next |
+| End a session and keep the thread for the next one | trace |
+| Analyze code in depth, find what is wrong or illogical | review |
 | Read project activity or explicitly record progress | trace |
 | Explicit phased roadmap or genuine multi-workstream sequencing | Roadmap below |
 
@@ -64,7 +66,10 @@ it when nothing else is running.
    and unknowns into the step. Follow its actual instructions, not its summary.
 4. When it returns a result, update that context and reassess what remains.
    Continue only inside the user's original authorized outcome. Child skills
-   do not launch one another; Arsenal owns the transition. The one inline
+   do not launch one another; Arsenal owns the transition. When a skill ends
+   by suggesting the next one (issue: a brief; an unclear brief: a
+   proposal; review: the skill per point; next: the picked item), offer that
+   step in one line and run it only on the user's yes, one link at a time. The one inline
    exception is the shared "Verify external facts" lookup: any skill may read
    the `websearch` skill and run one search without handing control over.
 

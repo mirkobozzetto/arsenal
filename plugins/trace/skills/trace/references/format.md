@@ -28,8 +28,11 @@ One line per work block, newest at the bottom:
 ## Mechanical vs intent
 
 The Stop hook is deterministic and cheap: it logs the working-tree delta since
-its last fire, every turn that changed files, with no model call. It captures
-*what files moved*, never *why*.
+its last fire, every turn that changed files, with no model call. It also logs
+one `commit <hash> <subject>` entry per commit made since its last fire (at
+most 10, older ones folded into one line), because a file edited and committed
+in the same turn never shows in the working tree. The first fire only records
+`HEAD`. It captures *what moved*, never *why*.
 
 The upgrade path (not built): a Stop hook that returns
 `hookSpecificOutput.additionalContext` asking the model to write the entry,
@@ -49,3 +52,24 @@ thing: a **cross-session activity log** spanning every context, not tied to one
 artifact. They share a name and a spirit (markdown, append, honest progress) but
 not a scope. Kept separate on purpose; `next` reads both - the artifact statuses
 for the board, this ledger for "what moved lately".
+
+## Saves
+
+`/trace` at the end of a session appends a save block, written by
+`trace.cjs save`:
+
+```
+### save <iso-date> | branch <branch> | status: open
+- done: <what this session did>
+- left: <what is not finished>
+- next: <first action ; second action>
+- remember: <decision or failed approach the next session needs>
+- planned: <brief:slug, proposal:NNNN, issue #N, review:slug>
+```
+
+Empty fields are omitted. `status` goes `open` -> `resumed` through
+`trace.cjs resume <iso-date>`, which `next` calls once the user picks it.
+`trace.cjs saves [--all]` lists them as JSON, newest first. On the first
+save the script adds `.claude/trace.md` and `.claude/.trace-state` to
+`.git/info/exclude`: the ledger is private to the machine and never
+committed, while the project's `.gitignore` stays untouched.

@@ -22,6 +22,13 @@ its acceptance criteria. On yes, read the `issue` skill and run its
 `issues` into the frontmatter. On no, or with `git_host` `none`, continue
 without issues; nothing later depends on them.
 
+When the brief still holds an open technical decision (a choice of
+architecture, data model, library or integration that the acceptance
+criteria do not settle), end with one line asking whether to run a
+proposal on it (« On lance une propose ? » in the conversation language),
+with the command in the harness syntax (`/propose:propose
+docs/brief/<slug>` in Claude Code). Never start it yourself.
+
 The current SKILL.md owns the workflow policy. User consent is required
 before any agent, reviewer or advisor. No automatic validation sessions
 for prose; no continuation after a user stop or completed result.

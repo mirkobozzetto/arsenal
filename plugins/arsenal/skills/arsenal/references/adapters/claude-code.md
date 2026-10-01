@@ -15,7 +15,8 @@ capabilities. Do not infer it from an Anthropic model name.
   the model requested by the native file and provenance `agent-file`.
 - Plugin skills are scoped too: `/brief` is unknown, `/brief:brief` works.
   Write every Arsenal command as `/<skill>:<skill>` (`/ship:ship`,
-  `/brief:brief`, `/propose:propose`, `/next:next`, `/issue:issue`).
+  `/brief:brief`, `/propose:propose`, `/next:next`, `/issue:issue`,
+  `/trace:trace`, `/review:review`).
 - Format resume as `/arsenal:arsenal -r <slug>` only when the command is
   available.
 

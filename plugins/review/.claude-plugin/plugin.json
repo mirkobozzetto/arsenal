@@ -1,0 +1,11 @@
+{
+  "name": "review",
+  "version": "1.0.1",
+  "description": "Deep code review driven by a short interview: read-only reader agents per angle, verified findings, and each point routed to ship, issue, brief or propose.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/review"
+}
