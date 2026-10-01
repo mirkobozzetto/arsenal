@@ -23,6 +23,7 @@
     "plugins/issue/skills",
     "plugins/next/skills",
     "plugins/trace/skills",
+    "plugins/review/skills",
     "plugins/websearch/skills",
     "plugins/ship/runtime/pi-extension.ts",
     "assets/social-preview.png",
