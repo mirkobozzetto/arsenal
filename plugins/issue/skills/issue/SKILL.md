@@ -29,6 +29,11 @@ row, commit, PR) and closes the issue as completed. Ship calls it after a
 merge into a branch that is not the default one, where GitHub's `Closes #N`
 does nothing.
 
+After every `create`, end with one line asking whether to turn the issue
+into a brief (« On en fait un brief ? » in the conversation language), with
+the command in the harness syntax (`/brief:brief #N` in Claude Code). Never
+start it yourself; Arsenal owns the transition.
+
 Resume reconstructs the current state from the issue, not stale memory. A
 solved issue does not trigger another diagnosis. List returns concise open
 items and stops. If the controlled shell has no external networking, report
