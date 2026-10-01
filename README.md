@@ -171,13 +171,13 @@ Per-plugin setup, flags, and dependencies live in each plugin's README.
 Install the complete Arsenal package from npm:
 
 ```bash
-pi install npm:arsenal-agent-skills@2.4.0
+pi install npm:arsenal-agent-skills
 ```
 
-Or install the pinned GitHub release:
+Or pin a GitHub release:
 
 ```bash
-pi install git:github.com/mirkobozzetto/arsenal@v2.4.0
+pi install git:github.com/mirkobozzetto/arsenal@v2.5.0
 ```
 
 Start a fresh Pi session, then run `/arsenal-mode on`. The package also
@@ -225,8 +225,20 @@ In Codex, invoke a skill with `$arsenal`, `$brief`, `$propose`, `$ship`, `$next`
 or the corresponding skill name. In Claude Code, use the `/` forms shown above.
 
 `next` and `trace` bundle lifecycle hooks for both runtimes. Codex asks you to
-review and trust those hooks before running them. ChatGPT does not run plugin
+review and trust those hooks before running them, and again after an update
+that changes them: open `/hooks`. ChatGPT does not run plugin
 hooks, so both skills remain available there on demand without automation.
+
+### Update
+
+| Harness | Update |
+|---|---|
+| Claude Code | `/plugin marketplace update arsenal`, then restart or `/reload-plugins`. To get updates on their own, enable auto-update for `arsenal` in `/plugin` > Marketplaces (off by default for third-party marketplaces). |
+| Codex | `codex plugin marketplace upgrade arsenal`, then `codex plugin add <name>@arsenal` for each installed plugin. |
+| Pi | `pi update --extensions` for an unpinned install. A pinned one moves with `pi install npm:arsenal-agent-skills@<version>` or `pi install git:github.com/mirkobozzetto/arsenal@<tag>`. |
+| OMP (linked checkout) | `git pull` in the checkout. Link any new skill with the loop above. |
+
+Start a new session after updating.
 
 ---
 
@@ -235,7 +247,7 @@ hooks, so both skills remain available there on demand without automation.
 - Published **as I actually use them** - adapt to your setup.
 - Web lookups go through [Exa](https://exa.ai) MCP; `propose` also taps [GitNexus](https://github.com/mirkobozzetto/gitnexus) when present, greps when not.
 - `ship` uses the smallest meaningful verification permitted by your project instructions and reports what was actually checked.
-- Commits and pushes are not automatic. Request Git delivery explicitly; `ship --commit` requests progressive commits.
+- `ship` commits and pushes each verified unit on its work branch, never on the base branch; the first push of a branch asks once. `--no-commit` and `--no-push` turn this off. Opening or merging a pull request always asks.
 - `issue` needs an authenticated `gh` CLI.
 - **Other agents** (pi, oh-my-pi, Cursor): copy `plugins/<name>/skills/<name>/` into the agent's skill directory and wire its MCPs.
 - **Codex and Claude Code:** both use the native plugin manifests included in each plugin folder.
