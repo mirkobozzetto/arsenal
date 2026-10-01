@@ -7,7 +7,7 @@ Claude Code does not reliably reload agent files during a session
 
 | Harness | Reader | Model at launch | Thinking level | Providers |
 |---|---|---|---|---|
-| Claude Code | `review:review-reader` | `model` of the Agent tool (`opus`, `sonnet`, `haiku`, `fable`, full id) | the session's; not settable at launch | Claude only |
+| Claude Code | `review:review-reader`; until Claude Code restarts after the install, the builtin read-only `Explore` with the reader instructions in the prompt | `model` of the Agent tool (`opus`, `sonnet`, `haiku`, `fable`, full id) | the session's; not settable at launch | Claude only |
 | Codex | `review_reader` if installed, else a default agent with the reader instructions in the message | `model` of `spawn_agent` | `reasoning_effort` of `spawn_agent` | OpenAI only |
 | OMP | `review-reader` in `~/.omp/agent/agents/` | `task.agentModelOverrides["review-reader"]` | the agent file's `thinking-level` | any configured |
 | Pi | builtin `reviewer` | `model: "provider/model"` | suffix `:low`, `:medium`, `:high` | any configured |
