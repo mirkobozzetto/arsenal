@@ -31,8 +31,9 @@ the workflow stays shared. Pi uses its builtin `scout`, `oracle` and
 |  [`propose`](./plugins/propose) | The **how**. Alternatives, tradeoffs, risks, plan. One page or a few, hard ceilings. | `/propose OAuth token storage` |
 |  [`ship`](./plugins/ship) | The **build**. Implements a clear request or approved spec and reports verification. | `/ship docs/brief/oauth-login/` |
 |  [`issue`](./plugins/issue) | The 1am bug, logged so you can pick it up cold. | `/issue log this bug` |
-|  [`next`](./plugins/next) | Monday morning: what's open, what's next, exact resume command. | `/next` |
-|  [`trace`](./plugins/trace) | Progress ledger that writes itself. A hook, not a habit. | nothing |
+|  [`next`](./plugins/next) | Start of a session: what was left, numbered, and "what do we continue?". | `/next` |
+|  [`trace`](./plugins/trace) | End of a session: save where you stand, then `/clear` instead of compacting. | `/trace` |
+|  [`review`](./plugins/review) | Deep code review: interview, read-only readers per angle, verified findings routed to the right skill. | `/review` |
 |  [`websearch`](./plugins/websearch) | Evidence-backed web search via [Exa](https://exa.ai). | `/websearch <question>` |
 
 ---
@@ -53,7 +54,9 @@ Use `/arsenal` in Claude Code, `$arsenal` in Codex, or `/arsenal-mode` in OMP an
 | Implementation is clear and authorized | `ship` |
 | External evidence | `websearch` |
 | GitHub issue memory | `issue` |
-| Unfinished work or activity history | `next` or `trace` |
+| Start a session or find unfinished work | `next` |
+| End a session and keep the thread | `trace` |
+| Analyze code in depth | `review` |
 | A real phased roadmap | Arsenal's optional roadmap branch |
 
 There is no complexity score and no mandatory `brief → propose → ship` sequence.
@@ -141,6 +144,7 @@ Mirko
 /plugin install issue@arsenal
 /plugin install next@arsenal
 /plugin install trace@arsenal
+/plugin install review@arsenal
 /plugin install websearch@arsenal
 
 # ...or just one:
@@ -187,7 +191,7 @@ the repository root after reviewing any existing links in the destination:
 
 ```bash
 mkdir -p "$HOME/.omp/agent/skills"
-for skill in arsenal brief propose ship issue next trace websearch; do
+for skill in arsenal brief propose ship issue next trace review websearch; do
   ln -sfn "$PWD/plugins/$skill/skills/$skill" "$HOME/.omp/agent/skills/$skill"
 done
 ```
@@ -213,6 +217,7 @@ codex plugin add ship@arsenal
 codex plugin add issue@arsenal
 codex plugin add next@arsenal
 codex plugin add trace@arsenal
+codex plugin add review@arsenal
 codex plugin add websearch@arsenal
 ```
 
