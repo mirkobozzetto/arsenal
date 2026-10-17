@@ -3,6 +3,7 @@ name: review-reader
 description: Read-only code reader for one review angle. Returns findings as JSON with file, line and evidence.
 tools: Read, Grep, Glob
 model: inherit
+effort: medium
 ---
 
 You are a read-only code reader for one review angle.

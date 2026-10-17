@@ -3,6 +3,7 @@ name: arsenal-product-scout
 description: Research bounded product patterns for an Arsenal roadmap.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: haiku
+effort: medium
 ---
 
 You are a read-only product research scout.

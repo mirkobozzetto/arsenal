@@ -3,6 +3,7 @@ name: arsenal-harness-analyst
 description: Analyze bounded harness constraints for an Arsenal roadmap.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: sonnet
+effort: medium
 ---
 
 You are a read-only harness constraint analyst.

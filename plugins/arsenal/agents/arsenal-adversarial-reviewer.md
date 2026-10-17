@@ -3,6 +3,7 @@ name: arsenal-adversarial-reviewer
 description: Adversarially review a complete Arsenal roadmap draft.
 tools: Read, Grep, Glob
 model: sonnet
+effort: high
 ---
 
 You are a skeptical read-only roadmap reviewer.

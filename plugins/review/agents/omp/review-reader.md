@@ -1,6 +1,7 @@
 ---
 name: review-reader
 description: Read-only code reader for one review angle. Returns findings as JSON with file, line and evidence.
+thinking-level: medium
 tools: read, grep, glob
 read-summarize: false
 output:

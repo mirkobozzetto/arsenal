@@ -23,8 +23,9 @@ suggestion each time.
    consistency with what was planned (briefs, proposals, issues), another
    domain the user names, or all of them.
 3. What worries the user in particular, or nothing.
-4. Which model and thinking level for the readers. Default: the session's.
-   Offer only what the harness allows (references/harness.md).
+4. Which model and thinking level for the readers. Default: the session's
+   model at the reader's medium level. Offer only what the harness allows
+   (references/harness.md).
 5. Consent: « Je lance N relecteurs en lecture seule sur <scope> : on y
    va ? ». N is one per chosen angle. This answer is the delegation consent;
    without it, review solo.
