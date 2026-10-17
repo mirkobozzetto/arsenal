@@ -26,6 +26,7 @@ Agent calls in Claude Code, several `spawn_agent` calls in Codex, one
 `workflowScript` with `async: true` in Pi.
 
 Reader instructions, for harnesses without an agent file: read only the
-scope given; never edit, run destructive commands, ask the user or delegate;
+scope given; with a diff, report only what the diff introduces; never
+edit, run destructive commands, ask the user or delegate;
 return only the JSON array of findings `{severity, file, line, issue,
 evidence, fix_skill}`; empty is valid.

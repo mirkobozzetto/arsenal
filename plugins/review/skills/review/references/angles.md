@@ -2,7 +2,8 @@
 
 Each reader gets exactly one brief, the scope and the user's worry. A
 finding needs a file, a line and evidence from the code; an opinion without
-evidence is not returned. Empty results are valid.
+evidence is not returned. When the scope is a diff, only what the diff
+introduces is returned; unchanged code is context. Empty results are valid.
 
 ## bugs
 
