@@ -97,8 +97,8 @@ class SharedLineTests(unittest.TestCase):
 class AgentContractTests(unittest.TestCase):
     def test_three_agents_exist_for_every_harness(self):
         claude = sorted((PLUGIN_ROOT / "agents").glob("arsenal-*.md"))
-        omp = sorted((PLUGIN_ROOT / "agents" / "omp").glob("arsenal-*.md"))
-        codex = sorted((PLUGIN_ROOT / "agents" / "codex").glob("arsenal_*.toml"))
+        omp = sorted((PLUGIN_ROOT / "harness" / "omp").glob("arsenal-*.md"))
+        codex = sorted((PLUGIN_ROOT / "harness" / "codex").glob("arsenal_*.toml"))
         self.assertEqual(len(claude), 3)
         self.assertEqual(len(omp), 3)
         self.assertEqual(len(codex), 3)
@@ -116,7 +116,7 @@ class AgentContractTests(unittest.TestCase):
             "arsenal-harness-analyst": "openai-codex/gpt-5.6-terra",
             "arsenal-adversarial-reviewer": "openai-codex/gpt-5.6-terra",
         }
-        for path in (PLUGIN_ROOT / "agents" / "omp").glob("*.md"):
+        for path in (PLUGIN_ROOT / "harness" / "omp").glob("*.md"):
             fields, body = frontmatter(path)
             self.assertEqual(fields["model"], expected[fields["name"]])
             self.assertIn("output", fields)
@@ -124,7 +124,7 @@ class AgentContractTests(unittest.TestCase):
             self.assertIn("Never question the user", body)
 
     def test_codex_agents_parse_and_are_read_only(self):
-        for path in (PLUGIN_ROOT / "agents" / "codex").glob("*.toml"):
+        for path in (PLUGIN_ROOT / "harness" / "codex").glob("*.toml"):
             data = tomllib.loads(path.read_text(encoding="utf-8"))
             self.assertEqual(data["sandbox_mode"], "read-only")
             self.assertIn(data["model"], {"gpt-5.6-luna", "gpt-5.6-terra"})
