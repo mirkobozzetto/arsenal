@@ -14,6 +14,8 @@ PLUGIN_ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = PLUGIN_ROOT / "skills" / "arsenal"
 RENDERER = SKILL_ROOT / "scripts" / "render.py"
 INSTALLER = SKILL_ROOT / "scripts" / "install_agents.py"
+REPO_ROOT = PLUGIN_ROOT.parents[1]
+GENERATOR = REPO_ROOT / "scripts" / "gen_agents.py"
 
 
 def frontmatter(path):
@@ -129,6 +131,25 @@ class AgentContractTests(unittest.TestCase):
             self.assertEqual(data["sandbox_mode"], "read-only")
             self.assertIn(data["model"], {"gpt-5.6-luna", "gpt-5.6-terra"})
             self.assertIn("Never question the user", data["developer_instructions"])
+
+
+class GeneratedAgentTests(unittest.TestCase):
+    def test_agent_files_match_their_source(self):
+        spec = importlib.util.spec_from_file_location("gen_agents", GENERATOR)
+        generator = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(generator)
+        expected = generator.outputs()
+        on_disk = {
+            *REPO_ROOT.glob("plugins/*/agents/*.md"),
+            *REPO_ROOT.glob("plugins/*/harness/omp/*.md"),
+            *REPO_ROOT.glob("plugins/*/harness/codex/*.toml"),
+        }
+        self.assertEqual(set(expected), on_disk)
+        for path, text in expected.items():
+            self.assertEqual(
+                path.read_text(encoding="utf-8"), text,
+                f"{path} differs from its source: run scripts/gen_agents.py",
+            )
 
 
 class InstallerTests(unittest.TestCase):

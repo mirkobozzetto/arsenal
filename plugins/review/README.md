@@ -19,8 +19,8 @@ never edits your code.
 
 Pi loads it with the Arsenal package. For OMP, link
 `plugins/review/skills/review` into `~/.omp/agent/skills/` and copy
-`agents/omp/review-reader.md` into `~/.omp/agent/agents/`. For Codex, the
-reader runs without installation; copying `agents/codex/review_reader.toml`
+`harness/omp/review-reader.md` into `~/.omp/agent/agents/`. For Codex, the
+reader runs without installation; copying `harness/codex/review_reader.toml`
 into `~/.codex/agents/` makes it read-only by sandbox.
 
 ## Usage

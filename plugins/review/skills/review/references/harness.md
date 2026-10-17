@@ -17,7 +17,7 @@ session (anthropics/claude-code#75432).
 Ask in the interview only for what the row allows. Announce the resolved
 reader, model and level before launching. Never claim a model that was not
 verified. A missing reader in Codex or OMP: offer once to copy the file from
-this plugin's `agents/codex/` or `agents/omp/` into the harness agent
+this plugin's `harness/codex/` or `harness/omp/` into the harness agent
 directory, with consent; otherwise use the fallback in the row or review
 solo.
 
