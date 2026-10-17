@@ -15,6 +15,8 @@ scope: <what was analyzed>
 angles: <bugs, security, ...>
 readers: <harness, model, level, or solo>
 dropped: <number of findings removed at verification>
+round: <1, 2 or 3>
+reviewed: <commit the readers read>
 ---
 
 # <title>

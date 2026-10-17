@@ -11,12 +11,12 @@ PLUGIN_ROOT = Path(__file__).resolve().parents[3]
 MANIFEST_NAME = ".arsenal-agent-install.json"
 HARNESS = {
     "omp": {
-        "source": PLUGIN_ROOT / "agents" / "omp",
+        "source": PLUGIN_ROOT / "harness" / "omp",
         "target": Path.home() / ".omp" / "agent" / "agents",
         "suffix": ".md",
     },
     "codex": {
-        "source": PLUGIN_ROOT / "agents" / "codex",
+        "source": PLUGIN_ROOT / "harness" / "codex",
         "target": Path.home() / ".codex" / "agents",
         "suffix": ".toml",
     },

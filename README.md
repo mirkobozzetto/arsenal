@@ -263,6 +263,7 @@ Start a new session after updating.
 - `issue` needs an authenticated `gh` CLI.
 - **Other agents** (pi, oh-my-pi, Cursor): copy `plugins/<name>/skills/<name>/` into the agent's skill directory and wire its MCPs.
 - **Codex and Claude Code:** both use the native plugin manifests included in each plugin folder.
+- **Agents** are written once, in `plugins/<name>/agents/src/<agent>.toml`. `python3 scripts/gen_agents.py` writes the Claude Code file in `agents/` and the Codex and OMP files in `harness/`; a test fails when one drifts from its source.
 - Companion: [**espresso**](https://github.com/mirkobozzetto/espresso), the token-economy side. arsenal is what you build with; espresso keeps it cheap.
 
 ---
