@@ -74,7 +74,7 @@ ship closes the loop at finish: a `shipped` run flips the upstream `status`, whi
 
 | Source | Read from | Open while |
 |--------|-----------|------------|
-| trace save | `### save <date> \| branch <b> \| status: open` blocks in `.claude/trace.md` | `status: open`; `scan.cjs --resume <date>` sets `resumed` |
+| trace save | `### save <date> \| branch <b> \| status: open` blocks in `.claude/trace.md` | `status: open`; `scan.cjs --resume <date>` sets `resumed`; a new save sets older open saves on its branch `superseded` |
 | review report | `docs/review/<date>-<slug>/report.md`, `type: review` | one point checkbox is unchecked |
 | issue | `gh issue list --label arsenal --state open`, only when `origin` is on GitHub and never in `--banner` | open on GitHub |
 

@@ -331,6 +331,9 @@ for (const root of roots) {
   }
 }
 all.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
+saves.sort((a, b) => b.date.localeCompare(a.date));
+// The newest save leads: its next action is offered before the list.
+const lead = saves[0] && saves[0].next ? saves[0] : null;
 
 // When trace says a prd shipped but its frontmatter still reads open, the board
 // is stale (work landed outside ship). Flag it instead of trusting the checkbox.
@@ -379,11 +382,22 @@ function resumeList(withIssues) {
 }
 
 if (BANNER && saves.length) {
-  const lines = ["RESUME (left by the last sessions):", ...resumeList(false)];
+  const lines = [];
+  if (lead) lines.push(`LATEST: ${lead.next} (session ${lead.date}, branch ${lead.branch})`, "");
+  lines.push("RESUME (left by the last sessions):", ...resumeList(false), "");
+  if (lead)
+    lines.push(
+      `INSTRUCTION: in your first reply, before anything else, ask only "On reprend : ${lead.next} ?" (translated) and wait.`,
+      `If yes, run: node "${__filename}" "${lead.root}" --resume ${lead.date}, then hand that next action to Arsenal.`,
+      `If no, show this numbered list to the user in their language and ask only "On continue quoi ?" (translated).`,
+    );
+  else
+    lines.push(
+      "INSTRUCTION: in your first reply, before anything else, show this numbered list to the user in their language,",
+      `then ask only "On continue quoi ?" (translated) and wait.`,
+    );
   lines.push(
-    "",
-    "INSTRUCTION: in your first reply, before anything else, show this numbered list to the user in their language,",
-    `then ask only "On continue quoi ?" (translated) and wait. Open issues: ${harnessCommand("/next")}.`,
+    `Open issues: ${harnessCommand("/next")}.`,
     `When the user picks a session, run: node "${__filename}" "${roots[0]}" --resume <its date>,`,
     "then hand its next action to Arsenal. Never start the work before the user picks.",
   );
@@ -423,6 +437,7 @@ function row(i) {
 }
 
 const out = [];
+if (lead) out.push(`Next: ${lead.next} (session ${lead.date}, branch ${lead.branch}; --resume ${lead.date})`, "");
 if (saves.length || issues.length) {
   out.push("TO RESUME (pick a number):");
   out.push(resumeList(true).join("\n"));
@@ -446,7 +461,7 @@ if (open.length === 0 && wip.length === 0) {
   } else if (wip.length) {
     out.push(`\n(${wip.length} in authoring; --all to show)`);
   }
-  if (open.length) out.push(`\nNext: ${open[0].next_command}`);
+  if (open.length && !lead) out.push(`\nNext: ${open[0].next_command}`);
 }
 if (done.length && flags.has("--all")) {
   out.push("\nDONE:");

@@ -13,12 +13,15 @@ Claude Code pass --claude-code, so commands come out callable
 
 ## Resume a session
 
-Next is the start of a session; `trace` ends one. When the scan lists open
-trace saves, review reports or issues, show the numbered list first: for
-each session save, what was done and what is left. Then ask only « On
-continue quoi ? » in the conversation language and wait. In Claude Code
-and Codex the SessionStart hook prints the same list after `/clear` with
-this instruction; elsewhere the user runs next.
+Next is the start of a session; `trace` ends one. When the scan opens with
+a `Next:` line from the newest trace save, offer it first: ask only « On
+reprend : <its next> ? » in the conversation language and wait. On yes,
+run `scripts/scan.cjs --resume <its date>` and hand that next action to
+Arsenal. On no, or without such a line, show the numbered list of open
+saves, review reports and issues (for each save, what was done and what is
+left), ask only « On continue quoi ? » and wait. In Claude Code and Codex
+the SessionStart hook prints the same with this instruction after
+`/clear`; elsewhere the user runs next.
 
 When the user picks a session save, run `scripts/scan.cjs --resume
 <its date>` so it is not offered again, then hand its `next` line to
