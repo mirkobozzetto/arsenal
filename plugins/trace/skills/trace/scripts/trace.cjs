@@ -272,11 +272,21 @@ function runSave(rest) {
   ensureLedger();
   keepPrivate();
   const branch = (git("branch --show-current") || "").trim() || "-";
+  // The new save carries forward what is left. Older open saves on this branch
+  // are never resumed explicitly, so close them here or they pile up.
+  let superseded = 0;
+  const kept = fs.readFileSync(TRACE_FILE, "utf8").split("\n").map((l) => {
+    const h = l.match(SAVE_HEADER);
+    if (!h || h[2] !== branch || h[3] !== "open") return l;
+    superseded++;
+    return l.replace(/status: open\s*$/, "status: superseded");
+  });
+  if (superseded) fs.writeFileSync(TRACE_FILE, kept.join("\n"));
   const date = now();
   const lines = [`\n### save ${date} | branch ${branch} | status: open`];
   for (const k of SAVE_FIELDS) if (fields[k]) lines.push(`- ${k}: ${fields[k]}`);
   fs.appendFileSync(TRACE_FILE, lines.join("\n") + "\n\n");
-  process.stdout.write(`Saved ${date}\n`);
+  process.stdout.write(`Saved ${date}${superseded ? `, ${superseded} older open save(s) superseded` : ""}\n`);
   process.exit(0);
 }
 

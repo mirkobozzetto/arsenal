@@ -28,7 +28,8 @@ itself. Resolve `scripts/trace.cjs` from this skill's directory.
 4. Write it: `node scripts/trace.cjs save --done "…" --left "…" --next "a ;
    b" --remember "…" --planned "…"`. One line per field, in the conversation
    language, specific: paths, branch, task ids, issue numbers, commands.
-   Omit an empty field.
+   Omit an empty field. The save closes older open saves on the same
+   branch (`superseded`): carry into it whatever they still left.
 5. End with « Tu peux /clear. » in the conversation language, then the
    resume command as the last line: `next` in the harness syntax
    (`/next:next` in Claude Code, `/skill:next` in OMP and Pi, `$next` in
