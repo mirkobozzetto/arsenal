@@ -104,11 +104,12 @@
     {
       "name": "issue",
       "source": "./plugins/issue",
-      "description": "Use GitHub issues as cross-session resolution memory. Create/update/resume self-contained, cold-readable issues via gh CLI.",
-      "version": "1.2.0",
+      "description": "Use GitHub or Linear issues as cross-session resolution memory. Create/update/resume self-contained, cold-readable issues, duplicates checked first.",
+      "version": "1.3.0",
       "category": "memory",
       "tags": [
         "github",
+        "linear",
         "memory",
         "issues",
         "gh"

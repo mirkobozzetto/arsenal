@@ -53,7 +53,7 @@ Use `/arsenal` in Claude Code, `$arsenal` in Codex, or `/arsenal-mode` in OMP an
 | A consequential technical choice needs resolution | `propose` |
 | Implementation is clear and authorized | `ship` |
 | External evidence | `websearch` |
-| GitHub issue memory | `issue` |
+| GitHub or Linear issue memory | `issue` |
 | Start a session or find unfinished work | `next` |
 | End a session and keep the thread | `trace` |
 | Analyze code in depth | `review` |
