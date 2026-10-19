@@ -69,6 +69,8 @@ for the board, this ledger for "what moved lately".
 
 Empty fields are omitted. `status` goes `open` -> `resumed` through
 `trace.cjs resume <iso-date>`, which `next` calls once the user picks it.
+A new save sets the older open saves on the same branch to `superseded`:
+the newest one carries forward what is left, so only it stays open.
 `trace.cjs saves [--all]` lists them as JSON, newest first. On the first
 save the script adds `.claude/trace.md` and `.claude/.trace-state` to
 `.git/info/exclude`: the ledger is private to the machine and never
