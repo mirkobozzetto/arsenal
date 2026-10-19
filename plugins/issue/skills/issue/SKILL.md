@@ -7,9 +7,15 @@ argument-hint: "[create|update|resume|list|from-tasks|close] [#N | problem | bri
 # Issue memory
 
 Use the authenticated gh CLI. Read the specific issue and comments before
-updating it; do not query unrelated issues. Capture the problem, evidence,
-attempts, remaining action and verification so the issue can be resumed cold.
-Use references/issue-template.md when creating one.
+updating it; outside the duplicate check, do not query unrelated issues.
+Capture the problem, evidence, attempts, remaining action and verification
+so the issue can be resumed cold. Use references/issue-template.md when
+creating one.
+
+Before `create` and `from-tasks`, search the open issues with the topic's
+key words: `gh issue list --search "<words>" --state open`. Show a close
+match first, with the offer to add to it (`update`) instead of creating a
+new one. Nothing is created without confirmation.
 
 Confirm before creating or closing an issue. Append requested progress as
 comments instead of overwriting the body. Label new issues `arsenal`; keep
