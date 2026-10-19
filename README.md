@@ -53,7 +53,7 @@ Use `/arsenal` in Claude Code, `$arsenal` in Codex, or `/arsenal-mode` in OMP an
 | A consequential technical choice needs resolution | `propose` |
 | Implementation is clear and authorized | `ship` |
 | External evidence | `websearch` |
-| GitHub issue memory | `issue` |
+| GitHub or Linear issue memory | `issue` |
 | Start a session or find unfinished work | `next` |
 | End a session and keep the thread | `trace` |
 | Analyze code in depth | `review` |
@@ -177,7 +177,7 @@ pi install npm:arsenal-agent-skills
 Or pin a GitHub release:
 
 ```bash
-pi install git:github.com/mirkobozzetto/arsenal@v2.6.0
+pi install git:github.com/mirkobozzetto/arsenal@v2.7.0
 ```
 
 Start a fresh Pi session, then run `/arsenal-mode on`. The package also

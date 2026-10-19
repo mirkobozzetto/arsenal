@@ -1,7 +1,7 @@
 {
   "name": "issue",
-  "version": "1.2.0",
-  "description": "Use GitHub issues as cross-session resolution memory. Create, update, and resume self-contained, cold-readable issues via the gh CLI, recording the hypothesis and the resolution.",
+  "version": "1.3.0",
+  "description": "Use GitHub or Linear issues as cross-session resolution memory. Create, update, and resume self-contained, cold-readable issues, checking open issues for duplicates first; GitHub through the gh CLI, Linear through the connected Linear MCP server when the project's CLAUDE.md names it.",
   "author": {
     "name": "Mirko Bozzetto",
     "url": "https://github.com/mirkobozzetto"

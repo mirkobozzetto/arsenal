@@ -1,7 +1,7 @@
 {
   "name": "issue",
-  "version": "1.2.0",
-  "description": "Use GitHub issues as durable cross-session resolution memory.",
+  "version": "1.3.0",
+  "description": "Use GitHub or Linear issues as durable cross-session resolution memory.",
   "author": {
     "name": "Mirko Bozzetto",
     "url": "https://github.com/mirkobozzetto"
@@ -12,7 +12,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Issue",
-    "shortDescription": "Record and resume GitHub issue investigations.",
+    "shortDescription": "Record and resume GitHub or Linear issue investigations.",
     "developerName": "Mirko Bozzetto",
     "category": "Developer Tools",
     "defaultPrompt": [
