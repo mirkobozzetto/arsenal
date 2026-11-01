@@ -1,0 +1,11 @@
+{
+  "name": "nap",
+  "version": "1.0.0",
+  "description": "Session nap for Claude Code: /nap saves where the session stands with trace, then clears it and resumes it with next by itself, under Herdr, herdr or tmux. No question, no gesture.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/nap"
+}
