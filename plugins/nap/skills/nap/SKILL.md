@@ -22,5 +22,5 @@ skill's directory.
    conversation language: « Sieste : je reprends ensuite <next>. »
 
 Do nothing after that line. Once the turn ends, the wake-up types `/clear`,
-runs next and answers « oui » to its single « On reprend ». A numbered list
-from next waits for the user.
+runs next and answers « oui » to its single resume question, in any
+language. A list from next waits for the user.
