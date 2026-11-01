@@ -134,6 +134,23 @@
       "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/trace"
     },
     {
+      "name": "nap",
+      "source": "./plugins/nap",
+      "description": "Session nap for Claude Code: /nap saves with trace, clears the session and resumes it with next by itself, under Herdr, herdr or tmux.",
+      "version": "1.0.0",
+      "category": "memory",
+      "tags": [
+        "nap",
+        "clear",
+        "resume",
+        "continuity",
+        "herdr",
+        "tmux"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/nap"
+    },
+    {
       "name": "review",
       "source": "./plugins/review",
       "description": "Deep code review driven by a short interview: read-only readers per angle, verified findings, each point routed to ship, issue, brief or propose.",
