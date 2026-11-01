@@ -112,6 +112,12 @@ test("a numbered list from next gets no answer", () => {
   }
 });
 
+test("never types into the cmd shell, even when pointed at it", () => {
+  const { typed, out } = wake({ HC_TERMINAL_ID: "t-cmd" });
+  assert.deepEqual(typed, []);
+  assert.match(out, /nothing typed/);
+});
+
 test("without a multiplexer nothing is typed", () => {
   const { log, out } = wake({});
   assert.deepEqual(log, []);

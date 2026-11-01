@@ -28,15 +28,15 @@ if (name === "hc") {
   if (args[0] === "ls") {
     out = JSON.stringify({
       terminals: [
-        { address: "t-cmd", status: "idle" },
-        { address: state.target, status: pop() },
+        { address: "t-cmd", agent: "zsh" },
+        { address: state.target, agent: "claude", status: pop() },
       ],
     });
   } else if (args[0] === "keys" && said.includes("c l e a r")) typed("clear");
   else if (args[0] === "send" && said.includes("next:next")) typed("next");
   else if (args[0] === "read") out = state.screen;
 } else if (name === "herdr") {
-  if (args[1] === "get") out = JSON.stringify({ result: { pane: { agent_status: pop() } } });
+  if (args[1] === "get") out = JSON.stringify({ result: { pane: { agent: "claude", agent_status: pop() } } });
   else if (args[1] === "send-text" && args[3] === "/clear") typed("clear");
   else if (args[1] === "send-text" && args[3] === "/next:next") typed("next");
   else if (args[1] === "read") out = state.screen;

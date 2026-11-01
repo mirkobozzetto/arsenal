@@ -29,10 +29,12 @@ const ask = (cmd, args) => {
     return null;
   }
 };
-// A status that cannot be read counts as busy: never type when unsure.
-const working = (out, read) => {
+// Never type when unsure: a status that cannot be read, or a terminal that
+// runs something other than Claude (the "cmd" shell), counts as busy.
+const working = (out, pick) => {
   try {
-    return read(JSON.parse(out)) === "working";
+    const { agent, status } = pick(JSON.parse(out));
+    return (agent && agent !== "claude") || status === "working";
   } catch {
     return true;
   }
@@ -49,7 +51,7 @@ const MUX = {
   // No key types ":" and `hc send` wraps text in a tag where a slash command
   // never runs: /clear goes key by key, next as a message.
   "herdr-app": (t) => ({
-    busy: () => working(ask("hc", ["ls", "--json"]), (d) => d.terminals.find((x) => x.address === t).status),
+    busy: () => working(ask("hc", ["ls", "--json"]), (d) => d.terminals.find((x) => x.address === t)),
     clear: () => run("hc", ["keys", t, "/", ..."clear", "enter"]),
     next: () => run("hc", ["send", t, HC_NEXT]),
     yes: () => run("hc", ["send", t, YES]),
@@ -61,7 +63,11 @@ const MUX = {
       run("herdr", ["pane", "send-keys", p, "Enter"]);
     };
     return {
-      busy: () => working(ask("herdr", ["pane", "get", p]), (d) => d.result.pane.agent_status),
+      busy: () =>
+        working(ask("herdr", ["pane", "get", p]), ({ result: { pane } }) => ({
+          agent: pane.agent,
+          status: pane.agent_status,
+        })),
       clear: () => type("/clear"),
       next: () => type("/next:next"),
       yes: () => type(YES),
