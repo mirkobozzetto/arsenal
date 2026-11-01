@@ -180,7 +180,7 @@ pi install npm:arsenal-agent-skills
 Or pin a GitHub release:
 
 ```bash
-pi install git:github.com/mirkobozzetto/arsenal@v2.7.0
+pi install git:github.com/mirkobozzetto/arsenal@v2.8.0
 ```
 
 Start a fresh Pi session, then run `/arsenal-mode on`. The package also
