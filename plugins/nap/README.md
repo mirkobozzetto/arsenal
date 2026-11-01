@@ -33,8 +33,10 @@ It waits for the real end of the turn (two quiet polls in a row: one can fall
 between two tool calls). Herdr reports whether Claude is working; under tmux
 the pane counts as busy while Claude's spinner keeps redrawing it. It never
 types into a terminal that does not run Claude, such as a command shell.
-When next shows a numbered list instead of a single « On reprend », nothing
-more is typed: you choose.
+« oui » goes only to a single question, in whatever language next asks it:
+Claude's last message after next must end with a question mark and hold no
+list. When next shows its numbered list, or any list, nothing more is typed:
+you choose.
 
 The waker runs from a background Bash, the only one that sees the session's
 own terminal, in its own process session so the `/clear` it types does not
@@ -51,8 +53,7 @@ end it.
 ```
 
 Needs `node`, plus `hc`, `herdr` or `tmux` for the automatic wake-up.
-Claude Code only. The automatic « oui » answers next's French « On reprend »;
-in another language next still runs and waits for your answer.
+Claude Code only.
 
 ## Tests
 

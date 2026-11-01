@@ -11,9 +11,20 @@ const TICK_MS = "5";
 const HC_TERMINAL = "t4h";
 const HERDR_PANE = "w1:p2";
 const TMUX_PANE = "%3";
-const RESUME = "On reprend : ship T02 ?";
-const LIST = "1. session A\n2. session B\nOn continue quoi ?";
-// The SessionStart banner above the typed next also says "On reprend".
+// Claude Code's screen: ⏺ opens a message or a tool call; the input box and
+// its "? for shortcuts" hint sit below the last message.
+const CHROME = "✻ Brewed for 3s\n────\n❯ \n────\n  ? for shortcuts";
+const reply = (text) => `⏺ Skill(next:next)\n  ⎿  Successfully loaded skill\n\n⏺ ${text}\n\n${CHROME}`;
+const RESUMES = {
+  fr: "On reprend : ship T02 ?",
+  en: "Pick up where we left off: ship T02?",
+  ja: "再開しますか：ship T02？",
+};
+const LISTS = {
+  numbered: "Travail ouvert :\n\n  1. session A\n  2. session B\n\n  On continue quoi ?",
+  bulleted: "Open work:\n  - session A\n  - session B\n  What do we continue?",
+};
+// The SessionStart banner above the typed next asks a question too.
 const BANNER = 'INSTRUCTION: ask only "On reprend : older save ?"';
 // A pause between two tool calls: idle once, then working again.
 const TURN = ["working", "idle", "working", "idle", "idle"];
@@ -40,7 +51,7 @@ function sandbox(env, scenario = {}, tick = TICK_MS) {
     afterNext: ["working", "working"],
     banner: BANNER,
     nextShown,
-    reply: RESUME,
+    reply: reply(RESUMES.fr),
     screen: "",
     tick: 0,
     log: [],
@@ -104,11 +115,22 @@ test("waits for the real end of the turn, not a pause between tool calls", () =>
   }
 });
 
-test("a numbered list from next gets no answer", () => {
-  for (const env of Object.values(MUX)) {
-    const { typed, out } = wake(env, { reply: LIST });
-    assert.ok(!typed.some((l) => l.includes("oui")), typed.join("\n"));
-    assert.match(out, /no single resume/);
+test("answers a single resume question in any language", () => {
+  for (const [lang, text] of Object.entries(RESUMES)) {
+    for (const env of Object.values(MUX)) {
+      const { typed } = wake(env, { reply: reply(text) });
+      assert.ok(typed.some((l) => l.includes("oui")), `${lang}: ${typed.join("\n")}`);
+    }
+  }
+});
+
+test("a list from next gets no answer, numbered or bulleted", () => {
+  for (const [kind, text] of Object.entries(LISTS)) {
+    for (const env of Object.values(MUX)) {
+      const { typed, out } = wake(env, { reply: reply(text) });
+      assert.ok(!typed.some((l) => l.includes("oui")), `${kind}: ${typed.join("\n")}`);
+      assert.match(out, /no single resume/);
+    }
   }
 });
 

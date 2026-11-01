@@ -19,7 +19,7 @@ const typed = (text) => {
   }
   if (text === "next") {
     state.queue.push(...state.afterNext);
-    state.screen = `${state.banner}\n> ${state.nextShown}\n${state.reply}`;
+    state.screen = `${state.banner}\n❯ ${state.nextShown}\n${state.reply}`;
   }
 };
 

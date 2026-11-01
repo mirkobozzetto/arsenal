@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Wakes a napping Claude Code session: once its turn ends, types /clear in its
-// own terminal, runs next, and answers "oui" to a single "On reprend". Launch
-// it from a background Bash: a foreground one may run in another terminal.
+// own terminal, runs next, and answers "oui" to its single resume question.
+// Launch it from a background Bash: a foreground one may run elsewhere.
 //   wake.cjs            arm the wake-up (prints what was typed at the end)
 //   wake.cjs --detect   print herdr-app, herdr, tmux or none
 const fs = require("node:fs");
@@ -15,8 +15,14 @@ const POLL_TICKS = 2;
 const QUIET_POLLS = 2;
 const SETTLE_TICKS = 3;
 const MAX_POLLS = 120;
-const RESUME = "On reprend";
 const NEXT_MARK = "next:next";
+// Claude Code opens each message and tool call with ⏺ (● on some systems)
+// and indents what follows; a tool call reads `⏺ Name(args)`.
+const BULLETS = ["⏺", "●"];
+const TOOL_CALL = /^\S+ [\w:.-]+\(/;
+const TOOL_OUTPUT = /^\s*⎿/;
+const QUESTION = /[?？؟]/;
+const LIST_ITEM = /^\s*(\d+[.)]|[-*•])\s/;
 const HC_NEXT = "Lance le skill next:next.";
 const YES = "oui";
 
@@ -106,11 +112,28 @@ function waitQuiet(m) {
   return false;
 }
 
-// Only what follows the typed next counts: the SessionStart banner above it
-// also quotes "On reprend".
-const offered = (screen) => {
+// Claude's last message after the typed next, as lines, or null while there
+// is none. What precedes next (the SessionStart banner) never counts.
+function lastReply(screen) {
   const at = screen.lastIndexOf(NEXT_MARK);
-  return at >= 0 && screen.slice(at).includes(RESUME);
+  if (at < 0) return null;
+  let reply = null;
+  let cur = null;
+  for (const line of screen.slice(at).split("\n")) {
+    if (BULLETS.includes(line[0])) {
+      cur = TOOL_CALL.test(line) ? null : [line.slice(1).trim()];
+      if (cur) reply = cur;
+    } else if (cur && (line.trim() === "" || (/^\s/.test(line) && !TOOL_OUTPUT.test(line)))) cur.push(line);
+    else cur = null;
+  }
+  return reply;
+}
+
+// The resume offer, in whatever language: one question, no list. next's
+// numbered list, or any list, is left to the user.
+const singleQuestion = (reply) => {
+  const lines = reply.filter((l) => l.trim());
+  return QUESTION.test(lines.at(-1)) && !lines.some((l) => LIST_ITEM.test(l));
 };
 
 function nap(name, target) {
@@ -120,20 +143,14 @@ function nap(name, target) {
   sleep(SETTLE_TICKS);
   if (!waitQuiet(m)) return console.log(`clear typed in ${target}, the session never went quiet after it`);
   m.next();
-  for (let i = 0, quiet = 0, worked = false; i < MAX_POLLS; i++) {
+  for (let i = 0, quiet = 0; i < MAX_POLLS; i++) {
     sleep(POLL_TICKS);
-    if (m.busy()) {
-      worked = true;
-      quiet = 0;
-      continue;
-    }
-    quiet++;
-    if (offered(m.screen())) {
-      m.yes();
-      return console.log(`clear, next and ${YES} typed in ${target}`);
-    }
-    // A numbered list, or anything but a single resume, waits for the user.
-    if (worked && quiet >= QUIET_POLLS) break;
+    quiet = m.busy() ? 0 : quiet + 1;
+    const reply = quiet >= QUIET_POLLS && lastReply(m.screen());
+    if (!reply) continue;
+    if (!singleQuestion(reply)) break;
+    m.yes();
+    return console.log(`clear, next and ${YES} typed in ${target}`);
   }
   console.log(`clear and next typed in ${target}, no single resume offered`);
 }
