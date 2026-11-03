@@ -24,11 +24,11 @@ function scan(tasks, frontmatter = "", flags = ["--json"]) {
 test("scopes the resume command to the first unfinished task", () => {
   const first = scan(`## 1. First\n- [ ] one\n\n## 2. Second\n- [ ] two\n`);
   assert.equal(first.next_task_id, "1");
-  assert.equal(first.next_command, "/ship --tasks 1 docs/brief/demo");
+  assert.equal(first.next_command, "/ship:ship --tasks 1 docs/brief/demo");
 
   const second = scan(`## 1. First\n- [x] one\n\n## 2. Second\n- [ ] two\n`);
   assert.equal(second.next_task_id, "2");
-  assert.equal(second.next_command, "/ship --tasks 2 docs/brief/demo");
+  assert.equal(second.next_command, "/ship:ship --tasks 2 docs/brief/demo");
 });
 
 test("supports stable T-prefixed task identifiers", () => {
@@ -36,7 +36,7 @@ test("supports stable T-prefixed task identifiers", () => {
     `## T01 — First\n- [x] one\n\n## T02 — Second\n### Detail\n- [ ] two\n`,
   );
   assert.equal(item.next_task_id, "T02");
-  assert.equal(item.next_command, "/ship --tasks T02 docs/brief/demo");
+  assert.equal(item.next_command, "/ship:ship --tasks T02 docs/brief/demo");
 });
 
 test("carries base and branch when the brief declares them, tolerates their absence", () => {

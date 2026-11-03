@@ -1,0 +1,11 @@
+{
+  "name": "slim",
+  "version": "1.0.0",
+  "description": "Slim the instructions Claude Code loads in every session without losing a rule: /slim weighs CLAUDE.md and rules, sorts each block, writes only on your go and proves nothing was lost.",
+  "author": {
+    "name": "Mirko Bozzetto",
+    "url": "https://github.com/mirkobozzetto"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/slim"
+}

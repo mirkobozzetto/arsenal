@@ -34,6 +34,7 @@ the workflow stays shared. Pi uses its builtin `scout`, `oracle` and
 |  [`next`](./plugins/next) | Start of a session: what was left, numbered, and "what do we continue?". | `/next` |
 |  [`trace`](./plugins/trace) | End of a session: save where you stand, then `/clear` instead of compacting. | `/trace` |
 |  [`nap`](./plugins/nap) | Claude Code: the session saves, clears itself and resumes alone, no gesture. | `/nap` |
+|  [`slim`](./plugins/slim) | Claude Code: lighter rules and CLAUDE.md, every rule kept, proved by a script. | `/slim` |
 |  [`review`](./plugins/review) | Deep code review: interview, read-only readers per angle, verified findings routed to the right skill. | `/review` |
 |  [`websearch`](./plugins/websearch) | Evidence-backed web search via [Exa](https://exa.ai). | `/websearch <question>` |
 
@@ -58,6 +59,7 @@ Use `/arsenal` in Claude Code, `$arsenal` in Codex, or `/arsenal-mode` in OMP an
 | Start a session or find unfinished work | `next` |
 | End a session and keep the thread | `trace` |
 | Clear the session and resume it alone | `nap` |
+| Slim the instructions loaded in every session | `slim` |
 | Analyze code in depth | `review` |
 | A real phased roadmap | Arsenal's optional roadmap branch |
 
@@ -147,6 +149,7 @@ Mirko
 /plugin install next@arsenal
 /plugin install trace@arsenal
 /plugin install nap@arsenal
+/plugin install slim@arsenal
 /plugin install review@arsenal
 /plugin install websearch@arsenal
 
