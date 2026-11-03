@@ -37,8 +37,11 @@ const SLIM = [
 ].join("\n");
 const EVIDENCE = `# rules/tests.md\n\n- Jamais plus de 5 secondes : ${CITATION}.\n`;
 
+// Mirko's own Git config (hooks, signing, accounts) never reaches the sandbox.
+const GIT_ENV = { ...process.env, GIT_CONFIG_GLOBAL: "/dev/null", GIT_CONFIG_NOSYSTEM: "1", GIT_CONFIG_COUNT: "0" };
+
 function git(cwd, ...args) {
-  execFileSync("git", ["-c", "user.name=t", "-c", "user.email=t@t", ...args], { cwd, stdio: "ignore" });
+  execFileSync("git", ["-c", "user.name=t", "-c", "user.email=t@t", ...args], { cwd, env: GIT_ENV, stdio: "ignore" });
 }
 
 function sandbox() {
