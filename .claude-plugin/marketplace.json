@@ -151,6 +151,22 @@
       "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/nap"
     },
     {
+      "name": "slim",
+      "source": "./plugins/slim",
+      "description": "Slim the instructions Claude Code loads in every session without losing a rule: /slim weighs CLAUDE.md and rules, sorts each block, writes only on your go and proves nothing was lost.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "slim",
+        "context",
+        "claude-md",
+        "rules",
+        "tokens"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/mirkobozzetto/arsenal/tree/main/plugins/slim"
+    },
+    {
       "name": "review",
       "source": "./plugins/review",
       "description": "Deep code review driven by a short interview: read-only readers per angle, verified findings, each point routed to ship, issue, brief or propose.",
